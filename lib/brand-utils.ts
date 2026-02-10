@@ -13,11 +13,11 @@ export const orderedSections = Object.values(BRAND_CONTENT.sections).sort(
   (left, right) => Number.parseInt(left.header.number, 10) - Number.parseInt(right.header.number, 10),
 );
 
-export const sectionById = new Map(
+export const sectionById: ReadonlyMap<string, BrandSection> = new Map(
   orderedSections.map((section) => [section.header.id, section] as const),
 );
 
-export const sectionSummaryById = new Map(
+export const sectionSummaryById: ReadonlyMap<string, string> = new Map(
   orderedSections.map((section) => [section.header.id, section.header.summary] as const),
 );
 
