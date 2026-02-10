@@ -1,0 +1,6 @@
+<svg width="180" height="60" viewBox="0 0 180 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="180" height="60" fill="#FFFFFF"/>
+  <rect x="10" y="15" width="30" height="30" rx="4" fill="#C9A24A"/>
+  <text x="50" y="32" font-family="system-ui, sans-serif" font-size="18" font-weight="600" fill="#111111">Vayasya</text>
+  <text x="50" y="48" font-family="system-ui, sans-serif" font-size="12" font-weight="400" fill="#4B5563">Seva</text>
+</svg>

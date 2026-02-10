@@ -8,7 +8,7 @@ import { handbookMetadata, tokenCssVariables } from "../lib/brand-utils";
 import "./globals.css";
 
 const hind = Hind({
-  subsets: ["latin"],
+  subsets: ["latin", "devanagari"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-hind",
   display: "swap",
