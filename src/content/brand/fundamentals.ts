@@ -174,7 +174,7 @@ export const COLOR_USAGE_RULES = [
     context: "Default interface surfaces",
     risk: "Using accent colors as full backgrounds lowers readability and creates visual noise.",
     recommended:
-      "Use --vy-bg for base, --vy-muted for panels, and reserve accent colors for highlights under 20% surface coverage.",
+      "Use a light base canvas with muted panels, and reserve accent colors for highlights under 20% surface coverage.",
   },
   {
     context: "Vertical-specific documents",
@@ -192,7 +192,7 @@ export const COLOR_USAGE_RULES = [
     context: "Logo proximity",
     risk: "Competing gold-like UI color blocks can reduce logo authority.",
     recommended:
-      "Use --vy-gold-ui sparingly around logo-adjacent controls; never simulate or tint the logo itself.",
+      "Use the brand gold sparingly around logo-adjacent controls; never simulate or tint the logo itself.",
   },
 ] as const satisfies readonly Scenario[];
 

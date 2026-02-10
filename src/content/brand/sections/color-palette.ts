@@ -91,7 +91,7 @@ export const COLOR_PALETTE_SECTION = {
     {
       context: "Proposal documents",
       risk: "Low-contrast body text can cause reading errors in review.",
-      recommended: "Keep body text on --vy-bg with --vy-fg or --vy-text-strong only.",
+      recommended: "Keep body text on background with foreground or strong-text colors only.",
     },
   ],
   rules: [
@@ -103,8 +103,8 @@ export const COLOR_PALETTE_SECTION = {
   doDont: [
     {
       topic: "State colors",
-      do: "Use --vy-danger for rejected item status.",
-      dont: "Use --vy-seva for rejected item status.",
+      do: "Use danger state color for rejected item status.",
+      dont: "Use decorative accent color for rejected item status.",
       why: "Semantic mapping must remain consistent across products.",
     },
   ],

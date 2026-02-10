@@ -25,6 +25,35 @@ import {
 const sections = BRAND_CONTENT.sections;
 const fundamentals = BRAND_CONTENT.fundamentals;
 
+const TOKEN_LABELS: Record<string, string> = {
+  bg: "background",
+  fg: "foreground",
+  "text-strong": "strong text",
+  muted: "muted surface",
+  "muted-fg": "muted text",
+  border: "border",
+  "gold-ui": "brand gold",
+  seva: "Seva accent",
+  setu: "Setu accent",
+  kaushal: "Kaushal accent",
+  prabandh: "Prabandh accent",
+  success: "success",
+  warning: "warning",
+  info: "info",
+  danger: "danger",
+};
+
+const sanitizeTokenMentions = (value: string) =>
+  value.replace(/`?--vy-[a-z-]+`?/gi, (rawToken) => {
+    const token = rawToken.replace(/`/g, "").toLowerCase().replace(/^--vy-/, "");
+    return TOKEN_LABELS[token] ?? token.replace(/-/g, " ");
+  });
+
+const tokenLabel = (token: string) => {
+  const label = sanitizeTokenMentions(token);
+  return label.charAt(0).toUpperCase() + label.slice(1);
+};
+
 // Chapter definitions
 const CHAPTERS = {
   foundation: {
@@ -74,7 +103,7 @@ function RulesBlock({ rules, title = "Rules" }: { rules: readonly string[]; titl
         {rules.map((rule, i) => (
           <div key={i} className="flex gap-3 rounded-lg bg-[color:var(--vy-muted)] p-4">
             <Check className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--vy-success)]" />
-            <span className="text-[color:var(--vy-fg)]">{rule}</span>
+            <span className="text-[color:var(--vy-fg)]">{sanitizeTokenMentions(rule)}</span>
           </div>
         ))}
       </div>
@@ -90,18 +119,22 @@ function DoDontBlock({ examples, title = "Do / Don't" }: { examples: readonly { 
       <div className="grid gap-6 lg:grid-cols-2">
         {examples.map((ex, i) => (
           <div key={i} className="rounded-lg border border-[color:var(--vy-border)] p-6">
-            <p className="mb-4 font-medium text-[color:var(--vy-text-strong)]">{ex.topic}</p>
+            <p className="mb-4 font-medium text-[color:var(--vy-text-strong)]">
+              {sanitizeTokenMentions(ex.topic)}
+            </p>
             <div className="space-y-3">
               <div className="flex gap-3 rounded border-l-2 border-[color:var(--vy-success)] bg-[color:var(--vy-muted)] p-3">
                 <Check className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--vy-success)]" />
-                <p className="text-[color:var(--vy-fg)]">{ex.do}</p>
+                <p className="text-[color:var(--vy-fg)]">{sanitizeTokenMentions(ex.do)}</p>
               </div>
               <div className="flex gap-3 rounded border-l-2 border-[color:var(--vy-danger)] bg-[color:var(--vy-muted)] p-3">
                 <X className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--vy-danger)]" />
-                <p className="text-[color:var(--vy-muted-fg)]">{ex.dont}</p>
+                <p className="text-[color:var(--vy-muted-fg)]">{sanitizeTokenMentions(ex.dont)}</p>
               </div>
             </div>
-            <p className="mt-4 text-sm text-[color:var(--vy-muted-fg)]">{ex.why}</p>
+            <p className="mt-4 text-sm text-[color:var(--vy-muted-fg)]">
+              {sanitizeTokenMentions(ex.why)}
+            </p>
           </div>
         ))}
       </div>
@@ -120,20 +153,30 @@ function TemplatesBlock({ templates, title = "Templates" }: { templates: readonl
             <div className="bg-[color:var(--vy-muted)] p-5">
               <div className="flex items-center gap-2">
                 <FileText className="h-4 w-4 text-[color:var(--vy-muted-fg)]" />
-                <h5 className="font-semibold text-[color:var(--vy-text-strong)]">{t.name}</h5>
+                <h5 className="font-semibold text-[color:var(--vy-text-strong)]">
+                  {sanitizeTokenMentions(t.name)}
+                </h5>
               </div>
-              <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">{t.purpose}</p>
-              <p className="mt-1 text-xs text-[color:var(--vy-muted-fg)]">When to use: {t.whenToUse}</p>
+              <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">
+                {sanitizeTokenMentions(t.purpose)}
+              </p>
+              <p className="mt-1 text-xs text-[color:var(--vy-muted-fg)]">
+                When to use: {sanitizeTokenMentions(t.whenToUse)}
+              </p>
             </div>
             <div className="p-5 space-y-4">
-              <pre className="whitespace-pre-wrap rounded bg-[color:var(--vy-muted)] p-4 font-mono text-sm leading-relaxed">{t.template}</pre>
+              <pre className="whitespace-pre-wrap rounded bg-[color:var(--vy-muted)] p-4 font-mono text-sm leading-relaxed">
+                {sanitizeTokenMentions(t.template)}
+              </pre>
               <div>
                 <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)] mb-2">Guardrails</p>
                 <ul className="space-y-1 text-sm">
                   {t.guardrails.map((g, j) => (
                     <li key={j} className="flex gap-2">
                       <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--vy-warning)]" />
-                      <span className="text-[color:var(--vy-muted-fg)]">{g}</span>
+                      <span className="text-[color:var(--vy-muted-fg)]">
+                        {sanitizeTokenMentions(g)}
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -151,9 +194,13 @@ function SectionHeader({ number, title, summary }: { number: string; title: stri
     <header className="border-b border-[color:var(--vy-border)] pb-8">
       <div className="flex items-baseline gap-3">
         <span className="text-sm font-semibold text-[color:var(--vy-muted-fg)]">{number}</span>
-        <h3 className="text-2xl font-semibold text-[color:var(--vy-text-strong)]">{title}</h3>
+        <h3 className="text-2xl font-semibold text-[color:var(--vy-text-strong)]">
+          {sanitizeTokenMentions(title)}
+        </h3>
       </div>
-      <p className="mt-3 max-w-2xl text-lg text-[color:var(--vy-muted-fg)]">{summary}</p>
+      <p className="mt-3 max-w-2xl text-lg text-[color:var(--vy-muted-fg)]">
+        {sanitizeTokenMentions(summary)}
+      </p>
     </header>
   );
 }
@@ -180,9 +227,11 @@ function ColorSwatch({ token, hex, usage }: { token: string; hex: string; usage:
           <Copy className="h-5 w-5 text-[color:var(--vy-bg)] opacity-0 drop-shadow-md transition-opacity group-hover:opacity-100" />
         )}
       </div>
-      <p className="font-mono text-xs text-[color:var(--vy-muted-fg)]">{token}</p>
+      <p className="text-xs text-[color:var(--vy-muted-fg)]">{tokenLabel(token)}</p>
       <p className="font-mono text-sm font-medium">{hex}</p>
-      <p className="mt-1 text-xs text-[color:var(--vy-muted-fg)] line-clamp-2">{usage}</p>
+      <p className="mt-1 text-xs text-[color:var(--vy-muted-fg)] line-clamp-2">
+        {sanitizeTokenMentions(usage)}
+      </p>
     </button>
   );
 }
@@ -226,19 +275,31 @@ export default function Page() {
 
       {/* Topbar */}
       <header className="print:hidden border-b border-[color:var(--vy-border)]">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-5 lg:px-6">
-          <div className="flex items-center gap-3">
-            <div className="relative h-10 w-20 shrink-0 md:h-12 md:w-24">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 lg:px-6">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <a
+              href="#main-content"
+              aria-label="Go to handbook content"
+              className="inline-flex rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--vy-info)] focus-visible:ring-offset-2"
+            >
               <Image
                 src="/brand/logos/master-logo-light.svg"
-                alt="Vayasya"
-                fill
-                sizes="(min-width: 768px) 96px, 80px"
-                className="object-contain object-left"
+                alt="Vayasya logo"
+                width={195}
+                height={151}
+                priority
+                className="h-8 w-auto md:h-9"
               />
+            </a>
+            <span
+              className="hidden h-8 w-px bg-[color:var(--vy-border)] sm:block"
+              aria-hidden="true"
+            />
+            <div className="hidden sm:block leading-tight">
+              <p className="mt-1 text-sm font-medium text-[color:var(--vy-muted-fg)]">
+                Brand Handbook
+              </p>
             </div>
-            <span className="hidden sm:inline text-[color:var(--vy-border)]">|</span>
-            <span className="hidden sm:inline text-sm font-medium text-[color:var(--vy-muted-fg)]">Brand Handbook</span>
           </div>
 
           <div className="flex items-center gap-3">
@@ -492,7 +553,6 @@ export default function Page() {
                   <div className="flex items-center gap-3 mb-4">
                     <div className="h-8 w-8 rounded" style={{ backgroundColor: sections.brandArchitecture.masterBrand.accentHex }} />
                     <h5 className="text-xl font-semibold text-[color:var(--vy-text-strong)]">{sections.brandArchitecture.masterBrand.name}</h5>
-                    <span className="font-mono text-xs text-[color:var(--vy-muted-fg)]">{sections.brandArchitecture.masterBrand.accentToken}</span>
                   </div>
                   <p className="text-[color:var(--vy-muted-fg)]">{sections.brandArchitecture.masterBrand.role}</p>
                 </div>
@@ -510,7 +570,6 @@ export default function Page() {
                             <span className="font-mono text-xs text-[color:var(--vy-muted-fg)]">{v.accentHex}</span>
                           </div>
                           <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">{v.domain}</p>
-                          <p className="mt-1 font-mono text-xs text-[color:var(--vy-muted-fg)]">{v.accentToken}</p>
                         </div>
                       </div>
                     ))}
@@ -594,7 +653,7 @@ export default function Page() {
                 {/* Flat Gold Callout */}
                 <div className="mt-6 rounded-lg border-2 border-[color:var(--vy-gold-ui)] bg-[color:var(--vy-muted)] p-5">
                   <p className="font-medium text-[color:var(--vy-text-strong)]">Gold is flat. No gradients, no shimmer, no effects.</p>
-                  <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">The logo uses flat gold (`--vy-gold-ui`) as supplied. Do not apply CSS filters, gradient overlays, or decorative effects.</p>
+                  <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">The logo uses flat gold as supplied. Do not apply CSS filters, gradient overlays, or decorative effects.</p>
                 </div>
 
                 {/* 1. Logo */}
@@ -730,7 +789,7 @@ export default function Page() {
                                 color: `var(${vertical.accentToken})`,
                               }}
                             >
-                              {vertical.accentToken}
+                              {vertical.accentHex}
                             </span>
                           </div>
                           <p className="mt-4 text-sm text-[color:var(--vy-muted-fg)]">{vertical.domain}</p>
