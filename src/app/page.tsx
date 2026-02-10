@@ -228,13 +228,15 @@ export default function Page() {
       <header className="print:hidden border-b border-[color:var(--vy-border)]">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-5 lg:px-6">
           <div className="flex items-center gap-3">
-            <Image
-              src="/brand/logos/master-logo-light.svg"
-              alt="Vayasya"
-              width={120}
-              height={32}
-              className="h-7 w-auto"
-            />
+            <div className="relative h-12 w-24 shrink-0 md:h-14 md:w-28">
+              <Image
+                src="/brand/logos/master-logo-light.svg"
+                alt="Vayasya"
+                fill
+                sizes="(min-width: 768px) 112px, 96px"
+                className="object-contain object-left"
+              />
+            </div>
             <span className="hidden sm:inline text-[color:var(--vy-border)]">|</span>
             <span className="hidden sm:inline text-sm font-medium text-[color:var(--vy-muted-fg)]">Brand Handbook</span>
           </div>
@@ -601,27 +603,33 @@ export default function Page() {
                   <div className="grid gap-6 md:grid-cols-2">
                     <div className="rounded-lg border border-[color:var(--vy-border)] p-6">
                       <div className="flex h-32 items-center justify-center rounded bg-[color:var(--vy-bg)]">
-                        <Image
-                          src="/brand/logos/master-logo-light.svg"
-                          alt="Vayasya master logo on light background"
-                          width={180}
-                          height={60}
-                        />
+                        <div className="relative h-20 w-full max-w-[240px]">
+                          <Image
+                            src="/brand/logos/master-logo-light.svg"
+                            alt="Vayasya master logo on light background"
+                            fill
+                            sizes="240px"
+                            className="object-contain"
+                          />
+                        </div>
                       </div>
                       <p className="mt-4 font-medium">Light Background</p>
-                      <p className="text-sm text-[color:var(--vy-muted-fg)]">Min width: 120px &bull; Clear space: 1x V height</p>
+                      <p className="text-sm text-[color:var(--vy-muted-fg)]">Min width: 48px &bull; Clear space: 1x V height</p>
                     </div>
                     <div className="rounded-lg border border-[color:var(--vy-border)] p-6">
                       <div className="flex h-32 items-center justify-center rounded bg-[color:var(--vy-fg)]">
-                        <Image
-                          src="/brand/logos/master-logo-dark.svg"
-                          alt="Vayasya master logo on dark background"
-                          width={180}
-                          height={60}
-                        />
+                        <div className="relative h-20 w-full max-w-[240px]">
+                          <Image
+                            src="/brand/logos/master-logo-dark.svg"
+                            alt="Vayasya master logo on dark background"
+                            fill
+                            sizes="240px"
+                            className="object-contain"
+                          />
+                        </div>
                       </div>
                       <p className="mt-4 font-medium">Dark Background</p>
-                      <p className="text-sm text-[color:var(--vy-muted-fg)]">Min width: 120px &bull; Clear space: 1x V height</p>
+                      <p className="text-sm text-[color:var(--vy-muted-fg)]">Min width: 48px &bull; Clear space: 1x V height</p>
                     </div>
                   </div>
                 </div>
