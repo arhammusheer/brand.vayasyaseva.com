@@ -228,12 +228,12 @@ export default function Page() {
       <header className="print:hidden border-b border-[color:var(--vy-border)]">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-5 lg:px-6">
           <div className="flex items-center gap-3">
-            <div className="relative h-12 w-24 shrink-0 md:h-14 md:w-28">
+            <div className="relative h-10 w-20 shrink-0 md:h-12 md:w-24">
               <Image
                 src="/brand/logos/master-logo-light.svg"
                 alt="Vayasya"
                 fill
-                sizes="(min-width: 768px) 112px, 96px"
+                sizes="(min-width: 768px) 96px, 80px"
                 className="object-contain object-left"
               />
             </div>
@@ -597,51 +597,153 @@ export default function Page() {
                   <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">The logo uses flat gold (`--vy-gold-ui`) as supplied. Do not apply CSS filters, gradient overlays, or decorative effects.</p>
                 </div>
 
-                {/* Logo Previews */}
+                {/* 1. Logo */}
                 <div className="mt-10">
-                  <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Logo Variants</h4>
+                  <h4 className="mb-2 text-lg font-medium text-[color:var(--vy-text-strong)]">1. Logo</h4>
+                  <p className="mb-6 text-sm text-[color:var(--vy-muted-fg)]">
+                    Base brand mark only. This is the primary source asset used to build all approved lockups.
+                  </p>
                   <div className="grid gap-6 md:grid-cols-2">
                     <div className="rounded-lg border border-[color:var(--vy-border)] p-6">
                       <div className="flex h-32 items-center justify-center rounded bg-[color:var(--vy-bg)]">
-                        <div className="relative h-20 w-full max-w-[240px]">
+                        <div className="relative h-20 w-20">
                           <Image
                             src="/brand/logos/master-logo-light.svg"
-                            alt="Vayasya master logo on light background"
+                            alt="Vayasya base logo on light background"
                             fill
-                            sizes="240px"
+                            sizes="80px"
                             className="object-contain"
                           />
                         </div>
                       </div>
-                      <p className="mt-4 font-medium">Light Background</p>
-                      <p className="text-sm text-[color:var(--vy-muted-fg)]">Min width: 48px &bull; Clear space: 1x V height</p>
+                      <p className="mt-4 font-medium">Base Logo on Light Surface</p>
+                      <p className="text-sm text-[color:var(--vy-muted-fg)]">Minimum digital width: 120px for production usage.</p>
                     </div>
                     <div className="rounded-lg border border-[color:var(--vy-border)] p-6">
                       <div className="flex h-32 items-center justify-center rounded bg-[color:var(--vy-fg)]">
-                        <div className="relative h-20 w-full max-w-[240px]">
+                        <div className="relative h-20 w-20">
                           <Image
                             src="/brand/logos/master-logo-dark.svg"
-                            alt="Vayasya master logo on dark background"
+                            alt="Vayasya base logo on dark background"
                             fill
-                            sizes="240px"
+                            sizes="80px"
                             className="object-contain"
                           />
                         </div>
                       </div>
-                      <p className="mt-4 font-medium">Dark Background</p>
-                      <p className="text-sm text-[color:var(--vy-muted-fg)]">Min width: 48px &bull; Clear space: 1x V height</p>
+                      <p className="mt-4 font-medium">Base Logo on Dark Surface</p>
+                      <p className="text-sm text-[color:var(--vy-muted-fg)]">Variant selection is contrast-driven only.</p>
                     </div>
                   </div>
                 </div>
 
-                {/* Vertical Logos */}
-                <div className="mt-10">
-                  <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Vertical Logos</h4>
-                  <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
+                {/* 2. Logo with Text */}
+                <div className="mt-12">
+                  <h4 className="mb-2 text-lg font-medium text-[color:var(--vy-text-strong)]">2. Logo with Text</h4>
+                  <p className="mb-6 text-sm text-[color:var(--vy-muted-fg)]">
+                    Master lockup for parent-brand communication. Mark + Vayasya wordmark with clear hierarchy.
+                  </p>
+                  <div className="grid gap-6 md:grid-cols-2">
+                    <div className="rounded-lg border border-[color:var(--vy-border)] p-6">
+                      <div className="rounded bg-[color:var(--vy-bg)] p-6">
+                        <div className="flex items-center gap-4">
+                          <div className="relative h-16 w-16 shrink-0">
+                            <Image
+                              src="/brand/logos/master-logo-light.svg"
+                              alt="Vayasya master logo with wordmark"
+                              fill
+                              sizes="64px"
+                              className="object-contain"
+                            />
+                          </div>
+                          <div className="min-w-0">
+                            <p className="text-2xl font-semibold leading-none text-[color:var(--vy-text-strong)]">Vayasya</p>
+                            <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">Enterprise Workforce Services &amp; Systems</p>
+                          </div>
+                        </div>
+                      </div>
+                      <p className="mt-4 font-medium">Primary Master Lockup</p>
+                      <p className="text-sm text-[color:var(--vy-muted-fg)]">Use for group-level collateral and cross-vertical communication.</p>
+                    </div>
+                    <div className="rounded-lg border border-[color:var(--vy-border)] p-6">
+                      <div className="rounded bg-[color:var(--vy-muted)] p-6">
+                        <div className="flex items-center gap-4">
+                          <div className="relative h-14 w-14 shrink-0">
+                            <Image
+                              src="/brand/logos/master-logo-light.svg"
+                              alt="Vayasya compact lockup mark"
+                              fill
+                              sizes="56px"
+                              className="object-contain"
+                            />
+                          </div>
+                          <div className="min-w-0">
+                            <p className="text-xl font-semibold leading-none text-[color:var(--vy-text-strong)]">Vayasya</p>
+                            <p className="mt-2 text-xs font-medium uppercase tracking-wide text-[color:var(--vy-muted-fg)]">Master Brand</p>
+                          </div>
+                        </div>
+                      </div>
+                      <p className="mt-4 font-medium">Compact Master Lockup</p>
+                      <p className="text-sm text-[color:var(--vy-muted-fg)]">For tighter horizontal spaces while preserving master-brand emphasis.</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 3. Logo with Text and Verticals */}
+                <div className="mt-12">
+                  <h4 className="mb-2 text-lg font-medium text-[color:var(--vy-text-strong)]">3. Logo with Text and Verticals</h4>
+                  <p className="mb-6 text-sm text-[color:var(--vy-muted-fg)]">
+                    Vertical lockup pattern: parent brand remains larger; vertical name is secondary and color-coded by one accent token.
+                  </p>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    {sections.brandArchitecture.verticals.map((vertical) => {
+                      const verticalName = vertical.name.replace("Vayasya ", "");
+                      return (
+                        <div
+                          key={vertical.name}
+                          className="rounded-lg border p-5"
+                          style={{ borderColor: `var(${vertical.accentToken})` }}
+                        >
+                          <div className="flex items-center gap-4">
+                            <div className="relative h-14 w-14 shrink-0">
+                              <Image
+                                src="/brand/logos/master-logo-light.svg"
+                                alt={`${vertical.name} lockup mark`}
+                                fill
+                                sizes="56px"
+                                className="object-contain"
+                              />
+                            </div>
+                            <div className="min-w-0">
+                              <p className="text-xl font-semibold leading-none text-[color:var(--vy-text-strong)]">Vayasya</p>
+                              <p
+                                className="mt-2 text-sm font-medium leading-none"
+                                style={{ color: `var(${vertical.accentToken})` }}
+                              >
+                                {verticalName}
+                              </p>
+                            </div>
+                            <span
+                              className="ml-auto rounded-full border px-2.5 py-1 font-mono text-xs"
+                              style={{
+                                borderColor: `var(${vertical.accentToken})`,
+                                color: `var(${vertical.accentToken})`,
+                              }}
+                            >
+                              {vertical.accentToken}
+                            </span>
+                          </div>
+                          <p className="mt-4 text-sm text-[color:var(--vy-muted-fg)]">{vertical.domain}</p>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  <div className="mt-6 grid gap-4 grid-cols-2 md:grid-cols-4">
                     {Object.entries(BRAND_CONTENT.placeholders.verticalLogos).map(([key, path]) => (
                       <div key={key} className="rounded-lg border border-[color:var(--vy-border)] p-4">
                         <div className="flex h-16 items-center justify-center">
-                          <Image src={path} alt={`${key} logo`} width={120} height={40} />
+                          <Image src={path} alt={`${key} vertical logo asset`} width={120} height={40} className="object-contain" />
                         </div>
                         <p className="mt-2 text-center text-sm capitalize">{key}</p>
                       </div>
