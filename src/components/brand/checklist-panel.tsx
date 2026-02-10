@@ -1,6 +1,6 @@
 import { CheckSquare } from "lucide-react";
 
-import type { ChecklistGroup } from "../../src/lib/types/brand";
+import type { ChecklistGroup } from "../../lib/types/brand";
 import {
   Accordion,
   AccordionContent,

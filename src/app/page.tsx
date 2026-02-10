@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
-import { BRAND_CONTENT } from "../src/content/brand";
+import { BRAND_CONTENT } from "../content/brand";
 import {
   activeSectionLabel,
   anchorsFromNavigation,

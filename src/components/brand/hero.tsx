@@ -1,4 +1,4 @@
-import type { BRAND_CONTENT } from "../../src/content/brand";
+import type { BRAND_CONTENT } from "../../content/brand";
 
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";

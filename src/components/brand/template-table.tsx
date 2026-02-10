@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
-import type { TemplateSpec } from "../../src/lib/types/brand";
+import type { TemplateSpec } from "../../lib/types/brand";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import {

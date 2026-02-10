@@ -1,4 +1,4 @@
-import { BRAND_CONTENT } from "../src/content/brand";
+import { BRAND_CONTENT } from "../content/brand";
 
 type BrandContent = typeof BRAND_CONTENT;
 

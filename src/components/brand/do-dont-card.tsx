@@ -1,4 +1,4 @@
-import type { DoDontExample } from "../../src/lib/types/brand";
+import type { DoDontExample } from "../../lib/types/brand";
 
 import { Badge } from "../ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
