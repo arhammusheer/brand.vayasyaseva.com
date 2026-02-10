@@ -522,6 +522,34 @@ function ReferencePanel({ sectionId }: { sectionId: string }) {
   );
 }
 
+function sectionHasReferenceData(sectionId: string) {
+  const section = orderedSections.find((candidate) => candidate.header.id === sectionId);
+
+  if (!section) {
+    return false;
+  }
+
+  return Boolean(
+    ("claimRules" in section && section.claimRules?.length) ||
+      ("legalSafePatterns" in section && section.legalSafePatterns?.length) ||
+      ("swatches" in section && section.swatches?.length) ||
+      ("scenarios" in section && section.scenarios?.length) ||
+      ("variants" in section && section.variants?.length) ||
+      ("stacks" in section && section.stacks?.length) ||
+      ("hierarchy" in section && section.hierarchy?.length) ||
+      ("languageControls" in section && section.languageControls?.length) ||
+      ("mechanics" in section && section.mechanics?.length) ||
+      ("pillars" in section && section.pillars?.length) ||
+      ("terminology" in section && section.terminology?.length) ||
+      ("personas" in section && section.personas?.length) ||
+      ("standards" in section && section.standards?.length) ||
+      ("approvals" in section && section.approvals?.length) ||
+      ("checklist" in section && section.checklist?.length) ||
+      ("faq" in section && section.faq?.length) ||
+      ("footer" in section && section.footer),
+  );
+}
+
 export default function Page() {
   const [isCommandOpen, setIsCommandOpen] = useState(false);
   const [isLogoDialogOpen, setIsLogoDialogOpen] = useState(false);
@@ -734,6 +762,7 @@ export default function Page() {
           {orderedSections.map((section) => {
             const navItem = orderedNavItems.find((item) => item.id === section.header.id);
             const anchorId = navItem ? navHrefToAnchor(navItem.href) : section.header.id;
+            const hasReference = sectionHasReferenceData(section.header.id);
 
             return (
               <SectionShell
@@ -741,7 +770,9 @@ export default function Page() {
                 section={section}
                 anchorId={anchorId}
                 onCopyLink={copySectionLink}
-                referencePanel={<ReferencePanel sectionId={section.header.id} />}
+                referencePanel={
+                  hasReference ? <ReferencePanel sectionId={section.header.id} /> : undefined
+                }
               />
             );
           })}
