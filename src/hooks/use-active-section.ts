@@ -22,26 +22,60 @@ export function useActiveSection(sectionAnchors: readonly string[]): UseActiveSe
       .map((sectionId) => document.getElementById(sectionId))
       .filter((section): section is HTMLElement => Boolean(section));
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((left, right) => right.intersectionRatio - left.intersectionRatio);
+    if (!sectionElements.length) {
+      return;
+    }
 
-        if (visible[0]?.target.id) {
-          setActiveSectionId(visible[0].target.id);
+    let frameId: number | null = null;
+
+    const updateActiveSection = () => {
+      const scrollLine = window.innerHeight * 0.35;
+      let nextActiveId = sectionElements[0].id;
+
+      for (const section of sectionElements) {
+        if (section.getBoundingClientRect().top <= scrollLine) {
+          nextActiveId = section.id;
+          continue;
         }
-      },
-      {
-        root: null,
-        rootMargin: "-28% 0px -55% 0px",
-        threshold: [0.15, 0.35, 0.5, 0.75],
-      },
-    );
 
-    sectionElements.forEach((section) => observer.observe(section));
+        break;
+      }
 
-    return () => observer.disconnect();
+      const reachedPageBottom =
+        window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+
+      if (reachedPageBottom) {
+        nextActiveId = sectionElements[sectionElements.length - 1].id;
+      }
+
+      setActiveSectionId((currentId) =>
+        currentId === nextActiveId ? currentId : nextActiveId,
+      );
+    };
+
+    const scheduleUpdate = () => {
+      if (frameId !== null) {
+        window.cancelAnimationFrame(frameId);
+      }
+
+      frameId = window.requestAnimationFrame(() => {
+        frameId = null;
+        updateActiveSection();
+      });
+    };
+
+    scheduleUpdate();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      if (frameId !== null) {
+        window.cancelAnimationFrame(frameId);
+      }
+
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+    };
   }, [sectionAnchors]);
 
   useEffect(() => {

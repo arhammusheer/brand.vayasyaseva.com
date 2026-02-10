@@ -146,9 +146,9 @@ function TemplatesBlock({ templates, title = "Templates" }: { templates: readonl
   );
 }
 
-function SectionHeader({ id, number, title, summary }: { id: string; number: string; title: string; summary: string }) {
+function SectionHeader({ number, title, summary }: { number: string; title: string; summary: string }) {
   return (
-    <header id={id} className="scroll-mt-8 border-b border-[color:var(--vy-border)] pb-8">
+    <header className="border-b border-[color:var(--vy-border)] pb-8">
       <div className="flex items-baseline gap-3">
         <span className="font-mono text-sm text-[color:var(--vy-muted-fg)]">{number}</span>
         <h3 className="text-2xl font-semibold text-[color:var(--vy-text-strong)]">{title}</h3>
@@ -224,30 +224,48 @@ export default function Page() {
         />
       </div>
 
-      {/* Mobile Header */}
-      <header className="print:hidden sticky top-1 z-50 border-b border-[color:var(--vy-border)] bg-[color:var(--vy-bg)]/95 backdrop-blur lg:hidden">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
-          <p className="text-sm font-semibold">Vayasya Brand Handbook</p>
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="outline" size="icon" aria-label="Open navigation">
-                <Menu className="h-4 w-4" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-[300px]">
-              <SheetHeader>
-                <SheetTitle>Contents</SheetTitle>
-              </SheetHeader>
-              <ScrollArea className="mt-4 h-[calc(100vh-100px)]">
-                <ChapterNav activeSection={activeSectionId} onNavigate={handleNavigate} />
-              </ScrollArea>
-            </SheetContent>
-          </Sheet>
+      {/* Topbar */}
+      <header className="print:hidden border-b border-[color:var(--vy-border)]">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-5 lg:px-6">
+          <div className="flex items-center gap-3">
+            <Image
+              src="/brand/logos/master-logo-light.svg"
+              alt="Vayasya"
+              width={100}
+              height={32}
+              className="h-7 w-auto"
+            />
+            <span className="hidden sm:inline text-[color:var(--vy-border)]">|</span>
+            <span className="hidden sm:inline text-sm font-medium text-[color:var(--vy-muted-fg)]">Brand Handbook</span>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <span className="hidden md:inline rounded-full bg-[color:var(--vy-muted)] px-3 py-1 font-mono text-xs text-[color:var(--vy-muted-fg)]">
+              {sections.footerVersioning.footer.version}
+            </span>
+            <div className="lg:hidden">
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="outline" size="icon" aria-label="Open navigation">
+                    <Menu className="h-4 w-4" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="right" className="w-[300px]">
+                  <SheetHeader>
+                    <SheetTitle>Contents</SheetTitle>
+                  </SheetHeader>
+                  <ScrollArea className="mt-4 h-[calc(100vh-100px)]">
+                    <ChapterNav activeSection={activeSectionId} onNavigate={handleNavigate} />
+                  </ScrollArea>
+                </SheetContent>
+              </Sheet>
+            </div>
+          </div>
         </div>
       </header>
 
       {/* Main Layout */}
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 pb-24 pt-6 lg:grid-cols-[260px_1fr] lg:px-6">
+      <div className="mx-auto grid max-w-7xl gap-12 px-4 pb-24 pt-12 lg:grid-cols-[260px_1fr] lg:px-6">
         {/* Sidebar */}
         <aside className="print:hidden hidden lg:block">
           <ChapterNavSidebar activeSection={activeSectionId} onNavigate={handleNavigate} />
@@ -281,8 +299,8 @@ export default function Page() {
           {/* ==================== CHAPTER I: FOUNDATION ==================== */}
           <ChapterWrapper {...CHAPTERS.foundation}>
             {/* 01 Overview */}
-            <section>
-              <SectionHeader {...sections.overview.header} id="01-overview" />
+            <section id="01-overview" className="scroll-mt-8">
+              <SectionHeader {...sections.overview.header} />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.overview.intro}</p>
 
@@ -331,8 +349,8 @@ export default function Page() {
             </section>
 
             {/* 02 Identity */}
-            <section>
-              <SectionHeader {...sections.identity.header} id="02-identity" />
+            <section id="02-identity" className="scroll-mt-8">
+              <SectionHeader {...sections.identity.header} />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.identity.intro}</p>
 
@@ -462,8 +480,8 @@ export default function Page() {
             </section>
 
             {/* 03 Brand Architecture */}
-            <section>
-              <SectionHeader {...sections.brandArchitecture.header} id="03-brand-architecture" />
+            <section id="03-brand-architecture" className="scroll-mt-8">
+              <SectionHeader {...sections.brandArchitecture.header} />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.brandArchitecture.intro}</p>
 
@@ -522,8 +540,8 @@ export default function Page() {
             </section>
 
             {/* 04 Operating Pillars */}
-            <section>
-              <SectionHeader {...sections.operatingPillars.header} id="04-operating-pillars" />
+            <section id="04-operating-pillars" className="scroll-mt-8">
+              <SectionHeader {...sections.operatingPillars.header} />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.operatingPillars.intro}</p>
 
@@ -566,8 +584,8 @@ export default function Page() {
           {/* ==================== CHAPTER II: VISUAL SYSTEM ==================== */}
           <ChapterWrapper {...CHAPTERS.visual}>
             {/* 05 Logo Usage */}
-            <section>
-              <SectionHeader {...sections.logoUsage.header} id="05-logo-usage" />
+            <section id="05-logo-usage" className="scroll-mt-8">
+              <SectionHeader {...sections.logoUsage.header} />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.logoUsage.intro}</p>
 
@@ -630,8 +648,8 @@ export default function Page() {
             </section>
 
             {/* 06 Color Palette */}
-            <section>
-              <SectionHeader {...sections.colorPalette.header} id="06-color-palette" />
+            <section id="06-color-palette" className="scroll-mt-8">
+              <SectionHeader {...sections.colorPalette.header} />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.colorPalette.intro}</p>
 
@@ -658,8 +676,8 @@ export default function Page() {
             </section>
 
             {/* 07 Typography */}
-            <section>
-              <SectionHeader {...sections.typography.header} id="07-typography" />
+            <section id="07-typography" className="scroll-mt-8">
+              <SectionHeader {...sections.typography.header} />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.typography.intro}</p>
 
@@ -710,8 +728,8 @@ export default function Page() {
             </section>
 
             {/* 08 Imagery */}
-            <section>
-              <SectionHeader {...sections.imagery.header} id="08-imagery" />
+            <section id="08-imagery" className="scroll-mt-8">
+              <SectionHeader {...sections.imagery.header} />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.imagery.intro}</p>
                 <RulesBlock rules={sections.imagery.rules} />
@@ -724,8 +742,8 @@ export default function Page() {
           {/* ==================== CHAPTER III: COMMUNICATION ==================== */}
           <ChapterWrapper {...CHAPTERS.communication}>
             {/* 09 Voice & Tone */}
-            <section>
-              <SectionHeader {...sections.voiceTone.header} id="09-voice-tone" />
+            <section id="09-voice-tone" className="scroll-mt-8">
+              <SectionHeader {...sections.voiceTone.header} />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.voiceTone.intro}</p>
 
@@ -806,8 +824,8 @@ export default function Page() {
             </section>
 
             {/* 10 Claims Discipline */}
-            <section>
-              <SectionHeader {...sections.claimsDiscipline.header} id="10-claims-discipline" />
+            <section id="10-claims-discipline" className="scroll-mt-8">
+              <SectionHeader {...sections.claimsDiscipline.header} />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.claimsDiscipline.intro}</p>
 
@@ -891,8 +909,8 @@ export default function Page() {
             </section>
 
             {/* 11 Writing Mechanics */}
-            <section>
-              <SectionHeader {...sections.writingMechanics.header} id="11-writing-mechanics" />
+            <section id="11-writing-mechanics" className="scroll-mt-8">
+              <SectionHeader {...sections.writingMechanics.header} />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.writingMechanics.intro}</p>
 
@@ -920,8 +938,8 @@ export default function Page() {
           {/* ==================== CHAPTER IV: APPLICATION ==================== */}
           <ChapterWrapper {...CHAPTERS.application}>
             {/* 12 Documents */}
-            <section>
-              <SectionHeader {...sections.documents.header} id="12-documents" />
+            <section id="12-documents" className="scroll-mt-8">
+              <SectionHeader {...sections.documents.header} />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.documents.intro}</p>
                 <RulesBlock rules={sections.documents.rules} />
@@ -931,8 +949,8 @@ export default function Page() {
             </section>
 
             {/* 13 Presentations */}
-            <section>
-              <SectionHeader {...sections.presentations.header} id="13-presentations" />
+            <section id="13-presentations" className="scroll-mt-8">
+              <SectionHeader {...sections.presentations.header} />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.presentations.intro}</p>
                 <RulesBlock rules={sections.presentations.rules} />
@@ -942,8 +960,8 @@ export default function Page() {
             </section>
 
             {/* 14 Email */}
-            <section>
-              <SectionHeader {...sections.email.header} id="14-email" />
+            <section id="14-email" className="scroll-mt-8">
+              <SectionHeader {...sections.email.header} />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.email.intro}</p>
 
@@ -971,8 +989,8 @@ export default function Page() {
             </section>
 
             {/* 15 Meetings */}
-            <section>
-              <SectionHeader {...sections.meetings.header} id="15-meetings" />
+            <section id="15-meetings" className="scroll-mt-8">
+              <SectionHeader {...sections.meetings.header} />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.meetings.intro}</p>
 
@@ -999,8 +1017,8 @@ export default function Page() {
             </section>
 
             {/* 16 Pre-Send Checklist */}
-            <section>
-              <SectionHeader {...sections.preSendChecklist.header} id="16-pre-send-checklist" />
+            <section id="16-pre-send-checklist" className="scroll-mt-8">
+              <SectionHeader {...sections.preSendChecklist.header} />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.preSendChecklist.intro}</p>
 
@@ -1034,8 +1052,8 @@ export default function Page() {
           {/* ==================== CHAPTER V: APPENDIX ==================== */}
           <ChapterWrapper {...CHAPTERS.appendix}>
             {/* 17 Governance */}
-            <section>
-              <SectionHeader {...sections.governanceApprovals.header} id="governance-approvals" />
+            <section id="governance-approvals" className="scroll-mt-8">
+              <SectionHeader {...sections.governanceApprovals.header} />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.governanceApprovals.intro}</p>
 
@@ -1074,8 +1092,8 @@ export default function Page() {
             </section>
 
             {/* 18 Templates & Assets */}
-            <section>
-              <SectionHeader {...sections.templatesDownloadables.header} id="templates-downloadables" />
+            <section id="templates-downloadables" className="scroll-mt-8">
+              <SectionHeader {...sections.templatesDownloadables.header} />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.templatesDownloadables.intro}</p>
 
@@ -1097,8 +1115,8 @@ export default function Page() {
             </section>
 
             {/* 19 FAQ */}
-            <section>
-              <SectionHeader {...sections.faqEdgeCases.header} id="faq-edge-cases" />
+            <section id="faq-edge-cases" className="scroll-mt-8">
+              <SectionHeader {...sections.faqEdgeCases.header} />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.faqEdgeCases.intro}</p>
                 <div className="mt-10 space-y-4">
@@ -1115,8 +1133,8 @@ export default function Page() {
             </section>
 
             {/* 20 Changelog */}
-            <section>
-              <SectionHeader {...sections.changelog.header} id="changelog" />
+            <section id="changelog" className="scroll-mt-8">
+              <SectionHeader {...sections.changelog.header} />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.changelog.intro}</p>
                 <div className="mt-10 space-y-8">
@@ -1156,7 +1174,7 @@ export default function Page() {
             </section>
 
             {/* 21 Footer/Version */}
-            <section id="footer-versioning" className="rounded-xl bg-[color:var(--vy-muted)] p-8">
+            <section id="footer-versioning" className="scroll-mt-8 rounded-xl bg-[color:var(--vy-muted)] p-8">
               <div className="grid gap-6 text-sm md:grid-cols-2 lg:grid-cols-4">
                 <div>
                   <p className="text-xs font-medium uppercase tracking-wide text-[color:var(--vy-muted-fg)]">Version</p>
