@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
+import type { Viewport } from "next";
 import { Hind, JetBrains_Mono } from "next/font/google";
 
 import { TooltipProvider } from "../components/ui/tooltip";
@@ -25,6 +26,18 @@ export const metadata: Metadata = {
   title: handbookMetadata.title,
   description: handbookMetadata.description,
   metadataBase: new URL("https://brand.vayasyaseva.com"),
+  manifest: "/site.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" },
+    ],
+    shortcut: ["/favicon.ico"],
+  },
   openGraph: {
     title: handbookMetadata.title,
     description: handbookMetadata.description,
@@ -32,6 +45,10 @@ export const metadata: Metadata = {
     siteName: handbookMetadata.title,
     type: "website",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#FFFFFF",
 };
 
 export default function RootLayout({
