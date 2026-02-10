@@ -8,23 +8,23 @@ import type {
 export const FOOTER_VERSIONING_SECTION = {
   header: {
     id: "footer-versioning",
-    number: "19",
+    number: "21",
     title: "Footer / Versioning",
     summary: "Keep every published artifact attributable, current, and reviewable.",
   },
   intro:
     "Version metadata is mandatory for control and audit. Every formal artifact must contain version, effective date, owner, and review date.",
   footer: {
-    version: "v1.0.0",
-    effectiveDate: "10 Feb 2026",
-    nextReviewDate: "10 Aug 2026",
-    owner: "Vayasya Seva Brand Office",
+    version: "v2.0.0",
+    effectiveDate: "11 Feb 2026",
+    nextReviewDate: "11 Aug 2026",
+    owner: "Vayasya Brand Office",
     approvalTrail: [
       "Brand lead approval",
       "Vertical head approval",
       "Legal reviewer acknowledgment",
     ],
-    contact: "brand.office@vayasya.example",
+    contact: "TODO: Replace with actual contact email",
   },
   rules: [
     "Increase minor version for wording refinements without policy impact.",

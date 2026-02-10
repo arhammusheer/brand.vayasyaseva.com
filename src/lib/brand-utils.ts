@@ -35,8 +35,8 @@ export const tokenCssVariables = BRAND_CONTENT.fundamentals.colorTokens.reduce<
 }, {});
 
 export const handbookMetadata = {
-  title: `${BRAND_CONTENT.fundamentals.brandName.full} | ${BRAND_CONTENT.navigation.title}`,
-  description: BRAND_CONTENT.sections.philosophy.intro,
+  title: "Vayasya Brand Handbook",
+  description: "The canonical guide to Vayasya brand communication — identity, visual system, voice, and operational standards across all verticals.",
   sectionCount: orderedSections.length,
   version: BRAND_CONTENT.sections.footerVersioning.footer.version,
   lastUpdated: BRAND_CONTENT.sections.footerVersioning.footer.effectiveDate,

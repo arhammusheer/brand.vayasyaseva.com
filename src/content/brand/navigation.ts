@@ -1,35 +1,37 @@
 import type { NavGroup, NavItem, NavSection } from "../../lib/types/brand";
 
 export const BRAND_NAV_ITEMS = [
-  { id: "philosophy", label: "01 Philosophy", href: "#01-philosophy", order: 1 },
-  { id: "positioning", label: "02 Positioning", href: "#02-positioning", order: 2 },
-  { id: "operating-pillars", label: "03 Operating Pillars", href: "#03-operating-pillars", order: 3 },
-  { id: "logo-usage", label: "04 Logo Usage", href: "#04-logo-usage", order: 4 },
-  { id: "color-palette", label: "05 Color Palette", href: "#05-color-palette", order: 5 },
-  { id: "typography", label: "06 Typography", href: "#06-typography", order: 6 },
-  { id: "imagery", label: "07 Imagery", href: "#07-imagery", order: 7 },
-  { id: "voice-tone", label: "08 Voice & Tone", href: "#08-voice-tone", order: 8 },
-  { id: "claims-discipline", label: "09 Claims Discipline", href: "#09-claims-discipline", order: 9 },
-  { id: "writing-mechanics", label: "10 Writing Mechanics", href: "#10-writing-mechanics", order: 10 },
-  { id: "documents", label: "11 Documents", href: "#11-documents", order: 11 },
-  { id: "presentations", label: "12 Presentations", href: "#12-presentations", order: 12 },
-  { id: "email", label: "13 Email", href: "#13-email", order: 13 },
-  { id: "meetings", label: "14 Meetings", href: "#14-meetings", order: 14 },
-  { id: "pre-send-checklist", label: "15 Pre-Send Checklist", href: "#15-pre-send-checklist", order: 15 },
+  { id: "overview", label: "01 Overview", href: "#01-overview", order: 1 },
+  { id: "identity", label: "02 Identity", href: "#02-identity", order: 2 },
+  { id: "brand-architecture", label: "03 Brand Architecture", href: "#03-brand-architecture", order: 3 },
+  { id: "operating-pillars", label: "04 Operating Pillars", href: "#04-operating-pillars", order: 4 },
+  { id: "logo-usage", label: "05 Logo Usage", href: "#05-logo-usage", order: 5 },
+  { id: "color-palette", label: "06 Color Palette", href: "#06-color-palette", order: 6 },
+  { id: "typography", label: "07 Typography", href: "#07-typography", order: 7 },
+  { id: "imagery", label: "08 Imagery", href: "#08-imagery", order: 8 },
+  { id: "voice-tone", label: "09 Voice & Tone", href: "#09-voice-tone", order: 9 },
+  { id: "claims-discipline", label: "10 Claims Discipline", href: "#10-claims-discipline", order: 10 },
+  { id: "writing-mechanics", label: "11 Writing Mechanics", href: "#11-writing-mechanics", order: 11 },
+  { id: "documents", label: "12 Documents", href: "#12-documents", order: 12 },
+  { id: "presentations", label: "13 Presentations", href: "#13-presentations", order: 13 },
+  { id: "email", label: "14 Email", href: "#14-email", order: 14 },
+  { id: "meetings", label: "15 Meetings", href: "#15-meetings", order: 15 },
+  { id: "pre-send-checklist", label: "16 Pre-Send Checklist", href: "#16-pre-send-checklist", order: 16 },
 ] as const satisfies readonly NavItem[];
 
 export const APPENDIX_NAV_ITEMS = [
-  { id: "governance-approvals", label: "Governance & Approvals", href: "#governance-approvals", order: 16 },
-  { id: "templates-downloadables", label: "Templates & Downloadables", href: "#templates-downloadables", order: 17 },
-  { id: "faq-edge-cases", label: "FAQ / Edge Cases", href: "#faq-edge-cases", order: 18 },
-  { id: "footer-versioning", label: "Versioning", href: "#footer-versioning", order: 19 },
+  { id: "governance-approvals", label: "Governance & Approvals", href: "#governance-approvals", order: 17 },
+  { id: "templates-downloadables", label: "Templates & Assets", href: "#templates-downloadables", order: 18 },
+  { id: "faq-edge-cases", label: "FAQ / Edge Cases", href: "#faq-edge-cases", order: 19 },
+  { id: "changelog", label: "Changelog", href: "#changelog", order: 20 },
+  { id: "footer-versioning", label: "Versioning", href: "#footer-versioning", order: 21 },
 ] as const satisfies readonly NavItem[];
 
 export const NAV_GROUPS = [
   {
     id: "foundation",
     title: "Foundation",
-    items: ["philosophy", "positioning", "operating-pillars"],
+    items: ["overview", "identity", "brand-architecture", "operating-pillars"],
   },
   {
     id: "visual",

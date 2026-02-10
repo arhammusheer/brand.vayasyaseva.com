@@ -8,7 +8,7 @@ import type {
 export const GOVERNANCE_APPROVALS_SECTION = {
   header: {
     id: "governance-approvals",
-    number: "16",
+    number: "17",
     title: "Governance & Approvals",
     summary: "Use defined approval paths with SLAs for all critical brand artifacts.",
   },

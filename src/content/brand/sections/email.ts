@@ -7,7 +7,7 @@ import type {
 export const EMAIL_SECTION = {
   header: {
     id: "email",
-    number: "13",
+    number: "14",
     title: "Email",
     summary: "Use concise, legally safe, and action-oriented email structure.",
   },

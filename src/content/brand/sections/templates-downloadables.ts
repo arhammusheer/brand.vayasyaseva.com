@@ -7,7 +7,7 @@ import type {
 export const TEMPLATES_DOWNLOADABLES_SECTION = {
   header: {
     id: "templates-downloadables",
-    number: "17",
+    number: "18",
     title: "Templates & Downloadables",
     summary: "Use approved templates to reduce drafting time and compliance variance.",
   },

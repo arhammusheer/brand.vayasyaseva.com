@@ -8,7 +8,7 @@ import type {
 export const MEETINGS_SECTION = {
   header: {
     id: "meetings",
-    number: "14",
+    number: "15",
     title: "Meetings",
     summary: "Run meetings with pre-read, clear decisions, and documented owners.",
   },

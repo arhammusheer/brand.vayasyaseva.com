@@ -8,7 +8,7 @@ import type {
 export const PRE_SEND_CHECKLIST_SECTION = {
   header: {
     id: "pre-send-checklist",
-    number: "15",
+    number: "16",
     title: "Pre-Send Checklist",
     summary: "Use a mandatory gate before sending any external brand communication.",
   },

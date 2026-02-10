@@ -10,7 +10,7 @@ import type {
 export const VOICE_TONE_SECTION = {
   header: {
     id: "voice-tone",
-    number: "08",
+    number: "09",
     title: "Voice & Tone",
     summary: "Write with calm authority, operational precision, and respectful directness.",
   } satisfies SectionHeader,

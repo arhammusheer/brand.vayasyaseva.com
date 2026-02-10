@@ -7,7 +7,7 @@ import type {
 export const DOCUMENTS_SECTION = {
   header: {
     id: "documents",
-    number: "11",
+    number: "12",
     title: "Documents",
     summary: "Apply one structure for briefs, proposals, SOPs, and policy documents.",
   },

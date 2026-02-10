@@ -14,9 +14,12 @@ import {
   VERTICAL_LOGOS,
 } from "./placeholders";
 
-// Core sections (01-15)
-import { PHILOSOPHY_SECTION } from "./sections/01-philosophy";
-import { POSITIONING_SECTION } from "./sections/positioning";
+// New sections (01-03)
+import { OVERVIEW_SECTION } from "./sections/01-overview";
+import { IDENTITY_SECTION } from "./sections/02-identity";
+import { BRAND_ARCHITECTURE_SECTION } from "./sections/03-brand-architecture";
+
+// Core sections (04-16)
 import { OPERATING_PILLARS_SECTION } from "./sections/operating-pillars";
 import { LOGO_USAGE_SECTION } from "./sections/logo-usage";
 import { COLOR_PALETTE_SECTION } from "./sections/color-palette";
@@ -31,10 +34,11 @@ import { EMAIL_SECTION } from "./sections/email";
 import { MEETINGS_SECTION } from "./sections/meetings";
 import { PRE_SEND_CHECKLIST_SECTION } from "./sections/pre-send-checklist";
 
-// Appendix sections (16-19)
+// Appendix sections (17-21)
 import { GOVERNANCE_APPROVALS_SECTION } from "./sections/governance-approvals";
 import { TEMPLATES_DOWNLOADABLES_SECTION } from "./sections/templates-downloadables";
 import { FAQ_EDGE_CASES_SECTION } from "./sections/faq-edge-cases";
+import { CHANGELOG_SECTION } from "./sections/20-changelog";
 import { FOOTER_VERSIONING_SECTION } from "./sections/footer-versioning";
 
 export const BRAND_CONTENT = {
@@ -57,8 +61,9 @@ export const BRAND_CONTENT = {
     verticalLogos: VERTICAL_LOGOS,
   },
   sections: {
-    philosophy: PHILOSOPHY_SECTION,
-    positioning: POSITIONING_SECTION,
+    overview: OVERVIEW_SECTION,
+    identity: IDENTITY_SECTION,
+    brandArchitecture: BRAND_ARCHITECTURE_SECTION,
     operatingPillars: OPERATING_PILLARS_SECTION,
     logoUsage: LOGO_USAGE_SECTION,
     colorPalette: COLOR_PALETTE_SECTION,
@@ -75,6 +80,7 @@ export const BRAND_CONTENT = {
     governanceApprovals: GOVERNANCE_APPROVALS_SECTION,
     templatesDownloadables: TEMPLATES_DOWNLOADABLES_SECTION,
     faqEdgeCases: FAQ_EDGE_CASES_SECTION,
+    changelog: CHANGELOG_SECTION,
     footerVersioning: FOOTER_VERSIONING_SECTION,
   },
 } as const;

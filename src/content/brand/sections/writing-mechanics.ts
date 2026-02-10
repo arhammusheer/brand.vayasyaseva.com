@@ -8,7 +8,7 @@ import type {
 export const WRITING_MECHANICS_SECTION = {
   header: {
     id: "writing-mechanics",
-    number: "10",
+    number: "11",
     title: "Writing Mechanics",
     summary: "Standardize writing structure, punctuation, and formatting for operational clarity.",
   },

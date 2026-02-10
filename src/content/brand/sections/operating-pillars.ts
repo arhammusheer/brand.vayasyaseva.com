@@ -8,7 +8,7 @@ import type {
 export const OPERATING_PILLARS_SECTION = {
   header: {
     id: "operating-pillars",
-    number: "03",
+    number: "04",
     title: "Operating Pillars",
     summary: "Four pillars define execution quality across every client engagement.",
   },

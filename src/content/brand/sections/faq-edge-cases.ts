@@ -8,7 +8,7 @@ import type {
 export const FAQ_EDGE_CASES_SECTION = {
   header: {
     id: "faq-edge-cases",
-    number: "18",
+    number: "19",
     title: "FAQ / Edge Cases",
     summary: "Resolve common exceptions without breaking brand or compliance controls.",
   },

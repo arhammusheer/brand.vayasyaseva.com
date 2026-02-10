@@ -10,7 +10,7 @@ import type {
 export const TYPOGRAPHY_SECTION = {
   header: {
     id: "typography",
-    number: "06",
+    number: "07",
     title: "Typography",
     summary: "Use Hind for brand communication and JetBrains Mono for tabular data reliability.",
   },

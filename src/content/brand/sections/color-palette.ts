@@ -9,7 +9,7 @@ import type {
 export const COLOR_PALETTE_SECTION = {
   header: {
     id: "color-palette",
-    number: "05",
+    number: "06",
     title: "Color Palette",
     summary: "Apply tokens with predictable roles to preserve readability and brand ownership.",
   },

@@ -8,7 +8,7 @@ import type {
 export const LOGO_USAGE_SECTION = {
   header: {
     id: "logo-usage",
-    number: "04",
+    number: "05",
     title: "Logo Usage",
     summary: "Protect identity through consistent lockup, spacing, and color handling.",
   },
@@ -18,7 +18,7 @@ export const LOGO_USAGE_SECTION = {
     {
       id: "master-light",
       label: "Master Logo Light",
-      filePath: "/brand/logos/master-logo-light.png",
+      filePath: "/brand/logos/master-logo-light.svg",
       background: "light",
       minWidthPx: 120,
       clearSpaceRule: "Keep clear space equal to the height of the V around all sides.",

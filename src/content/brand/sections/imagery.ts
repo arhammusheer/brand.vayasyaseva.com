@@ -8,7 +8,7 @@ import type {
 export const IMAGERY_SECTION = {
   header: {
     id: "imagery",
-    number: "07",
+    number: "08",
     title: "Imagery",
     summary: "Use imagery as evidence and context, not decoration.",
   },

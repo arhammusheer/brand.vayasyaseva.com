@@ -8,7 +8,7 @@ import type {
 export const CLAIMS_DISCIPLINE_SECTION = {
   header: {
     id: "claims-discipline",
-    number: "09",
+    number: "10",
     title: "Claims Discipline",
     summary: "Classify every claim by evidence level before publication.",
   } satisfies SectionHeader,

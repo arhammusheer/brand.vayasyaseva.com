@@ -10,7 +10,7 @@ import type {
 export const BRAND_NAME = {
   parent: "Vayasya",
   vertical: "Vayasya Seva",
-  full: "Vayasya Seva, a Vayasya vertical",
+  full: "Vayasya — Enterprise Workforce Services & Systems",
 } as const;
 
 export const VERTICALS = [
@@ -148,7 +148,7 @@ export const LOGO_RULES = {
     {
       id: "master-light",
       label: "Master logo on light background",
-      filePath: "/brand/logos/master-logo-light.png",
+      filePath: "/brand/logos/master-logo-light.svg",
       background: "light",
       minWidthPx: 120,
       clearSpaceRule: "At least 1x height of the V in Vayasya around all sides.",
