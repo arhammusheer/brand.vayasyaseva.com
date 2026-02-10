@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowUp, Menu, Check, X, Copy, AlertTriangle } from "lucide-react";
+import { ArrowUp, Menu, Check, X, Copy, AlertTriangle, ArrowRight, FileText, Minus } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -31,7 +31,7 @@ const CHAPTERS = {
     id: "chapter-foundation",
     number: "I",
     title: "Foundation",
-    description: "Core philosophy, positioning, and behavioral pillars that define Vayasya.",
+    description: "Identity, brand architecture, and behavioral pillars that define Vayasya.",
     accent: "foundation",
   },
   visual: {
@@ -59,7 +59,7 @@ const CHAPTERS = {
     id: "chapter-appendix",
     number: "V",
     title: "Appendix",
-    description: "Governance, templates, FAQ, and version information.",
+    description: "Governance, templates, FAQ, changelog, and version information.",
     accent: "appendix",
   },
 } as const;
@@ -102,6 +102,43 @@ function DoDontBlock({ examples, title = "Do / Don't" }: { examples: readonly { 
               </div>
             </div>
             <p className="mt-4 text-sm text-[color:var(--vy-muted-fg)]">{ex.why}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function TemplatesBlock({ templates, title = "Templates" }: { templates: readonly { name: string; purpose: string; whenToUse: string; template: string; guardrails: readonly string[] }[]; title?: string }) {
+  if (!templates.length) return null;
+  return (
+    <div className="mt-12">
+      <h4 className="mb-5 text-lg font-medium text-[color:var(--vy-text-strong)]">{title}</h4>
+      <div className="grid gap-6">
+        {templates.map((t, i) => (
+          <div key={i} className="rounded-lg border border-[color:var(--vy-border)] overflow-hidden">
+            <div className="bg-[color:var(--vy-muted)] p-5">
+              <div className="flex items-center gap-2">
+                <FileText className="h-4 w-4 text-[color:var(--vy-muted-fg)]" />
+                <h5 className="font-semibold text-[color:var(--vy-text-strong)]">{t.name}</h5>
+              </div>
+              <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">{t.purpose}</p>
+              <p className="mt-1 text-xs text-[color:var(--vy-muted-fg)]">When to use: {t.whenToUse}</p>
+            </div>
+            <div className="p-5 space-y-4">
+              <pre className="whitespace-pre-wrap rounded bg-[color:var(--vy-muted)] p-4 font-mono text-sm leading-relaxed">{t.template}</pre>
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)] mb-2">Guardrails</p>
+                <ul className="space-y-1 text-sm">
+                  {t.guardrails.map((g, j) => (
+                    <li key={j} className="flex gap-2">
+                      <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--vy-warning)]" />
+                      <span className="text-[color:var(--vy-muted-fg)]">{g}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -157,17 +194,17 @@ export default function Page() {
     smoothScrollToSection(anchorId);
   };
 
-  const manifesto = "manifesto" in sections.philosophy ? sections.philosophy.manifesto : null;
-  const pillars = "pillars" in sections.operatingPillars ? sections.operatingPillars.pillars : [];
-  const personas = "personas" in sections.voiceTone ? sections.voiceTone.personas : [];
-  const terminology = "terminology" in sections.voiceTone ? sections.voiceTone.terminology : [];
-  const bannedPhrases = "bannedPhrases" in sections.voiceTone ? sections.voiceTone.bannedPhrases : [];
-  const claimRules = "claimRules" in sections.claimsDiscipline ? sections.claimsDiscipline.claimRules : [];
-  const evidenceTiers = "evidenceTiers" in sections.claimsDiscipline ? sections.claimsDiscipline.evidenceTiers : [];
-  const checklist = "checklist" in sections.preSendChecklist ? sections.preSendChecklist.checklist : [];
-  const standards = "standards" in sections.meetings ? sections.meetings.standards : [];
-  const approvals = "approvals" in sections.governanceApprovals ? sections.governanceApprovals.approvals : [];
-  const mechanics = "mechanics" in sections.writingMechanics ? sections.writingMechanics.mechanics : [];
+  const manifesto = sections.identity.manifesto;
+  const pillars = sections.operatingPillars.pillars;
+  const personas = sections.voiceTone.personas;
+  const terminology = sections.voiceTone.terminology;
+  const bannedPhrases = sections.voiceTone.bannedPhrases;
+  const claimRules = sections.claimsDiscipline.claimRules;
+  const evidenceTiers = sections.claimsDiscipline.evidenceTiers;
+  const checklist = sections.preSendChecklist.checklist;
+  const standards = sections.meetings.standards;
+  const approvals = sections.governanceApprovals.approvals;
+  const mechanics = sections.writingMechanics.mechanics;
 
   return (
     <div className="min-h-screen bg-[color:var(--vy-bg)] text-[color:var(--vy-fg)]">
@@ -190,7 +227,7 @@ export default function Page() {
       {/* Mobile Header */}
       <header className="print:hidden sticky top-1 z-50 border-b border-[color:var(--vy-border)] bg-[color:var(--vy-bg)]/95 backdrop-blur lg:hidden">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
-          <p className="text-sm font-semibold">Brand Handbook</p>
+          <p className="text-sm font-semibold">Vayasya Brand Handbook</p>
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" aria-label="Open navigation">
@@ -227,11 +264,11 @@ export default function Page() {
               Brand Handbook
             </h1>
             <p className="mt-6 max-w-2xl text-xl text-[color:var(--vy-muted-fg)] leading-relaxed">
-              The canonical guide to Vayasya brand communication. Five chapters covering identity, visual system, voice, and operational standards.
+              The single source of truth for Vayasya brand communication. Identity, visual system, voice, operational standards, and governance across all verticals.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <span className="rounded-full bg-[color:var(--vy-gold-ui)] px-4 py-1.5 text-sm font-medium text-white">
-                v{"footer" in sections.footerVersioning ? sections.footerVersioning.footer.version : "1.0"}
+                {sections.footerVersioning.footer.version}
               </span>
               {fundamentals.verticals.map((v) => (
                 <span key={v} className="rounded-full border border-[color:var(--vy-border)] px-4 py-1.5 text-sm">
@@ -243,123 +280,302 @@ export default function Page() {
 
           {/* ==================== CHAPTER I: FOUNDATION ==================== */}
           <ChapterWrapper {...CHAPTERS.foundation}>
-            {/* 01 Philosophy */}
+            {/* 01 Overview */}
             <section>
-              <SectionHeader {...sections.philosophy.header} id="01-philosophy" />
+              <SectionHeader {...sections.overview.header} id="01-overview" />
               <div className="mt-10">
-                <p className="max-w-prose text-lg leading-relaxed">{sections.philosophy.intro}</p>
+                <p className="max-w-prose text-lg leading-relaxed">{sections.overview.intro}</p>
 
-                {manifesto && (
-                  <>
-                    {/* Mission Band */}
-                    <div className="my-12 rounded-xl bg-[color:var(--vy-muted)] p-10 text-center">
-                      <p className="text-2xl font-medium text-[color:var(--vy-text-strong)] md:text-3xl leading-relaxed">
-                        "{manifesto.mission}"
-                      </p>
-                    </div>
+                <div className="mt-10 rounded-lg bg-[color:var(--vy-muted)] p-6">
+                  <p className="text-sm font-medium uppercase tracking-wide text-[color:var(--vy-muted-fg)] mb-2">Who this is for</p>
+                  <p className="text-[color:var(--vy-fg)]">{sections.overview.audience}</p>
+                </div>
 
-                    {/* Beliefs */}
-                    <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">What We Believe</h4>
-                    <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                      {manifesto.beliefs.map((b, i) => (
-                        <div key={i} className="rounded-lg border border-[color:var(--vy-border)] p-4">
-                          <p className="font-semibold text-[color:var(--vy-text-strong)]">{b.belief}</p>
-                          <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">{b.explanation}</p>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Stand For / Reject */}
-                    <div className="mt-12 grid gap-8 md:grid-cols-2">
-                      <div className="rounded-lg border-2 border-[color:var(--vy-success)] p-6">
-                        <h4 className="mb-4 flex items-center gap-2 font-semibold text-[color:var(--vy-success)]">
-                          <Check className="h-5 w-5" /> We Stand For
-                        </h4>
-                        <ul className="space-y-3">
-                          {manifesto.standFor.map((s, i) => (
-                            <li key={i} className="text-[color:var(--vy-fg)]">• {s}</li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div className="rounded-lg border-2 border-[color:var(--vy-danger)] p-6">
-                        <h4 className="mb-4 flex items-center gap-2 font-semibold text-[color:var(--vy-danger)]">
-                          <X className="h-5 w-5" /> We Reject
-                        </h4>
-                        <ul className="space-y-3">
-                          {manifesto.reject.map((r, i) => (
-                            <li key={i} className="text-[color:var(--vy-muted-fg)]">• {r}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </>
-                )}
-
-                <RulesBlock rules={sections.philosophy.rules} />
-                <DoDontBlock examples={sections.philosophy.doDont} />
-              </div>
-            </section>
-
-            {/* 02 Positioning */}
-            <section>
-              <SectionHeader {...sections.positioning.header} id="02-positioning" />
-              <div className="mt-10">
-                <p className="max-w-prose text-lg leading-relaxed">{sections.positioning.intro}</p>
-                <RulesBlock rules={sections.positioning.rules} />
-                <DoDontBlock examples={sections.positioning.doDont} />
-              </div>
-            </section>
-
-            {/* 03 Operating Pillars */}
-            <section>
-              <SectionHeader {...sections.operatingPillars.header} id="03-operating-pillars" />
-              <div className="mt-10">
-                <p className="max-w-prose text-lg leading-relaxed">{sections.operatingPillars.intro}</p>
-
-                {pillars.length > 0 && (
-                  <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-                    {pillars.map((p) => (
-                      <div key={p.name} className="rounded-lg border border-[color:var(--vy-border)] overflow-hidden">
-                        <div className="bg-[color:var(--vy-muted)] p-5">
-                          <h5 className="text-lg font-semibold text-[color:var(--vy-text-strong)]">{p.name}</h5>
-                          <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">{p.definition}</p>
-                        </div>
-                        <div className="p-5 space-y-5">
+                {/* How to Use */}
+                <div className="mt-10">
+                  <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">How to Use This Handbook</h4>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    {sections.overview.howToUse.map((item, i) => (
+                      <div key={i} className="rounded-lg border border-[color:var(--vy-border)] p-5">
+                        <div className="flex items-start gap-3">
+                          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[color:var(--vy-gold-ui)] text-xs font-semibold text-white">
+                            {i + 1}
+                          </span>
                           <div>
-                            <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-success)]">
-                              <Check className="inline h-3 w-3 mr-1" />Behaviors
-                            </p>
-                            <ul className="space-y-2 text-sm">
-                              {p.behaviors.map((b, i) => <li key={i}>• {b}</li>)}
-                            </ul>
-                          </div>
-                          <div>
-                            <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-danger)]">
-                              <AlertTriangle className="inline h-3 w-3 mr-1" />Red Flags
-                            </p>
-                            <ul className="space-y-2 text-sm text-[color:var(--vy-muted-fg)]">
-                              {p.redFlags.map((r, i) => <li key={i}>• {r}</li>)}
-                            </ul>
+                            <p className="font-semibold text-[color:var(--vy-text-strong)]">{item.step}</p>
+                            <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">{item.detail}</p>
                           </div>
                         </div>
                       </div>
                     ))}
                   </div>
+                </div>
+
+                {/* Quick Links */}
+                <div className="mt-10">
+                  <h4 className="mb-4 text-lg font-medium text-[color:var(--vy-text-strong)]">Quick Reference</h4>
+                  <div className="grid gap-3 grid-cols-2 md:grid-cols-3">
+                    {sections.overview.quickLinks.map((link) => (
+                      <button
+                        key={link.anchor}
+                        onClick={() => handleNavigate(link.anchor.replace("#", ""))}
+                        className="flex items-center gap-2 rounded-lg border border-[color:var(--vy-border)] p-3 text-left text-sm hover:bg-[color:var(--vy-muted)] transition-colors"
+                      >
+                        <ArrowRight className="h-3.5 w-3.5 text-[color:var(--vy-muted-fg)]" />
+                        <span>{link.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* 02 Identity */}
+            <section>
+              <SectionHeader {...sections.identity.header} id="02-identity" />
+              <div className="mt-10">
+                <p className="max-w-prose text-lg leading-relaxed">{sections.identity.intro}</p>
+
+                {/* What We Are */}
+                <div className="mt-10 rounded-lg border-2 border-[color:var(--vy-gold-ui)] p-6">
+                  <p className="text-xl font-medium text-[color:var(--vy-text-strong)]">{sections.identity.whatWeAre.statement}</p>
+                  <div className="mt-5 grid gap-3 md:grid-cols-2">
+                    {sections.identity.whatWeAre.signals.map((s, i) => (
+                      <div key={i} className="flex items-center gap-2">
+                        <Check className="h-4 w-4 shrink-0 text-[color:var(--vy-gold-ui)]" />
+                        <span className="text-sm">{s}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* What We Are Not */}
+                <div className="mt-8 rounded-lg border-2 border-[color:var(--vy-danger)] p-6">
+                  <h4 className="mb-4 flex items-center gap-2 font-semibold text-[color:var(--vy-danger)]">
+                    <X className="h-5 w-5" /> What Vayasya is NOT
+                  </h4>
+                  <ul className="space-y-3">
+                    {sections.identity.whatWeAreNot.map((item, i) => (
+                      <li key={i} className="flex items-start gap-2 text-[color:var(--vy-fg)]">
+                        <Minus className="mt-1 h-4 w-4 shrink-0 text-[color:var(--vy-danger)]" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Anti-Brand */}
+                <div className="mt-8 rounded-lg bg-red-50 border border-[color:var(--vy-danger)] p-6">
+                  <h4 className="mb-4 font-semibold text-[color:var(--vy-danger)]">Anti-Brand: Always Avoid</h4>
+                  <div className="grid gap-3 md:grid-cols-2">
+                    {sections.identity.antiBrand.map((item, i) => (
+                      <div key={i} className="flex items-start gap-2">
+                        <X className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--vy-danger)]" />
+                        <span className="text-sm text-[color:var(--vy-fg)]">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Mission Band */}
+                <div className="my-12 rounded-xl bg-[color:var(--vy-muted)] p-10 text-center">
+                  <p className="text-2xl font-medium text-[color:var(--vy-text-strong)] md:text-3xl leading-relaxed">
+                    &ldquo;{manifesto.mission}&rdquo;
+                  </p>
+                </div>
+
+                {/* Beliefs */}
+                <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">What We Believe</h4>
+                <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                  {manifesto.beliefs.map((b, i) => (
+                    <div key={i} className="rounded-lg border border-[color:var(--vy-border)] p-4">
+                      <p className="font-semibold text-[color:var(--vy-text-strong)]">{b.belief}</p>
+                      <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">{b.explanation}</p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Stand For / Reject */}
+                <div className="mt-12 grid gap-8 md:grid-cols-2">
+                  <div className="rounded-lg border-2 border-[color:var(--vy-success)] p-6">
+                    <h4 className="mb-4 flex items-center gap-2 font-semibold text-[color:var(--vy-success)]">
+                      <Check className="h-5 w-5" /> We Stand For
+                    </h4>
+                    <ul className="space-y-3">
+                      {manifesto.standFor.map((s, i) => (
+                        <li key={i} className="text-[color:var(--vy-fg)]">&bull; {s}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="rounded-lg border-2 border-[color:var(--vy-danger)] p-6">
+                    <h4 className="mb-4 flex items-center gap-2 font-semibold text-[color:var(--vy-danger)]">
+                      <X className="h-5 w-5" /> We Reject
+                    </h4>
+                    <ul className="space-y-3">
+                      {manifesto.reject.map((r, i) => (
+                        <li key={i} className="text-[color:var(--vy-muted-fg)]">&bull; {r}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Positioning */}
+                <div className="mt-12">
+                  <h4 className="mb-4 text-lg font-medium text-[color:var(--vy-text-strong)]">Positioning</h4>
+                  <p className="max-w-prose text-[color:var(--vy-muted-fg)]">{sections.identity.positioning.intro}</p>
+                  <RulesBlock rules={sections.identity.positioning.rules} title="Positioning Rules" />
+                </div>
+
+                {/* Positioning Terminology */}
+                {sections.identity.positioning.terminology.length > 0 && (
+                  <div className="mt-8">
+                    <h4 className="mb-4 text-lg font-medium text-[color:var(--vy-text-strong)]">Positioning Terminology</h4>
+                    <div className="overflow-x-auto rounded-lg border border-[color:var(--vy-border)]">
+                      <table className="w-full text-sm">
+                        <thead className="bg-[color:var(--vy-muted)]">
+                          <tr>
+                            <th className="p-4 text-left font-medium">Instead of</th>
+                            <th className="p-4 text-left font-medium text-[color:var(--vy-success)]">Use</th>
+                            <th className="p-4 text-left font-medium text-[color:var(--vy-danger)]">Avoid</th>
+                            <th className="p-4 text-left font-medium">Notes</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {sections.identity.positioning.terminology.map((t) => (
+                            <tr key={t.term} className="border-t border-[color:var(--vy-border)]">
+                              <td className="p-4 font-medium">{t.term}</td>
+                              <td className="p-4 text-[color:var(--vy-success)]">{t.approved}</td>
+                              <td className="p-4 text-[color:var(--vy-danger)]">{t.avoid.join(", ")}</td>
+                              <td className="p-4 text-[color:var(--vy-muted-fg)]">{t.notes}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                 )}
+
+                <RulesBlock rules={sections.identity.rules} />
+                <DoDontBlock examples={sections.identity.doDont} />
+                <TemplatesBlock templates={sections.identity.templates} />
+              </div>
+            </section>
+
+            {/* 03 Brand Architecture */}
+            <section>
+              <SectionHeader {...sections.brandArchitecture.header} id="03-brand-architecture" />
+              <div className="mt-10">
+                <p className="max-w-prose text-lg leading-relaxed">{sections.brandArchitecture.intro}</p>
+
+                {/* Master Brand */}
+                <div className="mt-10 rounded-lg border-2 border-[color:var(--vy-gold-ui)] p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="h-8 w-8 rounded" style={{ backgroundColor: sections.brandArchitecture.masterBrand.accentHex }} />
+                    <h5 className="text-xl font-semibold text-[color:var(--vy-text-strong)]">{sections.brandArchitecture.masterBrand.name}</h5>
+                    <span className="font-mono text-xs text-[color:var(--vy-muted-fg)]">{sections.brandArchitecture.masterBrand.accentToken}</span>
+                  </div>
+                  <p className="text-[color:var(--vy-muted-fg)]">{sections.brandArchitecture.masterBrand.role}</p>
+                </div>
+
+                {/* Verticals */}
+                <div className="mt-8">
+                  <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Verticals</h4>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    {sections.brandArchitecture.verticals.map((v) => (
+                      <div key={v.name} className="rounded-lg border border-[color:var(--vy-border)] overflow-hidden">
+                        <div className="h-2" style={{ backgroundColor: v.accentHex }} />
+                        <div className="p-5">
+                          <div className="flex items-center justify-between">
+                            <h5 className="font-semibold text-[color:var(--vy-text-strong)]">{v.name}</h5>
+                            <span className="font-mono text-xs text-[color:var(--vy-muted-fg)]">{v.accentHex}</span>
+                          </div>
+                          <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">{v.domain}</p>
+                          <p className="mt-1 font-mono text-xs text-[color:var(--vy-muted-fg)]">{v.accentToken}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Naming Rules */}
+                <RulesBlock rules={sections.brandArchitecture.namingRules} title="Naming Rules" />
+
+                {/* Lockup Rules */}
+                <RulesBlock rules={sections.brandArchitecture.lockupRules} title="Lockup Rules" />
+
+                {/* Usage Guidance */}
+                <div className="mt-12">
+                  <h4 className="mb-5 text-lg font-medium text-[color:var(--vy-text-strong)]">When to Use Which Brand</h4>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    {sections.brandArchitecture.usageGuidance.map((g, i) => (
+                      <div key={i} className="rounded-lg bg-[color:var(--vy-muted)] p-5">
+                        <p className="font-medium text-[color:var(--vy-text-strong)]">{g.context}</p>
+                        <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">{g.rule}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <RulesBlock rules={sections.brandArchitecture.rules} />
+                <DoDontBlock examples={sections.brandArchitecture.doDont} />
+              </div>
+            </section>
+
+            {/* 04 Operating Pillars */}
+            <section>
+              <SectionHeader {...sections.operatingPillars.header} id="04-operating-pillars" />
+              <div className="mt-10">
+                <p className="max-w-prose text-lg leading-relaxed">{sections.operatingPillars.intro}</p>
+
+                <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                  {pillars.map((p) => (
+                    <div key={p.name} className="rounded-lg border border-[color:var(--vy-border)] overflow-hidden">
+                      <div className="bg-[color:var(--vy-muted)] p-5">
+                        <h5 className="text-lg font-semibold text-[color:var(--vy-text-strong)]">{p.name}</h5>
+                        <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">{p.definition}</p>
+                      </div>
+                      <div className="p-5 space-y-5">
+                        <div>
+                          <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-success)]">
+                            <Check className="inline h-3 w-3 mr-1" />Behaviors
+                          </p>
+                          <ul className="space-y-2 text-sm">
+                            {p.behaviors.map((b, i) => <li key={i}>&bull; {b}</li>)}
+                          </ul>
+                        </div>
+                        <div>
+                          <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-danger)]">
+                            <AlertTriangle className="inline h-3 w-3 mr-1" />Red Flags
+                          </p>
+                          <ul className="space-y-2 text-sm text-[color:var(--vy-muted-fg)]">
+                            {p.redFlags.map((r, i) => <li key={i}>&bull; {r}</li>)}
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
 
                 <RulesBlock rules={sections.operatingPillars.rules} />
                 <DoDontBlock examples={sections.operatingPillars.doDont} />
+                <TemplatesBlock templates={sections.operatingPillars.templates} />
               </div>
             </section>
           </ChapterWrapper>
 
           {/* ==================== CHAPTER II: VISUAL SYSTEM ==================== */}
           <ChapterWrapper {...CHAPTERS.visual}>
-            {/* 04 Logo Usage */}
+            {/* 05 Logo Usage */}
             <section>
-              <SectionHeader {...sections.logoUsage.header} id="04-logo-usage" />
+              <SectionHeader {...sections.logoUsage.header} id="05-logo-usage" />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.logoUsage.intro}</p>
+
+                {/* Flat Gold Callout */}
+                <div className="mt-6 rounded-lg border-2 border-[color:var(--vy-gold-ui)] bg-[color:var(--vy-muted)] p-5">
+                  <p className="font-medium text-[color:var(--vy-text-strong)]">Gold is flat. No gradients, no shimmer, no effects.</p>
+                  <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">The logo uses flat gold (#C9A24A) as supplied. Do not apply CSS filters, gradient overlays, or decorative effects.</p>
+                </div>
 
                 {/* Logo Previews */}
                 <div className="mt-10">
@@ -375,7 +591,7 @@ export default function Page() {
                         />
                       </div>
                       <p className="mt-4 font-medium">Light Background</p>
-                      <p className="text-sm text-[color:var(--vy-muted-fg)]">Min width: 120px • Clear space: 1x V height</p>
+                      <p className="text-sm text-[color:var(--vy-muted-fg)]">Min width: 120px &bull; Clear space: 1x V height</p>
                     </div>
                     <div className="rounded-lg border border-[color:var(--vy-border)] p-6">
                       <div className="flex h-32 items-center justify-center rounded bg-[#111111]">
@@ -387,7 +603,7 @@ export default function Page() {
                         />
                       </div>
                       <p className="mt-4 font-medium">Dark Background</p>
-                      <p className="text-sm text-[color:var(--vy-muted-fg)]">Min width: 120px • Clear space: 1x V height</p>
+                      <p className="text-sm text-[color:var(--vy-muted-fg)]">Min width: 120px &bull; Clear space: 1x V height</p>
                     </div>
                   </div>
                 </div>
@@ -409,12 +625,13 @@ export default function Page() {
 
                 <RulesBlock rules={sections.logoUsage.rules} />
                 <DoDontBlock examples={sections.logoUsage.doDont} />
+                <TemplatesBlock templates={sections.logoUsage.templates} />
               </div>
             </section>
 
-            {/* 05 Color Palette */}
+            {/* 06 Color Palette */}
             <section>
-              <SectionHeader {...sections.colorPalette.header} id="05-color-palette" />
+              <SectionHeader {...sections.colorPalette.header} id="06-color-palette" />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.colorPalette.intro}</p>
 
@@ -436,12 +653,13 @@ export default function Page() {
 
                 <RulesBlock rules={sections.colorPalette.rules} />
                 <DoDontBlock examples={sections.colorPalette.doDont} />
+                <TemplatesBlock templates={sections.colorPalette.templates} />
               </div>
             </section>
 
-            {/* 06 Typography */}
+            {/* 07 Typography */}
             <section>
-              <SectionHeader {...sections.typography.header} id="06-typography" />
+              <SectionHeader {...sections.typography.header} id="07-typography" />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.typography.intro}</p>
 
@@ -487,375 +705,476 @@ export default function Page() {
 
                 <RulesBlock rules={sections.typography.rules} />
                 <DoDontBlock examples={sections.typography.doDont} />
+                <TemplatesBlock templates={sections.typography.templates} />
               </div>
             </section>
 
-            {/* 07 Imagery */}
+            {/* 08 Imagery */}
             <section>
-              <SectionHeader {...sections.imagery.header} id="07-imagery" />
+              <SectionHeader {...sections.imagery.header} id="08-imagery" />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.imagery.intro}</p>
                 <RulesBlock rules={sections.imagery.rules} />
                 <DoDontBlock examples={sections.imagery.doDont} />
+                <TemplatesBlock templates={sections.imagery.templates} />
               </div>
             </section>
           </ChapterWrapper>
 
           {/* ==================== CHAPTER III: COMMUNICATION ==================== */}
           <ChapterWrapper {...CHAPTERS.communication}>
-            {/* 08 Voice & Tone */}
+            {/* 09 Voice & Tone */}
             <section>
-              <SectionHeader {...sections.voiceTone.header} id="08-voice-tone" />
+              <SectionHeader {...sections.voiceTone.header} id="09-voice-tone" />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.voiceTone.intro}</p>
 
                 {/* Voice Personas */}
-                {personas.length > 0 && (
-                  <div className="mt-10">
-                    <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Voice Traits</h4>
-                    <div className="grid gap-6 md:grid-cols-2">
-                      {personas.map((p) => (
-                        <div key={p.trait} className="rounded-lg border border-[color:var(--vy-border)] p-6">
-                          <h5 className="text-lg font-semibold text-[color:var(--vy-text-strong)]">{p.trait}</h5>
-                          <p className="mt-2 text-[color:var(--vy-muted-fg)]">{p.description}</p>
-                          <div className="mt-5 space-y-4">
-                            <div>
-                              <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-success)]">Sounds like</p>
-                              <ul className="mt-1 space-y-1 text-sm">
-                                {p.soundsLike.map((s, i) => <li key={i}>"{s}"</li>)}
-                              </ul>
-                            </div>
-                            <div>
-                              <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-danger)]">Avoid</p>
-                              <div className="mt-1 flex flex-wrap gap-2">
-                                {p.avoid.map((a, i) => (
-                                  <span key={i} className="rounded bg-red-50 px-2 py-0.5 text-sm text-[color:var(--vy-danger)]">{a}</span>
-                                ))}
-                              </div>
+                <div className="mt-10">
+                  <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Voice Traits</h4>
+                  <div className="grid gap-6 md:grid-cols-2">
+                    {personas.map((p) => (
+                      <div key={p.trait} className="rounded-lg border border-[color:var(--vy-border)] p-6">
+                        <h5 className="text-lg font-semibold text-[color:var(--vy-text-strong)]">{p.trait}</h5>
+                        <p className="mt-2 text-[color:var(--vy-muted-fg)]">{p.description}</p>
+                        <div className="mt-5 space-y-4">
+                          <div>
+                            <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-success)]">Sounds like</p>
+                            <ul className="mt-1 space-y-1 text-sm">
+                              {p.soundsLike.map((s, i) => <li key={i}>&ldquo;{s}&rdquo;</li>)}
+                            </ul>
+                          </div>
+                          <div>
+                            <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-danger)]">Avoid</p>
+                            <div className="mt-1 flex flex-wrap gap-2">
+                              {p.avoid.map((a, i) => (
+                                <span key={i} className="rounded bg-red-50 px-2 py-0.5 text-sm text-[color:var(--vy-danger)]">{a}</span>
+                              ))}
                             </div>
                           </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Terminology */}
-                {terminology.length > 0 && (
-                  <div className="mt-12">
-                    <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Terminology Dictionary</h4>
-                    <div className="overflow-x-auto rounded-lg border border-[color:var(--vy-border)]">
-                      <table className="w-full text-sm">
-                        <thead className="bg-[color:var(--vy-muted)]">
-                          <tr>
-                            <th className="p-4 text-left font-medium">Instead of</th>
-                            <th className="p-4 text-left font-medium text-[color:var(--vy-success)]">Use</th>
-                            <th className="p-4 text-left font-medium text-[color:var(--vy-danger)]">Avoid</th>
-                            <th className="p-4 text-left font-medium">Notes</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {terminology.map((t) => (
-                            <tr key={t.term} className="border-t border-[color:var(--vy-border)]">
-                              <td className="p-4 font-medium">{t.term}</td>
-                              <td className="p-4 text-[color:var(--vy-success)]">{t.approved}</td>
-                              <td className="p-4 text-[color:var(--vy-danger)]">{t.avoid.join(", ")}</td>
-                              <td className="p-4 text-[color:var(--vy-muted-fg)]">{t.notes}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                )}
-
-                {/* Banned Phrases */}
-                {bannedPhrases.length > 0 && (
-                  <div className="mt-12">
-                    <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Banned Phrases</h4>
-                    <div className="grid gap-4 md:grid-cols-2">
-                      {bannedPhrases.map((b) => (
-                        <div key={b.phrase} className="rounded-lg border border-[color:var(--vy-danger)] bg-red-50 p-5">
-                          <p className="font-medium text-[color:var(--vy-danger)]">"{b.phrase}"</p>
-                          <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">{b.reason}</p>
-                          <p className="mt-3 text-sm"><span className="font-medium text-[color:var(--vy-success)]">Use:</span> {b.alternative}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                <RulesBlock rules={sections.voiceTone.rules} />
-                <DoDontBlock examples={sections.voiceTone.doDont} />
-              </div>
-            </section>
-
-            {/* 09 Claims Discipline */}
-            <section>
-              <SectionHeader {...sections.claimsDiscipline.header} id="09-claims-discipline" />
-              <div className="mt-10">
-                <p className="max-w-prose text-lg leading-relaxed">{sections.claimsDiscipline.intro}</p>
-
-                {/* Claims Matrix */}
-                {claimRules.length > 0 && (
-                  <div className="mt-10">
-                    <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Claim Classification</h4>
-                    <div className="grid gap-6 md:grid-cols-2">
-                      {claimRules.map((c) => {
-                        const colors: Record<string, string> = {
-                          aspirational: "border-l-blue-500 bg-blue-50",
-                          directional: "border-l-amber-500 bg-amber-50",
-                          measured: "border-l-green-500 bg-green-50",
-                          contractual: "border-l-purple-500 bg-purple-50",
-                        };
-                        return (
-                          <div key={c.claimType} className={`rounded-lg border-l-4 p-6 ${colors[c.claimType] || ""}`}>
-                            <h5 className="text-lg font-semibold capitalize">{c.claimType}</h5>
-                            <div className="mt-4 space-y-3 text-sm">
-                              <p><span className="font-medium text-[color:var(--vy-success)]">Pattern:</span> {c.allowedPattern}</p>
-                              <p><span className="font-medium">Evidence:</span> {c.requiredEvidence}</p>
-                              <p><span className="font-medium text-[color:var(--vy-danger)]">Prohibited:</span> {c.prohibitedPattern}</p>
-                              <p><span className="font-medium">Review trigger:</span> {c.reviewTrigger}</p>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
-
-                {/* Evidence Tiers */}
-                {evidenceTiers.length > 0 && (
-                  <div className="mt-12">
-                    <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Evidence Requirements</h4>
-                    <div className="grid gap-6 md:grid-cols-2">
-                      {evidenceTiers.map((e) => (
-                        <div key={e.tier} className="rounded-lg border border-[color:var(--vy-border)] p-6">
-                          <div className="flex items-center justify-between">
-                            <h5 className="font-semibold">{e.tier}</h5>
-                            {e.expirationDays && (
-                              <span className="rounded bg-[color:var(--vy-muted)] px-2 py-0.5 text-xs">
-                                Expires: {e.expirationDays}d
-                              </span>
-                            )}
-                          </div>
-                          <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">{e.description}</p>
-                          <div className="mt-4 grid gap-4 text-sm">
-                            <div>
-                              <p className="text-xs font-semibold uppercase text-[color:var(--vy-success)]">Valid</p>
-                              <ul className="mt-2 space-y-1">{e.validEvidence.map((v, i) => <li key={i}>• {v}</li>)}</ul>
-                            </div>
-                            <div>
-                              <p className="text-xs font-semibold uppercase text-[color:var(--vy-danger)]">Invalid</p>
-                              <ul className="mt-2 space-y-1 text-[color:var(--vy-muted-fg)]">{e.invalidEvidence.map((v, i) => <li key={i}>• {v}</li>)}</ul>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                <RulesBlock rules={sections.claimsDiscipline.rules} />
-                <DoDontBlock examples={sections.claimsDiscipline.doDont} />
-              </div>
-            </section>
-
-            {/* 10 Writing Mechanics */}
-            <section>
-              <SectionHeader {...sections.writingMechanics.header} id="10-writing-mechanics" />
-              <div className="mt-10">
-                <p className="max-w-prose text-lg leading-relaxed">{sections.writingMechanics.intro}</p>
-
-                {mechanics.length > 0 && (
-                  <div className="mt-10 space-y-5">
-                    {mechanics.map((m, i) => (
-                      <div key={i} className="rounded-lg border border-[color:var(--vy-border)] p-6">
-                        <p className="font-medium text-[color:var(--vy-text-strong)]">{m.rule}</p>
-                        <p className="mt-3 text-sm text-[color:var(--vy-muted-fg)]">{m.rationale}</p>
-                        <div className="mt-4 flex flex-wrap gap-2">
-                          {m.examples.map((ex, j) => (
-                            <span key={j} className="rounded bg-[color:var(--vy-muted)] px-3 py-1 font-mono text-sm">{ex}</span>
-                          ))}
                         </div>
                       </div>
                     ))}
                   </div>
-                )}
+                </div>
+
+                {/* Terminology */}
+                <div className="mt-12">
+                  <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Terminology Dictionary</h4>
+                  <div className="overflow-x-auto rounded-lg border border-[color:var(--vy-border)]">
+                    <table className="w-full text-sm">
+                      <thead className="bg-[color:var(--vy-muted)]">
+                        <tr>
+                          <th className="p-4 text-left font-medium">Instead of</th>
+                          <th className="p-4 text-left font-medium text-[color:var(--vy-success)]">Use</th>
+                          <th className="p-4 text-left font-medium text-[color:var(--vy-danger)]">Avoid</th>
+                          <th className="p-4 text-left font-medium">Notes</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {terminology.map((t) => (
+                          <tr key={t.term} className="border-t border-[color:var(--vy-border)]">
+                            <td className="p-4 font-medium">{t.term}</td>
+                            <td className="p-4 text-[color:var(--vy-success)]">{t.approved}</td>
+                            <td className="p-4 text-[color:var(--vy-danger)]">{t.avoid.join(", ")}</td>
+                            <td className="p-4 text-[color:var(--vy-muted-fg)]">{t.notes}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {/* Banned Phrases */}
+                <div className="mt-12">
+                  <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Banned Phrases</h4>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    {bannedPhrases.map((b) => (
+                      <div key={b.phrase} className="rounded-lg border border-[color:var(--vy-danger)] bg-red-50 p-5">
+                        <p className="font-medium text-[color:var(--vy-danger)]">&ldquo;{b.phrase}&rdquo;</p>
+                        <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">{b.reason}</p>
+                        <p className="mt-3 text-sm"><span className="font-medium text-[color:var(--vy-success)]">Use:</span> {b.alternative}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <RulesBlock rules={sections.voiceTone.rules} />
+                <DoDontBlock examples={sections.voiceTone.doDont} />
+                <TemplatesBlock templates={sections.voiceTone.templates} />
+              </div>
+            </section>
+
+            {/* 10 Claims Discipline */}
+            <section>
+              <SectionHeader {...sections.claimsDiscipline.header} id="10-claims-discipline" />
+              <div className="mt-10">
+                <p className="max-w-prose text-lg leading-relaxed">{sections.claimsDiscipline.intro}</p>
+
+                {/* Claims Matrix */}
+                <div className="mt-10">
+                  <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Claim Classification</h4>
+                  <div className="grid gap-6 md:grid-cols-2">
+                    {claimRules.map((c) => {
+                      const colors: Record<string, string> = {
+                        aspirational: "border-l-blue-500 bg-blue-50",
+                        directional: "border-l-amber-500 bg-amber-50",
+                        measured: "border-l-green-500 bg-green-50",
+                        contractual: "border-l-purple-500 bg-purple-50",
+                      };
+                      return (
+                        <div key={c.claimType} className={`rounded-lg border-l-4 p-6 ${colors[c.claimType] || ""}`}>
+                          <h5 className="text-lg font-semibold capitalize">{c.claimType}</h5>
+                          <div className="mt-4 space-y-3 text-sm">
+                            <p><span className="font-medium text-[color:var(--vy-success)]">Pattern:</span> {c.allowedPattern}</p>
+                            <p><span className="font-medium">Evidence:</span> {c.requiredEvidence}</p>
+                            <p><span className="font-medium text-[color:var(--vy-danger)]">Prohibited:</span> {c.prohibitedPattern}</p>
+                            <p><span className="font-medium">Review trigger:</span> {c.reviewTrigger}</p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Evidence Tiers */}
+                <div className="mt-12">
+                  <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Evidence Requirements</h4>
+                  <div className="grid gap-6 md:grid-cols-2">
+                    {evidenceTiers.map((e) => (
+                      <div key={e.tier} className="rounded-lg border border-[color:var(--vy-border)] p-6">
+                        <div className="flex items-center justify-between">
+                          <h5 className="font-semibold">{e.tier}</h5>
+                          {e.expirationDays && (
+                            <span className="rounded bg-[color:var(--vy-muted)] px-2 py-0.5 text-xs">
+                              Expires: {e.expirationDays}d
+                            </span>
+                          )}
+                        </div>
+                        <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">{e.description}</p>
+                        <div className="mt-4 grid gap-4 text-sm">
+                          <div>
+                            <p className="text-xs font-semibold uppercase text-[color:var(--vy-success)]">Valid</p>
+                            <ul className="mt-2 space-y-1">{e.validEvidence.map((v, i) => <li key={i}>&bull; {v}</li>)}</ul>
+                          </div>
+                          <div>
+                            <p className="text-xs font-semibold uppercase text-[color:var(--vy-danger)]">Invalid</p>
+                            <ul className="mt-2 space-y-1 text-[color:var(--vy-muted-fg)]">{e.invalidEvidence.map((v, i) => <li key={i}>&bull; {v}</li>)}</ul>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Legal Safe Patterns */}
+                <div className="mt-12">
+                  <h4 className="mb-5 text-lg font-medium text-[color:var(--vy-text-strong)]">Legal-Safe Patterns</h4>
+                  <div className="grid gap-3 md:grid-cols-2">
+                    {sections.claimsDiscipline.legalSafePatterns.map((p, i) => (
+                      <div key={i} className={`flex gap-3 rounded-lg p-4 ${p.startsWith("Avoid") ? "bg-red-50" : "bg-[color:var(--vy-muted)]"}`}>
+                        {p.startsWith("Avoid") ? (
+                          <X className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--vy-danger)]" />
+                        ) : (
+                          <Check className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--vy-success)]" />
+                        )}
+                        <span className="text-sm">{p}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <RulesBlock rules={sections.claimsDiscipline.rules} />
+                <DoDontBlock examples={sections.claimsDiscipline.doDont} />
+                <TemplatesBlock templates={sections.claimsDiscipline.templates} />
+              </div>
+            </section>
+
+            {/* 11 Writing Mechanics */}
+            <section>
+              <SectionHeader {...sections.writingMechanics.header} id="11-writing-mechanics" />
+              <div className="mt-10">
+                <p className="max-w-prose text-lg leading-relaxed">{sections.writingMechanics.intro}</p>
+
+                <div className="mt-10 space-y-5">
+                  {mechanics.map((m, i) => (
+                    <div key={i} className="rounded-lg border border-[color:var(--vy-border)] p-6">
+                      <p className="font-medium text-[color:var(--vy-text-strong)]">{m.rule}</p>
+                      <p className="mt-3 text-sm text-[color:var(--vy-muted-fg)]">{m.rationale}</p>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {m.examples.map((ex, j) => (
+                          <span key={j} className="rounded bg-[color:var(--vy-muted)] px-3 py-1 font-mono text-sm">{ex}</span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
 
                 <RulesBlock rules={sections.writingMechanics.rules} />
                 <DoDontBlock examples={sections.writingMechanics.doDont} />
+                <TemplatesBlock templates={sections.writingMechanics.templates} />
               </div>
             </section>
           </ChapterWrapper>
 
           {/* ==================== CHAPTER IV: APPLICATION ==================== */}
           <ChapterWrapper {...CHAPTERS.application}>
-            {/* 11-13: Documents, Presentations, Email */}
-            {[
-              { s: sections.documents, id: "11-documents" },
-              { s: sections.presentations, id: "12-presentations" },
-              { s: sections.email, id: "13-email" },
-            ].map(({ s, id }) => (
-              <section key={id}>
-                <SectionHeader {...s.header} id={id} />
-                <div className="mt-10">
-                  <p className="max-w-prose text-lg leading-relaxed">{s.intro}</p>
-                  <RulesBlock rules={s.rules} />
-                  <DoDontBlock examples={s.doDont} />
-                </div>
-              </section>
-            ))}
-
-            {/* 14 Meetings */}
+            {/* 12 Documents */}
             <section>
-              <SectionHeader {...sections.meetings.header} id="14-meetings" />
+              <SectionHeader {...sections.documents.header} id="12-documents" />
               <div className="mt-10">
-                <p className="max-w-prose text-lg leading-relaxed">{sections.meetings.intro}</p>
-
-                {standards.length > 0 && (
-                  <div className="mt-10">
-                    <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Meeting Standards</h4>
-                    <div className="grid gap-6 md:grid-cols-2">
-                      {standards.map((st) => (
-                        <div key={st.meetingType} className="rounded-lg border border-[color:var(--vy-border)] p-6">
-                          <h5 className="font-semibold">{st.meetingType}</h5>
-                          <p className="mt-1 text-xs text-[color:var(--vy-muted-fg)]">{st.timeboxMinutes} min • {st.ownerRole}</p>
-                          <div className="mt-4 grid gap-3 text-sm">
-                            <p><span className="font-medium text-[color:var(--vy-success)]">Inputs:</span> {st.requiredInputs.join(", ")}</p>
-                            <p><span className="font-medium text-[color:var(--vy-info)]">Outputs:</span> {st.requiredOutputs.join(", ")}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                <RulesBlock rules={sections.meetings.rules} />
-                <DoDontBlock examples={sections.meetings.doDont} />
+                <p className="max-w-prose text-lg leading-relaxed">{sections.documents.intro}</p>
+                <RulesBlock rules={sections.documents.rules} />
+                <DoDontBlock examples={sections.documents.doDont} />
+                <TemplatesBlock templates={sections.documents.templates} />
               </div>
             </section>
 
-            {/* 15 Pre-Send Checklist */}
+            {/* 13 Presentations */}
             <section>
-              <SectionHeader {...sections.preSendChecklist.header} id="15-pre-send-checklist" />
+              <SectionHeader {...sections.presentations.header} id="13-presentations" />
+              <div className="mt-10">
+                <p className="max-w-prose text-lg leading-relaxed">{sections.presentations.intro}</p>
+                <RulesBlock rules={sections.presentations.rules} />
+                <DoDontBlock examples={sections.presentations.doDont} />
+                <TemplatesBlock templates={sections.presentations.templates} />
+              </div>
+            </section>
+
+            {/* 14 Email */}
+            <section>
+              <SectionHeader {...sections.email.header} id="14-email" />
+              <div className="mt-10">
+                <p className="max-w-prose text-lg leading-relaxed">{sections.email.intro}</p>
+
+                {/* Legal Safe Patterns */}
+                <div className="mt-10">
+                  <h4 className="mb-5 text-lg font-medium text-[color:var(--vy-text-strong)]">Legal-Safe Email Patterns</h4>
+                  <div className="grid gap-3 md:grid-cols-2">
+                    {sections.email.legalSafePatterns.map((p, i) => (
+                      <div key={i} className={`flex gap-3 rounded-lg p-4 ${p.startsWith("Avoid") ? "bg-red-50" : "bg-[color:var(--vy-muted)]"}`}>
+                        {p.startsWith("Avoid") ? (
+                          <X className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--vy-danger)]" />
+                        ) : (
+                          <Check className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--vy-success)]" />
+                        )}
+                        <span className="text-sm">{p}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <RulesBlock rules={sections.email.rules} />
+                <DoDontBlock examples={sections.email.doDont} />
+                <TemplatesBlock templates={sections.email.templates} />
+              </div>
+            </section>
+
+            {/* 15 Meetings */}
+            <section>
+              <SectionHeader {...sections.meetings.header} id="15-meetings" />
+              <div className="mt-10">
+                <p className="max-w-prose text-lg leading-relaxed">{sections.meetings.intro}</p>
+
+                <div className="mt-10">
+                  <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Meeting Standards</h4>
+                  <div className="grid gap-6 md:grid-cols-2">
+                    {standards.map((st) => (
+                      <div key={st.meetingType} className="rounded-lg border border-[color:var(--vy-border)] p-6">
+                        <h5 className="font-semibold">{st.meetingType}</h5>
+                        <p className="mt-1 text-xs text-[color:var(--vy-muted-fg)]">{st.timeboxMinutes} min &bull; {st.ownerRole}</p>
+                        <div className="mt-4 grid gap-3 text-sm">
+                          <p><span className="font-medium text-[color:var(--vy-success)]">Inputs:</span> {st.requiredInputs.join(", ")}</p>
+                          <p><span className="font-medium text-[color:var(--vy-info)]">Outputs:</span> {st.requiredOutputs.join(", ")}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <RulesBlock rules={sections.meetings.rules} />
+                <DoDontBlock examples={sections.meetings.doDont} />
+                <TemplatesBlock templates={sections.meetings.templates} />
+              </div>
+            </section>
+
+            {/* 16 Pre-Send Checklist */}
+            <section>
+              <SectionHeader {...sections.preSendChecklist.header} id="16-pre-send-checklist" />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.preSendChecklist.intro}</p>
 
-                {checklist.length > 0 && (
-                  <div className="mt-10 rounded-xl border-2 border-[color:var(--vy-border)] p-8 print:p-4">
-                    <p className="mb-6 text-sm text-[color:var(--vy-muted-fg)]">Complete all checks before sending external communication.</p>
-                    <div className="space-y-8">
-                      {checklist.map((g, i) => (
-                        <div key={i}>
-                          <h5 className="mb-4 font-semibold">{g.title}</h5>
-                          <ul className="space-y-3">
-                            {g.items.map((item, j) => (
-                              <li key={j} className="flex items-start gap-3">
-                                <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 border-[color:var(--vy-border)]" />
-                                <span>{item}</span>
-                              </li>
-                            ))}
-                          </ul>
-                          <p className="mt-3 ml-8 text-sm text-[color:var(--vy-success)]">Pass: {g.passCondition}</p>
-                        </div>
-                      ))}
-                    </div>
+                <div className="mt-10 rounded-xl border-2 border-[color:var(--vy-border)] p-8 print:p-4">
+                  <p className="mb-6 text-sm text-[color:var(--vy-muted-fg)]">Complete all checks before sending external communication.</p>
+                  <div className="space-y-8">
+                    {checklist.map((g, i) => (
+                      <div key={i}>
+                        <h5 className="mb-4 font-semibold">{g.title}</h5>
+                        <ul className="space-y-3">
+                          {g.items.map((item, j) => (
+                            <li key={j} className="flex items-start gap-3">
+                              <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 border-[color:var(--vy-border)]" />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <p className="mt-3 ml-8 text-sm text-[color:var(--vy-success)]">Pass: {g.passCondition}</p>
+                      </div>
+                    ))}
                   </div>
-                )}
+                </div>
 
                 <RulesBlock rules={sections.preSendChecklist.rules} />
                 <DoDontBlock examples={sections.preSendChecklist.doDont} />
+                <TemplatesBlock templates={sections.preSendChecklist.templates} />
               </div>
             </section>
           </ChapterWrapper>
 
           {/* ==================== CHAPTER V: APPENDIX ==================== */}
           <ChapterWrapper {...CHAPTERS.appendix}>
-            {/* Governance */}
+            {/* 17 Governance */}
             <section>
               <SectionHeader {...sections.governanceApprovals.header} id="governance-approvals" />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.governanceApprovals.intro}</p>
 
-                {approvals.length > 0 && (
-                  <div className="mt-10 overflow-x-auto rounded-lg border border-[color:var(--vy-border)]">
-                    <table className="w-full text-sm">
-                      <thead className="bg-[color:var(--vy-muted)]">
-                        <tr>
-                          <th className="p-4 text-left font-medium">Artifact</th>
-                          <th className="p-4 text-left font-medium">Approver</th>
-                          <th className="p-4 text-left font-medium">SLA</th>
-                          <th className="p-4 text-left font-medium">Escalation</th>
+                <div className="mt-10 overflow-x-auto rounded-lg border border-[color:var(--vy-border)]">
+                  <table className="w-full text-sm">
+                    <thead className="bg-[color:var(--vy-muted)]">
+                      <tr>
+                        <th className="p-4 text-left font-medium">Artifact</th>
+                        <th className="p-4 text-left font-medium">Approver</th>
+                        <th className="p-4 text-left font-medium">Criteria</th>
+                        <th className="p-4 text-left font-medium">SLA</th>
+                        <th className="p-4 text-left font-medium">Escalation</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {approvals.map((a) => (
+                        <tr key={a.artifact} className="border-t border-[color:var(--vy-border)]">
+                          <td className="p-4 font-medium">{a.artifact}</td>
+                          <td className="p-4">{a.approverRole}</td>
+                          <td className="p-4">
+                            <ul className="space-y-1">
+                              {a.criteria.map((c, i) => <li key={i} className="text-[color:var(--vy-muted-fg)]">&bull; {c}</li>)}
+                            </ul>
+                          </td>
+                          <td className="p-4">{a.slaBusinessDays}d</td>
+                          <td className="p-4 text-[color:var(--vy-muted-fg)]">{a.escalation}</td>
                         </tr>
-                      </thead>
-                      <tbody>
-                        {approvals.map((a) => (
-                          <tr key={a.artifact} className="border-t border-[color:var(--vy-border)]">
-                            <td className="p-4 font-medium">{a.artifact}</td>
-                            <td className="p-4">{a.approverRole}</td>
-                            <td className="p-4">{a.slaBusinessDays}d</td>
-                            <td className="p-4 text-[color:var(--vy-muted-fg)]">{a.escalation}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
 
                 <RulesBlock rules={sections.governanceApprovals.rules} />
+                <TemplatesBlock templates={sections.governanceApprovals.templates} />
               </div>
             </section>
 
-            {/* Templates */}
+            {/* 18 Templates & Assets */}
             <section>
               <SectionHeader {...sections.templatesDownloadables.header} id="templates-downloadables" />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.templatesDownloadables.intro}</p>
+
+                {/* TODO Notice */}
+                <div className="mt-6 rounded-lg border-2 border-dashed border-[color:var(--vy-warning)] bg-amber-50 p-5">
+                  <div className="flex items-start gap-3">
+                    <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--vy-warning)]" />
+                    <div>
+                      <p className="font-medium text-[color:var(--vy-text-strong)]">TODO: Downloadable files not yet available</p>
+                      <p className="mt-1 text-sm text-[color:var(--vy-muted-fg)]">Template specifications are listed below. Contact the brand office for current template files until downloads are enabled.</p>
+                    </div>
+                  </div>
+                </div>
+
                 <RulesBlock rules={sections.templatesDownloadables.rules} />
+                <DoDontBlock examples={sections.templatesDownloadables.doDont} />
+                <TemplatesBlock templates={sections.templatesDownloadables.templates} />
               </div>
             </section>
 
-            {/* FAQ */}
+            {/* 19 FAQ */}
             <section>
               <SectionHeader {...sections.faqEdgeCases.header} id="faq-edge-cases" />
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.faqEdgeCases.intro}</p>
-                {"faq" in sections.faqEdgeCases && sections.faqEdgeCases.faq && (
-                  <div className="mt-10 space-y-4">
-                    {sections.faqEdgeCases.faq.map((f, i) => (
-                      <details key={i} className="rounded-lg border border-[color:var(--vy-border)]">
-                        <summary className="cursor-pointer p-5 font-medium">{f.question}</summary>
-                        <div className="border-t border-[color:var(--vy-border)] p-5 text-[color:var(--vy-muted-fg)]">{f.answer}</div>
-                      </details>
-                    ))}
-                  </div>
-                )}
+                <div className="mt-10 space-y-4">
+                  {sections.faqEdgeCases.faq.map((f, i) => (
+                    <details key={i} className="rounded-lg border border-[color:var(--vy-border)]">
+                      <summary className="cursor-pointer p-5 font-medium">{f.question}</summary>
+                      <div className="border-t border-[color:var(--vy-border)] p-5 text-[color:var(--vy-muted-fg)]">{f.answer}</div>
+                    </details>
+                  ))}
+                </div>
+                <RulesBlock rules={sections.faqEdgeCases.rules} />
+                <DoDontBlock examples={sections.faqEdgeCases.doDont} />
               </div>
             </section>
 
-            {/* Footer/Version */}
-            <section id="footer-versioning" className="rounded-xl bg-[color:var(--vy-muted)] p-8">
-              {"footer" in sections.footerVersioning && (
-                <div className="grid gap-6 text-sm md:grid-cols-2 lg:grid-cols-4">
-                  <div>
-                    <p className="text-xs font-medium uppercase tracking-wide text-[color:var(--vy-muted-fg)]">Version</p>
-                    <p className="mt-2 font-mono">{sections.footerVersioning.footer.version}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-medium uppercase tracking-wide text-[color:var(--vy-muted-fg)]">Effective</p>
-                    <p className="mt-2">{sections.footerVersioning.footer.effectiveDate}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-medium uppercase tracking-wide text-[color:var(--vy-muted-fg)]">Owner</p>
-                    <p className="mt-2">{sections.footerVersioning.footer.owner}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-medium uppercase tracking-wide text-[color:var(--vy-muted-fg)]">Contact</p>
-                    <p className="mt-2">{sections.footerVersioning.footer.contact}</p>
-                  </div>
+            {/* 20 Changelog */}
+            <section>
+              <SectionHeader {...sections.changelog.header} id="changelog" />
+              <div className="mt-10">
+                <p className="max-w-prose text-lg leading-relaxed">{sections.changelog.intro}</p>
+                <div className="mt-10 space-y-8">
+                  {sections.changelog.entries.map((entry) => (
+                    <div key={entry.version} className="rounded-lg border border-[color:var(--vy-border)] overflow-hidden">
+                      <div className="bg-[color:var(--vy-muted)] p-5 flex items-center justify-between">
+                        <div>
+                          <span className="font-mono font-semibold text-[color:var(--vy-text-strong)]">{entry.version}</span>
+                          <span className="ml-3 text-sm text-[color:var(--vy-muted-fg)]">{entry.date}</span>
+                        </div>
+                      </div>
+                      <div className="p-5">
+                        <p className="text-sm text-[color:var(--vy-muted-fg)] mb-4">{entry.summary}</p>
+                        <ul className="space-y-2">
+                          {entry.changes.map((change, i) => {
+                            const typeColors: Record<string, string> = {
+                              added: "bg-green-100 text-green-800",
+                              removed: "bg-red-100 text-red-800",
+                              changed: "bg-blue-100 text-blue-800",
+                              fixed: "bg-amber-100 text-amber-800",
+                            };
+                            return (
+                              <li key={i} className="flex items-start gap-3 text-sm">
+                                <span className={`shrink-0 rounded px-2 py-0.5 text-xs font-medium ${typeColors[change.type] || ""}`}>
+                                  {change.type}
+                                </span>
+                                <span className="text-[color:var(--vy-fg)]">{change.description}</span>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              )}
+              </div>
+            </section>
+
+            {/* 21 Footer/Version */}
+            <section id="footer-versioning" className="rounded-xl bg-[color:var(--vy-muted)] p-8">
+              <div className="grid gap-6 text-sm md:grid-cols-2 lg:grid-cols-4">
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-wide text-[color:var(--vy-muted-fg)]">Version</p>
+                  <p className="mt-2 font-mono">{sections.footerVersioning.footer.version}</p>
+                </div>
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-wide text-[color:var(--vy-muted-fg)]">Effective</p>
+                  <p className="mt-2">{sections.footerVersioning.footer.effectiveDate}</p>
+                </div>
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-wide text-[color:var(--vy-muted-fg)]">Owner</p>
+                  <p className="mt-2">{sections.footerVersioning.footer.owner}</p>
+                </div>
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-wide text-[color:var(--vy-muted-fg)]">Contact</p>
+                  <p className="mt-2">{sections.footerVersioning.footer.contact}</p>
+                </div>
+              </div>
             </section>
           </ChapterWrapper>
         </main>
