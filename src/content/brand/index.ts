@@ -1,19 +1,3 @@
-import type {
-  ApprovalRule,
-  BrandFooter,
-  ChecklistGroup,
-  ClaimRule,
-  DoDontExample,
-  MeetingStandard,
-  NavSection,
-  Pillar,
-  QASection,
-  Scenario,
-  SectionHeader,
-  TemplateSpec,
-  TerminologyEntry,
-  VoicePersona,
-} from "../../lib/types/brand";
 import {
   BRAND_NAME,
   COLOR_TOKENS,
@@ -23,89 +7,35 @@ import {
   TYPO_RULES,
   VERTICALS,
 } from "./fundamentals";
-import { BRAND_NAVIGATION } from "./navigation";
+import { BRAND_NAVIGATION, BRAND_NAV_ITEMS, NAV_GROUPS, APPENDIX_NAV_ITEMS } from "./navigation";
 import {
   MASTER_LOGO_DARK,
   MASTER_LOGO_LIGHT,
   VERTICAL_LOGOS,
 } from "./placeholders";
-import { CLAIMS_DISCIPLINE_SECTION } from "./sections/claims-discipline";
+
+// Core sections (01-15)
+import { PHILOSOPHY_SECTION } from "./sections/01-philosophy";
+import { POSITIONING_SECTION } from "./sections/positioning";
+import { OPERATING_PILLARS_SECTION } from "./sections/operating-pillars";
+import { LOGO_USAGE_SECTION } from "./sections/logo-usage";
 import { COLOR_PALETTE_SECTION } from "./sections/color-palette";
+import { TYPOGRAPHY_SECTION } from "./sections/typography";
+import { IMAGERY_SECTION } from "./sections/imagery";
+import { VOICE_TONE_SECTION } from "./sections/08-voice-tone";
+import { CLAIMS_DISCIPLINE_SECTION } from "./sections/09-claims-discipline";
+import { WRITING_MECHANICS_SECTION } from "./sections/writing-mechanics";
 import { DOCUMENTS_SECTION } from "./sections/documents";
+import { PRESENTATIONS_SECTION } from "./sections/presentations";
 import { EMAIL_SECTION } from "./sections/email";
+import { MEETINGS_SECTION } from "./sections/meetings";
+import { PRE_SEND_CHECKLIST_SECTION } from "./sections/pre-send-checklist";
+
+// Appendix sections (16-19)
+import { GOVERNANCE_APPROVALS_SECTION } from "./sections/governance-approvals";
+import { TEMPLATES_DOWNLOADABLES_SECTION } from "./sections/templates-downloadables";
 import { FAQ_EDGE_CASES_SECTION } from "./sections/faq-edge-cases";
 import { FOOTER_VERSIONING_SECTION } from "./sections/footer-versioning";
-import { GOVERNANCE_APPROVALS_SECTION } from "./sections/governance-approvals";
-import { IMAGERY_SECTION } from "./sections/imagery";
-import { LOGO_USAGE_SECTION } from "./sections/logo-usage";
-import { MEETINGS_SECTION } from "./sections/meetings";
-import { OPERATING_PILLARS_SECTION } from "./sections/operating-pillars";
-import { PHILOSOPHY_SECTION } from "./sections/philosophy";
-import { POSITIONING_SECTION } from "./sections/positioning";
-import { PRE_SEND_CHECKLIST_SECTION } from "./sections/pre-send-checklist";
-import { PRESENTATIONS_SECTION } from "./sections/presentations";
-import { TEMPLATES_DOWNLOADABLES_SECTION } from "./sections/templates-downloadables";
-import { TYPOGRAPHY_SECTION } from "./sections/typography";
-import { VOICE_TONE_SECTION } from "./sections/voice-tone";
-import { WRITING_MECHANICS_SECTION } from "./sections/writing-mechanics";
-
-type BrandSection = {
-  header: SectionHeader;
-  intro: string;
-  rules: readonly string[];
-  doDont: readonly DoDontExample[];
-  templates: readonly TemplateSpec[];
-  pillars?: readonly Pillar[];
-  scenarios?: readonly Scenario[];
-  personas?: readonly VoicePersona[];
-  terminology?: readonly TerminologyEntry[];
-  claimRules?: readonly ClaimRule[];
-  legalSafePatterns?: readonly string[];
-  standards?: readonly MeetingStandard[];
-  approvals?: readonly ApprovalRule[];
-  checklist?: readonly ChecklistGroup[];
-  faq?: readonly QASection[];
-  footer?: BrandFooter;
-};
-
-type BrandContent = {
-  fundamentals: {
-    brandName: typeof BRAND_NAME;
-    verticals: typeof VERTICALS;
-    fontStacks: typeof FONT_STACKS;
-    colorTokens: typeof COLOR_TOKENS;
-    logoRules: typeof LOGO_RULES;
-    colorUsageRules: typeof COLOR_USAGE_RULES;
-    typoRules: typeof TYPO_RULES;
-  };
-  navigation: NavSection;
-  placeholders: {
-    masterLogoLight: typeof MASTER_LOGO_LIGHT;
-    masterLogoDark: typeof MASTER_LOGO_DARK;
-    verticalLogos: typeof VERTICAL_LOGOS;
-  };
-  sections: {
-    philosophy: BrandSection;
-    positioning: BrandSection;
-    operatingPillars: BrandSection;
-    logoUsage: BrandSection;
-    colorPalette: BrandSection;
-    typography: BrandSection;
-    imagery: BrandSection;
-    voiceTone: BrandSection;
-    claimsDiscipline: BrandSection;
-    writingMechanics: BrandSection;
-    documents: BrandSection;
-    presentations: BrandSection;
-    email: BrandSection;
-    meetings: BrandSection;
-    preSendChecklist: BrandSection;
-    governanceApprovals: BrandSection;
-    templatesDownloadables: BrandSection;
-    faqEdgeCases: BrandSection;
-    footerVersioning: BrandSection;
-  };
-};
 
 export const BRAND_CONTENT = {
   fundamentals: {
@@ -118,6 +48,9 @@ export const BRAND_CONTENT = {
     typoRules: TYPO_RULES,
   },
   navigation: BRAND_NAVIGATION,
+  navItems: BRAND_NAV_ITEMS,
+  navGroups: NAV_GROUPS,
+  appendixItems: APPENDIX_NAV_ITEMS,
   placeholders: {
     masterLogoLight: MASTER_LOGO_LIGHT,
     masterLogoDark: MASTER_LOGO_DARK,
@@ -144,4 +77,8 @@ export const BRAND_CONTENT = {
     faqEdgeCases: FAQ_EDGE_CASES_SECTION,
     footerVersioning: FOOTER_VERSIONING_SECTION,
   },
-} as const satisfies BrandContent;
+} as const;
+
+// Type exports for use in components
+export type BrandContent = typeof BRAND_CONTENT;
+export type BrandSection = (typeof BRAND_CONTENT.sections)[keyof typeof BRAND_CONTENT.sections];

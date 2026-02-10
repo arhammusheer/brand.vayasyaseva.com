@@ -1,3 +1,4 @@
+// Navigation types
 export type NavItem = {
   id: string;
   label: string;
@@ -6,12 +7,20 @@ export type NavItem = {
   description?: string;
 };
 
+export type NavGroup = {
+  id: string;
+  title: string;
+  items: readonly string[];
+};
+
 export type NavSection = {
   id: string;
   title: string;
   items: readonly NavItem[];
+  groups?: readonly NavGroup[];
 };
 
+// Hero and metadata types
 export type HeroMeta = {
   eyebrow: string;
   title: string;
@@ -26,6 +35,13 @@ export type HeroData = {
   highlights: readonly HighlightCard[];
 };
 
+export type HighlightCard = {
+  label: string;
+  value: string;
+  note?: string;
+};
+
+// Section header with enhanced intent
 export type SectionHeader = {
   id: string;
   number: string;
@@ -33,12 +49,7 @@ export type SectionHeader = {
   summary: string;
 };
 
-export type HighlightCard = {
-  label: string;
-  value: string;
-  note?: string;
-};
-
+// Core brand content types
 export type Scenario = {
   context: string;
   risk: string;
@@ -59,6 +70,11 @@ export type LogoVariant = {
   background: "light" | "dark" | "mixed";
   minWidthPx: number;
   clearSpaceRule: string;
+};
+
+export type LogoProhibition = {
+  description: string;
+  example?: string;
 };
 
 export type ColorSwatch = {
@@ -119,8 +135,10 @@ export type BrandFooter = {
   contact: string;
 };
 
+export type ClaimType = "aspirational" | "directional" | "measured" | "contractual";
+
 export type ClaimRule = {
-  claimType: "aspirational" | "directional" | "measured" | "contractual";
+  claimType: ClaimType;
   allowedPattern: string;
   requiredEvidence: string;
   prohibitedPattern: string;
@@ -157,10 +175,40 @@ export type TerminologyEntry = {
   notes: string;
 };
 
+export type BannedPhrase = {
+  phrase: string;
+  reason: string;
+  alternative: string;
+};
+
 export type MeetingStandard = {
   meetingType: string;
   requiredInputs: readonly string[];
   requiredOutputs: readonly string[];
   timeboxMinutes: number;
   ownerRole: string;
+};
+
+export type ImageryGuideline = {
+  category: string;
+  preferred: readonly string[];
+  forbidden: readonly string[];
+};
+
+export type DocumentAnatomy = {
+  element: string;
+  requirement: string;
+  example?: string;
+};
+
+export type SlideLayout = {
+  type: string;
+  usage: string;
+  elements: readonly string[];
+};
+
+export type EmailComponent = {
+  component: string;
+  format: string;
+  example: string;
 };
