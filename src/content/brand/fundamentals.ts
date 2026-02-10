@@ -148,7 +148,7 @@ export const LOGO_RULES = {
     {
       id: "master-light",
       label: "Master logo on light background",
-      filePath: "/public/brand/placeholders/master-logo-light.svg",
+      filePath: "/brand/logos/master-logo-light.png",
       background: "light",
       minWidthPx: 120,
       clearSpaceRule: "At least 1x height of the V in Vayasya around all sides.",
@@ -156,7 +156,7 @@ export const LOGO_RULES = {
     {
       id: "master-dark",
       label: "Master logo on dark background",
-      filePath: "/public/brand/placeholders/master-logo-dark.svg",
+      filePath: "/brand/logos/master-logo-dark.svg",
       background: "dark",
       minWidthPx: 120,
       clearSpaceRule: "At least 1x height of the V in Vayasya around all sides.",

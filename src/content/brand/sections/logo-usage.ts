@@ -18,7 +18,7 @@ export const LOGO_USAGE_SECTION = {
     {
       id: "master-light",
       label: "Master Logo Light",
-      filePath: "/public/brand/placeholders/master-logo-light.svg",
+      filePath: "/brand/logos/master-logo-light.png",
       background: "light",
       minWidthPx: 120,
       clearSpaceRule: "Keep clear space equal to the height of the V around all sides.",
@@ -26,7 +26,7 @@ export const LOGO_USAGE_SECTION = {
     {
       id: "master-dark",
       label: "Master Logo Dark",
-      filePath: "/public/brand/placeholders/master-logo-dark.svg",
+      filePath: "/brand/logos/master-logo-dark.svg",
       background: "dark",
       minWidthPx: 120,
       clearSpaceRule: "Keep clear space equal to the height of the V around all sides.",

@@ -1,7 +1,7 @@
 // Logo asset paths (relative to /public, served from root)
 // In Next.js, files in /public are served from the root URL
 
-export const MASTER_LOGO_LIGHT = "/brand/logos/master-logo-light.svg";
+export const MASTER_LOGO_LIGHT = "/brand/logos/master-logo-light.png";
 export const MASTER_LOGO_DARK = "/brand/logos/master-logo-dark.svg";
 
 export const VERTICAL_LOGOS = {
