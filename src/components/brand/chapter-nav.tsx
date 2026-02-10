@@ -38,12 +38,12 @@ export function ChapterNav({ activeSection, onNavigate }: ChapterNavProps) {
                       className={cn(
                         "flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm transition-colors",
                         isActive
-                          ? "bg-[color:var(--vy-seva)] text-white"
+                          ? "bg-[color:var(--vy-gold-ui)] text-[color:var(--vy-bg)]"
                           : "text-[color:var(--vy-fg)] hover:bg-[color:var(--vy-muted)]"
                       )}
                       aria-current={isActive ? "page" : undefined}
                     >
-                      <span className="shrink-0 font-mono text-xs opacity-60">
+                      <span className="shrink-0 text-xs opacity-60">
                         {item.label.split(" ")[0]}
                       </span>
                       <span className="truncate">

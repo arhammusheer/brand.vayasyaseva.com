@@ -24,7 +24,7 @@ export const FOOTER_VERSIONING_SECTION = {
       "Vertical head approval",
       "Legal reviewer acknowledgment",
     ],
-    contact: "TODO: Replace with actual contact email",
+    contact: "brand-office@vayasyaseva.com",
   },
   rules: [
     "Increase minor version for wording refinements without policy impact.",

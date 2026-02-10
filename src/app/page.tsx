@@ -32,35 +32,35 @@ const CHAPTERS = {
     number: "I",
     title: "Foundation",
     description: "Identity, brand architecture, and behavioral pillars that define Vayasya.",
-    accent: "foundation",
+    accentColor: "foundation",
   },
   visual: {
     id: "chapter-visual",
     number: "II",
     title: "Visual System",
     description: "Logo usage, color palette, typography, and imagery guidelines.",
-    accent: "visual",
+    accentColor: "visual",
   },
   communication: {
     id: "chapter-communication",
     number: "III",
     title: "Communication",
     description: "Voice, tone, claims discipline, and writing mechanics.",
-    accent: "communication",
+    accentColor: "communication",
   },
   application: {
     id: "chapter-application",
     number: "IV",
     title: "Application",
     description: "Documents, presentations, email, meetings, and quality gates.",
-    accent: "application",
+    accentColor: "application",
   },
   appendix: {
     id: "chapter-appendix",
     number: "V",
     title: "Appendix",
     description: "Governance, templates, FAQ, changelog, and version information.",
-    accent: "appendix",
+    accentColor: "appendix",
   },
 } as const;
 
@@ -92,11 +92,11 @@ function DoDontBlock({ examples, title = "Do / Don't" }: { examples: readonly { 
           <div key={i} className="rounded-lg border border-[color:var(--vy-border)] p-6">
             <p className="mb-4 font-medium text-[color:var(--vy-text-strong)]">{ex.topic}</p>
             <div className="space-y-3">
-              <div className="flex gap-3 rounded bg-green-50 p-3">
+              <div className="flex gap-3 rounded border-l-2 border-[color:var(--vy-success)] bg-[color:var(--vy-muted)] p-3">
                 <Check className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--vy-success)]" />
                 <p className="text-[color:var(--vy-fg)]">{ex.do}</p>
               </div>
-              <div className="flex gap-3 rounded bg-red-50 p-3">
+              <div className="flex gap-3 rounded border-l-2 border-[color:var(--vy-danger)] bg-[color:var(--vy-muted)] p-3">
                 <X className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--vy-danger)]" />
                 <p className="text-[color:var(--vy-muted-fg)]">{ex.dont}</p>
               </div>
@@ -150,7 +150,7 @@ function SectionHeader({ number, title, summary }: { number: string; title: stri
   return (
     <header className="border-b border-[color:var(--vy-border)] pb-8">
       <div className="flex items-baseline gap-3">
-        <span className="font-mono text-sm text-[color:var(--vy-muted-fg)]">{number}</span>
+        <span className="text-sm font-semibold text-[color:var(--vy-muted-fg)]">{number}</span>
         <h3 className="text-2xl font-semibold text-[color:var(--vy-text-strong)]">{title}</h3>
       </div>
       <p className="mt-3 max-w-2xl text-lg text-[color:var(--vy-muted-fg)]">{summary}</p>
@@ -175,9 +175,9 @@ function ColorSwatch({ token, hex, usage }: { token: string; hex: string; usage:
         style={{ backgroundColor: hex }}
       >
         {copied ? (
-          <Check className="h-5 w-5 text-white drop-shadow-md" />
+          <Check className="h-5 w-5 text-[color:var(--vy-bg)] drop-shadow-md" />
         ) : (
-          <Copy className="h-5 w-5 text-white opacity-0 drop-shadow-md transition-opacity group-hover:opacity-100" />
+          <Copy className="h-5 w-5 text-[color:var(--vy-bg)] opacity-0 drop-shadow-md transition-opacity group-hover:opacity-100" />
         )}
       </div>
       <p className="font-mono text-xs text-[color:var(--vy-muted-fg)]">{token}</p>
@@ -219,7 +219,7 @@ export default function Page() {
       {/* Progress Bar */}
       <div className="print:hidden fixed inset-x-0 top-0 z-[60] h-1 bg-[color:var(--vy-muted)]">
         <div
-          className="h-full bg-[color:var(--vy-seva)] transition-[width]"
+          className="h-full bg-[color:var(--vy-gold-ui)] transition-[width]"
           style={{ width: `${Math.round(progress * 100)}%` }}
         />
       </div>
@@ -231,7 +231,7 @@ export default function Page() {
             <Image
               src="/brand/logos/master-logo-light.svg"
               alt="Vayasya"
-              width={100}
+              width={120}
               height={32}
               className="h-7 w-auto"
             />
@@ -285,7 +285,7 @@ export default function Page() {
               The single source of truth for Vayasya brand communication. Identity, visual system, voice, operational standards, and governance across all verticals.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <span className="rounded-full bg-[color:var(--vy-gold-ui)] px-4 py-1.5 text-sm font-medium text-white">
+              <span className="rounded-full bg-[color:var(--vy-gold-ui)] px-4 py-1.5 text-sm font-medium text-[color:var(--vy-bg)]">
                 {sections.footerVersioning.footer.version}
               </span>
               {fundamentals.verticals.map((v) => (
@@ -316,7 +316,7 @@ export default function Page() {
                     {sections.overview.howToUse.map((item, i) => (
                       <div key={i} className="rounded-lg border border-[color:var(--vy-border)] p-5">
                         <div className="flex items-start gap-3">
-                          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[color:var(--vy-gold-ui)] text-xs font-semibold text-white">
+                          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[color:var(--vy-gold-ui)] text-xs font-semibold text-[color:var(--vy-bg)]">
                             {i + 1}
                           </span>
                           <div>
@@ -383,7 +383,7 @@ export default function Page() {
                 </div>
 
                 {/* Anti-Brand */}
-                <div className="mt-8 rounded-lg bg-red-50 border border-[color:var(--vy-danger)] p-6">
+                <div className="mt-8 rounded-lg border border-[color:var(--vy-danger)] bg-[color:var(--vy-muted)] p-6">
                   <h4 className="mb-4 font-semibold text-[color:var(--vy-danger)]">Anti-Brand: Always Avoid</h4>
                   <div className="grid gap-3 md:grid-cols-2">
                     {sections.identity.antiBrand.map((item, i) => (
@@ -592,7 +592,7 @@ export default function Page() {
                 {/* Flat Gold Callout */}
                 <div className="mt-6 rounded-lg border-2 border-[color:var(--vy-gold-ui)] bg-[color:var(--vy-muted)] p-5">
                   <p className="font-medium text-[color:var(--vy-text-strong)]">Gold is flat. No gradients, no shimmer, no effects.</p>
-                  <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">The logo uses flat gold (#C9A24A) as supplied. Do not apply CSS filters, gradient overlays, or decorative effects.</p>
+                  <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">The logo uses flat gold (`--vy-gold-ui`) as supplied. Do not apply CSS filters, gradient overlays, or decorative effects.</p>
                 </div>
 
                 {/* Logo Previews */}
@@ -600,7 +600,7 @@ export default function Page() {
                   <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Logo Variants</h4>
                   <div className="grid gap-6 md:grid-cols-2">
                     <div className="rounded-lg border border-[color:var(--vy-border)] p-6">
-                      <div className="flex h-32 items-center justify-center rounded bg-white">
+                      <div className="flex h-32 items-center justify-center rounded bg-[color:var(--vy-bg)]">
                         <Image
                           src="/brand/logos/master-logo-light.svg"
                           alt="Vayasya master logo on light background"
@@ -612,7 +612,7 @@ export default function Page() {
                       <p className="text-sm text-[color:var(--vy-muted-fg)]">Min width: 120px &bull; Clear space: 1x V height</p>
                     </div>
                     <div className="rounded-lg border border-[color:var(--vy-border)] p-6">
-                      <div className="flex h-32 items-center justify-center rounded bg-[#111111]">
+                      <div className="flex h-32 items-center justify-center rounded bg-[color:var(--vy-fg)]">
                         <Image
                           src="/brand/logos/master-logo-dark.svg"
                           alt="Vayasya master logo on dark background"
@@ -766,7 +766,7 @@ export default function Page() {
                             <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-danger)]">Avoid</p>
                             <div className="mt-1 flex flex-wrap gap-2">
                               {p.avoid.map((a, i) => (
-                                <span key={i} className="rounded bg-red-50 px-2 py-0.5 text-sm text-[color:var(--vy-danger)]">{a}</span>
+                                <span key={i} className="rounded border border-[color:var(--vy-danger)] bg-[color:var(--vy-muted)] px-2 py-0.5 text-sm text-[color:var(--vy-danger)]">{a}</span>
                               ))}
                             </div>
                           </div>
@@ -808,7 +808,7 @@ export default function Page() {
                   <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Banned Phrases</h4>
                   <div className="grid gap-4 md:grid-cols-2">
                     {bannedPhrases.map((b) => (
-                      <div key={b.phrase} className="rounded-lg border border-[color:var(--vy-danger)] bg-red-50 p-5">
+                      <div key={b.phrase} className="rounded-lg border border-[color:var(--vy-danger)] bg-[color:var(--vy-muted)] p-5">
                         <p className="font-medium text-[color:var(--vy-danger)]">&ldquo;{b.phrase}&rdquo;</p>
                         <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">{b.reason}</p>
                         <p className="mt-3 text-sm"><span className="font-medium text-[color:var(--vy-success)]">Use:</span> {b.alternative}</p>
@@ -835,10 +835,10 @@ export default function Page() {
                   <div className="grid gap-6 md:grid-cols-2">
                     {claimRules.map((c) => {
                       const colors: Record<string, string> = {
-                        aspirational: "border-l-blue-500 bg-blue-50",
-                        directional: "border-l-amber-500 bg-amber-50",
-                        measured: "border-l-green-500 bg-green-50",
-                        contractual: "border-l-purple-500 bg-purple-50",
+                        aspirational: "border-[color:var(--vy-info)] bg-[color:var(--vy-muted)]",
+                        directional: "border-[color:var(--vy-warning)] bg-[color:var(--vy-muted)]",
+                        measured: "border-[color:var(--vy-success)] bg-[color:var(--vy-muted)]",
+                        contractual: "border-[color:var(--vy-gold-ui)] bg-[color:var(--vy-muted)]",
                       };
                       return (
                         <div key={c.claimType} className={`rounded-lg border-l-4 p-6 ${colors[c.claimType] || ""}`}>
@@ -890,7 +890,7 @@ export default function Page() {
                   <h4 className="mb-5 text-lg font-medium text-[color:var(--vy-text-strong)]">Legal-Safe Patterns</h4>
                   <div className="grid gap-3 md:grid-cols-2">
                     {sections.claimsDiscipline.legalSafePatterns.map((p, i) => (
-                      <div key={i} className={`flex gap-3 rounded-lg p-4 ${p.startsWith("Avoid") ? "bg-red-50" : "bg-[color:var(--vy-muted)]"}`}>
+                      <div key={i} className={`flex gap-3 rounded-lg border-l-2 p-4 ${p.startsWith("Avoid") ? "border-[color:var(--vy-danger)] bg-[color:var(--vy-muted)]" : "border-[color:var(--vy-success)] bg-[color:var(--vy-muted)]"}`}>
                         {p.startsWith("Avoid") ? (
                           <X className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--vy-danger)]" />
                         ) : (
@@ -970,7 +970,7 @@ export default function Page() {
                   <h4 className="mb-5 text-lg font-medium text-[color:var(--vy-text-strong)]">Legal-Safe Email Patterns</h4>
                   <div className="grid gap-3 md:grid-cols-2">
                     {sections.email.legalSafePatterns.map((p, i) => (
-                      <div key={i} className={`flex gap-3 rounded-lg p-4 ${p.startsWith("Avoid") ? "bg-red-50" : "bg-[color:var(--vy-muted)]"}`}>
+                      <div key={i} className={`flex gap-3 rounded-lg border-l-2 p-4 ${p.startsWith("Avoid") ? "border-[color:var(--vy-danger)] bg-[color:var(--vy-muted)]" : "border-[color:var(--vy-success)] bg-[color:var(--vy-muted)]"}`}>
                         {p.startsWith("Avoid") ? (
                           <X className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--vy-danger)]" />
                         ) : (
@@ -1097,13 +1097,13 @@ export default function Page() {
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.templatesDownloadables.intro}</p>
 
-                {/* TODO Notice */}
-                <div className="mt-6 rounded-lg border-2 border-dashed border-[color:var(--vy-warning)] bg-amber-50 p-5">
+                {/* Template access notice */}
+                <div className="mt-6 rounded-lg border-2 border-dashed border-[color:var(--vy-warning)] bg-[color:var(--vy-muted)] p-5">
                   <div className="flex items-start gap-3">
                     <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--vy-warning)]" />
                     <div>
-                      <p className="font-medium text-[color:var(--vy-text-strong)]">TODO: Downloadable files not yet available</p>
-                      <p className="mt-1 text-sm text-[color:var(--vy-muted-fg)]">Template specifications are listed below. Contact the brand office for current template files until downloads are enabled.</p>
+                      <p className="font-medium text-[color:var(--vy-text-strong)]">Download access is controlled by the Brand Office.</p>
+                      <p className="mt-1 text-sm text-[color:var(--vy-muted-fg)]">Use the template specifications below and request latest approved files through the governance workflow before external release.</p>
                     </div>
                   </div>
                 </div>
@@ -1151,10 +1151,10 @@ export default function Page() {
                         <ul className="space-y-2">
                           {entry.changes.map((change, i) => {
                             const typeColors: Record<string, string> = {
-                              added: "bg-green-100 text-green-800",
-                              removed: "bg-red-100 text-red-800",
-                              changed: "bg-blue-100 text-blue-800",
-                              fixed: "bg-amber-100 text-amber-800",
+                              added: "border border-[color:var(--vy-success)] bg-[color:var(--vy-muted)] text-[color:var(--vy-success)]",
+                              removed: "border border-[color:var(--vy-danger)] bg-[color:var(--vy-muted)] text-[color:var(--vy-danger)]",
+                              changed: "border border-[color:var(--vy-info)] bg-[color:var(--vy-muted)] text-[color:var(--vy-info)]",
+                              fixed: "border border-[color:var(--vy-warning)] bg-[color:var(--vy-muted)] text-[color:var(--vy-warning)]",
                             };
                             return (
                               <li key={i} className="flex items-start gap-3 text-sm">

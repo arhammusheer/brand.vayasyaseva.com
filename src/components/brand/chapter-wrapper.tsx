@@ -11,10 +11,10 @@ type ChapterWrapperProps = {
 
 const chapterAccents: Record<string, string> = {
   foundation: "border-l-[color:var(--vy-gold-ui)]",
-  visual: "border-l-[color:var(--vy-seva)]",
-  communication: "border-l-[color:var(--vy-setu)]",
-  application: "border-l-[color:var(--vy-kaushal)]",
-  appendix: "border-l-[color:var(--vy-prabandh)]",
+  visual: "border-l-[color:var(--vy-gold-ui)]",
+  communication: "border-l-[color:var(--vy-gold-ui)]",
+  application: "border-l-[color:var(--vy-gold-ui)]",
+  appendix: "border-l-[color:var(--vy-gold-ui)]",
 };
 
 export function ChapterWrapper({
@@ -34,7 +34,7 @@ export function ChapterWrapper({
         className={`mb-16 border-l-4 ${accent} bg-[color:var(--vy-muted)] py-10 pl-8 pr-6 rounded-r-lg`}
       >
         <div className="flex items-baseline gap-4">
-          <span className="font-mono text-lg font-semibold text-[color:var(--vy-muted-fg)]">
+          <span className="text-lg font-semibold text-[color:var(--vy-muted-fg)]">
             {number}
           </span>
           <h2 className="text-2xl font-semibold tracking-tight text-[color:var(--vy-text-strong)] md:text-3xl">

@@ -59,7 +59,7 @@ export const CHANGELOG_SECTION = {
         {
           type: "fixed" as const,
           description:
-            "Contact email marked as TODO (was example domain)",
+            "Footer contact email updated to brand office inbox",
         },
         {
           type: "changed" as const,

@@ -42,7 +42,7 @@ export const OVERVIEW_SECTION = {
     { label: "Color Palette", anchor: "#06-color-palette" },
     { label: "Voice & Tone", anchor: "#09-voice-tone" },
     { label: "Pre-Send Checklist", anchor: "#16-pre-send-checklist" },
-    { label: "Templates & Assets", anchor: "#18-templates-assets" },
-    { label: "Governance", anchor: "#17-governance-approvals" },
+    { label: "Templates & Assets", anchor: "#templates-downloadables" },
+    { label: "Governance", anchor: "#governance-approvals" },
   ],
 } as const;
