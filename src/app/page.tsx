@@ -921,7 +921,7 @@ export default function Page() {
                       <p className="mt-3 text-sm text-[color:var(--vy-muted-fg)]">{m.rationale}</p>
                       <div className="mt-4 flex flex-wrap gap-2">
                         {m.examples.map((ex, j) => (
-                          <span key={j} className="rounded bg-[color:var(--vy-muted)] px-3 py-1 font-mono text-sm">{ex}</span>
+                          <span key={j} className="rounded bg-[color:var(--vy-muted)] px-3 py-1 text-sm">{ex}</span>
                         ))}
                       </div>
                     </div>

@@ -45,7 +45,7 @@ export default function RootLayout({
       style={tokenCssVariables as CSSProperties}
       suppressHydrationWarning
     >
-      <body className={`${hind.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+      <body className={`${hind.variable} ${jetbrainsMono.variable} antialiased`}>
         <TooltipProvider delayDuration={120}>
           {children}
           <Toaster />
