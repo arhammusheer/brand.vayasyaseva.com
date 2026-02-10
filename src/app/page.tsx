@@ -68,9 +68,9 @@ const CHAPTERS = {
 function RulesBlock({ rules, title = "Rules" }: { rules: readonly string[]; title?: string }) {
   if (!rules.length) return null;
   return (
-    <div className="mt-8">
-      <h4 className="mb-4 text-lg font-medium text-[color:var(--vy-text-strong)]">{title}</h4>
-      <div className="grid gap-3 md:grid-cols-2">
+    <div className="mt-12">
+      <h4 className="mb-5 text-lg font-medium text-[color:var(--vy-text-strong)]">{title}</h4>
+      <div className="grid gap-4 md:grid-cols-2">
         {rules.map((rule, i) => (
           <div key={i} className="flex gap-3 rounded-lg bg-[color:var(--vy-muted)] p-4">
             <Check className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--vy-success)]" />
@@ -85,12 +85,12 @@ function RulesBlock({ rules, title = "Rules" }: { rules: readonly string[]; titl
 function DoDontBlock({ examples, title = "Do / Don't" }: { examples: readonly { topic: string; do: string; dont: string; why: string }[]; title?: string }) {
   if (!examples.length) return null;
   return (
-    <div className="mt-8">
-      <h4 className="mb-4 text-lg font-medium text-[color:var(--vy-text-strong)]">{title}</h4>
+    <div className="mt-12">
+      <h4 className="mb-5 text-lg font-medium text-[color:var(--vy-text-strong)]">{title}</h4>
       <div className="grid gap-6 lg:grid-cols-2">
         {examples.map((ex, i) => (
-          <div key={i} className="rounded-lg border border-[color:var(--vy-border)] p-5">
-            <p className="mb-3 font-medium text-[color:var(--vy-text-strong)]">{ex.topic}</p>
+          <div key={i} className="rounded-lg border border-[color:var(--vy-border)] p-6">
+            <p className="mb-4 font-medium text-[color:var(--vy-text-strong)]">{ex.topic}</p>
             <div className="space-y-3">
               <div className="flex gap-3 rounded bg-green-50 p-3">
                 <Check className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--vy-success)]" />
@@ -101,7 +101,7 @@ function DoDontBlock({ examples, title = "Do / Don't" }: { examples: readonly { 
                 <p className="text-[color:var(--vy-muted-fg)]">{ex.dont}</p>
               </div>
             </div>
-            <p className="mt-3 text-sm text-[color:var(--vy-muted-fg)]">{ex.why}</p>
+            <p className="mt-4 text-sm text-[color:var(--vy-muted-fg)]">{ex.why}</p>
           </div>
         ))}
       </div>
@@ -111,12 +111,12 @@ function DoDontBlock({ examples, title = "Do / Don't" }: { examples: readonly { 
 
 function SectionHeader({ id, number, title, summary }: { id: string; number: string; title: string; summary: string }) {
   return (
-    <header id={id} className="scroll-mt-8 border-b border-[color:var(--vy-border)] pb-6">
+    <header id={id} className="scroll-mt-8 border-b border-[color:var(--vy-border)] pb-8">
       <div className="flex items-baseline gap-3">
         <span className="font-mono text-sm text-[color:var(--vy-muted-fg)]">{number}</span>
         <h3 className="text-2xl font-semibold text-[color:var(--vy-text-strong)]">{title}</h3>
       </div>
-      <p className="mt-2 max-w-2xl text-[color:var(--vy-muted-fg)]">{summary}</p>
+      <p className="mt-3 max-w-2xl text-lg text-[color:var(--vy-muted-fg)]">{summary}</p>
     </header>
   );
 }
@@ -219,22 +219,22 @@ export default function Page() {
         {/* Main Content */}
         <main id="main-content" className="min-w-0">
           {/* Hero */}
-          <header className="mb-16 pb-8 border-b border-[color:var(--vy-border)]">
+          <header className="mb-20 pb-12 border-b border-[color:var(--vy-border)]">
             <p className="text-sm font-medium uppercase tracking-widest text-[color:var(--vy-muted-fg)]">
               {fundamentals.brandName.parent}
             </p>
-            <h1 className="mt-4 text-4xl font-bold tracking-tight text-[color:var(--vy-text-strong)] md:text-5xl">
+            <h1 className="mt-6 text-4xl font-bold tracking-tight text-[color:var(--vy-text-strong)] md:text-5xl lg:text-6xl">
               Brand Handbook
             </h1>
-            <p className="mt-4 max-w-2xl text-lg text-[color:var(--vy-muted-fg)]">
+            <p className="mt-6 max-w-2xl text-xl text-[color:var(--vy-muted-fg)] leading-relaxed">
               The canonical guide to Vayasya brand communication. Five chapters covering identity, visual system, voice, and operational standards.
             </p>
-            <div className="mt-6 flex flex-wrap items-center gap-4">
-              <span className="rounded-full bg-[color:var(--vy-gold-ui)] px-3 py-1 text-sm font-medium text-white">
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <span className="rounded-full bg-[color:var(--vy-gold-ui)] px-4 py-1.5 text-sm font-medium text-white">
                 v{"footer" in sections.footerVersioning ? sections.footerVersioning.footer.version : "1.0"}
               </span>
               {fundamentals.verticals.map((v) => (
-                <span key={v} className="rounded-full border border-[color:var(--vy-border)] px-3 py-1 text-sm">
+                <span key={v} className="rounded-full border border-[color:var(--vy-border)] px-4 py-1.5 text-sm">
                   {v}
                 </span>
               ))}
@@ -244,23 +244,23 @@ export default function Page() {
           {/* ==================== CHAPTER I: FOUNDATION ==================== */}
           <ChapterWrapper {...CHAPTERS.foundation}>
             {/* 01 Philosophy */}
-            <section className="mb-16">
+            <section>
               <SectionHeader {...sections.philosophy.header} id="01-philosophy" />
-              <div className="mt-6">
+              <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.philosophy.intro}</p>
 
                 {manifesto && (
                   <>
                     {/* Mission Band */}
-                    <div className="my-8 rounded-xl bg-[color:var(--vy-muted)] p-8 text-center">
-                      <p className="text-2xl font-medium text-[color:var(--vy-text-strong)] md:text-3xl">
+                    <div className="my-12 rounded-xl bg-[color:var(--vy-muted)] p-10 text-center">
+                      <p className="text-2xl font-medium text-[color:var(--vy-text-strong)] md:text-3xl leading-relaxed">
                         "{manifesto.mission}"
                       </p>
                     </div>
 
                     {/* Beliefs */}
-                    <h4 className="mb-4 text-lg font-medium text-[color:var(--vy-text-strong)]">What We Believe</h4>
-                    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">What We Believe</h4>
+                    <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
                       {manifesto.beliefs.map((b, i) => (
                         <div key={i} className="rounded-lg border border-[color:var(--vy-border)] p-4">
                           <p className="font-semibold text-[color:var(--vy-text-strong)]">{b.belief}</p>
@@ -270,22 +270,22 @@ export default function Page() {
                     </div>
 
                     {/* Stand For / Reject */}
-                    <div className="mt-8 grid gap-6 md:grid-cols-2">
-                      <div className="rounded-lg border-2 border-[color:var(--vy-success)] p-5">
-                        <h4 className="mb-3 flex items-center gap-2 font-semibold text-[color:var(--vy-success)]">
+                    <div className="mt-12 grid gap-8 md:grid-cols-2">
+                      <div className="rounded-lg border-2 border-[color:var(--vy-success)] p-6">
+                        <h4 className="mb-4 flex items-center gap-2 font-semibold text-[color:var(--vy-success)]">
                           <Check className="h-5 w-5" /> We Stand For
                         </h4>
-                        <ul className="space-y-2">
+                        <ul className="space-y-3">
                           {manifesto.standFor.map((s, i) => (
                             <li key={i} className="text-[color:var(--vy-fg)]">• {s}</li>
                           ))}
                         </ul>
                       </div>
-                      <div className="rounded-lg border-2 border-[color:var(--vy-danger)] p-5">
-                        <h4 className="mb-3 flex items-center gap-2 font-semibold text-[color:var(--vy-danger)]">
+                      <div className="rounded-lg border-2 border-[color:var(--vy-danger)] p-6">
+                        <h4 className="mb-4 flex items-center gap-2 font-semibold text-[color:var(--vy-danger)]">
                           <X className="h-5 w-5" /> We Reject
                         </h4>
-                        <ul className="space-y-2">
+                        <ul className="space-y-3">
                           {manifesto.reject.map((r, i) => (
                             <li key={i} className="text-[color:var(--vy-muted-fg)]">• {r}</li>
                           ))}
@@ -301,9 +301,9 @@ export default function Page() {
             </section>
 
             {/* 02 Positioning */}
-            <section className="mb-16">
+            <section>
               <SectionHeader {...sections.positioning.header} id="02-positioning" />
-              <div className="mt-6">
+              <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.positioning.intro}</p>
                 <RulesBlock rules={sections.positioning.rules} />
                 <DoDontBlock examples={sections.positioning.doDont} />
@@ -311,33 +311,33 @@ export default function Page() {
             </section>
 
             {/* 03 Operating Pillars */}
-            <section className="mb-16">
+            <section>
               <SectionHeader {...sections.operatingPillars.header} id="03-operating-pillars" />
-              <div className="mt-6">
+              <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.operatingPillars.intro}</p>
 
                 {pillars.length > 0 && (
-                  <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                  <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     {pillars.map((p) => (
                       <div key={p.name} className="rounded-lg border border-[color:var(--vy-border)] overflow-hidden">
-                        <div className="bg-[color:var(--vy-muted)] p-4">
+                        <div className="bg-[color:var(--vy-muted)] p-5">
                           <h5 className="text-lg font-semibold text-[color:var(--vy-text-strong)]">{p.name}</h5>
-                          <p className="mt-1 text-sm text-[color:var(--vy-muted-fg)]">{p.definition}</p>
+                          <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">{p.definition}</p>
                         </div>
-                        <div className="p-4 space-y-4">
+                        <div className="p-5 space-y-5">
                           <div>
-                            <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-success)]">
+                            <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-success)]">
                               <Check className="inline h-3 w-3 mr-1" />Behaviors
                             </p>
-                            <ul className="space-y-1 text-sm">
+                            <ul className="space-y-2 text-sm">
                               {p.behaviors.map((b, i) => <li key={i}>• {b}</li>)}
                             </ul>
                           </div>
                           <div>
-                            <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-danger)]">
+                            <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-danger)]">
                               <AlertTriangle className="inline h-3 w-3 mr-1" />Red Flags
                             </p>
-                            <ul className="space-y-1 text-sm text-[color:var(--vy-muted-fg)]">
+                            <ul className="space-y-2 text-sm text-[color:var(--vy-muted-fg)]">
                               {p.redFlags.map((r, i) => <li key={i}>• {r}</li>)}
                             </ul>
                           </div>
@@ -356,14 +356,14 @@ export default function Page() {
           {/* ==================== CHAPTER II: VISUAL SYSTEM ==================== */}
           <ChapterWrapper {...CHAPTERS.visual}>
             {/* 04 Logo Usage */}
-            <section className="mb-16">
+            <section>
               <SectionHeader {...sections.logoUsage.header} id="04-logo-usage" />
-              <div className="mt-6">
+              <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.logoUsage.intro}</p>
 
                 {/* Logo Previews */}
-                <div className="mt-8">
-                  <h4 className="mb-4 text-lg font-medium text-[color:var(--vy-text-strong)]">Logo Variants</h4>
+                <div className="mt-10">
+                  <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Logo Variants</h4>
                   <div className="grid gap-6 md:grid-cols-2">
                     <div className="rounded-lg border border-[color:var(--vy-border)] p-6">
                       <div className="flex h-32 items-center justify-center rounded bg-white">
@@ -393,8 +393,8 @@ export default function Page() {
                 </div>
 
                 {/* Vertical Logos */}
-                <div className="mt-8">
-                  <h4 className="mb-4 text-lg font-medium text-[color:var(--vy-text-strong)]">Vertical Logos</h4>
+                <div className="mt-10">
+                  <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Vertical Logos</h4>
                   <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
                     {Object.entries(BRAND_CONTENT.placeholders.verticalLogos).map(([key, path]) => (
                       <div key={key} className="rounded-lg border border-[color:var(--vy-border)] p-4">
@@ -413,9 +413,9 @@ export default function Page() {
             </section>
 
             {/* 05 Color Palette */}
-            <section className="mb-16">
+            <section>
               <SectionHeader {...sections.colorPalette.header} id="05-color-palette" />
-              <div className="mt-6">
+              <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.colorPalette.intro}</p>
 
                 {/* Color Swatches by Role */}
@@ -423,9 +423,9 @@ export default function Page() {
                   const colors = fundamentals.colorTokens.filter((c) => c.role === role);
                   if (!colors.length) return null;
                   return (
-                    <div key={role} className="mt-8">
-                      <h4 className="mb-4 text-lg font-medium text-[color:var(--vy-text-strong)]">{role}</h4>
-                      <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                    <div key={role} className="mt-10">
+                      <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">{role}</h4>
+                      <div className="grid gap-5 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
                         {colors.map((c) => (
                           <ColorSwatch key={c.token} token={c.token} hex={c.hex} usage={c.usage} />
                         ))}
@@ -440,16 +440,16 @@ export default function Page() {
             </section>
 
             {/* 06 Typography */}
-            <section className="mb-16">
+            <section>
               <SectionHeader {...sections.typography.header} id="06-typography" />
-              <div className="mt-6">
+              <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.typography.intro}</p>
 
                 {/* Type Specimen */}
-                <div className="mt-8 rounded-lg border border-[color:var(--vy-border)] p-6 space-y-6">
+                <div className="mt-10 rounded-lg border border-[color:var(--vy-border)] p-8 space-y-8">
                   {fundamentals.typoRules.hierarchy.map((h) => (
-                    <div key={h.level} className="border-b border-[color:var(--vy-border)] pb-4 last:border-0 last:pb-0">
-                      <div className="flex items-baseline justify-between mb-2">
+                    <div key={h.level} className="border-b border-[color:var(--vy-border)] pb-6 last:border-0 last:pb-0">
+                      <div className="flex items-baseline justify-between mb-3">
                         <span className="text-xs font-medium uppercase tracking-wide text-[color:var(--vy-muted-fg)]">{h.level}</span>
                         <span className="font-mono text-xs text-[color:var(--vy-muted-fg)]">
                           {h.fontFamily} {h.fontWeight} / {h.fontSize} / {h.lineHeight}
@@ -471,15 +471,15 @@ export default function Page() {
                 </div>
 
                 {/* India-First Formats */}
-                <div className="mt-8">
-                  <h4 className="mb-4 text-lg font-medium text-[color:var(--vy-text-strong)]">India-First Formatting</h4>
-                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="mt-12">
+                  <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">India-First Formatting</h4>
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {Object.entries(fundamentals.typoRules.indiaFirstFormats).map(([key, val]) => (
-                      <div key={key} className="rounded-lg bg-[color:var(--vy-muted)] p-4">
+                      <div key={key} className="rounded-lg bg-[color:var(--vy-muted)] p-5">
                         <p className="text-xs font-medium uppercase tracking-wide text-[color:var(--vy-muted-fg)]">
                           {key.replace(/([A-Z])/g, " $1").trim()}
                         </p>
-                        <p className="mt-1 font-mono text-sm">{val}</p>
+                        <p className="mt-2 font-mono text-sm">{val}</p>
                       </div>
                     ))}
                   </div>
@@ -491,9 +491,9 @@ export default function Page() {
             </section>
 
             {/* 07 Imagery */}
-            <section className="mb-16">
+            <section>
               <SectionHeader {...sections.imagery.header} id="07-imagery" />
-              <div className="mt-6">
+              <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.imagery.intro}</p>
                 <RulesBlock rules={sections.imagery.rules} />
                 <DoDontBlock examples={sections.imagery.doDont} />
@@ -504,21 +504,21 @@ export default function Page() {
           {/* ==================== CHAPTER III: COMMUNICATION ==================== */}
           <ChapterWrapper {...CHAPTERS.communication}>
             {/* 08 Voice & Tone */}
-            <section className="mb-16">
+            <section>
               <SectionHeader {...sections.voiceTone.header} id="08-voice-tone" />
-              <div className="mt-6">
+              <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.voiceTone.intro}</p>
 
                 {/* Voice Personas */}
                 {personas.length > 0 && (
-                  <div className="mt-8">
-                    <h4 className="mb-4 text-lg font-medium text-[color:var(--vy-text-strong)]">Voice Traits</h4>
-                    <div className="grid gap-4 md:grid-cols-2">
+                  <div className="mt-10">
+                    <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Voice Traits</h4>
+                    <div className="grid gap-6 md:grid-cols-2">
                       {personas.map((p) => (
-                        <div key={p.trait} className="rounded-lg border border-[color:var(--vy-border)] p-5">
+                        <div key={p.trait} className="rounded-lg border border-[color:var(--vy-border)] p-6">
                           <h5 className="text-lg font-semibold text-[color:var(--vy-text-strong)]">{p.trait}</h5>
-                          <p className="mt-1 text-[color:var(--vy-muted-fg)]">{p.description}</p>
-                          <div className="mt-4 space-y-3">
+                          <p className="mt-2 text-[color:var(--vy-muted-fg)]">{p.description}</p>
+                          <div className="mt-5 space-y-4">
                             <div>
                               <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-success)]">Sounds like</p>
                               <ul className="mt-1 space-y-1 text-sm">
@@ -542,25 +542,25 @@ export default function Page() {
 
                 {/* Terminology */}
                 {terminology.length > 0 && (
-                  <div className="mt-8">
-                    <h4 className="mb-4 text-lg font-medium text-[color:var(--vy-text-strong)]">Terminology Dictionary</h4>
+                  <div className="mt-12">
+                    <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Terminology Dictionary</h4>
                     <div className="overflow-x-auto rounded-lg border border-[color:var(--vy-border)]">
                       <table className="w-full text-sm">
                         <thead className="bg-[color:var(--vy-muted)]">
                           <tr>
-                            <th className="p-3 text-left font-medium">Instead of</th>
-                            <th className="p-3 text-left font-medium text-[color:var(--vy-success)]">Use</th>
-                            <th className="p-3 text-left font-medium text-[color:var(--vy-danger)]">Avoid</th>
-                            <th className="p-3 text-left font-medium">Notes</th>
+                            <th className="p-4 text-left font-medium">Instead of</th>
+                            <th className="p-4 text-left font-medium text-[color:var(--vy-success)]">Use</th>
+                            <th className="p-4 text-left font-medium text-[color:var(--vy-danger)]">Avoid</th>
+                            <th className="p-4 text-left font-medium">Notes</th>
                           </tr>
                         </thead>
                         <tbody>
                           {terminology.map((t) => (
                             <tr key={t.term} className="border-t border-[color:var(--vy-border)]">
-                              <td className="p-3 font-medium">{t.term}</td>
-                              <td className="p-3 text-[color:var(--vy-success)]">{t.approved}</td>
-                              <td className="p-3 text-[color:var(--vy-danger)]">{t.avoid.join(", ")}</td>
-                              <td className="p-3 text-[color:var(--vy-muted-fg)]">{t.notes}</td>
+                              <td className="p-4 font-medium">{t.term}</td>
+                              <td className="p-4 text-[color:var(--vy-success)]">{t.approved}</td>
+                              <td className="p-4 text-[color:var(--vy-danger)]">{t.avoid.join(", ")}</td>
+                              <td className="p-4 text-[color:var(--vy-muted-fg)]">{t.notes}</td>
                             </tr>
                           ))}
                         </tbody>
@@ -571,14 +571,14 @@ export default function Page() {
 
                 {/* Banned Phrases */}
                 {bannedPhrases.length > 0 && (
-                  <div className="mt-8">
-                    <h4 className="mb-4 text-lg font-medium text-[color:var(--vy-text-strong)]">Banned Phrases</h4>
-                    <div className="grid gap-3 md:grid-cols-2">
+                  <div className="mt-12">
+                    <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Banned Phrases</h4>
+                    <div className="grid gap-4 md:grid-cols-2">
                       {bannedPhrases.map((b) => (
-                        <div key={b.phrase} className="rounded-lg border border-[color:var(--vy-danger)] bg-red-50 p-4">
+                        <div key={b.phrase} className="rounded-lg border border-[color:var(--vy-danger)] bg-red-50 p-5">
                           <p className="font-medium text-[color:var(--vy-danger)]">"{b.phrase}"</p>
-                          <p className="mt-1 text-sm text-[color:var(--vy-muted-fg)]">{b.reason}</p>
-                          <p className="mt-2 text-sm"><span className="font-medium text-[color:var(--vy-success)]">Use:</span> {b.alternative}</p>
+                          <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">{b.reason}</p>
+                          <p className="mt-3 text-sm"><span className="font-medium text-[color:var(--vy-success)]">Use:</span> {b.alternative}</p>
                         </div>
                       ))}
                     </div>
@@ -591,16 +591,16 @@ export default function Page() {
             </section>
 
             {/* 09 Claims Discipline */}
-            <section className="mb-16">
+            <section>
               <SectionHeader {...sections.claimsDiscipline.header} id="09-claims-discipline" />
-              <div className="mt-6">
+              <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.claimsDiscipline.intro}</p>
 
                 {/* Claims Matrix */}
                 {claimRules.length > 0 && (
-                  <div className="mt-8">
-                    <h4 className="mb-4 text-lg font-medium text-[color:var(--vy-text-strong)]">Claim Classification</h4>
-                    <div className="grid gap-4 md:grid-cols-2">
+                  <div className="mt-10">
+                    <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Claim Classification</h4>
+                    <div className="grid gap-6 md:grid-cols-2">
                       {claimRules.map((c) => {
                         const colors: Record<string, string> = {
                           aspirational: "border-l-blue-500 bg-blue-50",
@@ -609,9 +609,9 @@ export default function Page() {
                           contractual: "border-l-purple-500 bg-purple-50",
                         };
                         return (
-                          <div key={c.claimType} className={`rounded-lg border-l-4 p-5 ${colors[c.claimType] || ""}`}>
+                          <div key={c.claimType} className={`rounded-lg border-l-4 p-6 ${colors[c.claimType] || ""}`}>
                             <h5 className="text-lg font-semibold capitalize">{c.claimType}</h5>
-                            <div className="mt-3 space-y-2 text-sm">
+                            <div className="mt-4 space-y-3 text-sm">
                               <p><span className="font-medium text-[color:var(--vy-success)]">Pattern:</span> {c.allowedPattern}</p>
                               <p><span className="font-medium">Evidence:</span> {c.requiredEvidence}</p>
                               <p><span className="font-medium text-[color:var(--vy-danger)]">Prohibited:</span> {c.prohibitedPattern}</p>
@@ -626,11 +626,11 @@ export default function Page() {
 
                 {/* Evidence Tiers */}
                 {evidenceTiers.length > 0 && (
-                  <div className="mt-8">
-                    <h4 className="mb-4 text-lg font-medium text-[color:var(--vy-text-strong)]">Evidence Requirements</h4>
-                    <div className="grid gap-4 md:grid-cols-2">
+                  <div className="mt-12">
+                    <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Evidence Requirements</h4>
+                    <div className="grid gap-6 md:grid-cols-2">
                       {evidenceTiers.map((e) => (
-                        <div key={e.tier} className="rounded-lg border border-[color:var(--vy-border)] p-5">
+                        <div key={e.tier} className="rounded-lg border border-[color:var(--vy-border)] p-6">
                           <div className="flex items-center justify-between">
                             <h5 className="font-semibold">{e.tier}</h5>
                             {e.expirationDays && (
@@ -639,15 +639,15 @@ export default function Page() {
                               </span>
                             )}
                           </div>
-                          <p className="mt-1 text-sm text-[color:var(--vy-muted-fg)]">{e.description}</p>
-                          <div className="mt-3 grid gap-3 text-sm">
+                          <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">{e.description}</p>
+                          <div className="mt-4 grid gap-4 text-sm">
                             <div>
                               <p className="text-xs font-semibold uppercase text-[color:var(--vy-success)]">Valid</p>
-                              <ul className="mt-1 space-y-1">{e.validEvidence.map((v, i) => <li key={i}>• {v}</li>)}</ul>
+                              <ul className="mt-2 space-y-1">{e.validEvidence.map((v, i) => <li key={i}>• {v}</li>)}</ul>
                             </div>
                             <div>
                               <p className="text-xs font-semibold uppercase text-[color:var(--vy-danger)]">Invalid</p>
-                              <ul className="mt-1 space-y-1 text-[color:var(--vy-muted-fg)]">{e.invalidEvidence.map((v, i) => <li key={i}>• {v}</li>)}</ul>
+                              <ul className="mt-2 space-y-1 text-[color:var(--vy-muted-fg)]">{e.invalidEvidence.map((v, i) => <li key={i}>• {v}</li>)}</ul>
                             </div>
                           </div>
                         </div>
@@ -662,18 +662,18 @@ export default function Page() {
             </section>
 
             {/* 10 Writing Mechanics */}
-            <section className="mb-16">
+            <section>
               <SectionHeader {...sections.writingMechanics.header} id="10-writing-mechanics" />
-              <div className="mt-6">
+              <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.writingMechanics.intro}</p>
 
                 {mechanics.length > 0 && (
-                  <div className="mt-8 space-y-4">
+                  <div className="mt-10 space-y-5">
                     {mechanics.map((m, i) => (
-                      <div key={i} className="rounded-lg border border-[color:var(--vy-border)] p-5">
+                      <div key={i} className="rounded-lg border border-[color:var(--vy-border)] p-6">
                         <p className="font-medium text-[color:var(--vy-text-strong)]">{m.rule}</p>
-                        <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">{m.rationale}</p>
-                        <div className="mt-3 flex flex-wrap gap-2">
+                        <p className="mt-3 text-sm text-[color:var(--vy-muted-fg)]">{m.rationale}</p>
+                        <div className="mt-4 flex flex-wrap gap-2">
                           {m.examples.map((ex, j) => (
                             <span key={j} className="rounded bg-[color:var(--vy-muted)] px-3 py-1 font-mono text-sm">{ex}</span>
                           ))}
@@ -691,15 +691,15 @@ export default function Page() {
 
           {/* ==================== CHAPTER IV: APPLICATION ==================== */}
           <ChapterWrapper {...CHAPTERS.application}>
-            {/* 11-14: Documents, Presentations, Email, Meetings */}
+            {/* 11-13: Documents, Presentations, Email */}
             {[
               { s: sections.documents, id: "11-documents" },
               { s: sections.presentations, id: "12-presentations" },
               { s: sections.email, id: "13-email" },
             ].map(({ s, id }) => (
-              <section key={id} className="mb-16">
+              <section key={id}>
                 <SectionHeader {...s.header} id={id} />
-                <div className="mt-6">
+                <div className="mt-10">
                   <p className="max-w-prose text-lg leading-relaxed">{s.intro}</p>
                   <RulesBlock rules={s.rules} />
                   <DoDontBlock examples={s.doDont} />
@@ -708,20 +708,20 @@ export default function Page() {
             ))}
 
             {/* 14 Meetings */}
-            <section className="mb-16">
+            <section>
               <SectionHeader {...sections.meetings.header} id="14-meetings" />
-              <div className="mt-6">
+              <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.meetings.intro}</p>
 
                 {standards.length > 0 && (
-                  <div className="mt-8">
-                    <h4 className="mb-4 text-lg font-medium text-[color:var(--vy-text-strong)]">Meeting Standards</h4>
-                    <div className="grid gap-4 md:grid-cols-2">
+                  <div className="mt-10">
+                    <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">Meeting Standards</h4>
+                    <div className="grid gap-6 md:grid-cols-2">
                       {standards.map((st) => (
-                        <div key={st.meetingType} className="rounded-lg border border-[color:var(--vy-border)] p-5">
+                        <div key={st.meetingType} className="rounded-lg border border-[color:var(--vy-border)] p-6">
                           <h5 className="font-semibold">{st.meetingType}</h5>
-                          <p className="text-xs text-[color:var(--vy-muted-fg)]">{st.timeboxMinutes} min • {st.ownerRole}</p>
-                          <div className="mt-3 grid gap-2 text-sm">
+                          <p className="mt-1 text-xs text-[color:var(--vy-muted-fg)]">{st.timeboxMinutes} min • {st.ownerRole}</p>
+                          <div className="mt-4 grid gap-3 text-sm">
                             <p><span className="font-medium text-[color:var(--vy-success)]">Inputs:</span> {st.requiredInputs.join(", ")}</p>
                             <p><span className="font-medium text-[color:var(--vy-info)]">Outputs:</span> {st.requiredOutputs.join(", ")}</p>
                           </div>
@@ -737,19 +737,19 @@ export default function Page() {
             </section>
 
             {/* 15 Pre-Send Checklist */}
-            <section className="mb-16">
+            <section>
               <SectionHeader {...sections.preSendChecklist.header} id="15-pre-send-checklist" />
-              <div className="mt-6">
+              <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.preSendChecklist.intro}</p>
 
                 {checklist.length > 0 && (
-                  <div className="mt-8 rounded-xl border-2 border-[color:var(--vy-border)] p-6 print:p-4">
-                    <p className="mb-4 text-sm text-[color:var(--vy-muted-fg)]">Complete all checks before sending external communication.</p>
-                    <div className="space-y-6">
+                  <div className="mt-10 rounded-xl border-2 border-[color:var(--vy-border)] p-8 print:p-4">
+                    <p className="mb-6 text-sm text-[color:var(--vy-muted-fg)]">Complete all checks before sending external communication.</p>
+                    <div className="space-y-8">
                       {checklist.map((g, i) => (
                         <div key={i}>
-                          <h5 className="mb-3 font-semibold">{g.title}</h5>
-                          <ul className="space-y-2">
+                          <h5 className="mb-4 font-semibold">{g.title}</h5>
+                          <ul className="space-y-3">
                             {g.items.map((item, j) => (
                               <li key={j} className="flex items-start gap-3">
                                 <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 border-[color:var(--vy-border)]" />
@@ -757,7 +757,7 @@ export default function Page() {
                               </li>
                             ))}
                           </ul>
-                          <p className="mt-2 ml-8 text-sm text-[color:var(--vy-success)]">Pass: {g.passCondition}</p>
+                          <p className="mt-3 ml-8 text-sm text-[color:var(--vy-success)]">Pass: {g.passCondition}</p>
                         </div>
                       ))}
                     </div>
@@ -773,29 +773,29 @@ export default function Page() {
           {/* ==================== CHAPTER V: APPENDIX ==================== */}
           <ChapterWrapper {...CHAPTERS.appendix}>
             {/* Governance */}
-            <section className="mb-16">
+            <section>
               <SectionHeader {...sections.governanceApprovals.header} id="governance-approvals" />
-              <div className="mt-6">
+              <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.governanceApprovals.intro}</p>
 
                 {approvals.length > 0 && (
-                  <div className="mt-8 overflow-x-auto rounded-lg border border-[color:var(--vy-border)]">
+                  <div className="mt-10 overflow-x-auto rounded-lg border border-[color:var(--vy-border)]">
                     <table className="w-full text-sm">
                       <thead className="bg-[color:var(--vy-muted)]">
                         <tr>
-                          <th className="p-3 text-left font-medium">Artifact</th>
-                          <th className="p-3 text-left font-medium">Approver</th>
-                          <th className="p-3 text-left font-medium">SLA</th>
-                          <th className="p-3 text-left font-medium">Escalation</th>
+                          <th className="p-4 text-left font-medium">Artifact</th>
+                          <th className="p-4 text-left font-medium">Approver</th>
+                          <th className="p-4 text-left font-medium">SLA</th>
+                          <th className="p-4 text-left font-medium">Escalation</th>
                         </tr>
                       </thead>
                       <tbody>
                         {approvals.map((a) => (
                           <tr key={a.artifact} className="border-t border-[color:var(--vy-border)]">
-                            <td className="p-3 font-medium">{a.artifact}</td>
-                            <td className="p-3">{a.approverRole}</td>
-                            <td className="p-3">{a.slaBusinessDays}d</td>
-                            <td className="p-3 text-[color:var(--vy-muted-fg)]">{a.escalation}</td>
+                            <td className="p-4 font-medium">{a.artifact}</td>
+                            <td className="p-4">{a.approverRole}</td>
+                            <td className="p-4">{a.slaBusinessDays}d</td>
+                            <td className="p-4 text-[color:var(--vy-muted-fg)]">{a.escalation}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -808,25 +808,25 @@ export default function Page() {
             </section>
 
             {/* Templates */}
-            <section className="mb-16">
+            <section>
               <SectionHeader {...sections.templatesDownloadables.header} id="templates-downloadables" />
-              <div className="mt-6">
+              <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.templatesDownloadables.intro}</p>
                 <RulesBlock rules={sections.templatesDownloadables.rules} />
               </div>
             </section>
 
             {/* FAQ */}
-            <section className="mb-16">
+            <section>
               <SectionHeader {...sections.faqEdgeCases.header} id="faq-edge-cases" />
-              <div className="mt-6">
+              <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.faqEdgeCases.intro}</p>
                 {"faq" in sections.faqEdgeCases && sections.faqEdgeCases.faq && (
-                  <div className="mt-8 space-y-3">
+                  <div className="mt-10 space-y-4">
                     {sections.faqEdgeCases.faq.map((f, i) => (
                       <details key={i} className="rounded-lg border border-[color:var(--vy-border)]">
-                        <summary className="cursor-pointer p-4 font-medium">{f.question}</summary>
-                        <div className="border-t border-[color:var(--vy-border)] p-4 text-[color:var(--vy-muted-fg)]">{f.answer}</div>
+                        <summary className="cursor-pointer p-5 font-medium">{f.question}</summary>
+                        <div className="border-t border-[color:var(--vy-border)] p-5 text-[color:var(--vy-muted-fg)]">{f.answer}</div>
                       </details>
                     ))}
                   </div>
@@ -835,24 +835,24 @@ export default function Page() {
             </section>
 
             {/* Footer/Version */}
-            <section id="footer-versioning" className="rounded-xl bg-[color:var(--vy-muted)] p-6">
+            <section id="footer-versioning" className="rounded-xl bg-[color:var(--vy-muted)] p-8">
               {"footer" in sections.footerVersioning && (
-                <div className="grid gap-4 text-sm md:grid-cols-2 lg:grid-cols-4">
+                <div className="grid gap-6 text-sm md:grid-cols-2 lg:grid-cols-4">
                   <div>
                     <p className="text-xs font-medium uppercase tracking-wide text-[color:var(--vy-muted-fg)]">Version</p>
-                    <p className="mt-1 font-mono">{sections.footerVersioning.footer.version}</p>
+                    <p className="mt-2 font-mono">{sections.footerVersioning.footer.version}</p>
                   </div>
                   <div>
                     <p className="text-xs font-medium uppercase tracking-wide text-[color:var(--vy-muted-fg)]">Effective</p>
-                    <p className="mt-1">{sections.footerVersioning.footer.effectiveDate}</p>
+                    <p className="mt-2">{sections.footerVersioning.footer.effectiveDate}</p>
                   </div>
                   <div>
                     <p className="text-xs font-medium uppercase tracking-wide text-[color:var(--vy-muted-fg)]">Owner</p>
-                    <p className="mt-1">{sections.footerVersioning.footer.owner}</p>
+                    <p className="mt-2">{sections.footerVersioning.footer.owner}</p>
                   </div>
                   <div>
                     <p className="text-xs font-medium uppercase tracking-wide text-[color:var(--vy-muted-fg)]">Contact</p>
-                    <p className="mt-1">{sections.footerVersioning.footer.contact}</p>
+                    <p className="mt-2">{sections.footerVersioning.footer.contact}</p>
                   </div>
                 </div>
               )}

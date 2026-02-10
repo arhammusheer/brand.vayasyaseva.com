@@ -28,26 +28,26 @@ export function ChapterWrapper({
   const accent = chapterAccents[accentColor] || chapterAccents.foundation;
 
   return (
-    <div id={id} className="scroll-mt-8">
+    <article id={id} className="scroll-mt-8 pt-8 pb-16 first:pt-0">
       {/* Chapter Header */}
       <header
-        className={`mb-12 border-l-4 ${accent} bg-[color:var(--vy-muted)] py-8 pl-6 pr-4`}
+        className={`mb-16 border-l-4 ${accent} bg-[color:var(--vy-muted)] py-10 pl-8 pr-6 rounded-r-lg`}
       >
         <div className="flex items-baseline gap-4">
-          <span className="font-mono text-sm font-medium text-[color:var(--vy-muted-fg)]">
+          <span className="font-mono text-lg font-semibold text-[color:var(--vy-muted-fg)]">
             {number}
           </span>
           <h2 className="text-2xl font-semibold tracking-tight text-[color:var(--vy-text-strong)] md:text-3xl">
             {title}
           </h2>
         </div>
-        <p className="mt-2 max-w-2xl text-[color:var(--vy-muted-fg)]">
+        <p className="mt-3 max-w-2xl text-lg text-[color:var(--vy-muted-fg)]">
           {description}
         </p>
       </header>
 
-      {/* Chapter Content */}
-      <div className="space-y-0">{children}</div>
-    </div>
+      {/* Chapter Content - sections have their own spacing */}
+      <div className="space-y-24">{children}</div>
+    </article>
   );
 }
