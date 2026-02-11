@@ -850,6 +850,31 @@ export default function Page() {
               <div className="mt-10">
                 <p className="max-w-prose text-lg leading-relaxed">{sections.typography.intro}</p>
 
+                <div className="mt-8 rounded-lg border border-[color:var(--vy-border)] bg-[color:var(--vy-muted)] p-6">
+                  <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                    <div>
+                      <h4 className="text-lg font-medium text-[color:var(--vy-text-strong)]">
+                        {sections.typography.fontPack.name}
+                      </h4>
+                      <p className="mt-1 text-sm text-[color:var(--vy-muted-fg)]">
+                        {sections.typography.fontPack.description}
+                      </p>
+                      <p className="mt-2 font-mono text-xs text-[color:var(--vy-muted-fg)]">
+                        File: {sections.typography.fontPack.filePath}
+                      </p>
+                    </div>
+                    <Button asChild>
+                      <a href={sections.typography.fontPack.filePath} download>
+                        Download Font Pack ({sections.typography.fontPack.fileType})
+                        <ArrowRight className="h-4 w-4" />
+                      </a>
+                    </Button>
+                  </div>
+                  {sections.typography.fontPack.accessNote ? (
+                    <p className="mt-4 text-xs text-[color:var(--vy-muted-fg)]">{sections.typography.fontPack.accessNote}</p>
+                  ) : null}
+                </div>
+
                 {/* Type Specimen */}
                 <div className="mt-10 rounded-lg border border-[color:var(--vy-border)] p-8 space-y-8">
                   {fundamentals.typoRules.hierarchy.map((h) => (

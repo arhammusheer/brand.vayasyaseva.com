@@ -160,6 +160,14 @@ export type TemplateSpec = {
   guardrails: readonly string[];
 };
 
+export type DownloadableAsset = {
+  name: string;
+  description: string;
+  filePath: string;
+  fileType: string;
+  accessNote?: string;
+};
+
 export type ApprovalRule = {
   artifact: string;
   approverRole: string;

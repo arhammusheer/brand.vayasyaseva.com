@@ -1,4 +1,5 @@
 import type {
+  DownloadableAsset,
   DoDontExample,
   LanguageGuideItem,
   SectionHeader,
@@ -16,6 +17,14 @@ export const TYPOGRAPHY_SECTION = {
   },
   intro:
     "Typography is a readability control. Hind is mandatory for primary and display use. JetBrains Mono is reserved for data-heavy contexts where character distinction is critical.",
+  fontPack: {
+    name: "Vayasya Font Pack",
+    description: "Approved company font files bundled for local installation.",
+    filePath: "/brand/fonts/vayasya-font-pack.zip",
+    fileType: "ZIP",
+    accessNote:
+      "This package contains internal-use fonts. Keep distribution restricted to authorized company teams.",
+  },
   stacks: [
     {
       label: "Primary",
@@ -112,6 +121,7 @@ export const TYPOGRAPHY_SECTION = {
 } as const satisfies {
   header: SectionHeader;
   intro: string;
+  fontPack: DownloadableAsset;
   stacks: readonly TypographyStack[];
   hierarchy: readonly TypeHierarchy[];
   languageControls: readonly LanguageGuideItem[];
