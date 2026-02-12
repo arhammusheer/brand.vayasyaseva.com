@@ -28,10 +28,21 @@ const fundamentals = BRAND_CONTENT.fundamentals;
 const TOKEN_LABELS: Record<string, string> = {
   bg: "background",
   fg: "foreground",
+  "bg-canvas": "canvas background",
+  "bg-subtle": "subtle background",
+  "bg-muted": "muted background",
+  "border-default": "default border",
+  "text-primary": "primary text",
+  "text-secondary": "secondary text",
   "text-strong": "strong text",
   muted: "muted surface",
   "muted-fg": "muted text",
   border: "border",
+  "brand-primary": "brand primary",
+  "brand-primary-hover": "brand primary hover",
+  "brand-on-primary": "on brand surface text",
+  "brand-text": "brand text",
+  "focus-ring": "focus ring",
   "gold-ui": "brand gold",
   seva: "Seva accent",
   setu: "Setu accent",
@@ -44,7 +55,7 @@ const TOKEN_LABELS: Record<string, string> = {
 };
 
 const sanitizeTokenMentions = (value: string) =>
-  value.replace(/`?--vy-[a-z-]+`?/gi, (rawToken) => {
+  value.replace(/`?--vy-[a-z0-9-]+`?/gi, (rawToken) => {
     const token = rawToken.replace(/`/g, "").toLowerCase().replace(/^--vy-/, "");
     return TOKEN_LABELS[token] ?? token.replace(/-/g, " ");
   });
@@ -52,6 +63,33 @@ const sanitizeTokenMentions = (value: string) =>
 const tokenLabel = (token: string) => {
   const label = sanitizeTokenMentions(token);
   return label.charAt(0).toUpperCase() + label.slice(1);
+};
+
+const COLOR_ROLE_ORDER = [
+  "Neutral",
+  "Gold",
+  "Seva",
+  "Setu",
+  "Kaushal",
+  "Prabandh",
+  "Semantic",
+  "Data Visualization",
+  "Role Mapping",
+  "Compatibility",
+] as const;
+
+const swatchIconColor = (hex: string) => {
+  const normalized = hex.replace("#", "");
+  if (!/^[\da-f]{6}$/i.test(normalized)) {
+    return "var(--vy-brand-on-primary)";
+  }
+
+  const red = Number.parseInt(normalized.slice(0, 2), 16);
+  const green = Number.parseInt(normalized.slice(2, 4), 16);
+  const blue = Number.parseInt(normalized.slice(4, 6), 16);
+  const luminance = (0.299 * red + 0.587 * green + 0.114 * blue) / 255;
+
+  return luminance > 0.62 ? "var(--vy-brand-on-primary)" : "var(--vy-bg-canvas)";
 };
 
 // Chapter definitions
@@ -208,6 +246,8 @@ function SectionHeader({ number, title, summary }: { number: string; title: stri
 // Color Swatch Component
 function ColorSwatch({ token, hex, usage }: { token: string; hex: string; usage: string }) {
   const [copied, setCopied] = useState(false);
+  const iconColor = swatchIconColor(hex);
+
   const copyHex = async () => {
     await navigator.clipboard.writeText(hex);
     setCopied(true);
@@ -222,9 +262,12 @@ function ColorSwatch({ token, hex, usage }: { token: string; hex: string; usage:
         style={{ backgroundColor: hex }}
       >
         {copied ? (
-          <Check className="h-5 w-5 text-[color:var(--vy-bg)] drop-shadow-md" />
+          <Check className="h-5 w-5 drop-shadow-md" style={{ color: iconColor }} />
         ) : (
-          <Copy className="h-5 w-5 text-[color:var(--vy-bg)] opacity-0 drop-shadow-md transition-opacity group-hover:opacity-100" />
+          <Copy
+            className="h-5 w-5 opacity-0 drop-shadow-md transition-opacity group-hover:opacity-100"
+            style={{ color: iconColor }}
+          />
         )}
       </div>
       <p className="text-xs text-[color:var(--vy-muted-fg)]">{tokenLabel(token)}</p>
@@ -254,13 +297,19 @@ export default function Page() {
   const standards = sections.meetings.standards;
   const approvals = sections.governanceApprovals.approvals;
   const mechanics = sections.writingMechanics.mechanics;
+  const orderedColorRoles = [
+    ...COLOR_ROLE_ORDER,
+    ...Array.from(new Set(fundamentals.colorTokens.map((color) => color.role))).filter(
+      (role) => !COLOR_ROLE_ORDER.includes(role as (typeof COLOR_ROLE_ORDER)[number]),
+    ),
+  ];
 
   return (
     <div className="min-h-screen bg-[color:var(--vy-bg)] text-[color:var(--vy-fg)]">
       {/* Skip Link */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[70] focus:rounded focus:bg-[color:var(--vy-bg)] focus:px-3 focus:py-2 focus:outline focus:outline-2 focus:outline-[color:var(--vy-info)]"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[70] focus:rounded focus:bg-[color:var(--vy-bg)] focus:px-3 focus:py-2 focus:outline focus:outline-2 focus:outline-[color:var(--vy-focus-ring)]"
       >
         Skip to content
       </a>
@@ -280,7 +329,7 @@ export default function Page() {
             <a
               href="#main-content"
               aria-label="Go to handbook content"
-              className="inline-flex rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--vy-info)] focus-visible:ring-offset-2"
+              className="inline-flex rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--vy-focus-ring)] focus-visible:ring-offset-2"
             >
               <Image
                 src="/brand/logos/master-logo-light.svg"
@@ -348,7 +397,7 @@ export default function Page() {
               The single source of truth for Vayasya brand communication. Identity, visual system, voice, operational standards, and governance across all verticals.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <span className="rounded-full bg-[color:var(--vy-gold-ui)] px-4 py-1.5 text-sm font-medium text-[color:var(--vy-bg)]">
+              <span className="rounded-full bg-[color:var(--vy-gold-ui)] px-4 py-1.5 text-sm font-medium text-[color:var(--vy-brand-on-primary)]">
                 {sections.footerVersioning.footer.version}
               </span>
               {fundamentals.verticals.map((v) => (
@@ -379,7 +428,7 @@ export default function Page() {
                     {sections.overview.howToUse.map((item, i) => (
                       <div key={i} className="rounded-lg border border-[color:var(--vy-border)] p-5">
                         <div className="flex items-start gap-3">
-                          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[color:var(--vy-gold-ui)] text-xs font-semibold text-[color:var(--vy-bg)]">
+                          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[color:var(--vy-gold-ui)] text-xs font-semibold text-[color:var(--vy-brand-on-primary)]">
                             {i + 1}
                           </span>
                           <div>
@@ -423,7 +472,7 @@ export default function Page() {
                   <div className="mt-5 grid gap-3 md:grid-cols-2">
                     {sections.identity.whatWeAre.signals.map((s, i) => (
                       <div key={i} className="flex items-center gap-2">
-                        <Check className="h-4 w-4 shrink-0 text-[color:var(--vy-gold-ui)]" />
+                        <Check className="h-4 w-4 shrink-0 text-[color:var(--vy-brand-text)]" />
                         <span className="text-sm">{s}</span>
                       </div>
                     ))}
@@ -823,7 +872,7 @@ export default function Page() {
                 <p className="max-w-prose text-lg leading-relaxed">{sections.colorPalette.intro}</p>
 
                 {/* Color Swatches by Role */}
-                {["Base", "Support", "Identity", "Vertical Accent", "Semantic"].map((role) => {
+                {orderedColorRoles.map((role) => {
                   const colors = fundamentals.colorTokens.filter((c) => c.role === role);
                   if (!colors.length) return null;
                   return (

@@ -5,99 +5,45 @@ import type {
   SectionHeader,
   TemplateSpec,
 } from "../../../lib/types/brand";
+import { COLOR_TOKENS } from "../fundamentals";
 
 export const COLOR_PALETTE_SECTION = {
   header: {
     id: "color-palette",
     number: "06",
     title: "Color Palette",
-    summary: "Apply tokens with predictable roles to preserve readability and brand ownership.",
+    summary: "Apply the harmonized token system to keep brand hierarchy, readability, and semantic clarity intact.",
   },
   intro:
-    "Use the token system exactly. Base colors carry readability; accent colors signal vertical context; semantic colors communicate state. Do not create ad hoc colors.",
-  swatches: [
-    { token: "--vy-bg", hex: "#FFFFFF", role: "Base", usage: "Background" },
-    { token: "--vy-fg", hex: "#111111", role: "Base", usage: "Primary text" },
-    {
-      token: "--vy-text-strong",
-      hex: "#000000",
-      role: "Base",
-      usage: "Strong emphasis text",
-    },
-    { token: "--vy-muted", hex: "#F6F7F8", role: "Support", usage: "Muted surfaces" },
-    {
-      token: "--vy-muted-fg",
-      hex: "#4B5563",
-      role: "Support",
-      usage: "Secondary text",
-    },
-    {
-      token: "--vy-border",
-      hex: "#E5E7EB",
-      role: "Support",
-      usage: "Borders and dividers",
-    },
-    {
-      token: "--vy-gold-ui",
-      hex: "#C9A24A",
-      role: "Identity",
-      usage: "Premium accents",
-    },
-    {
-      token: "--vy-seva",
-      hex: "#C97A2B",
-      role: "Vertical",
-      usage: "Vayasya Seva accent",
-    },
-    {
-      token: "--vy-setu",
-      hex: "#2F3E5C",
-      role: "Vertical",
-      usage: "Vayasya Setu accent",
-    },
-    {
-      token: "--vy-kaushal",
-      hex: "#2E6B4F",
-      role: "Vertical",
-      usage: "Vayasya Kaushal accent",
-    },
-    {
-      token: "--vy-prabandh",
-      hex: "#3A3A3A",
-      role: "Vertical",
-      usage: "Vayasya Prabandh accent",
-    },
-    {
-      token: "--vy-success",
-      hex: "#2E6B4F",
-      role: "Semantic",
-      usage: "Success state",
-    },
-    {
-      token: "--vy-warning",
-      hex: "#C97A2B",
-      role: "Semantic",
-      usage: "Warning state",
-    },
-    { token: "--vy-info", hex: "#2F3E5C", role: "Semantic", usage: "Info state" },
-    { token: "--vy-danger", hex: "#B42318", role: "Semantic", usage: "Error state" },
-  ],
+    "Use the token system exactly. Neutrals carry operational readability, one vertical or master-brand color carries ownership context, and semantic/data-viz colors carry meaning.",
+  swatches: COLOR_TOKENS,
   scenarios: [
     {
-      context: "Performance dashboard",
-      risk: "Too many accent colors may imply multiple business owners.",
-      recommended: "Use one vertical accent plus semantic status colors only.",
+      context: "Legacy palette migration",
+      risk: "Keeping legacy hex values produces inconsistent identity across artifacts.",
+      recommended:
+        "Replace old gold #C9A24A with --vy-gold-500 (#DAA236) and old Seva #C97A2B with --vy-seva-600 (#BA511A).",
     },
     {
-      context: "Proposal documents",
-      risk: "Low-contrast body text can cause reading errors in review.",
-      recommended: "Keep body text on background with foreground or strong-text colors only.",
+      context: "UI role mapping",
+      risk: "Using decorative tones for structural UI roles breaks consistency between docs and product.",
+      recommended:
+        "Use bg.canvas/bg.subtle/bg.muted, border.default, text.primary/text.secondary, brand.primary and focus.ring aliases for implementation.",
+    },
+    {
+      context: "Chart-heavy reporting",
+      risk: "Out-of-order palette usage reduces category separation and weakens scan speed.",
+      recommended:
+        "Use data-viz colors in fixed order from --vy-chart-1 through --vy-chart-8 unless business semantics require a specific sequence.",
     },
   ],
   rules: [
     "No new brand colors without governance approval.",
-    "Accent coverage should remain below 20% of total visible surface.",
+    "Primary composition target: 70% neutrals, 20% single vertical/master color, 10% semantic or chart highlights.",
+    "Use gold-500 for fills/highlight surfaces and gold-700 for text/icons on white.",
+    "On gold surfaces, use dark text (--vy-brand-on-primary / neutral-900), never white.",
     "Use semantic tokens only for semantic meaning, not decoration.",
+    "Use exactly one vertical accent per artifact unless explicitly multi-vertical and labeled.",
     "Do not use gradients that mix two vertical accents.",
   ],
   doDont: [
@@ -107,6 +53,12 @@ export const COLOR_PALETTE_SECTION = {
       dont: "Use decorative accent color for rejected item status.",
       why: "Semantic mapping must remain consistent across products.",
     },
+    {
+      topic: "Gold usage",
+      do: "Use gold-500 as a fill with neutral-900 text on top.",
+      dont: "Use white text on gold fills or use gold shades as body text.",
+      why: "This preserves readability and keeps gold premium instead of dusty.",
+    },
   ],
   templates: [
     {
@@ -114,9 +66,10 @@ export const COLOR_PALETTE_SECTION = {
       purpose: "Share exact token usage in design-engineering handoff.",
       whenToUse: "Before implementation of new screens or collateral.",
       template:
-        "Surface: <component name>\nBackground token: <token>\nText token: <token>\nAccent token: <token>\nSemantic states: <success/warning/info/danger mapping>\nAccessibility note: <contrast checked yes/no>",
+        "Surface: <component name>\nBackground role: <bg.canvas/bg.subtle/bg.muted>\nText role: <text.primary/text.secondary>\nAccent role: <brand.primary or one vertical token>\nOn-accent text: <brand.onPrimary>\nFocus ring: <focus.ring>\nSemantic states: <success/warning/info/danger/pending>\nChart order used: <chart-1 ... chart-8>\nAccessibility note: <contrast checked yes/no>",
       guardrails: [
         "Reference tokens, never raw hex in approvals.",
+        "Capture migration mapping if replacing old colors (#C9A24A or #C97A2B).",
         "Record one owner for final sign-off.",
       ],
     },

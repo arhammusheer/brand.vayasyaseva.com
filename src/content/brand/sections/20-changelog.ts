@@ -13,6 +13,44 @@ export const CHANGELOG_SECTION = {
 
   entries: [
     {
+      version: "v3.0.0",
+      date: "12 Feb 2026",
+      summary:
+        "Major color system overhaul: neutral/gold scales, harmonized vertical families, semantic decoupling, and chart palette standardization.",
+      changes: [
+        {
+          type: "changed" as const,
+          description:
+            "Replaced legacy gold and accent tones with the new master gold and vertical color families.",
+        },
+        {
+          type: "added" as const,
+          description:
+            "Introduced full neutral, gold, Seva, Setu, Kaushal, and Prabandh token scales.",
+        },
+        {
+          type: "added" as const,
+          description:
+            "Added semantic pending token and ordered 8-color data-visualization palette.",
+        },
+        {
+          type: "changed" as const,
+          description:
+            "Applied explicit token role mapping for canvas, text, border, brand, and focus-ring usage.",
+        },
+        {
+          type: "changed" as const,
+          description:
+            "Updated architecture and handbook guidance to enforce 70/20/10 color usage ratio.",
+        },
+        {
+          type: "fixed" as const,
+          description:
+            "Updated logo placeholder assets to reflect new gold and vertical accent values.",
+        },
+      ],
+    },
+    {
       version: "v2.0.0",
       date: "11 Feb 2026",
       summary:

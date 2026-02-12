@@ -38,7 +38,7 @@ export function ChapterNav({ activeSection, onNavigate }: ChapterNavProps) {
                       className={cn(
                         "flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm transition-colors",
                         isActive
-                          ? "bg-[color:var(--vy-gold-ui)] text-[color:var(--vy-bg)]"
+                          ? "bg-[color:var(--vy-gold-ui)] text-[color:var(--vy-brand-on-primary)]"
                           : "text-[color:var(--vy-fg)] hover:bg-[color:var(--vy-muted)]"
                       )}
                       aria-current={isActive ? "page" : undefined}

@@ -19,7 +19,7 @@ export const BRAND_ARCHITECTURE_SECTION = {
     name: "Vayasya",
     role: "Parent brand for all verticals. Used for group-level communications, cross-vertical materials, governance documents, and any context where no single vertical applies.",
     accentToken: "--vy-gold-ui",
-    accentHex: "#C9A24A",
+    accentHex: "#DAA236",
   },
 
   verticals: [
@@ -27,26 +27,26 @@ export const BRAND_ARCHITECTURE_SECTION = {
       name: "Vayasya Seva",
       domain: "Manpower and labour services operations",
       accentToken: "--vy-seva",
-      accentHex: "#C97A2B",
+      accentHex: "#BA511A",
     },
     {
       name: "Vayasya Setu",
       domain:
         "HRMS and workforce operating system — attendance, scheduling, payroll, compliance rails",
       accentToken: "--vy-setu",
-      accentHex: "#2F3E5C",
+      accentHex: "#445FA8",
     },
     {
       name: "Vayasya Kaushal",
       domain: "Training, upskilling, and workforce readiness",
       accentToken: "--vy-kaushal",
-      accentHex: "#2E6B4F",
+      accentHex: "#2E7A58",
     },
     {
       name: "Vayasya Prabandh",
       domain: "Workforce administration, governance, and controls layer",
       accentToken: "--vy-prabandh",
-      accentHex: "#3A3A3A",
+      accentHex: "#556073",
     },
   ],
 
@@ -86,7 +86,7 @@ export const BRAND_ARCHITECTURE_SECTION = {
   rules: [
     "Use exactly one vertical accent per document unless explicitly multi-vertical and labeled accordingly.",
     "Do not create new verticals, sub-brands, or product brands without governance approval.",
-    "Master brand gold (#C9A24A) is reserved for logo-adjacent and premium identity uses only.",
+    "Master brand gold (#DAA236) is reserved for logo-adjacent and premium identity uses only.",
     "Vertical accent coverage must remain below 20% of total visible surface area.",
   ],
 
