@@ -244,7 +244,13 @@ export const COLOR_TOKENS = [
     token: "--vy-seva-900",
     hex: "#552811",
     role: "Seva",
-    usage: "Seva-900 darkest Seva shade",
+    usage: "Seva-900 deep Seva base",
+  },
+  {
+    token: "--vy-seva-950",
+    hex: "#3B1B0C",
+    role: "Seva",
+    usage: "Seva-950 ultra-deep Seva background",
   },
   {
     token: "--vy-setu-50",
@@ -304,7 +310,13 @@ export const COLOR_TOKENS = [
     token: "--vy-setu-900",
     hex: "#273558",
     role: "Setu",
-    usage: "Setu-900 darkest Setu shade",
+    usage: "Setu-900 deep Setu base",
+  },
+  {
+    token: "--vy-setu-950",
+    hex: "#1A2440",
+    role: "Setu",
+    usage: "Setu-950 ultra-deep Setu background",
   },
   {
     token: "--vy-kaushal-50",
@@ -364,7 +376,13 @@ export const COLOR_TOKENS = [
     token: "--vy-kaushal-900",
     hex: "#1B402F",
     role: "Kaushal",
-    usage: "Kaushal-900 darkest Kaushal shade",
+    usage: "Kaushal-900 deep Kaushal base",
+  },
+  {
+    token: "--vy-kaushal-950",
+    hex: "#122B20",
+    role: "Kaushal",
+    usage: "Kaushal-950 ultra-deep Kaushal background",
   },
   {
     token: "--vy-prabandh-50",
@@ -424,7 +442,13 @@ export const COLOR_TOKENS = [
     token: "--vy-prabandh-900",
     hex: "#2A303C",
     role: "Prabandh",
-    usage: "Prabandh-900 darkest Prabandh shade",
+    usage: "Prabandh-900 deep Prabandh base",
+  },
+  {
+    token: "--vy-prabandh-950",
+    hex: "#1D222C",
+    role: "Prabandh",
+    usage: "Prabandh-950 ultra-deep Prabandh background",
   },
   {
     token: "--vy-success",

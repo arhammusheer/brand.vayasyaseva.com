@@ -803,6 +803,9 @@ export default function Page() {
                   <p className="mb-6 text-sm text-[color:var(--vy-muted-fg)]">
                     Vertical lockup pattern: parent brand remains larger; vertical name is secondary and color-coded by one accent token.
                   </p>
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)]">
+                    Light Surface Version
+                  </p>
                   <div className="grid gap-4 md:grid-cols-2">
                     {sections.brandArchitecture.verticals.map((vertical) => {
                       const verticalName = vertical.name.replace("Vayasya ", "");
@@ -847,15 +850,54 @@ export default function Page() {
                     })}
                   </div>
 
-                  <div className="mt-6 grid gap-4 grid-cols-2 md:grid-cols-4">
-                    {Object.entries(BRAND_CONTENT.placeholders.verticalLogos).map(([key, path]) => (
-                      <div key={key} className="rounded-lg border border-[color:var(--vy-border)] p-4">
-                        <div className="flex h-16 items-center justify-center">
-                          <Image src={path} alt={`${key} vertical logo asset`} width={120} height={40} className="object-contain" />
+                  <p className="mt-8 mb-3 text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)]">
+                    Dark Surface Version
+                  </p>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    {sections.brandArchitecture.verticals.map((vertical) => {
+                      const verticalName = vertical.name.replace("Vayasya ", "");
+                      return (
+                        <div
+                          key={`${vertical.name}-dark`}
+                          className="rounded-lg border p-5"
+                          style={{
+                            borderColor: `var(${vertical.accentToken})`,
+                            backgroundColor: `var(${vertical.accentToken}-950)`,
+                          }}
+                        >
+                          <div className="flex items-center gap-4">
+                            <div className="relative h-14 w-14 shrink-0">
+                              <Image
+                                src="/brand/logos/master-logo-dark.svg"
+                                alt={`${vertical.name} lockup mark on dark background`}
+                                fill
+                                sizes="56px"
+                                className="object-contain"
+                              />
+                            </div>
+                            <div className="min-w-0">
+                              <p className="text-xl font-semibold leading-none text-[color:var(--vy-neutral-25)]">Vayasya</p>
+                              <p
+                                className="mt-2 text-sm font-medium leading-none"
+                                style={{ color: `var(${vertical.accentToken}-300)` }}
+                              >
+                                {verticalName}
+                              </p>
+                            </div>
+                            <span
+                              className="ml-auto rounded-full border px-2.5 py-1 font-mono text-xs"
+                              style={{
+                                borderColor: `var(${vertical.accentToken}-300)`,
+                                color: `var(${vertical.accentToken}-300)`,
+                              }}
+                            >
+                              {vertical.accentHex}
+                            </span>
+                          </div>
+                          <p className="mt-4 text-sm text-[color:var(--vy-neutral-300)]">{vertical.domain}</p>
                         </div>
-                        <p className="mt-2 text-center text-sm capitalize">{key}</p>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
 
