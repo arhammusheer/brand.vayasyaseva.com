@@ -728,7 +728,7 @@ export default function Page() {
                       <p className="text-sm text-[color:var(--vy-muted-fg)]">Minimum digital width: 120px for production usage.</p>
                     </div>
                     <div className="rounded-lg border border-[color:var(--vy-border)] p-6">
-                      <div className="flex h-32 items-center justify-center rounded bg-[color:var(--vy-fg)]">
+                      <div className="flex h-32 items-center justify-center rounded bg-[color:var(--vy-gold-950)]">
                         <div className="relative h-20 w-20">
                           <Image
                             src="/brand/logos/master-logo-dark.svg"
