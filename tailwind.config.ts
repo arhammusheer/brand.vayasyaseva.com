@@ -6,11 +6,13 @@ const config: Config = {
     "./src/**/*.{ts,tsx}",
   ],
   theme: {
-  	extend: {
-  		fontFamily: {
-  			sans: ['var(--font-hind)', 'Noto Sans', 'Segoe UI', 'sans-serif'],
-  			mono: ['var(--font-jetbrains-mono)', 'ui-monospace', 'SFMono-Regular', 'monospace']
-  		},
+  		extend: {
+  			fontFamily: {
+  				display: ['var(--font-anek)', 'var(--font-hind)', 'Noto Sans', 'Segoe UI', 'sans-serif'],
+  				serif: ['var(--font-hind)', 'Noto Sans', 'Segoe UI', 'sans-serif'],
+  				sans: ['var(--font-hind)', 'Noto Sans', 'Segoe UI', 'sans-serif'],
+  				mono: ['var(--font-jetbrains-mono)', 'ui-monospace', 'SFMono-Regular', 'monospace']
+  			},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',

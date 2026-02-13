@@ -78,6 +78,117 @@ const COLOR_ROLE_ORDER = [
   "Compatibility",
 ] as const;
 
+const TYPE_FAMILY_VARIABLES: Record<string, string> = {
+  Anek: "var(--font-anek)",
+  Hind: "var(--font-hind)",
+  "JetBrains Mono": "var(--font-jetbrains-mono)",
+};
+
+const resolveTypeFamily = (family: string) =>
+  TYPE_FAMILY_VARIABLES[family] ?? TYPE_FAMILY_VARIABLES.Hind;
+
+type TypographyFamily = "Anek" | "Hind" | "JetBrains Mono";
+
+const TYPE_FAMILY_CLASSNAMES: Record<TypographyFamily, string> = {
+  Anek: "font-display",
+  Hind: "font-serif",
+  "JetBrains Mono": "font-mono",
+};
+
+const TYPOGRAPHY_ROLE_GUIDE: readonly {
+  family: TypographyFamily;
+  role: string;
+  emphasis: string;
+  sample: string;
+  useCases: readonly string[];
+  avoidCases: readonly string[];
+  weights: string;
+}[] = [
+  {
+    family: "Anek",
+    role: "Display System",
+    emphasis: "High-attention hierarchy",
+    sample: "Vayasya delivers dependable systems at enterprise scale.",
+    useCases: [
+      "Hero and chapter headlines",
+      "Section titles and high-emphasis callouts",
+      "Brand lockup wordmarks in guideline examples",
+    ],
+    avoidCases: [
+      "Long narrative paragraphs",
+      "Dense table or data rows",
+      "Small helper or legal text",
+    ],
+    weights: "400-700",
+  },
+  {
+    family: "Hind",
+    role: "Serif System",
+    emphasis: "Narrative readability",
+    sample: "Use Hind for documentation, labels, and all explanatory copy.",
+    useCases: [
+      "Body paragraphs and long-form guidance",
+      "UI labels, buttons, and navigation copy",
+      "Captions, helper text, and instructions",
+    ],
+    avoidCases: [
+      "Hero-level display lockups",
+      "Data strings requiring exact alignment",
+      "Over-styled decorative titles",
+    ],
+    weights: "400-700",
+  },
+  {
+    family: "JetBrains Mono",
+    role: "Mono System",
+    emphasis: "Precision and alignment",
+    sample: "REF: VYS_2026-02_00847 • INR 1,25,000 • 17:30 IST",
+    useCases: [
+      "IDs, references, and file names",
+      "Dates, times, currency, and measurements",
+      "Table values where alignment matters",
+    ],
+    avoidCases: [
+      "Narrative body paragraphs",
+      "Marketing or mission headlines",
+      "General-purpose label systems",
+    ],
+    weights: "500",
+  },
+] as const;
+
+const TYPE_LEVEL_SPECIMENS: Readonly<Record<string, string>> = {
+  Display: "Dependable workforce systems, communicated with discipline.",
+  H2: "Section Heading with Clear Priority",
+  H3: "Subheading for structured guidance",
+  Body:
+    "Vayasya communication should read as precise, grounded, and easy to act on. Keep long-form copy in Hind for sustained readability.",
+  "Body Small": "Use this style for notes, caveats, and supporting labels.",
+  Data: "VYS_INV_2026_0312 • INR 1,25,000 • 13 Feb 2026 • 17:30 IST",
+};
+
+const TYPOGRAPHY_DECISION_MATRIX: readonly {
+  context: string;
+  family: TypographyFamily;
+  reason: string;
+}[] = [
+  {
+    context: "Hero title, chapter title, section headline",
+    family: "Anek",
+    reason: "Creates immediate hierarchy and brand presence.",
+  },
+  {
+    context: "Paragraphs, lists, labels, instructional copy",
+    family: "Hind",
+    reason: "Maintains readability in long and medium-length content.",
+  },
+  {
+    context: "IDs, version strings, tables, metrics, timestamps",
+    family: "JetBrains Mono",
+    reason: "Improves scanning and preserves numeric alignment.",
+  },
+];
+
 const swatchIconColor = (hex: string) => {
   const normalized = hex.replace("#", "");
   if (!/^[\da-f]{6}$/i.test(normalized)) {
@@ -231,8 +342,8 @@ function SectionHeader({ number, title, summary }: { number: string; title: stri
   return (
     <header className="border-b border-[color:var(--vy-border)] pb-8">
       <div className="flex items-baseline gap-3">
-        <span className="text-sm font-semibold text-[color:var(--vy-muted-fg)]">{number}</span>
-        <h3 className="text-2xl font-semibold text-[color:var(--vy-text-strong)]">
+        <span className="font-display text-sm font-semibold text-[color:var(--vy-muted-fg)]">{number}</span>
+        <h3 className="font-display text-2xl font-semibold text-[color:var(--vy-text-strong)]">
           {sanitizeTokenMentions(title)}
         </h3>
       </div>
@@ -765,7 +876,7 @@ export default function Page() {
                             />
                           </div>
                           <div className="min-w-0">
-                            <p className="text-2xl font-semibold leading-none text-[color:var(--vy-text-strong)]">Vayasya</p>
+                            <p className="font-display text-2xl font-semibold leading-none text-[color:var(--vy-text-strong)]">Vayasya</p>
                             <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">Enterprise Workforce Services &amp; Systems</p>
                           </div>
                         </div>
@@ -786,7 +897,7 @@ export default function Page() {
                             />
                           </div>
                           <div className="min-w-0">
-                            <p className="text-xl font-semibold leading-none text-[color:var(--vy-text-strong)]">Vayasya</p>
+                            <p className="font-display text-xl font-semibold leading-none text-[color:var(--vy-text-strong)]">Vayasya</p>
                             <p className="mt-2 text-xs font-medium uppercase tracking-wide text-[color:var(--vy-muted-fg)]">Master Brand</p>
                           </div>
                         </div>
@@ -826,7 +937,7 @@ export default function Page() {
                               />
                             </div>
                             <div className="min-w-0">
-                              <p className="text-xl font-semibold leading-none text-[color:var(--vy-text-strong)]">Vayasya</p>
+                              <p className="font-display text-xl font-semibold leading-none text-[color:var(--vy-text-strong)]">Vayasya</p>
                               <p
                                 className="mt-2 text-sm font-medium leading-none"
                                 style={{ color: `var(${vertical.accentToken})` }}
@@ -876,7 +987,7 @@ export default function Page() {
                               />
                             </div>
                             <div className="min-w-0">
-                              <p className="text-xl font-semibold leading-none text-[color:var(--vy-neutral-25)]">Vayasya</p>
+                              <p className="font-display text-xl font-semibold leading-none text-[color:var(--vy-neutral-25)]">Vayasya</p>
                               <p
                                 className="mt-2 text-sm font-medium leading-none"
                                 style={{ color: `var(${vertical.accentToken}-300)` }}
@@ -966,29 +1077,156 @@ export default function Page() {
                   ) : null}
                 </div>
 
-                {/* Type Specimen */}
-                <div className="mt-10 rounded-lg border border-[color:var(--vy-border)] p-8 space-y-8">
-                  {fundamentals.typoRules.hierarchy.map((h) => (
-                    <div key={h.level} className="border-b border-[color:var(--vy-border)] pb-6 last:border-0 last:pb-0">
-                      <div className="flex items-baseline justify-between mb-3">
-                        <span className="text-xs font-medium uppercase tracking-wide text-[color:var(--vy-muted-fg)]">{h.level}</span>
-                        <span className="font-mono text-xs text-[color:var(--vy-muted-fg)]">
-                          {h.fontFamily} {h.fontWeight} / {h.fontSize} / {h.lineHeight}
-                        </span>
-                      </div>
-                      <p
-                        style={{
-                          fontFamily: h.fontFamily === "JetBrains Mono" ? "var(--font-jetbrains-mono)" : "var(--font-hind)",
-                          fontWeight: h.fontWeight,
-                          fontSize: h.fontSize,
-                          lineHeight: h.lineHeight,
-                        }}
-                        className="text-[color:var(--vy-text-strong)]"
-                      >
-                        {h.usage}
-                      </p>
-                    </div>
-                  ))}
+                <div className="mt-6 rounded-lg border-l-4 border-l-[color:var(--vy-gold-ui)] bg-[color:var(--vy-muted)] p-5">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)]">
+                    Three-System Guardrail
+                  </p>
+                  <p className="mt-2 text-sm text-[color:var(--vy-fg)]">
+                    Every deliverable must stay inside this trio: Anek for display hierarchy, Hind for narrative readability, and JetBrains Mono for data precision.
+                  </p>
+                </div>
+
+                {/* Typeface Roles */}
+                <div className="mt-12">
+                  <h4 className="text-lg font-medium text-[color:var(--vy-text-strong)]">Typeface Roles</h4>
+                  <div className="mt-6 grid gap-6 lg:grid-cols-3">
+                    {sections.typography.stacks.map((stack) => {
+                      const roleGuide = TYPOGRAPHY_ROLE_GUIDE.find((role) => role.family === stack.family);
+                      if (!roleGuide) return null;
+
+                      const familyClassName = TYPE_FAMILY_CLASSNAMES[roleGuide.family];
+                      const specimenClassName = roleGuide.family === "JetBrains Mono"
+                        ? `${familyClassName} tabular-nums`
+                        : familyClassName;
+
+                      return (
+                        <div key={stack.family} className="rounded-lg border border-[color:var(--vy-border)] p-6">
+                          <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)]">
+                            {roleGuide.role}
+                          </p>
+                          <h5 className={`${familyClassName} mt-2 text-2xl font-semibold text-[color:var(--vy-text-strong)]`}>
+                            {stack.family}
+                          </h5>
+                          <p className="mt-1 text-xs text-[color:var(--vy-muted-fg)]">
+                            {roleGuide.emphasis} • Weights: {roleGuide.weights}
+                          </p>
+
+                          <p className={`${specimenClassName} mt-5 text-lg leading-relaxed text-[color:var(--vy-text-strong)]`}>
+                            {roleGuide.sample}
+                          </p>
+                          <p className="mt-3 text-sm text-[color:var(--vy-muted-fg)]">{stack.usage}</p>
+
+                          <div className="mt-5 grid gap-4 text-sm">
+                            <div>
+                              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-success)]">
+                                Use for
+                              </p>
+                              <ul className="space-y-2">
+                                {roleGuide.useCases.map((item) => (
+                                  <li key={item} className="flex items-start gap-2">
+                                    <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--vy-success)]" />
+                                    <span>{item}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                            <div>
+                              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-danger)]">
+                                Avoid for
+                              </p>
+                              <ul className="space-y-2 text-[color:var(--vy-muted-fg)]">
+                                {roleGuide.avoidCases.map((item) => (
+                                  <li key={item} className="flex items-start gap-2">
+                                    <X className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--vy-danger)]" />
+                                    <span>{item}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Type Hierarchy */}
+                <div className="mt-12">
+                  <h4 className="text-lg font-medium text-[color:var(--vy-text-strong)]">Type Hierarchy in Practice</h4>
+                  <div className="mt-6 overflow-hidden rounded-lg border border-[color:var(--vy-border)]">
+                    {fundamentals.typoRules.hierarchy.map((h) => {
+                      const specimen = TYPE_LEVEL_SPECIMENS[h.level] ?? h.usage;
+                      return (
+                        <div key={h.level} className="grid gap-4 border-b border-[color:var(--vy-border)] p-6 last:border-0 lg:grid-cols-[260px_1fr] lg:items-center">
+                          <div>
+                            <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)]">
+                              {h.level}
+                            </p>
+                            <p className="mt-2 font-mono text-xs text-[color:var(--vy-muted-fg)]">
+                              {h.fontFamily} {h.fontWeight}
+                            </p>
+                            <p className="font-mono text-xs text-[color:var(--vy-muted-fg)]">
+                              {h.fontSize} / {h.lineHeight}
+                            </p>
+                          </div>
+
+                          <div>
+                            <p
+                              style={{
+                                fontFamily: resolveTypeFamily(h.fontFamily),
+                                fontWeight: h.fontWeight,
+                                fontSize: h.fontSize,
+                                lineHeight: h.lineHeight,
+                              }}
+                              className={`${h.fontFamily === "JetBrains Mono" ? "tabular-nums" : ""} text-[color:var(--vy-text-strong)]`}
+                            >
+                              {specimen}
+                            </p>
+                            <p className="mt-2 text-xs text-[color:var(--vy-muted-fg)]">{h.usage}</p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Font Selection Matrix */}
+                <div className="mt-12">
+                  <h4 className="text-lg font-medium text-[color:var(--vy-text-strong)]">Font Selection Matrix</h4>
+                  <div className="mt-6 overflow-x-auto rounded-lg border border-[color:var(--vy-border)]">
+                    <table className="w-full text-sm">
+                      <thead className="bg-[color:var(--vy-muted)]">
+                        <tr>
+                          <th className="p-4 text-left font-medium">Context</th>
+                          <th className="p-4 text-left font-medium">Font System</th>
+                          <th className="p-4 text-left font-medium">Reason</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {TYPOGRAPHY_DECISION_MATRIX.map((entry) => (
+                          <tr key={entry.context} className="border-t border-[color:var(--vy-border)]">
+                            <td className="p-4">{entry.context}</td>
+                            <td className="p-4">
+                              <span
+                                className={`inline-flex rounded-full bg-[color:var(--vy-muted)] px-2.5 py-1 text-xs font-semibold ${TYPE_FAMILY_CLASSNAMES[entry.family]} ${entry.family === "JetBrains Mono" ? "tabular-nums" : ""}`}
+                              >
+                                {entry.family}
+                              </span>
+                            </td>
+                            <td className="p-4 text-[color:var(--vy-muted-fg)]">{entry.reason}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className="mt-6 rounded-lg border border-[color:var(--vy-warning)] bg-[color:var(--vy-muted)] p-5">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-warning)]">
+                      System Guardrail
+                    </p>
+                    <p className="mt-2 text-sm text-[color:var(--vy-fg)]">
+                      Do not introduce additional fonts in production assets. A fourth font weakens hierarchy, creates inconsistent tone, and makes compliance reviews harder.
+                    </p>
+                  </div>
                 </div>
 
                 {/* India-First Formats */}

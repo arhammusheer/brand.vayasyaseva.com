@@ -34,10 +34,10 @@ export function ChapterWrapper({
         className={`mb-16 border-l-4 ${accent} bg-[color:var(--vy-muted)] py-10 pl-8 pr-6 rounded-r-lg`}
       >
         <div className="flex items-baseline gap-4">
-          <span className="text-lg font-semibold text-[color:var(--vy-muted-fg)]">
+          <span className="font-display text-lg font-semibold text-[color:var(--vy-muted-fg)]">
             {number}
           </span>
-          <h2 className="text-2xl font-semibold tracking-tight text-[color:var(--vy-text-strong)] md:text-3xl">
+          <h2 className="font-display text-2xl font-semibold tracking-tight text-[color:var(--vy-text-strong)] md:text-3xl">
             {title}
           </h2>
         </div>

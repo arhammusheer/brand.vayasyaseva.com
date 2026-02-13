@@ -13,10 +13,10 @@ export const TYPOGRAPHY_SECTION = {
     id: "typography",
     number: "07",
     title: "Typography",
-    summary: "Use Hind for brand communication and JetBrains Mono for tabular data reliability.",
+    summary: "Use Anek for display, Hind for narrative text, and JetBrains Mono for tabular reliability.",
   },
   intro:
-    "Typography is a readability control. Hind is mandatory for primary and display use. JetBrains Mono is reserved for data-heavy contexts where character distinction is critical.",
+    "Typography is a readability control with three mandatory systems: Anek for display hierarchy, Hind for narrative and UI copy, and JetBrains Mono for data-heavy contexts where character distinction is critical.",
   fontPack: {
     name: "Vayasya Font Pack",
     description: "Approved company font files bundled for local installation.",
@@ -27,19 +27,19 @@ export const TYPOGRAPHY_SECTION = {
   },
   stacks: [
     {
-      label: "Primary",
+      label: "Display",
+      family: "Anek",
+      fallback: ["Hind", "Noto Sans", "Segoe UI", "sans-serif"],
+      usage: "Headlines",
+    },
+    {
+      label: "Serif",
       family: "Hind",
       fallback: ["Noto Sans", "Segoe UI", "sans-serif"],
       usage: "Body and labels",
     },
     {
-      label: "Display",
-      family: "Hind",
-      fallback: ["Noto Sans", "Segoe UI", "sans-serif"],
-      usage: "Headlines",
-    },
-    {
-      label: "Data Mono",
+      label: "Mono",
       family: "JetBrains Mono",
       fallback: ["ui-monospace", "monospace"],
       usage: "Tables and identifiers",
@@ -48,7 +48,7 @@ export const TYPOGRAPHY_SECTION = {
   hierarchy: [
     {
       level: "Display",
-      fontFamily: "Hind",
+      fontFamily: "Anek",
       fontWeight: 600,
       fontSize: "40px",
       lineHeight: "48px",
@@ -56,7 +56,7 @@ export const TYPOGRAPHY_SECTION = {
     },
     {
       level: "H2",
-      fontFamily: "Hind",
+      fontFamily: "Anek",
       fontWeight: 600,
       fontSize: "30px",
       lineHeight: "38px",
@@ -92,12 +92,20 @@ export const TYPOGRAPHY_SECTION = {
     },
   ],
   rules: [
+    "Use Anek only for display hierarchy and high-emphasis identity copy.",
     "Do not replace Hind with fallback unless rendering error is confirmed.",
     "Use JetBrains Mono only for data and code-like values, not narrative body text.",
+    "Do not introduce additional fonts beyond Anek, Hind, and JetBrains Mono.",
     "Avoid all-caps body paragraphs.",
     "Numeric tables must use tabular alignment and mono font.",
   ],
   doDont: [
+    {
+      topic: "Display hierarchy",
+      do: "Use Anek for section headings and short, high-emphasis titles.",
+      dont: "Set long body paragraphs in Anek.",
+      why: "Separating display and narrative systems preserves hierarchy and readability.",
+    },
     {
       topic: "Data table typography",
       do: "Use JetBrains Mono for invoice IDs and decimal values.",
@@ -111,7 +119,7 @@ export const TYPOGRAPHY_SECTION = {
       purpose: "Capture type decisions in one implementation-ready block.",
       whenToUse: "Design and frontend handoff.",
       template:
-        "Context: <screen/doc>\nHeading style: <Display/H2/H3>\nBody style: <Body/Body Small>\nData style: <Data Mono where applicable>\nLine length target: <55-72 chars>\nExceptions: <if any>",
+        "Context: <screen/doc>\nDisplay style: <Anek level + weight>\nBody style: <Hind Body/Body Small>\nData style: <JetBrains Mono where applicable>\nLine length target: <55-72 chars>\nExceptions: <if any>",
       guardrails: [
         "Document any exceptions with reason and approver.",
         "Keep style count low to protect consistency.",

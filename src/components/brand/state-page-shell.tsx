@@ -33,7 +33,7 @@ export function StatePageShell({
           <p className="font-mono text-3xl font-semibold tracking-tight text-[color:var(--vy-setu)]">
             {code}
           </p>
-          <h1 className="mt-3 text-2xl font-semibold tracking-tight text-[color:var(--vy-text-strong)] sm:text-3xl">
+          <h1 className="font-display mt-3 text-2xl font-semibold tracking-tight text-[color:var(--vy-text-strong)] sm:text-3xl">
             {title}
           </h1>
           <p className="mt-3 max-w-xl text-base leading-relaxed text-[color:var(--vy-muted-fg)]">

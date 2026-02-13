@@ -22,19 +22,19 @@ export const VERTICALS = [
 
 export const FONT_STACKS = [
   {
-    label: "Primary",
+    label: "Display",
+    family: "Anek",
+    fallback: ["Hind", "Noto Sans", "Segoe UI", "sans-serif"],
+    usage: "Headlines, section numerals, and key identity lockups.",
+  },
+  {
+    label: "Serif",
     family: "Hind",
     fallback: ["Noto Sans", "Segoe UI", "sans-serif"],
     usage: "Body copy, UI labels, navigation, and long-form handbook text.",
   },
   {
-    label: "Display",
-    family: "Hind",
-    fallback: ["Noto Sans", "Segoe UI", "sans-serif"],
-    usage: "Headlines, section numerals, and key identity lockups.",
-  },
-  {
-    label: "Data Mono",
+    label: "Mono",
     family: "JetBrains Mono",
     fallback: ["ui-monospace", "SFMono-Regular", "monospace"],
     usage: "Data tables, identifiers, and revision metadata.",
@@ -727,7 +727,7 @@ export const COLOR_USAGE_RULES = [
 const TYPE_HIERARCHY = [
   {
     level: "Display",
-    fontFamily: "Hind",
+    fontFamily: "Anek",
     fontWeight: 600,
     fontSize: "40px",
     lineHeight: "48px",
@@ -736,7 +736,7 @@ const TYPE_HIERARCHY = [
   },
   {
     level: "H2",
-    fontFamily: "Hind",
+    fontFamily: "Anek",
     fontWeight: 600,
     fontSize: "30px",
     lineHeight: "38px",
@@ -745,7 +745,7 @@ const TYPE_HIERARCHY = [
   },
   {
     level: "H3",
-    fontFamily: "Hind",
+    fontFamily: "Anek",
     fontWeight: 500,
     fontSize: "24px",
     lineHeight: "32px",

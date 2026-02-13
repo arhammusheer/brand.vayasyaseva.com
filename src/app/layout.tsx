@@ -1,12 +1,19 @@
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import type { Viewport } from "next";
-import { Hind, JetBrains_Mono } from "next/font/google";
+import { Anek_Devanagari, Hind, JetBrains_Mono } from "next/font/google";
 
 import { TooltipProvider } from "../components/ui/tooltip";
 import { Toaster } from "../components/ui/sonner";
 import { handbookMetadata, tokenCssVariables } from "../lib/brand-utils";
 import "./globals.css";
+
+const anek = Anek_Devanagari({
+  subsets: ["latin", "devanagari"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-anek",
+  display: "swap",
+});
 
 const hind = Hind({
   subsets: ["latin", "devanagari"],
@@ -62,7 +69,7 @@ export default function RootLayout({
       style={tokenCssVariables as CSSProperties}
       suppressHydrationWarning
     >
-      <body className={`${hind.variable} ${jetbrainsMono.variable} antialiased`}>
+      <body className={`${anek.variable} ${hind.variable} ${jetbrainsMono.variable} antialiased`}>
         <TooltipProvider delayDuration={120}>
           {children}
           <Toaster />

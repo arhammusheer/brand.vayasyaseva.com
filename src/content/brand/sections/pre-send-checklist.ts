@@ -20,7 +20,7 @@ export const PRE_SEND_CHECKLIST_SECTION = {
       items: [
         "Correct vertical name used consistently.",
         "Logo asset is original and unrecolored.",
-        "Typography follows Hind and JetBrains Mono rules.",
+        "Typography follows Anek (display), Hind (body), and JetBrains Mono (data) rules.",
       ],
       passCondition: "All identity controls are verified by sender.",
     },
