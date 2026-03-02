@@ -1,11 +1,10 @@
-Place the approved font package ZIP here.
+Font-pack downloads are generated dynamically by:
+/api/brand/font-pack
 
-Expected filename:
-vayasya-font-pack.zip
+Server-side source files live in:
+assets/brand-font-pack/
 
-This file is intentionally not committed to avoid distributing licensed fonts.
-
-Expected font families in the package:
+Required families:
 - Anek (Display)
-- Hind (Serif/body)
+- Hind (Body)
 - JetBrains Mono (Mono/data)

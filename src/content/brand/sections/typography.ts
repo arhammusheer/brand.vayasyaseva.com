@@ -19,8 +19,8 @@ export const TYPOGRAPHY_SECTION = {
     "Typography is a readability control with three mandatory systems: Anek for display hierarchy, Hind for narrative and UI copy, and JetBrains Mono for data-heavy contexts where character distinction is critical.",
   fontPack: {
     name: "Vayasya Font Pack",
-    description: "Approved company font files bundled for local installation.",
-    filePath: "/brand/fonts/vayasya-font-pack.zip",
+    description: "Approved company font files packaged on demand from server-managed assets.",
+    filePath: "/api/brand/font-pack",
     fileType: "ZIP",
     accessNote:
       "This package contains internal-use fonts. Keep distribution restricted to authorized company teams.",
