@@ -168,6 +168,10 @@ export type DownloadableAsset = {
   accessNote?: string;
 };
 
+export type DownloadableBundle = DownloadableAsset & {
+  includes: readonly string[];
+};
+
 export type ApprovalRule = {
   artifact: string;
   approverRole: string;

@@ -1,4 +1,5 @@
 import type {
+  DownloadableBundle,
   DoDontExample,
   LogoVariant,
   SectionHeader,
@@ -14,6 +15,43 @@ export const LOGO_USAGE_SECTION = {
   },
   intro:
     "Logo consistency is mandatory. The source gold logo asset is authoritative and must remain untouched. Any deviation needs explicit approval.",
+  downloadables: [
+    {
+      name: "Logo Source Pack",
+      description: "All approved logo variants in original SVG for design and print workflows.",
+      filePath: "/api/brand/logo-pack?profile=svg",
+      fileType: "ZIP / SVG",
+      includes: [
+        "Master logos (light and dark)",
+        "All vertical variants (Seva, Setu, Kaushal, Prabandh)",
+        "Vector source files with no raster loss",
+      ],
+    },
+    {
+      name: "Logo PNG Pack",
+      description: "Transparent PNG exports in production-ready widths for day-to-day usage.",
+      filePath: "/api/brand/logo-pack?profile=png",
+      fileType: "ZIP / PNG",
+      includes: [
+        "All logo variants as PNG",
+        "Widths: 128, 256, 512, 1024, 2048 px",
+        "Ready for slides, docs, and tools without SVG support",
+      ],
+    },
+    {
+      name: "Complete Media Kit",
+      description: "Combined logo package with SVG, PNG, and web/app icon assets.",
+      filePath: "/api/brand/logo-pack?profile=media",
+      fileType: "ZIP / FULL KIT",
+      includes: [
+        "SVG source files",
+        "PNG exports in all standard widths",
+        "Favicon, Apple touch, Android icons, and web manifest",
+      ],
+    },
+  ],
+  accessNote:
+    "Use only generated packs for official materials. Do not recreate or recolor logos manually.",
   variants: [
     {
       id: "master-light",
@@ -69,6 +107,8 @@ export const LOGO_USAGE_SECTION = {
 } as const satisfies {
   header: SectionHeader;
   intro: string;
+  downloadables: readonly DownloadableBundle[];
+  accessNote?: string;
   variants: readonly LogoVariant[];
   rules: readonly string[];
   doDont: readonly DoDontExample[];

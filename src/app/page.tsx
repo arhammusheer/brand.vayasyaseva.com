@@ -816,6 +816,39 @@ export default function Page() {
                   <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">The logo uses flat gold as supplied. Do not apply CSS filters, gradient overlays, or decorative effects.</p>
                 </div>
 
+                <div className="mt-8 grid gap-6 lg:grid-cols-3">
+                  {sections.logoUsage.downloadables.map((asset) => (
+                    <article key={asset.filePath} className="rounded-lg border border-[color:var(--vy-border)] bg-[color:var(--vy-muted)] p-6">
+                      <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)]">
+                        {asset.fileType}
+                      </p>
+                      <h4 className="mt-2 text-lg font-medium text-[color:var(--vy-text-strong)]">{asset.name}</h4>
+                      <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">{asset.description}</p>
+                      <ul className="mt-4 space-y-1 text-sm text-[color:var(--vy-fg)]">
+                        {asset.includes.map((item) => <li key={item}>&bull; {item}</li>)}
+                      </ul>
+                      <p className="mt-4 font-mono text-xs text-[color:var(--vy-muted-fg)] break-all">
+                        {asset.filePath}
+                      </p>
+                      <Button asChild className="mt-5 w-full justify-between">
+                        <a href={asset.filePath} download>
+                          Download Pack
+                          <ArrowRight className="h-4 w-4" />
+                        </a>
+                      </Button>
+                    </article>
+                  ))}
+                </div>
+
+                {sections.logoUsage.accessNote ? (
+                  <div className="mt-6 rounded-lg border-2 border-dashed border-[color:var(--vy-warning)] bg-[color:var(--vy-muted)] p-5">
+                    <div className="flex items-start gap-3">
+                      <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--vy-warning)]" />
+                      <p className="text-sm text-[color:var(--vy-muted-fg)]">{sections.logoUsage.accessNote}</p>
+                    </div>
+                  </div>
+                ) : null}
+
                 {/* 1. Logo */}
                 <div className="mt-10">
                   <h4 className="mb-2 text-lg font-medium text-[color:var(--vy-text-strong)]">1. Logo</h4>
