@@ -1,15 +1,15 @@
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import type { Viewport } from "next";
-import { Anek_Devanagari, Hind, JetBrains_Mono } from "next/font/google";
+import { Anek_Latin, Hind, JetBrains_Mono } from "next/font/google";
 
 import { TooltipProvider } from "../components/ui/tooltip";
 import { Toaster } from "../components/ui/sonner";
 import { handbookMetadata, tokenCssVariables } from "../lib/brand-utils";
 import "./globals.css";
 
-const anek = Anek_Devanagari({
-  subsets: ["latin", "devanagari"],
+const anek = Anek_Latin({
+  subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-anek",
   display: "swap",

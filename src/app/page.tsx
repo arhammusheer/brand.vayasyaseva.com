@@ -79,7 +79,7 @@ const COLOR_ROLE_ORDER = [
 ] as const;
 
 const TYPE_FAMILY_VARIABLES: Record<string, string> = {
-  Anek: "var(--font-anek)",
+  "Anek": "var(--font-anek)",
   Hind: "var(--font-hind)",
   "JetBrains Mono": "var(--font-jetbrains-mono)",
 };
@@ -90,7 +90,7 @@ const resolveTypeFamily = (family: string) =>
 type TypographyFamily = "Anek" | "Hind" | "JetBrains Mono";
 
 const TYPE_FAMILY_CLASSNAMES: Record<TypographyFamily, string> = {
-  Anek: "font-display",
+  "Anek": "font-display",
   Hind: "font-serif",
   "JetBrains Mono": "font-mono",
 };

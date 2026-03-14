@@ -10,7 +10,7 @@ const FONT_FILE_EXTENSIONS = new Set([".ttf", ".otf", ".woff", ".woff2"]);
 const META_FILE_EXTENSIONS = new Set([".txt"]);
 
 const REQUIRED_FONT_FILES = [
-  "Anek/AnekDevanagari[wdth,wght].ttf",
+  "Anek/Anek[wdth,wght].ttf",
   "Hind/Hind-Regular.ttf",
   "Hind/Hind-Medium.ttf",
   "Hind/Hind-SemiBold.ttf",

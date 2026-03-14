@@ -6,7 +6,7 @@ This directory contains the raw font files used by the dynamic font-pack downloa
 
 Required files:
 
-- `Anek/AnekDevanagari[wdth,wght].ttf`
+- `Anek/Anek[wdth,wght].ttf`
 - `Hind/Hind-Regular.ttf`
 - `Hind/Hind-Medium.ttf`
 - `Hind/Hind-SemiBold.ttf`
