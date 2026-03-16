@@ -19,6 +19,7 @@ import type {
   LogoRelatedAsset,
   LogoRoleAction,
   LogoRoleSection,
+  LogoVariant,
 } from "../../lib/types/brand";
 import { Button } from "../ui/button";
 
@@ -310,6 +311,41 @@ export function LogoPreviewGrid({
   );
 }
 
+export function LogoRootChooser({
+  cards,
+  title,
+}: {
+  cards: readonly LogoPreviewCard[];
+  title: string;
+}) {
+  return (
+    <div className="space-y-5">
+      <h4 className="text-lg font-medium text-[color:var(--vy-text-strong)]">{title}</h4>
+      <div className="grid gap-6 xl:grid-cols-3">
+        {cards.map((card) => (
+          <article
+            key={card.id}
+            className="rounded-xl border border-[color:var(--vy-border)] bg-[color:var(--vy-muted)] p-6"
+          >
+            <h5 className="text-base font-semibold text-[color:var(--vy-text-strong)]">
+              {sanitizeTokenMentions(card.title)}
+            </h5>
+            <div className="mt-5">
+              <LogoPreviewSurface card={card} />
+            </div>
+            <p className="mt-5 text-sm font-medium text-[color:var(--vy-fg)]">
+              {sanitizeTokenMentions(card.whenToUse)}
+            </p>
+            <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">
+              {sanitizeTokenMentions(card.hardRule)}
+            </p>
+          </article>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function LogoMisuseGrid({
   examples,
   title,
@@ -335,6 +371,58 @@ export function LogoMisuseGrid({
             </p>
             <p className="mt-3 text-sm text-[color:var(--vy-fg)]">
               Use instead: {sanitizeTokenMentions(example.correction)}
+            </p>
+          </article>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function LogoVariantGrid({
+  variants,
+  title,
+}: {
+  variants: readonly LogoVariant[];
+  title?: string;
+}) {
+  return (
+    <div className="space-y-5">
+      {title ? (
+        <h4 className="text-lg font-medium text-[color:var(--vy-text-strong)]">{title}</h4>
+      ) : null}
+      <div className="grid gap-6 lg:grid-cols-2">
+        {variants.map((variant) => (
+          <article
+            key={variant.id}
+            className="rounded-xl border border-[color:var(--vy-border)] bg-[color:var(--vy-muted)] p-6"
+          >
+            <div
+              className={cn(
+                "flex h-40 items-center justify-center rounded-xl border border-[color:var(--vy-border)] p-6",
+                variant.background === "dark"
+                  ? "bg-[color:var(--vy-gold-950)]"
+                  : "bg-[color:var(--vy-bg)]",
+              )}
+            >
+              <div className="relative h-20 w-52 max-w-full">
+                <Image
+                  src={variant.filePath}
+                  alt={variant.label}
+                  fill
+                  sizes="240px"
+                  className="object-contain"
+                />
+              </div>
+            </div>
+            <p className="mt-5 text-base font-semibold text-[color:var(--vy-text-strong)]">
+              {sanitizeTokenMentions(variant.label)}
+            </p>
+            <p className="mt-2 text-sm text-[color:var(--vy-fg)]">
+              {sanitizeTokenMentions(variant.usageNote)}
+            </p>
+            <p className="mt-3 text-sm text-[color:var(--vy-muted-fg)]">
+              Clear space: {sanitizeTokenMentions(variant.clearSpaceRule)}
             </p>
           </article>
         ))}
@@ -393,13 +481,15 @@ export function LogoAssetMatrix({
   title,
 }: {
   items: readonly LogoAssetNeed[];
-  title: string;
+  title?: string;
 }) {
   return (
     <div className="space-y-5">
-      <h2 className="text-2xl font-semibold tracking-tight text-[color:var(--vy-text-strong)]">
-        {sanitizeTokenMentions(title)}
-      </h2>
+      {title ? (
+        <h2 className="text-2xl font-semibold tracking-tight text-[color:var(--vy-text-strong)]">
+          {sanitizeTokenMentions(title)}
+        </h2>
+      ) : null}
       <div className="overflow-hidden rounded-xl border border-[color:var(--vy-border)]">
         <div className="grid grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] bg-[color:var(--vy-muted)] px-5 py-3 text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)]">
           <span>Need</span>
@@ -432,13 +522,15 @@ export function LogoRoleSections({
   title,
 }: {
   sections: readonly LogoRoleSection[];
-  title: string;
+  title?: string;
 }) {
   return (
     <div className="space-y-5">
-      <h2 className="text-2xl font-semibold tracking-tight text-[color:var(--vy-text-strong)]">
-        {sanitizeTokenMentions(title)}
-      </h2>
+      {title ? (
+        <h2 className="text-2xl font-semibold tracking-tight text-[color:var(--vy-text-strong)]">
+          {sanitizeTokenMentions(title)}
+        </h2>
+      ) : null}
       <div className="grid gap-6 lg:grid-cols-3">
         {sections.map((section) => (
           <article

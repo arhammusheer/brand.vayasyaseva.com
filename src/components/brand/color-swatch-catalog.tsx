@@ -152,7 +152,7 @@ export function ColorSwatchCatalog({ swatches }: { swatches: readonly ColorSwatc
                   key={swatch.token}
                   type="button"
                   onClick={() => void handleCopy(swatch)}
-                  className="relative flex min-h-[15rem] flex-col justify-between overflow-hidden rounded-2xl border border-black/10 p-5 text-left shadow-sm transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--vy-focus-ring)] focus-visible:ring-offset-2"
+                  className="relative flex min-h-[8rem] flex-col justify-between overflow-hidden rounded-2xl border border-black/10 p-5 text-left shadow-sm transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--vy-focus-ring)] focus-visible:ring-offset-2"
                   style={{
                     backgroundColor: swatch.hex,
                     color: foreground,

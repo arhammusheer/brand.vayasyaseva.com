@@ -230,6 +230,48 @@ export function TypographySpecimenGrid({
   );
 }
 
+export function TypographyRootChooser({
+  cards,
+  title,
+}: {
+  cards: readonly TypographySpecimenCard[];
+  title: string;
+}) {
+  return (
+    <div className="space-y-5">
+      <h4 className="text-lg font-medium text-[color:var(--vy-text-strong)]">{title}</h4>
+      <div className="grid gap-6 xl:grid-cols-3">
+        {cards.map((card) => (
+          <article
+            key={card.id}
+            className="rounded-xl border border-[color:var(--vy-border)] bg-[color:var(--vy-muted)] p-6"
+          >
+            <h5 className="text-base font-semibold text-[color:var(--vy-text-strong)]">
+              {sanitizeTokenMentions(card.title)}
+            </h5>
+            <div className="mt-5 rounded-xl border border-[color:var(--vy-border)] bg-[color:var(--vy-bg)] p-5">
+              <p
+                className={cn(
+                  "text-[color:var(--vy-text-strong)]",
+                  typographyPreviewClass(card.fontClass),
+                )}
+              >
+                {sanitizeTokenMentions(card.previewText)}
+              </p>
+            </div>
+            <p className="mt-5 text-sm font-medium text-[color:var(--vy-fg)]">
+              {sanitizeTokenMentions(card.whenToUse)}
+            </p>
+            <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">
+              {sanitizeTokenMentions(card.hardRule)}
+            </p>
+          </article>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function TypographyCommonNeedsGrid({
   items,
   title = "Common needs",

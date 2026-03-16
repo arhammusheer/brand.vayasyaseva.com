@@ -17,15 +17,12 @@ import {
   ColorRootChooser,
 } from "../components/brand/color-palette-panels";
 import {
-  LogoCommonNeedsGrid,
-  LogoMisuseGrid,
-  LogoPreviewGrid,
+  LogoRootChooser,
 } from "../components/brand/logo-usage-panels";
 import {
-  TypographyCommonNeedsGrid,
-  TypographyMisuseGrid,
-  TypographySpecimenGrid,
+  TypographyRootChooser,
 } from "../components/brand/typography-panels";
+import { ReferenceDownloadRow } from "../components/brand/visual-reference-shell";
 import { Button } from "../components/ui/button";
 import { ScrollArea } from "../components/ui/scroll-area";
 import {
@@ -786,15 +783,15 @@ export default function Page() {
                 <p className="max-w-3xl text-lg leading-relaxed">
                   {sanitizeTokenMentions(sections.logoUsage.intro)}
                 </p>
+                <ReferenceDownloadRow
+                  assets={sections.logoUsage.downloadables}
+                  title="Download approved logo packs"
+                  className="mt-10"
+                />
                 <div className="mt-10 space-y-12">
-                  <LogoCommonNeedsGrid items={sections.logoUsage.commonNeeds} />
-                  <LogoPreviewGrid
+                  <LogoRootChooser
                     cards={sections.logoUsage.previewCards}
                     title="Choose the right logo"
-                  />
-                  <LogoMisuseGrid
-                    examples={sections.logoUsage.misuseChecks}
-                    title="Never do this"
                   />
                 </div>
                 <ReferenceLinkCard
@@ -838,15 +835,15 @@ export default function Page() {
                 <p className="max-w-3xl text-lg leading-relaxed">
                   {sanitizeTokenMentions(sections.typography.intro)}
                 </p>
+                <ReferenceDownloadRow
+                  assets={[sections.typography.fontPack]}
+                  title="Download the approved font pack"
+                  className="mt-10"
+                />
                 <div className="mt-10 space-y-12">
-                  <TypographySpecimenGrid
+                  <TypographyRootChooser
                     cards={sections.typography.specimenCards}
                     title="Pick the right type role"
-                  />
-                  <TypographyCommonNeedsGrid items={sections.typography.commonNeeds} />
-                  <TypographyMisuseGrid
-                    examples={sections.typography.misuseChecks}
-                    title="Never do this"
                   />
                 </div>
                 <ReferenceLinkCard

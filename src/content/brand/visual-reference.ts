@@ -12,7 +12,7 @@ export const VISUAL_REFERENCE_NAV_ITEMS = [
   {
     href: "/visual/logo-usage",
     label: "Logo Usage",
-    description: "Role-first logo reference with asset packs, approved variants, misuse checks, and review guidance.",
+    description: "Download logo packs, compare approved marks, and review placement and misuse checks.",
   },
   {
     href: "/visual/color-palette",
@@ -22,7 +22,7 @@ export const VISUAL_REFERENCE_NAV_ITEMS = [
   {
     href: "/visual/typography",
     label: "Typography",
-    description: "Role-first typography reference with live specimens, surface guidance, hierarchy examples, and technical checks.",
+    description: "Download the font pack, compare family roles, and review surface and hierarchy guidance.",
   },
   {
     href: "/visual/imagery",
@@ -53,27 +53,27 @@ export const VISUAL_REFERENCE_PAGES = [
     navLabel: "Logo Usage",
     title: "Logo Usage",
     summary:
-      "Role-first logo reference for designers, developers, and reviewers covering asset packs, approved variants, misuse checks, and technical assets.",
+      "Reference-first logo page for approved packs, master and vertical marks, placement rules, and misuse review.",
     pageIntro:
-      "Use this page when you are designing, implementing, or reviewing a branded surface and need more than the quick chooser on the handbook root.",
+      "Use this page when you need the full approved logo set, surface-specific pack choices, or a faster review path than the handbook root provides.",
     specialistAudience: "Marketing, design, product, and engineering teams.",
     handbookHref: "/#05-logo-usage",
     guidanceBlocks: [
       {
-        title: "Role quick actions",
-        description: "Jump straight into the designer, developer, or reviewer path instead of scanning the whole page.",
+        title: "Approved downloads",
+        description: "Get the SVG pack, PNG pack, or full media kit without scanning a large asset wall.",
       },
       {
-        title: "Asset packs",
-        description: "Choose the correct SVG, PNG, or full media-kit package for the actual delivery surface.",
+        title: "Master and vertical marks",
+        description: "Compare the approved master pair and the full vertical set in one place.",
       },
       {
-        title: "Approved variants",
-        description: "Use the right master or vertical asset and verify contrast, lockup integrity, and clear space.",
+        title: "Choose by need",
+        description: "Map the real delivery surface to the right pack instead of repurposing files from elsewhere.",
       },
       {
         title: "Misuse review",
-        description: "Reject recoloring, distortion, low-contrast placement, and unreadable or improvised use before release.",
+        description: "Reject recoloring, low-contrast placement, rebuilt lockups, and unreadable use before release.",
       },
     ],
     assets: [
@@ -151,27 +151,27 @@ export const VISUAL_REFERENCE_PAGES = [
     navLabel: "Typography",
     title: "Typography",
     summary:
-      "Role-first typography reference with live specimens, surface guidance, hierarchy examples, and release-ready technical checks.",
+      "Reference-first typography page with the font pack, family roles, surface guidance, hierarchy, and release checks.",
     pageIntro:
-      "Use this page when you are designing, implementing, or reviewing typography decisions and need more than the quick chooser on the handbook root.",
+      "Use this page when you need the full family roles, surface mapping, and hierarchy detail behind the root quick chooser.",
     specialistAudience: "Design, product, and engineering teams.",
     handbookHref: "/#07-typography",
     guidanceBlocks: [
       {
-        title: "Role quick actions",
-        description: "Start from the designer, developer, or reviewer path instead of scanning every typography rule.",
+        title: "Approved font pack",
+        description: "Download the approved font package before working in design, product, or implementation files.",
       },
       {
-        title: "Approved stacks and roles",
-        description: "Use live specimens to pick Anek for display, Hind for readable body/UI copy, and JetBrains Mono for data.",
+        title: "Family roles",
+        description: "Use live specimens to compare Anek for display, Hind for readable text, and JetBrains Mono for data.",
       },
       {
-        title: "Surface chooser",
-        description: "Map decks, product UI, tables, reports, and exports to the approved family roles.",
+        title: "Use by surface",
+        description: "Map decks, product UI, reports, exports, and data-heavy surfaces to the approved family roles.",
       },
       {
-        title: "Review and technical notes",
-        description: "Catch role mismatches, silent substitutions, and noisy hierarchy shifts before release.",
+        title: "Hierarchy and review",
+        description: "Check the specimen-led scale, technical values, and release checks before approval.",
       },
     ],
     assets: [

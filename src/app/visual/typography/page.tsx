@@ -1,13 +1,10 @@
 import {
-  ReferenceDownloadablesBlock,
+  ReferenceDownloadRow,
   ReferenceRulesBlock,
   ReferenceSectionHeading,
-  VisualReferencePageShell,
 } from "../../../components/brand/visual-reference-shell";
 import {
   TypographyHierarchyExamplesGrid,
-  TypographyQuickActionsGrid,
-  TypographyRoleActionsGrid,
   TypographySpecimenGrid,
   TypographySurfaceGuidesGrid,
 } from "../../../components/brand/typography-panels";
@@ -15,73 +12,55 @@ import {
   TYPOGRAPHY_REFERENCE,
   TYPOGRAPHY_SECTION,
 } from "../../../content/brand/sections/typography";
-import { getVisualReferencePage } from "../../../content/brand/visual-reference";
 import { buildBrandPageMetadata } from "../../../lib/brand-utils";
-
-const visualPage = (() => {
-  const page = getVisualReferencePage("typography");
-  if (!page) {
-    throw new Error("Missing visual reference page configuration for typography.");
-  }
-
-  return page;
-})();
 
 export const metadata = buildBrandPageMetadata({
   title: "Typography | Vayasya Visual Reference",
   description:
-    "Role-first Vayasya typography reference for designers, developers, and reviewers covering font packs, hierarchy, surface guidance, and technical checks.",
+    "Reference-first Vayasya typography page covering the font pack, family roles, surface guidance, hierarchy, and release checks.",
   path: "/visual/typography",
 });
 
 export default function VisualTypographyPage() {
   return (
-    <VisualReferencePageShell page={visualPage}>
-      <section className="space-y-6">
-        <TypographyRoleActionsGrid
-          items={TYPOGRAPHY_REFERENCE.roleActions}
-          title="Role quick actions"
-        />
-        <TypographyQuickActionsGrid
-          actions={TYPOGRAPHY_REFERENCE.specialistQuickActions}
-          title="Specialist quick actions"
-          description="Jump to the right pack, hierarchy view, surface guidance, or review path before scanning the whole page."
-        />
-      </section>
+    <section className="space-y-12">
+      <header className="space-y-3">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--vy-muted-fg)]">
+          Visual Reference
+        </p>
+        <h1 className="text-4xl font-semibold tracking-tight text-[color:var(--vy-text-strong)] md:text-5xl">
+          Typography
+        </h1>
+        <p className="max-w-3xl text-base leading-relaxed text-[color:var(--vy-muted-fg)] md:text-lg">
+          Download the approved font pack, match each family to the right surface, and review hierarchy before release.
+        </p>
+      </header>
 
-      <section className="space-y-6" id="font-pack-approved-stacks">
+      <ReferenceDownloadRow assets={[TYPOGRAPHY_SECTION.fontPack]} title="Download font pack" />
+
+      <section className="space-y-6" id="family-roles">
         <ReferenceSectionHeading
-          title="Font pack and approved stacks"
-          description={TYPOGRAPHY_SECTION.intro}
+          title="Family roles"
+          description="Use the three approved families by role: display, readable text, and precision-heavy data."
         />
-        <ReferenceDownloadablesBlock assets={[TYPOGRAPHY_SECTION.fontPack]} title="Approved font pack" />
-        <TypographySpecimenGrid
-          cards={TYPOGRAPHY_SECTION.specimenCards}
-          title="Approved stacks and roles"
-        />
+        <TypographySpecimenGrid cards={TYPOGRAPHY_SECTION.specimenCards} title="Approved families" />
         <ReferenceRulesBlock rules={TYPOGRAPHY_SECTION.rules} title="Core family rules" />
       </section>
 
       <section className="space-y-6" id="surface-chooser">
         <ReferenceSectionHeading
-          title="Surface chooser"
-          description="Choose the type treatment by actual surface so product, data, and collateral work stay aligned to the same system."
+          title="Use by surface"
+          description="Choose the type treatment by actual surface so decks, UI, reports, and exports stay aligned."
         />
-        <TypographySurfaceGuidesGrid
-          items={TYPOGRAPHY_REFERENCE.surfaceGuides}
-          title="Approved surface guidance"
-        />
+        <TypographySurfaceGuidesGrid items={TYPOGRAPHY_REFERENCE.surfaceGuides} title="Surface guidance" />
       </section>
 
       <section className="space-y-6" id="hierarchy-system">
         <ReferenceSectionHeading
           title="Hierarchy system"
-          description="Use the specimen-led scale first, then confirm the technical size and line-height values in the matrix below."
+          description="Use the specimen-led scale first, then confirm the technical size and line-height values in the matrix."
         />
-        <TypographyHierarchyExamplesGrid
-          items={TYPOGRAPHY_REFERENCE.hierarchyExamples}
-          title="Specimen-led hierarchy"
-        />
+        <TypographyHierarchyExamplesGrid items={TYPOGRAPHY_REFERENCE.hierarchyExamples} title="Specimen-led hierarchy" />
         <div className="overflow-x-auto rounded-lg border border-[color:var(--vy-border)]">
           <table className="w-full text-sm">
             <thead className="bg-[color:var(--vy-muted)]">
@@ -110,36 +89,33 @@ export default function VisualTypographyPage() {
         </div>
       </section>
 
-      <section className="space-y-6">
+      <section className="space-y-6" id="readability-implementation-checks">
         <ReferenceSectionHeading
-          title="Formatting controls"
-          description="Use these as execution checks for readability, casing, data formatting, and hierarchy discipline."
+          title="Readability and implementation checks"
+          description="Use these execution checks to keep reading comfort, data precision, and product handoff aligned."
         />
         <div className="grid gap-4 md:grid-cols-2">
           {TYPOGRAPHY_SECTION.languageControls.map((item) => (
-            <div key={item.rule} className="rounded-lg border border-[color:var(--vy-border)] p-5">
+            <div
+              key={item.rule}
+              className="rounded-lg border border-[color:var(--vy-border)] bg-[color:var(--vy-muted)] p-5"
+            >
               <p className="font-medium text-[color:var(--vy-text-strong)]">{item.rule}</p>
               <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">{item.rationale}</p>
               <p className="mt-3 text-sm text-[color:var(--vy-fg)]">{item.examples.join(" ")}</p>
             </div>
           ))}
         </div>
+        <ReferenceRulesBlock rules={TYPOGRAPHY_REFERENCE.technicalNotes} title="Technical notes" />
       </section>
 
       <section className="space-y-6" id="review-technical-notes">
         <ReferenceSectionHeading
-          title="Review and technical notes"
-          description="Use these checks before approving a branded surface or shipping a product implementation that relies on the type system."
-        />
-        <ReferenceRulesBlock
-          rules={TYPOGRAPHY_REFERENCE.reviewerChecklist}
           title="Reviewer checklist"
+          description="Use these checks before approving a branded surface or shipping a product implementation."
         />
-        <ReferenceRulesBlock
-          rules={TYPOGRAPHY_REFERENCE.technicalNotes}
-          title="Technical notes"
-        />
+        <ReferenceRulesBlock rules={TYPOGRAPHY_REFERENCE.reviewerChecklist} title="Release checks" />
       </section>
-    </VisualReferencePageShell>
+    </section>
   );
 }

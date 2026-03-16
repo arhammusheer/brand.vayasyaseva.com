@@ -176,6 +176,52 @@ export function ReferenceDownloadablesBlock({
   );
 }
 
+export function ReferenceDownloadRow({
+  assets,
+  title = "Downloads",
+  description,
+  className,
+}: {
+  assets: readonly (DownloadableAsset | DownloadableBundle)[];
+  title?: string;
+  description?: string;
+  className?: string;
+}) {
+  if (!assets.length) return null;
+
+  return (
+    <div className={cn("space-y-4", className)}>
+      <div className="space-y-2">
+        <h3 className="text-lg font-medium text-[color:var(--vy-text-strong)]">{title}</h3>
+        {description ? (
+          <p className="max-w-3xl text-sm text-[color:var(--vy-muted-fg)]">
+            {sanitizeTokenMentions(description)}
+          </p>
+        ) : null}
+      </div>
+      <div className="flex flex-wrap gap-3">
+        {assets.map((asset) => (
+          <Button
+            key={asset.filePath}
+            asChild
+            variant="outline"
+            className="h-auto min-w-[11.5rem] items-start gap-1 whitespace-normal px-4 py-3 text-left"
+          >
+            <a href={asset.filePath} download>
+              <span className="font-medium text-[color:var(--vy-text-strong)]">
+                {sanitizeTokenMentions(asset.name)}
+              </span>
+              <span className="text-xs text-[color:var(--vy-muted-fg)]">
+                {sanitizeTokenMentions(asset.fileType)}
+              </span>
+            </a>
+          </Button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function ReferenceColorSwatchGrid({
   title,
   swatches,
