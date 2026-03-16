@@ -211,6 +211,59 @@ export type ColorSwatch = {
   usage: string;
 };
 
+export type ColorQuickAction = {
+  id: string;
+  title: string;
+  description: string;
+  href: string;
+  ctaLabel: string;
+  icon: "owner" | "semantic" | "chart" | "catalog" | "neutral" | "alias";
+  badge?: string;
+};
+
+export type ColorLanePreview = {
+  id: string;
+  title: string;
+  previewKind:
+    | "neutrals"
+    | "owner-accents"
+    | "semantic"
+    | "data-viz"
+    | "role-mapping"
+    | "compatibility";
+  summary: string;
+  hardRule: string;
+  swatches: readonly ColorSwatch[];
+  badge?: string;
+};
+
+export type ColorNeed = {
+  need: string;
+  useThis: string;
+  note: string;
+};
+
+export type ColorMisuseExample = {
+  id: string;
+  title: string;
+  previewKind:
+    | "mixed-owners"
+    | "semantic-decoration"
+    | "low-contrast"
+    | "local-color";
+  issue: string;
+  correction: string;
+};
+
+export type ColorPaletteReference = {
+  specialistQuickActions: readonly ColorQuickAction[];
+  filterOrder: readonly string[];
+  laneSummaries: readonly ColorLanePreview[];
+  scenarioGuidance: readonly Scenario[];
+  reviewerNotes: readonly string[];
+  implementationNotes: readonly string[];
+};
+
 export type TypographyStack = {
   label: string;
   family: string;

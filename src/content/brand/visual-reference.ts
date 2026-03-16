@@ -17,7 +17,7 @@ export const VISUAL_REFERENCE_NAV_ITEMS = [
   {
     href: "/visual/color-palette",
     label: "Color Palette",
-    description: "Full token catalog, semantic roles, scenario mappings, and handoff rules.",
+    description: "Copy-ready swatch wall for approved brand, semantic, chart, and alias colors.",
   },
   {
     href: "/visual/typography",
@@ -102,47 +102,47 @@ export const VISUAL_REFERENCE_PAGES = [
     navLabel: "Color Palette",
     title: "Color Palette",
     summary:
-      "Full color reference for tokens, semantic roles, scenario mappings, and engineering-facing implementation guidance.",
+      "Full copy-ready swatch wall for approved brand, semantic, chart, and alias colors.",
     pageIntro:
-      "Use this page when you are selecting, reviewing, or implementing palette decisions beyond template defaults.",
+      "Use this page when you need the full approved color set in one place and want to copy exact hex values without extra reference chrome.",
     specialistAudience: "Design, product, and engineering teams.",
     handbookHref: "/#06-color-palette",
     guidanceBlocks: [
       {
-        title: "Full swatch catalog",
-        description: "Review the full neutral, brand, semantic, and chart token system in one place.",
+        title: "Full swatch wall",
+        description: "Scan the approved palette in one uninterrupted grid instead of working through filters or guidance blocks.",
       },
       {
-        title: "Scenario mappings",
-        description: "Match token usage to migration, UI, and reporting contexts.",
+        title: "Click to copy",
+        description: "Each swatch copies the hex value directly so handoff and implementation stay fast.",
       },
       {
-        title: "Semantic roles",
-        description: "Keep state colors meaningful and separate from decorative accents.",
+        title: "Token-first labeling",
+        description: "Every card shows the token label, hex value, and a short usage note on the swatch itself.",
       },
       {
-        title: "Implementation handoff",
-        description: "Use token names and compatibility rules for product and engineering delivery.",
+        title: "Zero extra chrome",
+        description: "The page stays intentionally stripped back so the colors remain the only thing competing for attention.",
       },
     ],
     assets: [
       {
-        name: "Token catalog",
-        description: "Complete token set with roles, hex values, and usage guidance.",
+        name: "Copy-ready swatches",
+        description: "Full approved color set with one-click hex copying.",
       },
       {
-        name: "Scenario mappings",
-        description: "Migration, UI, reporting, and semantic role examples.",
+        name: "Token labels",
+        description: "Readable token names presented directly on each swatch.",
       },
       {
-        name: "Implementation notes",
-        description: "Engineering-facing reminders for using tokens instead of local color guesses.",
+        name: "Short usage notes",
+        description: "Brief usage guidance embedded on every swatch card.",
       },
     ],
     implementationNotes: [
-      "Reference tokens in reviews and handoffs instead of raw hex values.",
-      "Use one clear brand owner per artifact unless the piece is explicitly multi-vertical.",
-      "Treat semantic and chart colors as meaning-bearing system roles, not decoration.",
+      "Copy hex values directly from the swatches instead of retyping them.",
+      "Use the token label on the card when calling out a color in review or handoff.",
+      "Return to the handbook root for behavior guidance; this page is intentionally just the palette.",
     ],
   },
   {

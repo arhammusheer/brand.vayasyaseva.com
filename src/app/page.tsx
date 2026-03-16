@@ -14,6 +14,9 @@ import {
 import { ChapterNav, ChapterNavSidebar } from "../components/brand/chapter-nav";
 import { ChapterWrapper } from "../components/brand/chapter-wrapper";
 import {
+  ColorRootChooser,
+} from "../components/brand/color-palette-panels";
+import {
   LogoCommonNeedsGrid,
   LogoMisuseGrid,
   LogoPreviewGrid,
@@ -818,8 +821,13 @@ export default function Page() {
                 <p className="max-w-3xl text-lg leading-relaxed">
                   {sanitizeTokenMentions(sections.colorPalette.intro)}
                 </p>
-                <FieldDefaults items={sections.colorPalette.employeeDefaults} title="Employee-safe default" />
-                <RulesBlock rules={sections.colorPalette.rules} title="Critical color rules" />
+                <FieldDefaults items={sections.colorPalette.employeeDefaults} />
+                <div className="mt-10">
+                  <ColorRootChooser
+                    lanes={sections.colorPalette.previewGroups}
+                    title="Choose the right palette lane"
+                  />
+                </div>
                 <ReferenceLinkCard
                   href={sections.colorPalette.referenceHref}
                   title={sections.colorPalette.referenceTitle}
