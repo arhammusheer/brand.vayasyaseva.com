@@ -2,6 +2,7 @@ import type {
   ChecklistGroup,
   DoDontExample,
   SectionHeader,
+  SectionSummaryStrip,
   TemplateSpec,
 } from "../../../lib/types/brand";
 
@@ -9,71 +10,85 @@ export const PRE_SEND_CHECKLIST_SECTION = {
   header: {
     id: "pre-send-checklist",
     number: "16",
-    title: "Pre-Send Checklist",
-    summary: "Use a mandatory gate before sending any external brand communication.",
-  },
+    title: "Pre-Send / Pre-Say / Pre-Share",
+    summary: "Run the same final gate before you send, say, or share anything that represents Vayasya.",
+  } satisfies SectionHeader,
+
+  summaryStrip: {
+    useThisWhen: "You are about to send a message, speak in a client setting, share a document, or post public-facing copy.",
+    doThis: "Check identity, scope, claim safety, owner, and next step before release.",
+    neverDoThis: "Do not assume a casual channel removes brand or claim risk.",
+    whoNeedsThis: "All employees, especially field/site and client-facing teams.",
+  } satisfies SectionSummaryStrip,
+
   intro:
-    "Before any external send, run this checklist to reduce factual, legal, and brand consistency errors.",
+    "This is the final quality gate for email, WhatsApp, quotations, decks, site-visit notes, and public-profile copy. If the item fails the gate, fix it before release.",
+
   checklist: [
     {
-      title: "Identity and formatting",
+      title: "Identity and scope",
       items: [
-        "Correct vertical name used consistently.",
-        "Logo asset is original and unrecolored.",
-        "Typography follows Anek (display), Hind (body), and JetBrains Mono (data) rules.",
+        "Correct company or vertical name is used.",
+        "Service description matches approved scope.",
+        "No informal shorthand creates confusion about ownership.",
       ],
-      passCondition: "All identity controls are verified by sender.",
+      passCondition: "The receiver will understand exactly who we are and what this item covers.",
     },
     {
-      title: "Claims and legal",
+      title: "Claims and safety",
       items: [
-        "Every claim tagged with claim class.",
-        "Measured claims have current evidence.",
-        "Contractual terms match signed agreement wording.",
+        "Any capability, timeline, or performance claim is supported or clearly qualified.",
+        "No guarantee or comparative language appears without approval.",
+        "If approval is required, it is already recorded.",
       ],
-      passCondition: "No unsupported claim remains in final draft.",
+      passCondition: "No sentence creates a stronger promise than we can prove or own.",
     },
     {
-      title: "Operational readiness",
+      title: "Actionability",
       items: [
-        "Required action and owner are explicit.",
-        "Dependencies and deadlines are stated.",
-        "Next checkpoint date and time are included.",
+        "Owner is named.",
+        "Required action is clear or intentionally marked as none.",
+        "Next checkpoint, reply route, or next step is stated.",
       ],
-      passCondition: "Recipient can act without clarification call.",
+      passCondition: "The receiver can act correctly without asking what happens next.",
     },
-  ],
+    {
+      title: "Channel fit",
+      items: [
+        "The chosen channel is appropriate for the risk level.",
+        "Verbal decisions are confirmed in writing if needed.",
+        "Attachments, assets, or scripts are the approved versions.",
+      ],
+      passCondition: "The item is being shared in the right format and channel for the situation.",
+    },
+  ] satisfies readonly ChecklistGroup[],
+
   rules: [
-    "Checklist completion is mandatory for client-facing deliverables.",
-    "Any failed item requires correction before release.",
-    "Store checklist evidence with final artifact version.",
+    "This gate applies to messages, spoken representations, shared files, and public-profile copy.",
+    "If the item fails one check, fix it before release rather than adding a verbal caveat later.",
+    "If the item mixes scope, legal, or commercial risk with urgency, escalate instead of rushing it out.",
   ],
+
   doDont: [
     {
-      topic: "Release decision",
-      do: "Hold send until measured claim evidence is attached.",
-      dont: "Send now and attach proof later.",
-      why: "Post-send corrections reduce credibility and may create legal risk.",
+      topic: "Fast channel mistake",
+      do: "Pause the WhatsApp send if the message creates a new commitment and move it to the approved review path.",
+      dont: "Send the risky message first because the channel feels informal.",
+      why: "Informal channels still create formal brand and claim risk.",
     },
-  ],
+  ] satisfies readonly DoDontExample[],
+
   templates: [
     {
-      name: "Pre-send sign-off",
-      purpose: "Record final quality gate before publication.",
-      whenToUse: "Any email, proposal, deck, or web copy sent externally.",
+      name: "Final release block",
+      purpose: "Record the last check before a message, file, or script is used externally.",
+      whenToUse: "Any client-facing email, quotation, deck, site-visit summary, or high-risk message.",
       template:
-        "Artifact: <name>\nVersion: <vX.Y>\nSender: <name>\nChecklist pass: <yes/no>\nExceptions: <none or details>\nApprover (if required): <name>\nTimestamp: <DD MMM YYYY HH:MM IST>",
+        "Item: <name>\nChannel: <email/WhatsApp/call/deck/document/profile>\nIdentity checked: <yes/no>\nClaims checked: <yes/no>\nOwner named: <yes/no>\nNext step stated: <yes/no>\nApproval needed: <yes/no>\nReleased by: <name>\nTimestamp: <DD MMM YYYY HH:MM IST>",
       guardrails: [
-        "No blank fields in final sign-off block.",
-        "If exception exists, include approval reference.",
+        "If approval is needed, do not mark the item released.",
+        "If the channel is verbal, note the follow-up record channel.",
       ],
     },
-  ],
-} as const satisfies {
-  header: SectionHeader;
-  intro: string;
-  checklist: readonly ChecklistGroup[];
-  rules: readonly string[];
-  doDont: readonly DoDontExample[];
-  templates: readonly TemplateSpec[];
-};
+  ] satisfies readonly TemplateSpec[],
+} as const;

@@ -1,8 +1,9 @@
 import type {
   DoDontExample,
   SectionHeader,
+  SectionSummaryStrip,
+  ServiceCapability,
   TemplateSpec,
-  TerminologyEntry,
 } from "../../../lib/types/brand";
 
 export const IDENTITY_SECTION = {
@@ -10,201 +11,265 @@ export const IDENTITY_SECTION = {
     id: "identity",
     number: "02",
     title: "Identity",
-    summary: "What Vayasya is, what we do, who we serve, and what we reject.",
+    summary: "The approved company description, service map, operating model, and scope boundaries.",
   } satisfies SectionHeader,
 
-  intent:
-    "This section defines the core identity of Vayasya. Every piece of communication should trace back to these principles. When in doubt, return here.",
+  summaryStrip: {
+    useThisWhen: "You need to explain what Vayasya is, what we do, or what we should be called.",
+    doThis: "Use the approved intro, service map, and scope boundaries exactly as written.",
+    neverDoThis: "Do not describe Vayasya as a staffing marketplace, a job portal, or a generalist company that does everything.",
+    whoNeedsThis: "Field/site teams, sales/account, HR/admin, leadership, recruiters, and anyone client-facing.",
+  } satisfies SectionSummaryStrip,
 
   intro:
-    "Vayasya is an enterprise-grade, compliance-first workforce services and workforce systems group. We operate in B2B, supporting factories and large clients with manpower deployment and workforce operations.",
+    "Vayasya should be described as a compliance-first industrial services company with defined operating services, clear ownership, and disciplined delivery. This section is the source of truth for how the company is introduced and scoped.",
 
-  whatWeAre: {
-    statement:
-      "Vayasya stands for operational reliability, compliance, and systems — built for scale.",
-    signals: [
-      "Institutional, calm, decisive",
-      "Systems-first, audit-ready, process-driven",
-      "Operational strength in Indian industrial context",
-      "Compliance encoded into systems, not human memory",
-    ],
+  approvedIntros: {
+    short:
+      "Vayasya supports industrial and operational environments with compliance-first services across workforce deployment, housekeeping, warehouses and logistics, civil and fabrication works, maintenance, and equipment or material support.",
+    paragraph:
+      "Vayasya is a compliance-first industrial services company serving operational environments that need dependable execution, clear ownership, and disciplined controls. We support workforce deployment, housekeeping, warehouses and logistics, civil and fabrication works, machinery maintenance, and equipment or material support through a structured operating model from intake to compliance closure.",
+    recruiter:
+      "Vayasya is not a job marketplace or staffing app. We run structured industrial service operations for client environments with strong compliance, supervision, and delivery controls.",
   },
+
+  identitySignals: [
+    "Compliance-first and audit-aware",
+    "Industrial and operations-grounded",
+    "Clear on scope, ownership, and timelines",
+    "Professional, disciplined, and non-dramatic",
+  ],
 
   whatWeAreNot: [
-    "Not a staffing marketplace or recruitment agency",
-    "Not a consumer HR brand or job portal",
-    "Not an NGO, welfare organization, or CSR initiative",
-    "Not a startup chasing growth metrics over operational depth",
+    "Not a staffing marketplace or consumer job portal",
+    "Not a lifestyle, wellness, or inspiration-led brand",
+    "Not a vague general contractor for every possible business need",
+    "Not a company that makes promises without evidence or operating controls",
   ],
 
-  antiBrand: [
-    "Spiritual, meditation, or wellness imagery or tone",
-    "\"Soft\" inspirational startup language",
-    "Excessively decorative design, gradients, or shiny gold effects",
-    "Consumer lifestyle branding or mass-market positioning",
-    "\"People empowerment\" fluff without operational substance",
-    "HR buzzwords disconnected from execution reality",
+  serviceCapabilities: [
+    {
+      name: "Workforce deployment",
+      approvedDescription:
+        "Deployment and management support for workforce requirements in operational environments.",
+      includes: [
+        "Structured manpower deployment",
+        "Client-site coordination",
+        "Attendance and compliance-linked operating support",
+      ],
+      notIncluded: [
+        "Open-ended recruitment promises",
+        "Consumer job placement messaging",
+      ],
+      onRequest: [
+        "Location-specific deployment details",
+        "Role-specific operating notes",
+      ],
+      proofPoints: [
+        "Use when discussing workforce service execution",
+        "Keep the focus on operating discipline, not hiring hype",
+      ],
+    },
+    {
+      name: "Housekeeping",
+      approvedDescription:
+        "Managed housekeeping support for industrial and operational facilities with defined supervision and service controls.",
+      includes: [
+        "Routine site housekeeping support",
+        "Defined service ownership",
+        "Operational reporting and review points",
+      ],
+      notIncluded: [
+        "Lifestyle or hospitality positioning",
+        "Decorative service language",
+      ],
+      onRequest: [
+        "Site-specific scope breakdown",
+        "Frequency and supervision details",
+      ],
+      proofPoints: [
+        "Describe as managed service execution",
+        "Avoid generic 'facility solution' phrasing",
+      ],
+    },
+    {
+      name: "Warehouses and logistics",
+      approvedDescription:
+        "Operational support for warehouse and logistics environments where process reliability and compliance matter.",
+      includes: [
+        "Warehouse-support workflows",
+        "Operational coordination",
+        "Structured supervision and reporting",
+      ],
+      notIncluded: [
+        "National logistics network claims without evidence",
+        "Technology-platform claims unless verified",
+      ],
+      onRequest: [
+        "Site and process-specific scope details",
+        "Role coverage by client need",
+      ],
+      proofPoints: [
+        "Keep the language operational and scope-led",
+        "Do not imply software capability unless accurate",
+      ],
+    },
+    {
+      name: "Civil and fabrication works",
+      approvedDescription:
+        "Defined civil and fabrication support for client operating environments with controlled scope and supervision.",
+      includes: [
+        "Civil works support",
+        "Fabrication-related execution support",
+        "Scope-led delivery language",
+      ],
+      notIncluded: [
+        "Unlimited turnkey construction claims",
+        "Guarantees beyond approved scope",
+      ],
+      onRequest: [
+        "Project-type examples",
+        "Scope boundary clarification",
+      ],
+      proofPoints: [
+        "Always tie the service to defined scope",
+        "Do not generalize into all-construction capability",
+      ],
+    },
+    {
+      name: "Machinery maintenance",
+      approvedDescription:
+        "Maintenance support for machinery and operational equipment within approved service boundaries.",
+      includes: [
+        "Maintenance-related support services",
+        "Operational coordination and follow-through",
+        "Client-specific maintenance context when approved",
+      ],
+      notIncluded: [
+        "OEM-level claims without evidence",
+        "Zero-downtime or fail-proof language",
+      ],
+      onRequest: [
+        "Specific maintenance coverage examples",
+        "Asset-type references where approved",
+      ],
+      proofPoints: [
+        "Use maintenance language only where current capability exists",
+        "Tie promises to approved scope and evidence",
+      ],
+    },
+    {
+      name: "Equipment and material support",
+      approvedDescription:
+        "Support for equipment or material-related operational needs where the scope, owner, and delivery method are defined.",
+      includes: [
+        "Operational support tied to client requirements",
+        "Defined delivery ownership",
+        "Structured follow-up and review",
+      ],
+      notIncluded: [
+        "Open-ended procurement or supply-chain claims",
+        "Capabilities not already offered or approved",
+      ],
+      onRequest: [
+        "Channel-specific description",
+        "Project-specific scope boundaries",
+      ],
+      proofPoints: [
+        "Keep the wording precise and scoped",
+        "Avoid broad procurement positioning",
+      ],
+    },
+  ] satisfies readonly ServiceCapability[],
+
+  operatingModel: [
+    {
+      step: "Intake",
+      detail: "Clarify requirement, site context, ownership, and scope before committing language or timelines.",
+    },
+    {
+      step: "Scope definition",
+      detail: "Document what is included, what is excluded, and what depends on client input or approval.",
+    },
+    {
+      step: "Execution setup",
+      detail: "Assign owners, checkpoints, and operating controls before active delivery begins.",
+    },
+    {
+      step: "Service delivery",
+      detail: "Run the work with visible status, dated updates, and disciplined escalation.",
+    },
+    {
+      step: "Compliance closure",
+      detail: "Close the loop with documentation, follow-through, and evidence where required.",
+    },
   ],
 
-  manifesto: {
-    mission:
-      "We exist to create operational clarity in complex environments.",
-    beliefs: [
-      {
-        belief: "Clarity over cleverness",
-        explanation:
-          "Simple, direct communication reduces errors. We sacrifice style for precision.",
-      },
-      {
-        belief: "Commitments are contracts",
-        explanation:
-          "What we say, we do. We under-promise and over-deliver, never the reverse.",
-      },
-      {
-        belief: "Transparency builds trust",
-        explanation:
-          "We share bad news early, with context and a path forward. Hiding problems makes them worse.",
-      },
-      {
-        belief: "Accountability has a name",
-        explanation:
-          "Every deliverable has an owner. We do not hide behind teams or processes.",
-      },
-      {
-        belief: "Process protects people",
-        explanation:
-          "Good systems prevent mistakes. We invest in structure so individuals can focus on quality.",
-      },
-    ],
-    standFor: [
-      "Operational precision in every deliverable",
-      "Respect for client time and attention",
-      "Evidence-based claims and commitments",
-      "Professional boundaries and clear escalation",
-      "Consistent quality regardless of deadline pressure",
-    ],
-    reject: [
-      "Vague promises without timelines or owners",
-      "Marketing language that exaggerates capability",
-      "Blame-shifting or defensive communication",
-      "Process shortcuts that trade quality for speed",
-      "Assumptions presented as facts",
-    ],
-  },
-
-  positioning: {
-    intro:
-      "Positioning statements must describe who we serve, what we solve, and how we deliver with measurable reliability. Avoid category inflation and broad, unprovable promises.",
-    rules: [
-      "Primary message: dependable execution for defined service outcomes.",
-      "Audience first: mention client segment before internal capability details.",
-      "Differentiate by operating discipline, not by superlatives.",
-      "Use one vertical context per narrative unless explicitly multi-vertical.",
-      "Do not claim market leadership without audited comparative evidence.",
-    ],
-    terminology: [
-      {
-        term: "Trusted partner",
-        approved: "Dependable operating partner",
-        avoid: ["Best-in-class partner", "Unmatched partner"],
-        notes:
-          "Use evidence-led language instead of comparative superlatives.",
-      },
-      {
-        term: "Transformation",
-        approved: "Structured service improvement",
-        avoid: ["Total transformation guaranteed"],
-        notes: "Guarantee language requires contractual coverage.",
-      },
-    ] satisfies readonly TerminologyEntry[],
-  },
+  whatWeDoNotSay: [
+    "We do everything for every industry.",
+    "We guarantee any outcome not tied to scope or contract.",
+    "We are a job portal, recruitment marketplace, or staffing app.",
+    "We are the best, leading, or unmatched without measured evidence.",
+    "We can start immediately with no dependencies or approvals.",
+  ],
 
   rules: [
-    "Prioritize clarity over cleverness in all client-facing language.",
-    "State ownership, timeline, and outcome in every operational update.",
-    "Represent current capability, not intended future capability, unless labeled explicitly as roadmap.",
-    "Document assumptions whenever a requirement is incomplete.",
-    "Treat brand consistency as a compliance control, not a cosmetic preference.",
-    "When facts and perception conflict, lead with facts.",
-    "Make the implicit explicit: if something is assumed, write it down.",
+    "Describe the company using approved service categories, not improvised umbrella labels.",
+    "Lead with operating clarity, compliance, and scope control rather than hype or abstraction.",
+    "If a client asks about a service beyond the approved map, state that the scope must be confirmed first.",
+    "Use one approved intro for the situation instead of writing a fresh one every time.",
+    "Keep service breadth aligned with the public site and current approved capability.",
   ],
 
   doDont: [
     {
-      topic: "Service communication",
-      do: "We can begin onboarding on 15 Feb 2026 once KYC records are validated.",
-      dont: "We can start anytime and will figure out KYC later.",
-      why: "The approved version sets condition and date, reducing misunderstanding.",
+      topic: "20-second company intro",
+      do: "Vayasya is a compliance-first industrial services company supporting workforce deployment, housekeeping, warehouses and logistics, civil and fabrication works, machinery maintenance, and equipment or material support.",
+      dont: "Vayasya is a complete workforce platform and recruitment marketplace for every staffing need.",
+      why: "The approved version matches current public positioning and stays within real operating scope.",
     },
     {
-      topic: "Commitment language",
-      do: "Current SLA target is 24 business hours for first response.",
-      dont: "Fast support guaranteed.",
-      why: "Specificity prevents inflated expectations and claim risk.",
+      topic: "Recruiter explanation",
+      do: "We support structured industrial service operations. We are not a consumer job portal.",
+      dont: "We are basically a hiring platform for anyone looking for work.",
+      why: "This keeps the company description aligned to business reality.",
     },
     {
-      topic: "Problem reporting",
-      do: "We identified a data quality issue on 10 Feb. Impact: delayed report. Fix ETA: 12 Feb.",
-      dont: "There might be some issues but we're handling it.",
-      why: "Early, specific reporting builds trust even when sharing problems.",
+      topic: "Capability explanation",
+      do: "We can discuss maintenance support within approved scope after reviewing the site need and ownership.",
+      dont: "Yes, we handle every kind of maintenance end to end with no issue.",
+      why: "Scope-first wording prevents overcommitment.",
     },
     {
-      topic: "Future capability",
-      do: "Automated reporting is on our Q2 2026 roadmap, subject to resource allocation.",
-      dont: "We'll have automated reporting soon.",
-      why: "Roadmap items are not commitments. Qualify future statements.",
-    },
-    {
-      topic: "Positioning line",
-      do: "Vayasya Seva helps teams run essential service workflows with clear ownership, timelines, and controls.",
-      dont: "Vayasya Seva reinvents everything for everyone.",
-      why: "Focused positioning aligns with operational delivery reality.",
-    },
-    {
-      topic: "Differentiation",
-      do: "Our approach uses checkpoint-based governance and documented handoffs.",
-      dont: "Our approach is unique and revolutionary.",
-      why: "The approved line is specific and auditable.",
+      topic: "Service breadth",
+      do: "For this conversation, the relevant services are workforce deployment and site housekeeping.",
+      dont: "We handle all industrial needs, so there is no need to define scope.",
+      why: "Focused scope language is more credible and safer.",
     },
   ] satisfies readonly DoDontExample[],
 
   templates: [
     {
-      name: "Decision brief",
-      purpose:
-        "Frame internal and client-facing decisions in a standard way.",
-      whenToUse:
-        "Before approvals, scope changes, or cross-team handoffs.",
+      name: "20-second introduction",
+      purpose: "Keep verbal introductions consistent across field, sales, and leadership contexts.",
+      whenToUse: "Calls, site visits, first meetings, and client introductions.",
       template:
-        "Decision: <one line>\nOwner: <name, role>\nDate: <DD MMM YYYY>\nOptions considered: <A/B/C with one-line description>\nSelected option: <A/B/C>\nReason: <risk, cost, timeline factors>\nImpact: <client/team/system>\nNext checkpoint: <date and owner>",
+        "Vayasya is a compliance-first industrial services company supporting <relevant approved services> with clear ownership, disciplined execution, and structured operating controls.",
       guardrails: [
-        "Do not publish without named owner.",
-        "Record at least one rejected option.",
-        "Use India-first date format.",
-        "Impact field must be specific, not 'minimal' or 'significant'.",
+        "Mention only services relevant to the context.",
+        "Do not add comparative or guarantee language.",
+        "If the ask is outside approved scope, say the scope must be confirmed first.",
       ],
     },
     {
-      name: "Assumption log",
-      purpose: "Track assumptions that may affect delivery.",
-      whenToUse: "When starting work with incomplete requirements.",
+      name: "Recruiter / HR company explanation",
+      purpose: "Give candidates and vendors a correct company description.",
+      whenToUse: "Recruiter outreach, HR/admin communication, and vendor introductions.",
       template:
-        "Assumption: <statement>\nBasis: <why we believe this>\nRisk if wrong: <impact>\nValidation owner: <name>\nValidation deadline: <DD MMM YYYY>\nStatus: <unvalidated/confirmed/invalidated>",
+        "Vayasya supports industrial service operations through workforce deployment, housekeeping, warehouses and logistics, civil and fabrication works, maintenance, and equipment or material support. We operate with compliance-first controls rather than marketplace-style hiring language.",
       guardrails: [
-        "Review assumption log weekly during active projects.",
-        "Invalidated assumptions trigger scope change process.",
-      ],
-    },
-    {
-      name: "30-second positioning script",
-      purpose:
-        "Align verbal introduction across sales, delivery, and leadership teams.",
-      whenToUse: "Calls, events, and first-contact internal notes.",
-      template:
-        "Who we serve: <segment>\nProblem we solve: <operational issue>\nHow we work: <method and controls>\nWhat clients can expect: <measured outcome and timeframe>",
-      guardrails: [
-        "Use measured outcomes only when baseline data exists.",
-        "Do not include comparative claims unless approved.",
+        "Do not position Vayasya as a staffing app or job portal.",
+        "Do not add unapproved scale claims.",
       ],
     },
   ] satisfies readonly TemplateSpec[],

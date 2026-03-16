@@ -15,9 +15,9 @@ export const FOOTER_VERSIONING_SECTION = {
   intro:
     "Version metadata is mandatory for control and audit. Every formal artifact must contain version, effective date, owner, and review date.",
   footer: {
-    version: "v3.0.0",
-    effectiveDate: "12 Feb 2026",
-    nextReviewDate: "12 Aug 2026",
+    version: "v4.0.0",
+    effectiveDate: "16 Mar 2026",
+    nextReviewDate: "16 Sep 2026",
     owner: "Vayasya Brand Office",
     approvalTrail: [
       "Brand lead approval",
@@ -35,7 +35,7 @@ export const FOOTER_VERSIONING_SECTION = {
   doDont: [
     {
       topic: "Version hygiene",
-      do: "Update footer from v1.0.0 to v1.1.0 after adding approved email legal pattern.",
+      do: "Issue a major version bump when the handbook changes how employees should use it day to day.",
       dont: "Change content without version update.",
       why: "Version history is required for traceability.",
     },

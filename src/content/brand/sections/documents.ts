@@ -1,6 +1,7 @@
 import type {
   DoDontExample,
   SectionHeader,
+  SectionSummaryStrip,
   TemplateSpec,
 } from "../../../lib/types/brand";
 
@@ -8,43 +9,65 @@ export const DOCUMENTS_SECTION = {
   header: {
     id: "documents",
     number: "12",
-    title: "Documents",
-    summary: "Apply one structure for briefs, proposals, SOPs, and policy documents.",
-  },
+    title: "Proposals, Quotations & Documents",
+    summary: "Use scope-first document structure for proposals, quotations, shared notes, and formal documents.",
+  } satisfies SectionHeader,
+
+  summaryStrip: {
+    useThisWhen: "You are sharing a quotation, proposal, formal note, or client-facing document.",
+    doThis: "Lead with scope, assumptions, owner, and next step before the receiver reaches the attachment details.",
+    neverDoThis: "Do not let the cover message or document intro create promises not inside the approved scope.",
+    whoNeedsThis: "Sales/account, supervisors, leadership, HR/admin, and document owners.",
+  } satisfies SectionSummaryStrip,
+
   intro:
-    "All formal documents should be easy to review, approve, and audit. Structure must prioritize decision-making and traceability.",
+    "Documents should help the receiver understand what is being offered, what is excluded, and what decision or action is needed next. Most document failure comes from hidden assumptions and loose scope wording.",
+
   rules: [
-    "Start with purpose, scope, owner, and version metadata.",
-    "Include assumptions, dependencies, and exclusions in a dedicated section.",
-    "Use revision table for every substantive change.",
-    "Separate factual statements from recommendations.",
-    "Reference contract clauses explicitly when applicable.",
+    "Start with purpose, scope, owner, and version or date.",
+    "Put assumptions and exclusions in a visible section, not buried in the last page.",
+    "If the document is commercial, keep claims discipline and contract language aligned with the approved source.",
+    "Use the same service description in the cover note and in the attached document.",
+    "Close every shared document with one clear next action.",
   ],
+
   doDont: [
     {
-      topic: "Scope statement",
-      do: "In scope: onboarding workflow setup for Region A. Out of scope: legacy system migration.",
-      dont: "We will support onboarding and related tasks as needed.",
-      why: "Explicit boundaries reduce downstream disputes.",
+      topic: "Quotation scope statement",
+      do: "Scope: housekeeping support for Site A as listed in the attached quotation. Excluded: civil work and maintenance scope.",
+      dont: "We can support the site and related requirements as needed.",
+      why: "The approved version removes ambiguity and reduces commercial drift.",
     },
-  ],
+    {
+      topic: "Proposal opening",
+      do: "This proposal covers workforce deployment support for the defined site scope, assumptions, and review points listed below.",
+      dont: "This proposal outlines our complete solution for all your operational needs.",
+      why: "Scope-led language is safer and more credible than total-solution language.",
+    },
+  ] satisfies readonly DoDontExample[],
+
   templates: [
     {
-      name: "Document skeleton",
-      purpose: "Provide a standard structure for all operational documents.",
-      whenToUse: "Any formal internal or client-shared document.",
+      name: "Quotation cover structure",
+      purpose: "Standardize the short note that accompanies quotations and commercial attachments.",
+      whenToUse: "Any quotation or commercial attachment shared externally.",
       template:
-        "Title\nOwner\nVersion\nDate\n1. Purpose\n2. Scope\n3. Assumptions\n4. Deliverables\n5. Timeline\n6. Risks and mitigations\n7. Approvals\n8. Revision history",
+        "Document: <quotation/proposal>\nScope: <approved scope>\nIncludes: <top items>\nAssumptions: <list or reference>\nOwner: <name>\nRequired action: <review/approve/respond>\nNext checkpoint: <date/time>",
       guardrails: [
-        "Version and date are mandatory.",
-        "Do not remove risk section even if no major risk is identified.",
+        "Do not add new commitments in the cover note.",
+        "If assumptions are important, surface them clearly before send.",
       ],
     },
-  ],
-} as const satisfies {
-  header: SectionHeader;
-  intro: string;
-  rules: readonly string[];
-  doDont: readonly DoDontExample[];
-  templates: readonly TemplateSpec[];
-};
+    {
+      name: "Formal document skeleton",
+      purpose: "Give formal documents one repeatable operating structure.",
+      whenToUse: "Client notes, SOPs, proposals, or policy-style documents.",
+      template:
+        "Title\nOwner\nDate / version\n1. Purpose\n2. Scope\n3. Includes\n4. Exclusions\n5. Assumptions\n6. Risks / dependencies\n7. Next action / approvals",
+      guardrails: [
+        "Do not remove the exclusions or assumptions sections.",
+        "Keep owner and date visible on page one.",
+      ],
+    },
+  ] satisfies readonly TemplateSpec[],
+} as const;

@@ -1,7 +1,8 @@
 import type {
-  ApprovalRule,
+  ApprovalTrigger,
   DoDontExample,
   SectionHeader,
+  SectionSummaryStrip,
   TemplateSpec,
 } from "../../../lib/types/brand";
 
@@ -10,76 +11,84 @@ export const GOVERNANCE_APPROVALS_SECTION = {
     id: "governance-approvals",
     number: "17",
     title: "Governance & Approvals",
-    summary: "Use defined approval paths with SLAs for all critical brand artifacts.",
-  },
+    summary: "Governance is for exceptions, risky claims, and public-facing changes, not for routine approved assets.",
+  } satisfies SectionHeader,
+
+  summaryStrip: {
+    useThisWhen: "You need to know whether a message, asset, or document must be approved before release.",
+    doThis: "Use the trigger matrix below. If the item is standard and already approved, self-serve it.",
+    neverDoThis: "Do not send risky wording first and hope approval can be added later.",
+    whoNeedsThis: "Reviewers, owners, leadership, HR/admin, sales/account, and anyone unsure about approval needs.",
+  } satisfies SectionSummaryStrip,
+
   intro:
-    "Governance ensures consistency and risk control. Approval requirements depend on artifact type, claim class, and channel exposure.",
-  approvals: [
+    "The default mode is self-serve for standard assets, approved copy blocks, and routine usage. Governance is only for exceptions, public-risk language, new templates, or non-standard brand decisions.",
+
+  triggers: [
     {
-      artifact: "Website core brand copy",
-      approverRole: "Brand lead",
-      criteria: [
-        "Token compliance",
-        "Voice and tone compliance",
-        "Claim class tagging complete",
+      title: "Approval required",
+      requiredFor: [
+        "Measured or contractual claims",
+        "New public-facing company or service copy",
+        "New template variants or asset variants",
+        "Joint-offering material involving multiple verticals",
+        "Changes to legal, commercial, or scope language",
       ],
-      slaBusinessDays: 3,
-      escalation: "Escalate to head of vertical if SLA is missed.",
+      notRequiredFor: [
+        "Routine use of approved signatures, logos, bios, and copy blocks",
+        "Using the approved representation pack as supplied",
+      ],
+      approverRole: "Brand lead, plus legal or business owner when claim/commercial risk exists",
+      responseSla: "2-4 business days depending on risk",
     },
     {
-      artifact: "Proposal with measured or contractual claims",
-      approverRole: "Brand lead + legal reviewer",
-      criteria: [
-        "Evidence linked",
-        "Contract alignment",
-        "No prohibited language",
+      title: "Self-serve allowed",
+      requiredFor: [
+        "Approved representation assets and copy blocks",
+        "Approved templates used without structural changes",
+        "Routine logo/font/signature usage",
       ],
-      slaBusinessDays: 2,
-      escalation: "Escalate to business head and legal operations.",
-    },
-    {
-      artifact: "Public-facing leadership presentation",
-      approverRole: "Brand lead + business head",
-      criteria: [
-        "Positioning consistency",
-        "Data timestamp present",
-        "No unsupported comparative claims",
+      notRequiredFor: [
+        "Fresh wording that changes promise level",
+        "Edited templates with removed mandatory sections",
       ],
-      slaBusinessDays: 4,
-      escalation: "Escalate to parent communications office.",
+      approverRole: "No prior approval required if used exactly as approved",
+      responseSla: "Immediate use",
     },
-  ],
+  ] satisfies readonly ApprovalTrigger[],
+
   rules: [
-    "No external release before required approvals are recorded.",
-    "Re-approval is required if claim text or legal language changes.",
-    "Expired evidence (older than 90 days) triggers fresh validation.",
+    "If the wording becomes stronger, broader, or more public, re-check approval need.",
+    "If you edit an approved template structurally, it is no longer routine usage.",
+    "If legal or commercial meaning changes, prior approval no longer covers it.",
   ],
+
   doDont: [
     {
-      topic: "Late-stage edits",
-      do: "Route revised claim language back to legal before send.",
-      dont: "Assume prior approval still applies after wording changes.",
-      why: "Minor wording changes can alter legal interpretation.",
+      topic: "Routine asset use",
+      do: "Use the approved signature and company intro block directly from the representation pack.",
+      dont: "Wait for Brand Office approval every time a routine signature is needed.",
+      why: "Standard approved assets are meant to reduce dependency, not create it.",
     },
-  ],
+    {
+      topic: "High-risk wording",
+      do: "Route revised performance or contract wording back through governance before release.",
+      dont: "Assume earlier approval still applies after the wording is strengthened.",
+      why: "Small wording changes can materially change the promise level.",
+    },
+  ] satisfies readonly DoDontExample[],
+
   templates: [
     {
-      name: "Approval request",
-      purpose: "Submit artifact for review with complete context.",
-      whenToUse: "Any item requiring governance sign-off.",
+      name: "Approval request block",
+      purpose: "Submit high-risk or exception items with enough context for review.",
+      whenToUse: "Public copy changes, non-standard claims, new templates, and new asset variants.",
       template:
-        "Artifact: <name and link>\nChannel: <email/web/deck/doc>\nClaim classes present: <list>\nRequested approver: <role>\nDeadline: <DD MMM YYYY>\nRisk note: <if urgent or high impact>",
+        "Item: <name and link>\nWhy approval is needed: <trigger>\nChannel: <web/deck/email/document/profile>\nClaim / scope risk: <summary>\nRequested approver: <role>\nDeadline: <DD MMM YYYY>\nOwner: <name>",
       guardrails: [
-        "Attach evidence references in same request.",
-        "Include latest version identifier.",
+        "Attach the actual wording or asset under review.",
+        "State the trigger clearly instead of saying 'for approval' only.",
       ],
     },
-  ],
-} as const satisfies {
-  header: SectionHeader;
-  intro: string;
-  approvals: readonly ApprovalRule[];
-  rules: readonly string[];
-  doDont: readonly DoDontExample[];
-  templates: readonly TemplateSpec[];
-};
+  ] satisfies readonly TemplateSpec[],
+} as const;

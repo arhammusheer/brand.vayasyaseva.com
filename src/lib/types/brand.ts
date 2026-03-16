@@ -49,6 +49,66 @@ export type SectionHeader = {
   summary: string;
 };
 
+export type SectionSummaryStrip = {
+  useThisWhen: string;
+  doThis: string;
+  neverDoThis: string;
+  whoNeedsThis: string;
+};
+
+export type QuickAnswerCard = {
+  title: string;
+  roleOrTask: string;
+  tenSecondRule: string;
+  checklistItems: readonly string[];
+  fullGuideAnchor: string;
+};
+
+export type RoleGuide = {
+  role: string;
+  mustKnow: readonly string[];
+  topTasks: readonly string[];
+  commonMistakes: readonly string[];
+  escalateWhen: string;
+  relatedAnchors: readonly string[];
+};
+
+export type TaskGuide = {
+  title: string;
+  channel: string;
+  approvedScript: string;
+  topRules: readonly string[];
+  doDont: readonly DoDontExample[];
+  escalateWhen: string;
+  relatedChecklist: readonly string[];
+  fullGuideAnchor: string;
+};
+
+export type ServiceCapability = {
+  name: string;
+  approvedDescription: string;
+  includes: readonly string[];
+  notIncluded: readonly string[];
+  onRequest: readonly string[];
+  proofPoints: readonly string[];
+};
+
+export type RepresentationAsset = {
+  name: string;
+  audience: string;
+  copy: string;
+  whenToUse: string;
+  governanceLevel: "self-serve" | "approval-required";
+};
+
+export type ApprovalTrigger = {
+  title: string;
+  requiredFor: readonly string[];
+  notRequiredFor: readonly string[];
+  approverRole: string;
+  responseSla: string;
+};
+
 // Core brand content types
 export type Scenario = {
   context: string;

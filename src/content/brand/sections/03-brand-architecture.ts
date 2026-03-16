@@ -1,6 +1,7 @@
 import type {
   DoDontExample,
   SectionHeader,
+  SectionSummaryStrip,
 } from "../../../lib/types/brand";
 
 export const BRAND_ARCHITECTURE_SECTION = {
@@ -9,11 +10,18 @@ export const BRAND_ARCHITECTURE_SECTION = {
     number: "03",
     title: "Brand Architecture",
     summary:
-      "Master brand, verticals, naming conventions, and accent assignment.",
+      "Choose the right brand name and vertical before you write, share, or present anything.",
   } satisfies SectionHeader,
 
+  summaryStrip: {
+    useThisWhen: "You need to decide whether to say Vayasya or a specific vertical.",
+    doThis: "Choose one clear brand owner, use the full name first, and keep the master brand dominant.",
+    neverDoThis: "Do not abbreviate verticals, mix accents casually, or imply a joint offering without approval.",
+    whoNeedsThis: "Sales/account, leadership, HR/admin, design/marketing, and anyone preparing external material.",
+  } satisfies SectionSummaryStrip,
+
   intro:
-    "Vayasya is the master brand. Verticals operate under it with distinct functional domains and accent colors. The master brand is always visually dominant.",
+    "Use this section as a naming and ownership choice guide. Pick the right brand owner first, then apply the related naming and lockup rules.",
 
   masterBrand: {
     name: "Vayasya",

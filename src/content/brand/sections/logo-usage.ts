@@ -3,6 +3,7 @@ import type {
   DoDontExample,
   LogoVariant,
   SectionHeader,
+  SectionSummaryStrip,
   TemplateSpec,
 } from "../../../lib/types/brand";
 
@@ -11,10 +12,21 @@ export const LOGO_USAGE_SECTION = {
     id: "logo-usage",
     number: "05",
     title: "Logo Usage",
-    summary: "Protect identity through consistent lockup, spacing, and color handling.",
+    summary: "For most employees: use the approved logo pack as-is and do not edit it.",
   },
+  summaryStrip: {
+    useThisWhen: "You need a logo, signature logo, or branded asset for a real job.",
+    doThis: "Download the approved pack and use the supplied file that fits the background and channel.",
+    neverDoThis: "Do not recolor, redraw, restack, or improvise the logo.",
+    whoNeedsThis: "All employees; deeper detail below is mainly for design/marketing.",
+  } satisfies SectionSummaryStrip,
   intro:
     "Logo consistency is mandatory. The source gold logo asset is authoritative and must remain untouched. Any deviation needs explicit approval.",
+  employeeDefaults: [
+    "If you only need a logo for email, a document, a slide, or a signature, use the supplied pack and stop there.",
+    "If you need a new size or new lockup, ask for it. Do not edit the file yourself.",
+    "Use governance only for exceptions, not for routine pack usage.",
+  ],
   downloadables: [
     {
       name: "Logo Source Pack",
@@ -106,7 +118,9 @@ export const LOGO_USAGE_SECTION = {
   ],
 } as const satisfies {
   header: SectionHeader;
+  summaryStrip: SectionSummaryStrip;
   intro: string;
+  employeeDefaults: readonly string[];
   downloadables: readonly DownloadableBundle[];
   accessNote?: string;
   variants: readonly LogoVariant[];

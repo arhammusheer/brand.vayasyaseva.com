@@ -1,6 +1,7 @@
 import type {
   DoDontExample,
   SectionHeader,
+  SectionSummaryStrip,
   TemplateSpec,
 } from "../../../lib/types/brand";
 
@@ -9,42 +10,53 @@ export const PRESENTATIONS_SECTION = {
     id: "presentations",
     number: "13",
     title: "Presentations",
-    summary: "Create slide narratives that are evidence-led and decision-oriented.",
-  },
+    summary: "Use decks to explain approved scope, evidence, and decisions without adding new promises.",
+  } satisfies SectionHeader,
+
+  summaryStrip: {
+    useThisWhen: "You are building or reviewing a client-facing deck, capability deck, or decision deck.",
+    doThis: "Keep one message per slide and make sure the story stays inside approved scope and evidence.",
+    neverDoThis: "Do not let slide headlines exaggerate what the company does or what has already been achieved.",
+    whoNeedsThis: "Sales/account, leadership, design/marketing, and reviewers.",
+  } satisfies SectionSummaryStrip,
+
   intro:
-    "Presentation content must be readable in live meetings and self-explanatory when forwarded asynchronously. Slides should show context, evidence, and decisions required.",
+    "Presentation quality matters because decks are often forwarded without the presenter. Each slide should still read safely and correctly when seen out of context.",
+
   rules: [
-    "One key message per slide with a specific headline.",
-    "Use data labels and date ranges for every chart.",
-    "Annotate assumptions directly below forecast visuals.",
-    "Use status markers consistently: green, amber, red.",
-    "Close with explicit decisions needed and owners.",
+    "Use one specific message per slide.",
+    "When describing services, match the approved service map and current scope language.",
+    "Use measured or directional claims only when evidence is ready and current.",
+    "If the slide asks for a decision, state the decision owner and date on the slide.",
+    "End with the next action, not a generic thank-you slide only.",
   ],
+
   doDont: [
     {
-      topic: "Chart headline",
-      do: "Ticket backlog reduced 12% from Jan to Feb 2026 after triage revision.",
-      dont: "Operational dashboard update.",
-      why: "Descriptive headlines improve comprehension and action.",
+      topic: "Capability slide headline",
+      do: "Approved service support for workforce deployment and housekeeping in industrial environments.",
+      dont: "End-to-end industrial solution for every operational need.",
+      why: "The approved version is tighter, safer, and closer to reality.",
     },
-  ],
+    {
+      topic: "Decision slide",
+      do: "Decision required by 22 Mar 2026: approve site-readiness timeline after access confirmation.",
+      dont: "Discussion points.",
+      why: "Decision slides should make the ask explicit.",
+    },
+  ] satisfies readonly DoDontExample[],
+
   templates: [
     {
       name: "Decision slide",
-      purpose: "Present options and request a clear decision in review meetings.",
-      whenToUse: "Steering committees, client reviews, and internal governance.",
+      purpose: "Keep review decks practical and action-oriented.",
+      whenToUse: "Client reviews, internal governance, and leadership presentations.",
       template:
-        "Decision required: <statement>\nContext: <2 lines>\nOption A: <cost, timeline, risk>\nOption B: <cost, timeline, risk>\nRecommendation: <A/B with reason>\nDecision owner: <name>\nDecision date: <DD MMM YYYY>",
+        "Decision required: <statement>\nContext: <two lines>\nOptions: <A/B with scope, risk, timing>\nRecommendation: <choice>\nOwner: <name>\nDecision date: <DD MMM YYYY>",
       guardrails: [
-        "Limit to two or three options.",
-        "State recommendation and owner explicitly.",
+        "State the recommendation directly.",
+        "Do not hide assumptions outside the slide if they change the decision.",
       ],
     },
-  ],
-} as const satisfies {
-  header: SectionHeader;
-  intro: string;
-  rules: readonly string[];
-  doDont: readonly DoDontExample[];
-  templates: readonly TemplateSpec[];
-};
+  ] satisfies readonly TemplateSpec[],
+} as const;

@@ -3,6 +3,7 @@ import type {
   DoDontExample,
   Scenario,
   SectionHeader,
+  SectionSummaryStrip,
   TemplateSpec,
 } from "../../../lib/types/brand";
 import { COLOR_TOKENS } from "../fundamentals";
@@ -12,10 +13,21 @@ export const COLOR_PALETTE_SECTION = {
     id: "color-palette",
     number: "06",
     title: "Color Palette",
-    summary: "Apply the harmonized token system to keep brand hierarchy, readability, and semantic clarity intact.",
+    summary: "For non-design staff: do not choose colors manually; use approved templates and assets.",
   },
+  summaryStrip: {
+    useThisWhen: "You are using or reviewing a branded asset and need to know whether color decisions are allowed.",
+    doThis: "Stay inside approved templates and one approved accent context.",
+    neverDoThis: "Do not invent colors, mix vertical accents casually, or decorate routine material.",
+    whoNeedsThis: "All employees; token details below are for design, marketing, and implementation work.",
+  } satisfies SectionSummaryStrip,
   intro:
     "Use the token system exactly. Neutrals carry operational readability, one vertical or master-brand color carries ownership context, and semantic/data-viz colors carry meaning.",
+  employeeDefaults: [
+    "If you are not designing from scratch, use approved templates and do not touch the palette.",
+    "Use one clear brand owner per artifact. Do not mix vertical colors to make something feel richer.",
+    "Treat semantic colors as meaning, not decoration.",
+  ],
   swatches: COLOR_TOKENS,
   scenarios: [
     {
@@ -76,7 +88,9 @@ export const COLOR_PALETTE_SECTION = {
   ],
 } as const satisfies {
   header: SectionHeader;
+  summaryStrip: SectionSummaryStrip;
   intro: string;
+  employeeDefaults: readonly string[];
   swatches: readonly ColorSwatch[];
   scenarios: readonly Scenario[];
   rules: readonly string[];

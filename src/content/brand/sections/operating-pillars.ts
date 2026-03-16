@@ -2,6 +2,7 @@ import type {
   DoDontExample,
   Pillar,
   SectionHeader,
+  SectionSummaryStrip,
   TemplateSpec,
 } from "../../../lib/types/brand";
 
@@ -10,82 +11,112 @@ export const OPERATING_PILLARS_SECTION = {
     id: "operating-pillars",
     number: "04",
     title: "Operating Pillars",
-    summary: "Four pillars define execution quality across every client engagement.",
-  },
+    summary: "Daily behavior standards for handoff quality, escalation, compliance, and client interaction.",
+  } satisfies SectionHeader,
+
+  summaryStrip: {
+    useThisWhen: "You need to know how Vayasya should behave in live work, not just how it should sound in writing.",
+    doThis: "Use the pillars as behavior checks during handoff, updates, visits, and escalation.",
+    neverDoThis: "Do not treat the pillars as poster values with no visible action.",
+    whoNeedsThis: "Field/site teams, supervisors, account owners, leadership, and reviewers.",
+  } satisfies SectionSummaryStrip,
+
   intro:
-    "Pillars are non-negotiable operating behaviors. They convert brand values into daily execution standards and measurable review points.",
+    "The pillars are daily operating behaviors. They matter most when work is under pressure, when something changes, or when the client needs a clear answer.",
+
   pillars: [
     {
       name: "Clarity",
-      definition: "Every deliverable names owner, scope, timeline, and acceptance criteria.",
+      definition: "Every update should make the current situation understandable without a follow-up call.",
       behaviors: [
-        "Use explicit acceptance criteria in statements of work.",
-        "Annotate dependencies and assumptions in client updates.",
+        "Name the owner, status, next step, and timing in every update.",
+        "State what is included and what is not included before work starts.",
+        "Use plain language when handing off tasks across shifts or teams.",
       ],
       redFlags: [
-        "Undefined responsibilities",
-        "Open-ended delivery language",
+        "Update has no owner or date",
+        "Scope is implied instead of written",
+        "People leave a meeting with different interpretations",
       ],
     },
     {
       name: "Reliability",
-      definition: "Commitments are realistic, tracked, and followed through visibly.",
+      definition: "Commitments should be realistic, visible, and tracked until closed.",
       behaviors: [
-        "Maintain dated status logs.",
-        "Escalate risks before SLA breach windows.",
+        "Commit only to dates and actions you own or that have been confirmed.",
+        "Raise risk before the deadline is missed, not after.",
+        "Close the loop with the client or internal owner once the action is complete.",
       ],
-      redFlags: ["Repeated timeline slippage", "Last-minute surprise escalations"],
+      redFlags: [
+        "Repeated 'we are checking' updates with no movement",
+        "Surprise delay messaging",
+        "Verbal promises not backed by written follow-through",
+      ],
     },
     {
       name: "Accountability",
-      definition: "Decisions and deviations are recorded with responsible approvers.",
+      definition: "Decisions, changes, and exceptions should always have a named owner.",
       behaviors: [
-        "Maintain approval trail for contract-impacting decisions.",
-        "Capture rationale for changes in a revision table.",
+        "Record who approved the decision and what changed.",
+        "Escalate when a request moves beyond your authority or approved scope.",
+        "Own the message even when the news is negative.",
       ],
-      redFlags: ["No audit trail", "Unapproved scope changes"],
+      redFlags: [
+        "Everyone references 'the team' but no person is named",
+        "Scope changes are discussed but not recorded",
+        "People assume prior approval still applies after wording changes",
+      ],
     },
     {
       name: "Respect",
-      definition: "Communication remains factual, precise, and culturally professional.",
+      definition: "Professional discipline should show in tone, appearance, and client handling.",
       behaviors: [
-        "Use neutral tone in escalation notes.",
-        "Avoid blame-focused wording and undocumented assumptions.",
+        "Use factual, calm language in delays or disagreements.",
+        "Show up with approved identity, appearance, and purpose on site visits.",
+        "Respect the client's time by making every meeting or update action-ready.",
       ],
-      redFlags: ["Adversarial language", "Passive-aggressive statements"],
+      redFlags: [
+        "Blame-focused or emotional language",
+        "Casual or unclear site introductions",
+        "Long updates that hide the actual decision or request",
+      ],
     },
-  ],
+  ] satisfies readonly Pillar[],
+
   rules: [
-    "Every kickoff must map deliverables to at least one pillar.",
-    "Monthly reviews must include pillar evidence, not opinions.",
-    "A repeated red flag in two cycles triggers governance review.",
+    "If an update does not tell the receiver what changed, what to do, and by when, it is not ready.",
+    "If a date or promise is not confirmed, label it as pending or target-based.",
+    "If you are not the owner, do not make the commitment on behalf of someone else.",
+    "If the interaction is client-facing, the pillar test applies before the pre-share test.",
   ],
+
   doDont: [
     {
-      topic: "Risk reporting",
-      do: "Dependency on client data can delay milestone 2 by three days; mitigation request sent on 10 Feb 2026.",
-      dont: "There might be some delays if things do not go well.",
-      why: "Concrete language enables action and accountability.",
+      topic: "Shift handoff",
+      do: "Current status: material delayed. Owner: Ankit. Client update due: 17:00 IST today. Next action: vendor confirmation by 15:00 IST.",
+      dont: "Material issue still there. Team is handling it.",
+      why: "The approved version leaves no doubt about ownership or next step.",
     },
-  ],
+    {
+      topic: "Early escalation",
+      do: "Risk identified: access approval still pending. Impact: tomorrow's start may move by one day if not cleared by 18:00 IST.",
+      dont: "We may face some issue tomorrow if things do not work out.",
+      why: "Specific escalation protects reliability and allows intervention.",
+    },
+  ] satisfies readonly DoDontExample[],
+
   templates: [
     {
-      name: "Pillar evidence log",
-      purpose: "Capture objective proof for monthly operating reviews.",
-      whenToUse: "End of each month per active engagement.",
+      name: "Shift handoff block",
+      purpose: "Keep field-to-field and field-to-supervisor handoffs usable without extra calls.",
+      whenToUse: "End of shift, site status transfer, and urgent operating updates.",
       template:
-        "Engagement: <name>\nMonth: <MMM YYYY>\nPillar: <Clarity/Reliability/Accountability/Respect>\nEvidence: <fact with date>\nRisk: <if any>\nOwner: <name>\nAction by: <DD MMM YYYY>",
+        "Current status: <green/amber/red>\nWhat changed: <fact>\nOwner: <name>\nAction due: <task and time>\nClient impact: <none or specific>\nEscalation needed: <yes/no and to whom>",
       guardrails: [
-        "No subjective adjectives without evidence.",
-        "Each entry must have a date.",
+        "Do not leave owner blank.",
+        "Use dated or timed actions only.",
+        "If client impact exists, move to the relevant escalation channel immediately.",
       ],
     },
-  ],
-} as const satisfies {
-  header: SectionHeader;
-  intro: string;
-  pillars: readonly Pillar[];
-  rules: readonly string[];
-  doDont: readonly DoDontExample[];
-  templates: readonly TemplateSpec[];
-};
+  ] satisfies readonly TemplateSpec[],
+} as const;

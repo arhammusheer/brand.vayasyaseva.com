@@ -2,6 +2,7 @@ import type {
   DoDontExample,
   MeetingStandard,
   SectionHeader,
+  SectionSummaryStrip,
   TemplateSpec,
 } from "../../../lib/types/brand";
 
@@ -9,59 +10,95 @@ export const MEETINGS_SECTION = {
   header: {
     id: "meetings",
     number: "15",
-    title: "Meetings",
-    summary: "Run meetings with pre-read, clear decisions, and documented owners.",
-  },
+    title: "Meetings, Calls & Site Visits",
+    summary: "Run meetings and site interactions with clear purpose, approved identity, and action-ready closeout.",
+  } satisfies SectionHeader,
+
+  summaryStrip: {
+    useThisWhen: "You are going into a meeting, call, or site visit and need to know how to represent Vayasya correctly.",
+    doThis: "Open with role and purpose, stay inside approved scope, and end with one clear next step.",
+    neverDoThis: "Do not arrive casually, speak beyond your authority, or leave without a recorded outcome.",
+    whoNeedsThis: "Field/site teams, supervisors, sales/account, leadership, and client-facing staff.",
+  } satisfies SectionSummaryStrip,
+
   intro:
-    "Meeting quality determines execution speed. Every meeting should produce clear outcomes, owners, and dated follow-ups.",
+    "The brand shows up most visibly in live interaction. Meetings and site visits should feel prepared, disciplined, and easy to trust.",
+
   standards: [
     {
-      meetingType: "Weekly delivery review",
-      requiredInputs: ["status dashboard", "risk log", "open dependencies"],
-      requiredOutputs: ["updated status", "owner actions", "next checkpoint"],
-      timeboxMinutes: 45,
-      ownerRole: "engagement manager",
+      meetingType: "Client review or update call",
+      requiredInputs: ["agenda or purpose", "current status", "dependencies or decisions needed"],
+      requiredOutputs: ["clear next step", "owner", "dated checkpoint"],
+      timeboxMinutes: 30,
+      ownerRole: "account owner or supervisor",
     },
     {
-      meetingType: "Scope change review",
-      requiredInputs: ["change request", "impact assessment", "contract references"],
-      requiredOutputs: ["approve/reject/defer decision", "commercial impact note"],
-      timeboxMinutes: 30,
-      ownerRole: "account lead",
+      meetingType: "Site visit",
+      requiredInputs: ["approved introduction", "clear purpose", "ID/uniform readiness if applicable"],
+      requiredOutputs: ["observations shared", "owner for next step", "visit closeout note"],
+      timeboxMinutes: 45,
+      ownerRole: "site supervisor or designated owner",
     },
+  ] satisfies readonly MeetingStandard[],
+
+  siteVisitRules: [
+    "Carry the correct ID and use approved uniform or appearance guidance for the context.",
+    "Introduce yourself with name, company, role, and purpose within the first interaction.",
+    "Use only the approved service description relevant to the visit.",
+    "Do not treat site observations as approved commitments until the owner confirms them.",
+    "Close every visit with the next step, owner, and timing.",
   ],
+
+  callRules: [
+    "Start calls with identity and purpose, not small talk that delays the point.",
+    "If a decision is made verbally, confirm it in writing after the call.",
+    "If the conversation becomes commercial, contractual, or out-of-scope, move to the correct owner.",
+  ],
+
   rules: [
-    "Share agenda and pre-read at least 24 hours in advance.",
-    "Begin with objective and expected decision.",
-    "Capture decision log live with owner and due date.",
-    "Close with readback of decisions and unresolved items.",
+    "Share agenda or purpose in advance when the interaction is planned.",
+    "Use one owner per action item.",
+    "Keep meeting and visit notes factual; do not record speculation as decision.",
+    "Escalate unclear commitments before they become assumed commitments.",
   ],
+
   doDont: [
     {
-      topic: "Meeting closure",
-      do: "Decision: approve revised milestone plan. Owner: Priya. Due date: 12 Feb 2026.",
-      dont: "We discussed many options and will continue later.",
-      why: "Clear closure prevents execution drift.",
+      topic: "Site introduction",
+      do: "I am Neha from Vayasya Seva. I am here for today's housekeeping and deployment review. I will close with the agreed next action before I leave.",
+      dont: "I am from Vayasya. Just here to inspect things.",
+      why: "The approved version makes identity, purpose, and closeout discipline clear.",
     },
-  ],
+    {
+      topic: "Visit closeout",
+      do: "Today's next step is access confirmation by 17:00 IST. Owner: Mahesh. We will send the written summary after the visit.",
+      dont: "We will discuss and revert.",
+      why: "Clear closeout protects trust and follow-through.",
+    },
+  ] satisfies readonly DoDontExample[],
+
   templates: [
     {
-      name: "Meeting minute format",
-      purpose: "Capture outcomes in a searchable and auditable format.",
-      whenToUse: "All formal client and internal decision meetings.",
+      name: "Site visit closeout note",
+      purpose: "Turn live interaction into a usable record.",
+      whenToUse: "After site visits, review meetings, and important client calls.",
       template:
-        "Meeting: <name>\nDate and time: <DD MMM YYYY, HH:MM IST>\nAttendees: <names>\nAgenda: <bullets>\nDecisions: <numbered list>\nActions: <owner, task, due date>\nRisks: <new/updated>\nNext meeting: <date>",
+        "Visit / meeting: <name>\nDate and time: <DD MMM YYYY, HH:MM IST>\nPurpose: <why we met>\nKey observations: <facts>\nAgreed next step: <action>\nOwner: <name>\nCheckpoint: <date/time>",
       guardrails: [
-        "Publish minutes within one business day.",
-        "Do not record off-the-record statements in formal minutes.",
+        "Do not turn observations into commitments without owner confirmation.",
+        "Send the note on the same day when the interaction affects delivery.",
       ],
     },
-  ],
-} as const satisfies {
-  header: SectionHeader;
-  intro: string;
-  standards: readonly MeetingStandard[];
-  rules: readonly string[];
-  doDont: readonly DoDontExample[];
-  templates: readonly TemplateSpec[];
-};
+    {
+      name: "Call opening line",
+      purpose: "Make phone and review calls sound prepared from the first sentence.",
+      whenToUse: "Client calls, review calls, and escalation calls.",
+      template:
+        "Hello, this is <name> from Vayasya <vertical/team if relevant>. I am calling regarding <topic>. Current status is <status>, and I need to confirm <specific point>.",
+      guardrails: [
+        "State identity and purpose first.",
+        "Move scope or commercial decisions to the correct owner.",
+      ],
+    },
+  ] satisfies readonly TemplateSpec[],
+} as const;

@@ -13,6 +13,39 @@ export const CHANGELOG_SECTION = {
 
   entries: [
     {
+      version: "v4.0.0",
+      date: "16 Mar 2026",
+      summary:
+        "Major handbook repositioning: rebuilt the guide around role-first and task-first quick reference for field/site and client-facing teams.",
+      changes: [
+        {
+          type: "changed" as const,
+          description:
+            "Rewrote Overview around role entry points, task cards, and 10-second guidance.",
+        },
+        {
+          type: "changed" as const,
+          description:
+            "Replaced manifesto-heavy identity framing with approved company intros, service map, and scope boundaries aligned to the public site.",
+        },
+        {
+          type: "changed" as const,
+          description:
+            "Expanded communication guidance to cover phone, WhatsApp, quotation notes, site visits, and live interaction scripts.",
+        },
+        {
+          type: "changed" as const,
+          description:
+            "Shifted templates and assets to a self-serve representation pack model for routine approved use.",
+        },
+        {
+          type: "added" as const,
+          description:
+            "Added plain-language scenario index for WhatsApp, quotation, site visit, LinkedIn, recruiter, supervisor, and delay questions.",
+        },
+      ],
+    },
+    {
       version: "v3.0.0",
       date: "12 Feb 2026",
       summary:

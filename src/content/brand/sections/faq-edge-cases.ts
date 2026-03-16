@@ -2,6 +2,7 @@ import type {
   DoDontExample,
   QASection,
   SectionHeader,
+  SectionSummaryStrip,
   TemplateSpec,
 } from "../../../lib/types/brand";
 
@@ -9,66 +10,109 @@ export const FAQ_EDGE_CASES_SECTION = {
   header: {
     id: "faq-edge-cases",
     number: "19",
-    title: "FAQ / Edge Cases",
-    summary: "Resolve common exceptions without breaking brand or compliance controls.",
-  },
+    title: "Common Scenarios & Edge Cases",
+    summary: "Plain-language answers for the real questions employees ask during the workday.",
+  } satisfies SectionHeader,
+
+  summaryStrip: {
+    useThisWhen: "You have a practical question and do not know which main section to open.",
+    doThis: "Search this section by plain-language terms and jump to the linked main guidance if needed.",
+    neverDoThis: "Do not assume an unlisted scenario is automatically allowed.",
+    whoNeedsThis: "All employees, especially people under time pressure.",
+  } satisfies SectionSummaryStrip,
+
   intro:
-    "This section covers edge-case decisions that frequently cause inconsistency. If an issue is not listed, escalate to governance before publishing.",
+    "This index is written for browser-find and quick lookup. Use the tags exactly as an employee would search for them during real work.",
+
   faq: [
     {
-      question: "Can we combine two vertical accents in one one-pager?",
+      question: "WhatsApp: can I send a client update on WhatsApp?",
       answer:
-        "Only when the one-pager represents a formally joint offering and both vertical owners approve in writing.",
-      tags: ["color", "multi-vertical"],
+        "Yes for short operational updates with status, owner, and next checkpoint. No for new commitments, pricing, legal wording, or anything that changes scope.",
+      tags: ["whatsapp", "client update", "message"],
     },
     {
-      question: "Can we use guarantee language in a sales deck?",
+      question: "Phone: how should I open a client call?",
       answer:
-        "No. Use guarantee language only if legal confirms contractual basis and exact clause mapping.",
-      tags: ["claims", "legal"],
+        "State your name, company, role or team, and purpose in the first sentence. Keep the call scope-specific and move risky commitments to the right owner.",
+      tags: ["phone", "call", "intro"],
     },
     {
-      question: "Can we shorten dates to numeric format in quick updates?",
-      answer: "Yes, use DD/MM/YYYY and keep 24-hour time with IST for clarity.",
-      tags: ["writing", "standards"],
+      question: "Quotation: what should the cover note say?",
+      answer:
+        "State the scope, key assumptions, owner, and next action. Do not add new promises or broaden the approved service description in the note.",
+      tags: ["quotation", "proposal", "cover note"],
     },
     {
-      question: "Can we resize the lockup so vertical name is equal to Vayasya?",
-      answer: "No. Lockup hierarchy is fixed and must preserve parent prominence.",
-      tags: ["logo", "identity"],
+      question: "Site visit: what should I say when I arrive?",
+      answer:
+        "Introduce yourself with name, company, role, and visit purpose. Close the visit with the next step, owner, and timing.",
+      tags: ["site visit", "arrival", "intro"],
     },
-  ],
+    {
+      question: "Uniform / ID card: when do these matter for brand representation?",
+      answer:
+        "Whenever you are in a client-facing visit or on-site context. Use approved identity and appearance guidance so the company presentation is professional and consistent.",
+      tags: ["uniform", "id card", "appearance"],
+    },
+    {
+      question: "Recruiter: how do I describe Vayasya to candidates?",
+      answer:
+        "Describe Vayasya as a compliance-first industrial services company, not a staffing marketplace or job portal.",
+      tags: ["recruiter", "candidate", "hr"],
+    },
+    {
+      question: "Supervisor: can I confirm a date on behalf of another owner?",
+      answer:
+        "No. You can communicate the current target and dependency status, but confirmed commitments should come from the owner or approved plan.",
+      tags: ["supervisor", "date", "commitment"],
+    },
+    {
+      question: "LinkedIn / social: can I write my own company description?",
+      answer:
+        "Use the approved short company intro and keep it general. Do not publish unapproved scale, performance, or service claims in personal profiles.",
+      tags: ["linkedin", "social", "profile"],
+    },
+    {
+      question: "Client visit: what if the client asks for an adjacent service?",
+      answer:
+        "State what is in scope for the current discussion and say the wider requirement will be reviewed before confirmation.",
+      tags: ["client visit", "scope", "adjacent service"],
+    },
+    {
+      question: "Delay: what is the minimum acceptable update?",
+      answer:
+        "Current status, what changed, impact, owner, and next checkpoint. If cost, scope, or contract is affected, escalate.",
+      tags: ["delay", "status", "escalation"],
+    },
+  ] satisfies readonly QASection[],
+
   rules: [
-    "When in doubt, default to stricter compliance-safe wording.",
-    "Document the edge-case decision and owner in the revision log.",
-    "Escalate unresolved edge cases before external release.",
+    "Write scenario titles in plain-language employee terms.",
+    "If a scenario is not listed and creates scope or claim risk, escalate before responding externally.",
+    "Keep tags simple so browser-find works for real work language.",
   ],
+
   doDont: [
     {
-      topic: "Unlisted exception",
-      do: "Raise governance ticket before publishing non-standard claim format.",
-      dont: "Publish first and ask for retroactive approval.",
-      why: "Pre-approval avoids legal and reputational risk.",
+      topic: "Unlisted scenario",
+      do: "Use the closest approved guidance and escalate if the gap changes scope, promise level, or public wording.",
+      dont: "Assume a new situation gives permission to improvise.",
+      why: "Edge cases still need the same brand and claim discipline.",
     },
-  ],
+  ] satisfies readonly DoDontExample[],
+
   templates: [
     {
-      name: "Edge-case decision log",
-      purpose: "Track non-standard decisions and rationale for future reuse.",
-      whenToUse: "Any exception to default brand or language rules.",
+      name: "New scenario log",
+      purpose: "Capture recurring questions so the handbook becomes easier to use over time.",
+      whenToUse: "Any repeated employee question that is not already in the scenario index.",
       template:
-        "Issue: <what is non-standard>\nContext: <channel/client/use case>\nRisk: <legal/brand/operational>\nDecision: <approved action>\nApprover: <name and role>\nValid until: <DD MMM YYYY>",
+        "Scenario title: <plain-language question>\nChannel: <where it happened>\nRisk type: <brand/claim/scope/operational>\nApproved answer: <short answer>\nLinked section: <main anchor>\nOwner: <name>",
       guardrails: [
-        "Do not reuse expired edge-case approvals.",
-        "Link supporting evidence if claim-related.",
+        "Write the title the way an employee would search for it.",
+        "Link the scenario back to the main section that governs it.",
       ],
     },
-  ],
-} as const satisfies {
-  header: SectionHeader;
-  intro: string;
-  faq: readonly QASection[];
-  rules: readonly string[];
-  doDont: readonly DoDontExample[];
-  templates: readonly TemplateSpec[];
-};
+  ] satisfies readonly TemplateSpec[],
+} as const;

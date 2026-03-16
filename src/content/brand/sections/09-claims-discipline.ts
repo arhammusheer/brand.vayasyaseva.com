@@ -2,6 +2,7 @@ import type {
   ClaimRule,
   DoDontExample,
   SectionHeader,
+  SectionSummaryStrip,
   TemplateSpec,
 } from "../../../lib/types/brand";
 
@@ -10,181 +11,189 @@ export const CLAIMS_DISCIPLINE_SECTION = {
     id: "claims-discipline",
     number: "10",
     title: "Claims Discipline",
-    summary: "Classify every claim by evidence level before publication.",
+    summary: "Use the claim ladder before you say anything about services, timelines, performance, or guarantees.",
   } satisfies SectionHeader,
 
-  intent: "Every external statement carries risk. Unsubstantiated claims damage credibility and invite legal exposure. This section provides a classification system that determines what you can say, what evidence you need, and who must approve it.",
+  summaryStrip: {
+    useThisWhen: "You are about to describe capability, timeline, performance, compliance, or a promise.",
+    doThis: "Ask what kind of claim it is, what evidence exists, and whether approval is required.",
+    neverDoThis: "Do not use strong words to sound confident when you cannot prove them.",
+    whoNeedsThis: "Sales/account, leadership, recruiters, supervisors, reviewers, and anyone sending client-facing copy.",
+  } satisfies SectionSummaryStrip,
 
-  intro: "All claims must be classified as aspirational, directional, measured, or contractual. Claim class determines allowed wording, evidence needs, and approval path.",
+  intro:
+    "Most claim risk comes from casual language, not bad intent. Use this section to decide what you can safely say, what you must soften, and when the answer is to remove the claim entirely.",
+
+  decisionLadder: [
+    "Can we prove this right now with current evidence? If no, remove it or downgrade it.",
+    "Is this about what we intend, what we are working toward, what we measured, or what the contract says?",
+    "Does this create a legal, commercial, or expectation risk if repeated by the receiver?",
+    "If the wording changes scope or promise level, does it need approval before release?",
+  ],
 
   claimRules: [
     {
       claimType: "aspirational",
-      allowedPattern: "We aim to... / Our intent is... / We strive to...",
-      requiredEvidence: "Strategic intent note approved by leadership within last 12 months.",
-      prohibitedPattern: "We always... / Guaranteed outcome... / We will definitely...",
-      reviewTrigger: "Any external publication or client-facing material.",
+      allowedPattern: "We aim to... / Our intent is... / We are building toward...",
+      requiredEvidence: "Leadership-approved direction or current plan.",
+      prohibitedPattern: "We already do this / This is guaranteed / This will definitely happen.",
+      reviewTrigger: "Public or client-facing use outside routine internal planning.",
     },
     {
       claimType: "directional",
-      allowedPattern: "We are improving... / We are working toward... / Our focus is on...",
-      requiredEvidence: "Current initiative log with milestone dates and owner assignments.",
-      prohibitedPattern: "Already achieved... / Market-leading performance... / Completed...",
-      reviewTrigger: "Investor, partner, or public channels.",
+      allowedPattern: "We are working toward... / We are currently strengthening...",
+      requiredEvidence: "Active initiative with owner and current status.",
+      prohibitedPattern: "Delivered capability described as already complete when it is still in progress.",
+      reviewTrigger: "Decks, proposals, leadership notes, or client-facing updates.",
     },
     {
       claimType: "measured",
-      allowedPattern: "In Q4 FY25, response time improved by 18%... / Based on 1,248 tickets...",
-      requiredEvidence: "Documented baseline, measurement method, sample size, and date range.",
-      prohibitedPattern: "Improved significantly... / Much better... / Dramatically increased...",
-      reviewTrigger: "Any KPI claim in client or public material.",
+      allowedPattern: "Based on <period> and <sample>, <metric> moved from X to Y.",
+      requiredEvidence: "Current data source, method, time range, and owner.",
+      prohibitedPattern: "Much faster / significantly better / best without numbers.",
+      reviewTrigger: "Any performance or comparison claim.",
     },
     {
       claimType: "contractual",
-      allowedPattern: "As per MSA clause 4.2, first response SLA is 24 business hours.",
-      requiredEvidence: "Signed contract reference and legal-reviewed clause text.",
-      prohibitedPattern: "Contract-level commitment without clause citation.",
-      reviewTrigger: "Proposal, SoW, MSA, and legal notices.",
+      allowedPattern: "As stated in the signed contract / clause <x>...",
+      requiredEvidence: "Executed contract wording or approved legal reference.",
+      prohibitedPattern: "Promise language that is not tied to signed terms.",
+      reviewTrigger: "Quotations, proposals, contracts, or legal/commercial communication.",
     },
   ] satisfies readonly ClaimRule[],
 
   evidenceTiers: [
     {
-      tier: "Aspirational",
-      description: "Forward-looking intent without commitment.",
+      tier: "Service capability",
+      description: "Use approved service map and current scope language.",
       validEvidence: [
-        "Board-approved strategic direction document",
-        "Leadership team meeting notes with dated decision",
-        "Annual planning document with stated goals",
+        "Current approved company description",
+        "Approved service capability text",
       ],
       invalidEvidence: [
-        "Verbal discussion without documentation",
-        "Individual opinion or preference",
-        "Draft strategy not yet approved",
-      ],
-      expirationDays: 365,
-      refreshProcess: "Re-confirm with leadership during annual planning cycle.",
-    },
-    {
-      tier: "Directional",
-      description: "Active work in progress with visible momentum.",
-      validEvidence: [
-        "Project plan with assigned owner and milestones",
-        "Sprint board showing active work items",
-        "Initiative tracker with status updates within 30 days",
-      ],
-      invalidEvidence: [
-        "Planned but not started initiative",
-        "Completed project (use measured instead)",
-        "Initiative on hold or paused",
-      ],
-      expirationDays: 90,
-      refreshProcess: "Update initiative status quarterly. Stale initiatives require re-approval.",
-    },
-    {
-      tier: "Measured",
-      description: "Quantified result with documented methodology.",
-      validEvidence: [
-        "Analytics report with date range and methodology",
-        "Survey results with sample size and collection period",
-        "Performance dashboard export with baseline comparison",
-      ],
-      invalidEvidence: [
-        "Anecdotal improvement without numbers",
-        "Estimated or projected figures",
-        "Data older than 90 days without refresh",
-      ],
-      expirationDays: 90,
-      refreshProcess: "Re-run measurement quarterly. Update claim text with current figures.",
-    },
-    {
-      tier: "Contractual",
-      description: "Legally binding commitment with enforcement.",
-      validEvidence: [
-        "Signed MSA, SoW, or NDA with specific clause reference",
-        "Legal-reviewed commitment language",
-        "Amendment or addendum with dated signatures",
-      ],
-      invalidEvidence: [
-        "Email agreement without contract",
-        "Verbal commitment",
-        "Draft contract not yet executed",
+        "What someone said on a call",
+        "What we hope to offer later",
       ],
       expirationDays: null,
-      refreshProcess: "Valid until contract termination or amendment. Track contract expiry dates.",
+      refreshProcess: "Refresh when the public company description or approved capability changes.",
+    },
+    {
+      tier: "Timeline or readiness",
+      description: "Use only confirmed dates or clearly qualified targets.",
+      validEvidence: [
+        "Named owner confirmation",
+        "Approved project or execution plan",
+      ],
+      invalidEvidence: [
+        "Optimistic guess",
+        "Verbal assurance from a non-owner",
+      ],
+      expirationDays: 30,
+      refreshProcess: "Reconfirm before each external use.",
+    },
+    {
+      tier: "Performance or scale",
+      description: "Use only when data, period, and sample are current.",
+      validEvidence: [
+        "Current report with methodology",
+        "Owned dashboard export with date range",
+      ],
+      invalidEvidence: [
+        "Anecdotes",
+        "Old figures reused without refresh",
+      ],
+      expirationDays: 90,
+      refreshProcess: "Refresh or remove when older than 90 days.",
+    },
+    {
+      tier: "Contract or compliance promise",
+      description: "Use only the approved legal or signed wording.",
+      validEvidence: [
+        "Executed contract clause",
+        "Legal-approved text",
+      ],
+      invalidEvidence: [
+        "Paraphrased memory",
+        "Commercial assumption not in the signed terms",
+      ],
+      expirationDays: null,
+      refreshProcess: "Valid until the signed agreement changes or expires.",
     },
   ],
 
   legalSafePatterns: [
-    "Use: subject to scope, data quality, and signed agreement.",
-    "Use: target, estimate, expected, based on current inputs.",
-    "Use: as defined in the executed contract.",
-    "Use: based on data from [date range].",
-    "Use: in our experience, typically...",
-    "Avoid: guaranteed, assured, fail-proof, no-risk.",
-    "Avoid: always, never, 100%, all cases.",
-    "Avoid: best, leading, superior (without cited evidence).",
+    "Use: based on current approved scope.",
+    "Use: target date, subject to required approvals or dependencies.",
+    "Use: as defined in the signed agreement.",
+    "Use: based on data from <date range>.",
+    "Avoid: guaranteed, zero-risk, fail-proof, immediate.",
+    "Avoid: best, leading, unmatched, superior.",
+    "Avoid: always, never, every time, no issue.",
+  ],
+
+  fieldExamples: [
+    {
+      context: "Deployment start date",
+      safe: "We are targeting deployment on 22 Mar 2026, subject to final client approval and document readiness.",
+      unsafe: "Deployment will definitely start on 22 Mar 2026.",
+    },
+    {
+      context: "Compliance statement",
+      safe: "We operate with compliance-first controls and can confirm the exact requirement set for this scope.",
+      unsafe: "Everything is fully compliant in every case.",
+    },
+    {
+      context: "Maintenance capability",
+      safe: "We can review maintenance support for this requirement within approved scope.",
+      unsafe: "We handle all maintenance needs end to end.",
+    },
+    {
+      context: "Performance statement",
+      safe: "Based on the current reporting period, response time improved from X to Y.",
+      unsafe: "Our response time is far better now.",
+    },
   ],
 
   rules: [
-    "Every external claim must include a claim class tag in draft review.",
-    "Measured claims require timestamped source data and owner sign-off.",
-    "Contractual claims require legal-approved wording; no paraphrasing.",
-    "If evidence is missing, downgrade claim class or remove claim.",
-    "Evidence older than 90 days must be refreshed before publication.",
-    "Comparative claims (better than, faster than) always require measured evidence.",
+    "If you cannot prove it, remove it or soften it.",
+    "If a date is still dependent on someone else's input, label it as a target.",
+    "If a sentence sounds stronger after a last-minute edit, re-review the claim class.",
+    "If the statement can be repeated as a promise, treat it as a higher-risk claim.",
+    "When in doubt, use the approved service description instead of improvising capability language.",
   ],
 
   doDont: [
     {
-      topic: "Measured claim",
-      do: "Average ticket closure time reduced from 26 to 21 hours between Oct-Dec 2025 across 1,248 tickets.",
-      dont: "Ticket closure is now much faster.",
-      why: "Measured claim must include baseline, value, period, and sample.",
+      topic: "Timeline claim",
+      do: "We are targeting the site start on 22 Mar 2026, subject to final access approval.",
+      dont: "The site will definitely start on 22 Mar 2026.",
+      why: "Qualified language reflects real dependencies.",
     },
     {
-      topic: "Contractual language",
-      do: "Payment terms are as stated in Section 7 of the signed agreement.",
-      dont: "Payment terms are flexible and can be adjusted anytime.",
-      why: "Contract terms must align exactly with signed documentation.",
+      topic: "Capability claim",
+      do: "For this scope, we can review maintenance support within approved service boundaries.",
+      dont: "We handle every type of maintenance with no issue.",
+      why: "Scope-first wording protects credibility and delivery.",
     },
     {
-      topic: "Aspirational statement",
-      do: "We are building toward 24/7 support availability as a strategic priority.",
-      dont: "We offer 24/7 support.",
-      why: "Aspirational intent is different from delivered capability.",
-    },
-    {
-      topic: "Directional update",
-      do: "Our team is implementing automated monitoring, targeted for Q2 2026 completion.",
-      dont: "We have advanced monitoring capabilities.",
-      why: "Work in progress is not a delivered feature.",
+      topic: "Performance claim",
+      do: "Based on the Jan-Feb 2026 reporting period, response time moved from X to Y.",
+      dont: "Our response time is much better now.",
+      why: "Measured claims need data, period, and method.",
     },
   ] satisfies readonly DoDontExample[],
 
   templates: [
     {
-      name: "Claim review worksheet",
-      purpose: "Validate each claim before release.",
-      whenToUse: "Proposals, website updates, decks, and press mentions.",
+      name: "Claim check block",
+      purpose: "Review risky wording quickly before release.",
+      whenToUse: "Quotations, proposals, decks, web copy, leadership notes, and high-risk email text.",
       template:
-        "Claim text: <statement>\nClaim class: <aspirational/directional/measured/contractual>\nEvidence source: <file/link>\nEvidence owner: <name>\nLast verified: <DD MMM YYYY>\nExpiration: <date when refresh needed>\nApprover: <role/name>\nRelease channel: <doc/web/email>",
+        "Claim text: <statement>\nClaim type: <aspirational/directional/measured/contractual>\nEvidence source: <file or approved text>\nOwner: <name>\nNeeds approval: <yes/no>\nApproved wording used: <yes/no>",
       guardrails: [
-        "No empty evidence field for measured or contractual claims.",
-        "If verification is older than 90 days, revalidate before release.",
-        "Keep evidence file linked, not embedded.",
-      ],
-    },
-    {
-      name: "Evidence refresh request",
-      purpose: "Request updated data for stale claims.",
-      whenToUse: "When claim evidence is approaching 90-day expiration.",
-      template:
-        "Original claim: <statement>\nEvidence last updated: <DD MMM YYYY>\nData owner: <name>\nRefresh deadline: <DD MMM YYYY>\nNew data required: <specific metrics/sources>",
-      guardrails: [
-        "Request at least 10 business days before publication.",
-        "If data is unavailable, downgrade claim class.",
+        "If evidence is missing, remove or downgrade the claim.",
+        "If the wording changes promise level, re-review it before send.",
       ],
     },
   ] satisfies readonly TemplateSpec[],
-};
+} as const;

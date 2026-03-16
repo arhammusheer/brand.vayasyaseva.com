@@ -3,6 +3,7 @@ import type {
   DoDontExample,
   LanguageGuideItem,
   SectionHeader,
+  SectionSummaryStrip,
   TemplateSpec,
   TypeHierarchy,
   TypographyStack,
@@ -13,10 +14,21 @@ export const TYPOGRAPHY_SECTION = {
     id: "typography",
     number: "07",
     title: "Typography",
-    summary: "Use Anek for display, Hind for narrative text, and JetBrains Mono for tabular reliability.",
+    summary: "For most employees: do not pick fonts manually; use approved templates and exported assets.",
   },
+  summaryStrip: {
+    useThisWhen: "You need to know whether you should be making typography choices at all.",
+    doThis: "Use approved templates and packs unless you are designing or implementing something new.",
+    neverDoThis: "Do not add a new font, substitute a personal favorite, or style body copy for effect.",
+    whoNeedsThis: "All employees; deeper hierarchy detail below is mainly for design/marketing and frontend work.",
+  } satisfies SectionSummaryStrip,
   intro:
     "Typography is a readability control with three mandatory systems: Anek for display hierarchy, Hind for narrative and UI copy, and JetBrains Mono for data-heavy contexts where character distinction is critical.",
+  employeeDefaults: [
+    "If you are working in a template, do not change the font system.",
+    "If the file looks wrong, escalate the template or asset issue instead of repairing it ad hoc.",
+    "Use typography rules as a production guide, not a creative playground.",
+  ],
   fontPack: {
     name: "Vayasya Font Pack",
     description: "Approved company font files packaged on demand from server-managed assets.",
@@ -128,7 +140,9 @@ export const TYPOGRAPHY_SECTION = {
   ],
 } as const satisfies {
   header: SectionHeader;
+  summaryStrip: SectionSummaryStrip;
   intro: string;
+  employeeDefaults: readonly string[];
   fontPack: DownloadableAsset;
   stacks: readonly TypographyStack[];
   hierarchy: readonly TypeHierarchy[];
