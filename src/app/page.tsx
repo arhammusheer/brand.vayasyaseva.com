@@ -20,12 +20,10 @@ import {
   LogoCommonNeedsGrid,
   LogoMisuseGrid,
   LogoPreviewGrid,
-  LogoQuickActionsGrid,
 } from "../components/brand/logo-usage-panels";
 import {
   TypographyCommonNeedsGrid,
   TypographyMisuseGrid,
-  TypographyQuickActionsGrid,
   TypographySpecimenGrid,
 } from "../components/brand/typography-panels";
 import { Button } from "../components/ui/button";
@@ -789,11 +787,6 @@ export default function Page() {
                   {sanitizeTokenMentions(sections.logoUsage.intro)}
                 </p>
                 <div className="mt-10 space-y-12">
-                  <LogoQuickActionsGrid
-                    actions={sections.logoUsage.quickActions}
-                    title="What you probably need"
-                    description="Pick the pack or task first. If none of these covers your case, open the full logo reference."
-                  />
                   <LogoCommonNeedsGrid items={sections.logoUsage.commonNeeds} />
                   <LogoPreviewGrid
                     cards={sections.logoUsage.previewCards}
@@ -846,11 +839,6 @@ export default function Page() {
                   {sanitizeTokenMentions(sections.typography.intro)}
                 </p>
                 <div className="mt-10 space-y-12">
-                  <TypographyQuickActionsGrid
-                    actions={sections.typography.quickActions}
-                    title="What you probably need"
-                    description="Start with the task. If you need more than the family role and the safe default, open the full typography reference."
-                  />
                   <TypographySpecimenGrid
                     cards={sections.typography.specimenCards}
                     title="Pick the right type role"
