@@ -12,7 +12,7 @@ export const VISUAL_REFERENCE_NAV_ITEMS = [
   {
     href: "/visual/logo-usage",
     label: "Logo Usage",
-    description: "Asset packs, approved variants, clear-space rules, and misuse checks.",
+    description: "Role-first logo reference with asset packs, approved variants, misuse checks, and review guidance.",
   },
   {
     href: "/visual/color-palette",
@@ -53,27 +53,27 @@ export const VISUAL_REFERENCE_PAGES = [
     navLabel: "Logo Usage",
     title: "Logo Usage",
     summary:
-      "Full logo reference for asset packs, approved variants, clear space, placement context, and misuse prevention.",
+      "Role-first logo reference for designers, developers, and reviewers covering asset packs, approved variants, misuse checks, and technical assets.",
     pageIntro:
-      "Use this page when you are preparing or implementing branded visuals and need the full logo system instead of the employee-safe default to 'use the approved pack as-is'.",
+      "Use this page when you are designing, implementing, or reviewing a branded surface and need more than the quick chooser on the handbook root.",
     specialistAudience: "Marketing, design, product, and engineering teams.",
     handbookHref: "/#05-logo-usage",
     guidanceBlocks: [
       {
+        title: "Role quick actions",
+        description: "Jump straight into the designer, developer, or reviewer path instead of scanning the whole page.",
+      },
+      {
         title: "Asset packs",
-        description: "Choose the right source, PNG, or full media-kit package for the channel.",
+        description: "Choose the correct SVG, PNG, or full media-kit package for the actual delivery surface.",
       },
       {
         title: "Approved variants",
-        description: "Use only the approved light or dark master variants and preserve the lockup.",
+        description: "Use the right master or vertical asset and verify contrast, lockup integrity, and clear space.",
       },
       {
-        title: "Placement rules",
-        description: "Check clear space, contrast, and supplied usage notes before release.",
-      },
-      {
-        title: "Misuse prevention",
-        description: "Reject recoloring, restacking, distortion, or improvised logo treatments.",
+        title: "Misuse review",
+        description: "Reject recoloring, distortion, low-contrast placement, and unreadable or improvised use before release.",
       },
     ],
     assets: [
@@ -93,7 +93,7 @@ export const VISUAL_REFERENCE_PAGES = [
     implementationNotes: [
       "Use SVG sources for design, print, and scalable web placements.",
       "Do not recreate or CSS-recolor the logo for product surfaces.",
-      "Escalate new lockups or icon-only use cases instead of deriving them locally.",
+      "Use the media kit for favicon, Apple touch, Android, and manifest-ready icon assets.",
     ],
   },
   {

@@ -126,9 +126,82 @@ export type LogoVariant = {
   clearSpaceRule: string;
 };
 
-export type LogoProhibition = {
+export type LogoQuickAction = {
+  id: string;
+  title: string;
   description: string;
-  example?: string;
+  href: string;
+  ctaLabel: string;
+  icon: "svg" | "png" | "media" | "vertical" | "review";
+  download?: boolean;
+  badge?: string;
+};
+
+export type LogoPreviewCard = {
+  id: string;
+  title: string;
+  kind: "variant" | "vertical-pack";
+  background: "light" | "dark" | "mixed";
+  whenToUse: string;
+  hardRule: string;
+  filePath?: string;
+  badge?: string;
+  members?: readonly {
+    label: string;
+    filePath: string;
+  }[];
+};
+
+export type LogoMisuseExample = {
+  id: string;
+  title: string;
+  previewKind:
+    | "recolor"
+    | "stretch"
+    | "rebuild"
+    | "low-contrast"
+    | "busy-image"
+    | "too-small";
+  issue: string;
+  correction: string;
+};
+
+export type LogoAssetNeed = {
+  need: string;
+  useThis: string;
+  note: string;
+};
+
+export type LogoRoleAction = {
+  role: string;
+  summary: string;
+  href: string;
+  actions: readonly string[];
+};
+
+export type LogoRoleSection = {
+  id: string;
+  role: string;
+  summary: string;
+  rules: readonly string[];
+};
+
+export type LogoRelatedAsset = {
+  name: string;
+  description: string;
+  href: string;
+  ctaLabel: string;
+  download?: boolean;
+};
+
+export type LogoUsageReference = {
+  specialistQuickActions: readonly LogoQuickAction[];
+  roleActions: readonly LogoRoleAction[];
+  assetMatrix: readonly LogoAssetNeed[];
+  roleSections: readonly LogoRoleSection[];
+  misuseExamples: readonly LogoMisuseExample[];
+  technicalNotes: readonly string[];
+  relatedAssets: readonly LogoRelatedAsset[];
 };
 
 export type ColorSwatch = {

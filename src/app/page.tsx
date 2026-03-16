@@ -13,6 +13,12 @@ import {
 
 import { ChapterNav, ChapterNavSidebar } from "../components/brand/chapter-nav";
 import { ChapterWrapper } from "../components/brand/chapter-wrapper";
+import {
+  LogoCommonNeedsGrid,
+  LogoMisuseGrid,
+  LogoPreviewGrid,
+  LogoQuickActionsGrid,
+} from "../components/brand/logo-usage-panels";
 import { Button } from "../components/ui/button";
 import { ScrollArea } from "../components/ui/scroll-area";
 import {
@@ -773,18 +779,22 @@ export default function Page() {
                 <p className="max-w-3xl text-lg leading-relaxed">
                   {sanitizeTokenMentions(sections.logoUsage.intro)}
                 </p>
-                <FieldDefaults items={sections.logoUsage.employeeDefaults} title="Employee-safe default" />
-                {sections.logoUsage.accessNote ? (
-                  <div className="mt-8 rounded-lg border border-[color:var(--vy-warning)] bg-[color:var(--vy-muted)] p-5">
-                    <div className="flex items-start gap-3">
-                      <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--vy-warning)]" />
-                      <p className="text-sm text-[color:var(--vy-muted-fg)]">
-                        {sanitizeTokenMentions(sections.logoUsage.accessNote)}
-                      </p>
-                    </div>
-                  </div>
-                ) : null}
-                <RulesBlock rules={sections.logoUsage.rules} title="Critical logo rules" />
+                <div className="mt-10 space-y-12">
+                  <LogoQuickActionsGrid
+                    actions={sections.logoUsage.quickActions}
+                    title="What you probably need"
+                    description="Pick the pack or task first. If none of these covers your case, open the full logo reference."
+                  />
+                  <LogoCommonNeedsGrid items={sections.logoUsage.commonNeeds} />
+                  <LogoPreviewGrid
+                    cards={sections.logoUsage.previewCards}
+                    title="Choose the right logo"
+                  />
+                  <LogoMisuseGrid
+                    examples={sections.logoUsage.misuseChecks}
+                    title="Never do this"
+                  />
+                </div>
                 <ReferenceLinkCard
                   href={sections.logoUsage.referenceHref}
                   title={sections.logoUsage.referenceTitle}
