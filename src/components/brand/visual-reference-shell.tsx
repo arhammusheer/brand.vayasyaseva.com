@@ -5,8 +5,6 @@ import {
   ArrowLeft,
   ArrowRight,
   Check,
-  FileText,
-  X,
 } from "lucide-react";
 
 import { orderedVisualReferencePages } from "../../content/brand/visual-reference";
@@ -14,10 +12,8 @@ import { sanitizeTokenMentions } from "../../lib/brand-utils";
 import { cn } from "../../lib/utils";
 import type {
   ColorSwatch,
-  DoDontExample,
   DownloadableAsset,
   DownloadableBundle,
-  TemplateSpec,
   VisualReferencePage,
 } from "../../lib/types/brand";
 import { Button } from "../ui/button";
@@ -123,103 +119,6 @@ export function ReferenceNote({
       <div className="flex items-start gap-3">
         <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--vy-warning)]" />
         <p className="text-sm text-[color:var(--vy-muted-fg)]">{sanitizeTokenMentions(note)}</p>
-      </div>
-    </div>
-  );
-}
-
-export function ReferenceDoDontBlock({
-  examples,
-  title = "Do / Don't",
-}: {
-  examples: readonly DoDontExample[];
-  title?: string;
-}) {
-  if (!examples.length) return null;
-
-  return (
-    <div className="space-y-5">
-      <h3 className="text-lg font-medium text-[color:var(--vy-text-strong)]">{title}</h3>
-      <div className="grid gap-6 lg:grid-cols-2">
-        {examples.map((example) => (
-          <div key={example.topic} className="rounded-lg border border-[color:var(--vy-border)] p-6">
-            <p className="mb-4 font-medium text-[color:var(--vy-text-strong)]">
-              {sanitizeTokenMentions(example.topic)}
-            </p>
-            <div className="space-y-3">
-              <div className="flex gap-3 rounded border-l-2 border-[color:var(--vy-success)] bg-[color:var(--vy-muted)] p-3">
-                <Check className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--vy-success)]" />
-                <p className="text-[color:var(--vy-fg)]">{sanitizeTokenMentions(example.do)}</p>
-              </div>
-              <div className="flex gap-3 rounded border-l-2 border-[color:var(--vy-danger)] bg-[color:var(--vy-muted)] p-3">
-                <X className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--vy-danger)]" />
-                <p className="text-[color:var(--vy-muted-fg)]">{sanitizeTokenMentions(example.dont)}</p>
-              </div>
-            </div>
-            <p className="mt-4 text-sm text-[color:var(--vy-muted-fg)]">
-              {sanitizeTokenMentions(example.why)}
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-export function ReferenceTemplatesBlock({
-  templates,
-  title = "Templates",
-}: {
-  templates: readonly TemplateSpec[];
-  title?: string;
-}) {
-  if (!templates.length) return null;
-
-  return (
-    <div className="space-y-5">
-      <h3 className="text-lg font-medium text-[color:var(--vy-text-strong)]">{title}</h3>
-      <div className="grid gap-6">
-        {templates.map((template) => (
-          <div
-            key={template.name}
-            className="overflow-hidden rounded-lg border border-[color:var(--vy-border)]"
-          >
-            <div className="bg-[color:var(--vy-muted)] p-5">
-              <div className="flex items-center gap-2">
-                <FileText className="h-4 w-4 text-[color:var(--vy-muted-fg)]" />
-                <h4 className="font-semibold text-[color:var(--vy-text-strong)]">
-                  {sanitizeTokenMentions(template.name)}
-                </h4>
-              </div>
-              <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">
-                {sanitizeTokenMentions(template.purpose)}
-              </p>
-              <p className="mt-1 text-xs text-[color:var(--vy-muted-fg)]">
-                When to use: {sanitizeTokenMentions(template.whenToUse)}
-              </p>
-            </div>
-            <div className="space-y-4 p-5">
-              <pre className="whitespace-pre-wrap rounded bg-[color:var(--vy-muted)] p-4 font-mono text-sm leading-relaxed">
-                {sanitizeTokenMentions(template.template)}
-              </pre>
-              <div>
-                <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)]">
-                  Guardrails
-                </p>
-                <ul className="space-y-1 text-sm">
-                  {template.guardrails.map((guardrail) => (
-                    <li key={guardrail} className="flex gap-2">
-                      <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--vy-warning)]" />
-                      <span className="text-[color:var(--vy-muted-fg)]">
-                        {sanitizeTokenMentions(guardrail)}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        ))}
       </div>
     </div>
   );

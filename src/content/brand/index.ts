@@ -34,11 +34,10 @@ import { EMAIL_SECTION } from "./sections/email";
 import { MEETINGS_SECTION } from "./sections/meetings";
 import { PRE_SEND_CHECKLIST_SECTION } from "./sections/pre-send-checklist";
 
-// Appendix sections (17-21)
+// Appendix sections (17-19 plus footer metadata)
 import { GOVERNANCE_APPROVALS_SECTION } from "./sections/governance-approvals";
 import { TEMPLATES_DOWNLOADABLES_SECTION } from "./sections/templates-downloadables";
 import { FAQ_EDGE_CASES_SECTION } from "./sections/faq-edge-cases";
-import { CHANGELOG_SECTION } from "./sections/20-changelog";
 import { FOOTER_VERSIONING_SECTION } from "./sections/footer-versioning";
 
 export const BRAND_CONTENT = {
@@ -80,7 +79,6 @@ export const BRAND_CONTENT = {
     governanceApprovals: GOVERNANCE_APPROVALS_SECTION,
     templatesDownloadables: TEMPLATES_DOWNLOADABLES_SECTION,
     faqEdgeCases: FAQ_EDGE_CASES_SECTION,
-    changelog: CHANGELOG_SECTION,
     footerVersioning: FOOTER_VERSIONING_SECTION,
   },
 } as const;

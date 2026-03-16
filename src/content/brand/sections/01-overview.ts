@@ -32,8 +32,6 @@ export const OVERVIEW_SECTION = {
     "State owner, timing, and next action in every external update.",
     "Use the correct brand or vertical name before you shorten anything.",
     "If a message could create legal, commercial, or client confusion, escalate before sending.",
-    "For daily work, start with the task cards below. Do not read the whole handbook unless the task needs it.",
-    "When in doubt, choose the safer, more specific statement.",
   ],
 
   roleGuides: [
@@ -120,48 +118,6 @@ export const OVERVIEW_SECTION = {
       escalateWhen:
         "New public-facing copy, new templates, or any claim about scale, compliance, or service performance is requested.",
       relatedAnchors: ["#02-identity", "#11-writing-mechanics", "#governance-approvals", "#templates-downloadables"],
-    },
-    {
-      role: "Leadership / spokespeople",
-      mustKnow: [
-        "Master brand versus vertical framing",
-        "Claim class and evidence expectations",
-        "The approved service map and operating model",
-      ],
-      topTasks: [
-        "Leadership introduction",
-        "High-level client narrative",
-        "Presentation review",
-      ],
-      commonMistakes: [
-        "Using aspirational language as if already delivered",
-        "Ad-libbing service breadth",
-        "Approving one-off phrasing that creates a new standard",
-      ],
-      escalateWhen:
-        "A statement will be published broadly, measured claims are used, or a new company description is proposed.",
-      relatedAnchors: ["#02-identity", "#10-claims-discipline", "#13-presentations", "#governance-approvals"],
-    },
-    {
-      role: "Design / marketing",
-      mustKnow: [
-        "The quick-reference layer serves non-design staff first",
-        "Visual system detail remains authoritative lower in the page",
-        "Standard assets are self-serve; exceptions route through governance",
-      ],
-      topTasks: [
-        "Asset support",
-        "Collateral review",
-        "Copy/layout consistency",
-      ],
-      commonMistakes: [
-        "Making the page denser instead of clearer",
-        "Assuming field staff will read long rationale",
-        "Treating design detail as universal guidance",
-      ],
-      escalateWhen:
-        "A new asset variant, new template type, or new visual rule is proposed.",
-      relatedAnchors: ["#05-logo-usage", "#06-color-palette", "#07-typography", "#templates-downloadables"],
     },
   ] satisfies readonly RoleGuide[],
 

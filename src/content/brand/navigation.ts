@@ -23,8 +23,6 @@ export const APPENDIX_NAV_ITEMS = [
   { id: "governance-approvals", label: "Governance & Approvals", href: "#governance-approvals", order: 17 },
   { id: "templates-downloadables", label: "Representation Pack & Assets", href: "#templates-downloadables", order: 18 },
   { id: "faq-edge-cases", label: "Common Scenarios & Edge Cases", href: "#faq-edge-cases", order: 19 },
-  { id: "changelog", label: "Changelog", href: "#changelog", order: 20 },
-  { id: "footer-versioning", label: "Versioning", href: "#footer-versioning", order: 21 },
 ] as const satisfies readonly NavItem[];
 
 export const NAV_GROUPS = [

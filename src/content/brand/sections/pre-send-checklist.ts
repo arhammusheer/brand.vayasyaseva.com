@@ -1,9 +1,7 @@
 import type {
   ChecklistGroup,
-  DoDontExample,
   SectionHeader,
   SectionSummaryStrip,
-  TemplateSpec,
 } from "../../../lib/types/brand";
 
 export const PRE_SEND_CHECKLIST_SECTION = {
@@ -68,27 +66,4 @@ export const PRE_SEND_CHECKLIST_SECTION = {
     "If the item fails one check, fix it before release rather than adding a verbal caveat later.",
     "If the item mixes scope, legal, or commercial risk with urgency, escalate instead of rushing it out.",
   ],
-
-  doDont: [
-    {
-      topic: "Fast channel mistake",
-      do: "Pause the WhatsApp send if the message creates a new commitment and move it to the approved review path.",
-      dont: "Send the risky message first because the channel feels informal.",
-      why: "Informal channels still create formal brand and claim risk.",
-    },
-  ] satisfies readonly DoDontExample[],
-
-  templates: [
-    {
-      name: "Final release block",
-      purpose: "Record the last check before a message, file, or script is used externally.",
-      whenToUse: "Any client-facing email, quotation, deck, site-visit summary, or high-risk message.",
-      template:
-        "Item: <name>\nChannel: <email/WhatsApp/call/deck/document/profile>\nIdentity checked: <yes/no>\nClaims checked: <yes/no>\nOwner named: <yes/no>\nNext step stated: <yes/no>\nApproval needed: <yes/no>\nReleased by: <name>\nTimestamp: <DD MMM YYYY HH:MM IST>",
-      guardrails: [
-        "If approval is needed, do not mark the item released.",
-        "If the channel is verbal, note the follow-up record channel.",
-      ],
-    },
-  ] satisfies readonly TemplateSpec[],
 } as const;

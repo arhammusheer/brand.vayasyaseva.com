@@ -1,13 +1,11 @@
 import Image from "next/image";
 
 import {
-  ReferenceDoDontBlock,
   ReferenceDownloadablesBlock,
   ReferenceFieldDefaults,
   ReferenceNote,
   ReferenceRulesBlock,
   ReferenceSectionHeading,
-  ReferenceTemplatesBlock,
   VisualReferencePageShell,
 } from "../../../components/brand/visual-reference-shell";
 import { LOGO_USAGE_SECTION } from "../../../content/brand/sections/logo-usage";
@@ -26,7 +24,7 @@ const visualPage = (() => {
 export const metadata = buildBrandPageMetadata({
   title: "Logo Usage | Vayasya Visual Reference",
   description:
-    "Full Vayasya logo reference covering asset packs, approved variants, minimum sizes, clear space, and misuse prevention.",
+    "Full Vayasya logo reference covering asset packs, approved variants, clear space, placement context, and misuse prevention.",
   path: "/visual/logo-usage",
 });
 
@@ -52,7 +50,7 @@ export default function VisualLogoUsagePage() {
       <section className="space-y-6">
         <ReferenceSectionHeading
           title="Approved variants"
-          description="Use the correct master asset for the background and preserve the minimum size and clear-space requirements."
+          description="Use the correct master asset for the background and preserve the approved lockup and clear-space rules."
         />
         <div className="grid gap-6 md:grid-cols-2">
           {LOGO_USAGE_SECTION.variants.map((variant) => (
@@ -78,7 +76,7 @@ export default function VisualLogoUsagePage() {
                 {variant.label}
               </p>
               <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">
-                Minimum width: {variant.minWidthPx}px
+                {variant.usageNote}
               </p>
               <p className="mt-1 text-sm text-[color:var(--vy-muted-fg)]">
                 Clear space: {variant.clearSpaceRule}
@@ -89,8 +87,6 @@ export default function VisualLogoUsagePage() {
       </section>
 
       <ReferenceRulesBlock rules={LOGO_USAGE_SECTION.rules} />
-      <ReferenceDoDontBlock examples={LOGO_USAGE_SECTION.doDont} />
-      <ReferenceTemplatesBlock templates={LOGO_USAGE_SECTION.templates} />
     </VisualReferencePageShell>
   );
 }

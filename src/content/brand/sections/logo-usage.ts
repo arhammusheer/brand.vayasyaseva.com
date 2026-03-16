@@ -1,10 +1,8 @@
 import type {
   DownloadableBundle,
-  DoDontExample,
   LogoVariant,
   SectionHeader,
   SectionSummaryStrip,
-  TemplateSpec,
   VisualReferenceLinkMeta,
 } from "../../../lib/types/brand";
 
@@ -14,12 +12,12 @@ export const LOGO_USAGE_SECTION = {
     number: "05",
     title: "Logo Usage",
     summary: "For most employees: use the approved logo pack as-is and do not edit it.",
-  },
+  } satisfies SectionHeader,
   summaryStrip: {
     useThisWhen: "You need a logo, signature logo, or branded asset for a real job.",
     doThis: "Download the approved pack and use the supplied file that fits the background and channel.",
     neverDoThis: "Do not recolor, redraw, restack, or improvise the logo.",
-    whoNeedsThis: "All employees; deeper detail below is mainly for design/marketing.",
+    whoNeedsThis: "All employees; deeper detail is for specialist teams.",
   } satisfies SectionSummaryStrip,
   intro:
     "Logo consistency is mandatory. The source gold logo asset is authoritative and must remain untouched. Any deviation needs explicit approval.",
@@ -50,7 +48,7 @@ export const LOGO_USAGE_SECTION = {
       fileType: "ZIP / PNG",
       includes: [
         "All logo variants as PNG",
-        "Widths: 128, 256, 512, 1024, 2048 px",
+        "Standard export sizes for office and presentation workflows",
         "Ready for slides, docs, and tools without SVG support",
       ],
     },
@@ -61,7 +59,7 @@ export const LOGO_USAGE_SECTION = {
       fileType: "ZIP / FULL KIT",
       includes: [
         "SVG source files",
-        "PNG exports in all standard widths",
+        "PNG exports in standard sizes",
         "Favicon, Apple touch, Android icons, and web manifest",
       ],
     },
@@ -74,7 +72,7 @@ export const LOGO_USAGE_SECTION = {
       label: "Master Logo Light",
       filePath: "/brand/logos/master-logo-light.svg",
       background: "light",
-      minWidthPx: 120,
+      usageNote: "Use on light backgrounds where the gold mark remains clean and fully visible.",
       clearSpaceRule: "Keep clear space equal to the height of the V around all sides.",
     },
     {
@@ -82,43 +80,16 @@ export const LOGO_USAGE_SECTION = {
       label: "Master Logo Dark",
       filePath: "/brand/logos/master-logo-dark.svg",
       background: "dark",
-      minWidthPx: 120,
+      usageNote: "Use on dark backgrounds where the mark needs the darker variant for clean contrast.",
       clearSpaceRule: "Keep clear space equal to the height of the V around all sides.",
     },
   ],
   rules: [
-    "Maintain lockup hierarchy: Vayasya larger semibold, vertical name smaller regular/medium.",
-    "Do not recolor, retint, or gradient-map the logo in any context.",
-    "Use light or dark master variant based on background contrast only.",
-    "Minimum digital width is 120px; below this, use icon-free text fallback approved by brand ops.",
-    "When placed over imagery, use a calm plate with at least 90% opacity.",
-  ],
-  doDont: [
-    {
-      topic: "Logo color",
-      do: "Use the provided source logo file with gold preserved.",
-      dont: "Apply CSS filter to turn logo white or blue.",
-      why: "Recoloring breaks identity consistency and violates lock.",
-    },
-    {
-      topic: "Lockup scale",
-      do: "Set Vayasya at larger semibold and vertical name at smaller medium weight.",
-      dont: "Use equal weight and equal size for both words.",
-      why: "Hierarchy is part of the approved master lockup standard.",
-    },
-  ],
-  templates: [
-    {
-      name: "Asset request note",
-      purpose: "Request correct logo file from brand operations.",
-      whenToUse: "When preparing a new collateral format.",
-      template:
-        "Request: Logo asset for <channel>\nBackground type: <light/dark/mixed>\nRequired size: <width x height>\nVertical context: <Seva/Setu/Kaushal/Prabandh>\nDeadline: <DD MMM YYYY>\nRequester: <name>",
-      guardrails: [
-        "Do not attach edited logo files in request threads.",
-        "Record where the asset will be published.",
-      ],
-    },
+    "Do not recolor, retint, distort, or gradient-map the logo.",
+    "Use the approved light or dark master variant based on background contrast only.",
+    "If the logo must sit over imagery, place it on a calm solid plate first.",
+    "If the logo becomes too small to read clearly, switch to an approved fallback instead of forcing it smaller.",
+    "Use the supplied lockup as-is; do not rebuild it manually.",
   ],
 } as const satisfies {
   header: SectionHeader;
@@ -132,6 +103,4 @@ export const LOGO_USAGE_SECTION = {
   accessNote?: string;
   variants: readonly LogoVariant[];
   rules: readonly string[];
-  doDont: readonly DoDontExample[];
-  templates: readonly TemplateSpec[];
 };

@@ -1,10 +1,8 @@
 import {
   ReferenceColorSwatchGrid,
-  ReferenceDoDontBlock,
   ReferenceFieldDefaults,
   ReferenceRulesBlock,
   ReferenceSectionHeading,
-  ReferenceTemplatesBlock,
   VisualReferencePageShell,
 } from "../../../components/brand/visual-reference-shell";
 import { COLOR_PALETTE_SECTION } from "../../../content/brand/sections/color-palette";
@@ -91,8 +89,6 @@ export default function VisualColorPalettePage() {
       </section>
 
       <ReferenceRulesBlock rules={COLOR_PALETTE_SECTION.rules} />
-      <ReferenceDoDontBlock examples={COLOR_PALETTE_SECTION.doDont} />
-      <ReferenceTemplatesBlock templates={COLOR_PALETTE_SECTION.templates} />
     </VisualReferencePageShell>
   );
 }

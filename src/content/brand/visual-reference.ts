@@ -12,7 +12,7 @@ export const VISUAL_REFERENCE_NAV_ITEMS = [
   {
     href: "/visual/logo-usage",
     label: "Logo Usage",
-    description: "Asset packs, approved variants, size rules, and misuse checks.",
+    description: "Asset packs, approved variants, clear-space rules, and misuse checks.",
   },
   {
     href: "/visual/color-palette",
@@ -53,7 +53,7 @@ export const VISUAL_REFERENCE_PAGES = [
     navLabel: "Logo Usage",
     title: "Logo Usage",
     summary:
-      "Full logo reference for asset packs, approved variants, minimum sizes, clear space, placement context, and misuse prevention.",
+      "Full logo reference for asset packs, approved variants, clear space, placement context, and misuse prevention.",
     pageIntro:
       "Use this page when you are preparing or implementing branded visuals and need the full logo system instead of the employee-safe default to 'use the approved pack as-is'.",
     specialistAudience: "Marketing, design, product, and engineering teams.",
@@ -69,7 +69,7 @@ export const VISUAL_REFERENCE_PAGES = [
       },
       {
         title: "Placement rules",
-        description: "Check minimum width, clear space, and contrast before release.",
+        description: "Check clear space, contrast, and supplied usage notes before release.",
       },
       {
         title: "Misuse prevention",
@@ -135,8 +135,8 @@ export const VISUAL_REFERENCE_PAGES = [
         description: "Migration, UI, reporting, and semantic role examples.",
       },
       {
-        name: "Color handoff block",
-        description: "Implementation-ready note format for design-engineering handoff.",
+        name: "Implementation notes",
+        description: "Engineering-facing reminders for using tokens instead of local color guesses.",
       },
     ],
     implementationNotes: [
@@ -184,8 +184,8 @@ export const VISUAL_REFERENCE_PAGES = [
         description: "Approved hierarchy levels for titles, body copy, and data contexts.",
       },
       {
-        name: "Typographic spec note",
-        description: "Implementation-ready summary for design and frontend handoff.",
+        name: "Formatting controls",
+        description: "Working rules for casing, hierarchy use, and readable long-form layouts.",
       },
     ],
     implementationNotes: [
@@ -233,8 +233,8 @@ export const VISUAL_REFERENCE_PAGES = [
         description: "Acceptable versus unacceptable evidence-style visuals.",
       },
       {
-        name: "Image caption standard",
-        description: "Standardized context and sensitivity note for published visuals.",
+        name: "Sensitivity checks",
+        description: "Guidance for masking, source control, and client-safe release decisions.",
       },
     ],
     implementationNotes: [

@@ -1,10 +1,8 @@
 import type {
   DownloadableAsset,
-  DoDontExample,
   LanguageGuideItem,
   SectionHeader,
   SectionSummaryStrip,
-  TemplateSpec,
   TypeHierarchy,
   TypographyStack,
   VisualReferenceLinkMeta,
@@ -97,9 +95,9 @@ export const TYPOGRAPHY_SECTION = {
   ],
   languageControls: [
     {
-      rule: "Keep body line length between 55 and 72 characters.",
-      rationale: "Improves legibility on desktop and mobile layouts.",
-      examples: ["Break paragraphs before dense clause chains."],
+      rule: "Keep body lines reasonably short so long paragraphs stay easy to scan.",
+      rationale: "Readable line lengths improve comprehension across desktop and mobile layouts.",
+      examples: ["Break dense paragraphs before clause chains start to feel wide or tiring."],
     },
     {
       rule: "Prefer sentence case for labels and helper text.",
@@ -115,33 +113,6 @@ export const TYPOGRAPHY_SECTION = {
     "Avoid all-caps body paragraphs.",
     "Numeric tables must use tabular alignment and mono font.",
   ],
-  doDont: [
-    {
-      topic: "Display hierarchy",
-      do: "Use Anek for section headings and short, high-emphasis titles.",
-      dont: "Set long body paragraphs in Anek.",
-      why: "Separating display and narrative systems preserves hierarchy and readability.",
-    },
-    {
-      topic: "Data table typography",
-      do: "Use JetBrains Mono for invoice IDs and decimal values.",
-      dont: "Use proportional text for table values needing alignment.",
-      why: "Mono alignment reduces interpretation errors.",
-    },
-  ],
-  templates: [
-    {
-      name: "Typographic spec note",
-      purpose: "Capture type decisions in one implementation-ready block.",
-      whenToUse: "Design and frontend handoff.",
-      template:
-        "Context: <screen/doc>\nDisplay style: <Anek level + weight>\nBody style: <Hind Body/Body Small>\nData style: <JetBrains Mono where applicable>\nLine length target: <55-72 chars>\nExceptions: <if any>",
-      guardrails: [
-        "Document any exceptions with reason and approver.",
-        "Keep style count low to protect consistency.",
-      ],
-    },
-  ],
 } as const satisfies {
   header: SectionHeader;
   summaryStrip: SectionSummaryStrip;
@@ -155,6 +126,4 @@ export const TYPOGRAPHY_SECTION = {
   hierarchy: readonly TypeHierarchy[];
   languageControls: readonly LanguageGuideItem[];
   rules: readonly string[];
-  doDont: readonly DoDontExample[];
-  templates: readonly TemplateSpec[];
 };

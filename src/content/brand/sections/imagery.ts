@@ -1,9 +1,7 @@
 import type {
-  DoDontExample,
   Scenario,
   SectionHeader,
   SectionSummaryStrip,
-  TemplateSpec,
   VisualReferenceLinkMeta,
 } from "../../../lib/types/brand";
 
@@ -48,27 +46,6 @@ export const IMAGERY_SECTION = {
       recommended: "Place logo on a calm plate and test at presentation scale.",
     },
   ],
-  doDont: [
-    {
-      topic: "Proof imagery",
-      do: "Use dashboard excerpt with sensitive fields masked.",
-      dont: "Use random handshake stock photo for service reliability claim.",
-      why: "Evidence-based visuals better support operational messaging.",
-    },
-  ],
-  templates: [
-    {
-      name: "Image caption standard",
-      purpose: "Ensure every published image contributes usable context.",
-      whenToUse: "Reports, decks, and website modules.",
-      template:
-        "Image purpose: <what this image proves>\nSource: <internal/client/licensed>\nDate captured: <DD MMM YYYY>\nSensitivity check: <PII removed yes/no>\nCaption: <single sentence with context>",
-      guardrails: [
-        "Never publish imagery containing unapproved client identifiers.",
-        "If source is third-party, record license reference.",
-      ],
-    },
-  ],
 } as const satisfies {
   header: SectionHeader;
   summaryStrip: SectionSummaryStrip;
@@ -79,6 +56,4 @@ export const IMAGERY_SECTION = {
   employeeDefaults: readonly string[];
   rules: readonly string[];
   scenarios: readonly Scenario[];
-  doDont: readonly DoDontExample[];
-  templates: readonly TemplateSpec[];
 };

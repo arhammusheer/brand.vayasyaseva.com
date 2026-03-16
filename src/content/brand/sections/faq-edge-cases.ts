@@ -1,9 +1,6 @@
 import type {
-  DoDontExample,
   QASection,
   SectionHeader,
-  SectionSummaryStrip,
-  TemplateSpec,
 } from "../../../lib/types/brand";
 
 export const FAQ_EDGE_CASES_SECTION = {
@@ -13,13 +10,6 @@ export const FAQ_EDGE_CASES_SECTION = {
     title: "Common Scenarios & Edge Cases",
     summary: "Plain-language answers for the real questions employees ask during the workday.",
   } satisfies SectionHeader,
-
-  summaryStrip: {
-    useThisWhen: "You have a practical question and do not know which main section to open.",
-    doThis: "Search this section by plain-language terms and jump to the linked main guidance if needed.",
-    neverDoThis: "Do not assume an unlisted scenario is automatically allowed.",
-    whoNeedsThis: "All employees, especially people under time pressure.",
-  } satisfies SectionSummaryStrip,
 
   intro:
     "This index is written for browser-find and quick lookup. Use the tags exactly as an employee would search for them during real work.",
@@ -86,33 +76,4 @@ export const FAQ_EDGE_CASES_SECTION = {
       tags: ["delay", "status", "escalation"],
     },
   ] satisfies readonly QASection[],
-
-  rules: [
-    "Write scenario titles in plain-language employee terms.",
-    "If a scenario is not listed and creates scope or claim risk, escalate before responding externally.",
-    "Keep tags simple so browser-find works for real work language.",
-  ],
-
-  doDont: [
-    {
-      topic: "Unlisted scenario",
-      do: "Use the closest approved guidance and escalate if the gap changes scope, promise level, or public wording.",
-      dont: "Assume a new situation gives permission to improvise.",
-      why: "Edge cases still need the same brand and claim discipline.",
-    },
-  ] satisfies readonly DoDontExample[],
-
-  templates: [
-    {
-      name: "New scenario log",
-      purpose: "Capture recurring questions so the handbook becomes easier to use over time.",
-      whenToUse: "Any repeated employee question that is not already in the scenario index.",
-      template:
-        "Scenario title: <plain-language question>\nChannel: <where it happened>\nRisk type: <brand/claim/scope/operational>\nApproved answer: <short answer>\nLinked section: <main anchor>\nOwner: <name>",
-      guardrails: [
-        "Write the title the way an employee would search for it.",
-        "Link the scenario back to the main section that governs it.",
-      ],
-    },
-  ] satisfies readonly TemplateSpec[],
 } as const;

@@ -1,8 +1,4 @@
-import type {
-  DoDontExample,
-  SectionHeader,
-  SectionSummaryStrip,
-} from "../../../lib/types/brand";
+import type { SectionHeader } from "../../../lib/types/brand";
 
 export const BRAND_ARCHITECTURE_SECTION = {
   header: {
@@ -13,109 +9,32 @@ export const BRAND_ARCHITECTURE_SECTION = {
       "Choose the right brand name and vertical before you write, share, or present anything.",
   } satisfies SectionHeader,
 
-  summaryStrip: {
-    useThisWhen: "You need to decide whether to say Vayasya or a specific vertical.",
-    doThis: "Choose one clear brand owner, use the full name first, and keep the master brand dominant.",
-    neverDoThis: "Do not abbreviate verticals, mix accents casually, or imply a joint offering without approval.",
-    whoNeedsThis: "Sales/account, leadership, HR/admin, design/marketing, and anyone preparing external material.",
-  } satisfies SectionSummaryStrip,
-
   intro:
-    "Use this section as a naming and ownership choice guide. Pick the right brand owner first, then apply the related naming and lockup rules.",
+    "Use this section as a naming choice guide. Pick the right brand owner first, then apply the approved name consistently through the rest of the material.",
 
-  masterBrand: {
-    name: "Vayasya",
-    role: "Parent brand for all verticals. Used for group-level communications, cross-vertical materials, governance documents, and any context where no single vertical applies.",
-    accentToken: "--vy-gold-ui",
-    accentHex: "#DAA236",
-  },
-
-  verticals: [
+  choiceGuide: [
     {
-      name: "Vayasya Seva",
-      domain: "Manpower and labour services operations",
-      accentToken: "--vy-seva",
-      accentHex: "#BA511A",
+      context: "Say Vayasya",
+      rule: "Use the master brand for group-level communication, shared governance, or any material where no single vertical clearly owns the message.",
     },
     {
-      name: "Vayasya Setu",
-      domain:
-        "HRMS and workforce operating system — attendance, scheduling, payroll, compliance rails",
-      accentToken: "--vy-setu",
-      accentHex: "#445FA8",
+      context: "Say a vertical",
+      rule: "Use the full vertical name only when that vertical clearly owns the work, service, or communication context.",
     },
     {
-      name: "Vayasya Kaushal",
-      domain: "Training, upskilling, and workforce readiness",
-      accentToken: "--vy-kaushal",
-      accentHex: "#2E7A58",
+      context: "Joint offering",
+      rule: "State it as joint only when both vertical owners have approved that framing.",
     },
     {
-      name: "Vayasya Prabandh",
-      domain: "Workforce administration, governance, and controls layer",
-      accentToken: "--vy-prabandh",
-      accentHex: "#556073",
-    },
-  ],
-
-  namingRules: [
-    "Always write \"Vayasya [Vertical]\" — never the vertical name alone in formal contexts.",
-    "First mention in any document uses the full name. Subsequent mentions may use the vertical name if context is clear.",
-    "Do not abbreviate to initials. No \"VS\", \"VK\", \"VP\", or \"VSetu\".",
-    "In conversation, \"Seva\" or \"Setu\" alone is acceptable after the full name has been established.",
-  ],
-
-  lockupRules: [
-    "Parent wordmark (Vayasya) is always larger and semibold.",
-    "Vertical name is smaller, regular or medium weight.",
-    "Never set parent and vertical at equal weight or equal size.",
-    "Logo lockup hierarchy is fixed. Do not modify proportions without governance approval.",
-  ],
-
-  usageGuidance: [
-    {
-      context: "Single-vertical material",
-      rule: "Use that vertical's accent color and vertical logo variant.",
-    },
-    {
-      context: "Cross-vertical material",
-      rule: "Use master brand gold accent. No vertical accent colors.",
-    },
-    {
-      context: "Multi-vertical joint offering",
-      rule: "Both vertical accents may appear only if both vertical owners approve in writing. Label the material as joint.",
-    },
-    {
-      context: "Internal-only communication",
-      rule: "Master brand is default. Vertical accents are optional for team-specific context.",
+      context: "Abbreviations",
+      rule: "Do not abbreviate vertical names in formal or client-facing communication.",
     },
   ],
 
   rules: [
-    "Use exactly one vertical accent per document unless explicitly multi-vertical and labeled accordingly.",
-    "Do not create new verticals, sub-brands, or product brands without governance approval.",
-    "Master brand gold (#DAA236) is reserved for logo-adjacent and premium identity uses only.",
-    "Vertical accent coverage must remain below 20% of total visible surface area.",
+    "Use the full name on first mention: Vayasya or Vayasya <Vertical>.",
+    "Do not shorten to initials or invented shorthand.",
+    "Choose one clear brand owner for each document, deck, or message.",
+    "If ownership is unclear, default to Vayasya until the scope is confirmed.",
   ],
-
-  doDont: [
-    {
-      topic: "Vertical naming",
-      do: "Vayasya Seva manages workforce deployment for this engagement.",
-      dont: "Seva manages workforce deployment for this engagement.",
-      why: "First mention must use the full name to establish context.",
-    },
-    {
-      topic: "Cross-vertical document",
-      do: "Use Vayasya master brand with gold accent for the joint quarterly report.",
-      dont: "Use half Seva orange and half Setu navy on the same cover page.",
-      why: "Mixed vertical accents create visual confusion about ownership.",
-    },
-    {
-      topic: "Abbreviation",
-      do: "The Vayasya Kaushal training module launches in March.",
-      dont: "The VK training module launches in March.",
-      why: "Abbreviations are not part of the approved naming system.",
-    },
-  ] satisfies readonly DoDontExample[],
 } as const;

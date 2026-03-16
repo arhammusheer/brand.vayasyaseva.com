@@ -1,10 +1,8 @@
 import {
-  ReferenceDoDontBlock,
   ReferenceDownloadablesBlock,
   ReferenceFieldDefaults,
   ReferenceRulesBlock,
   ReferenceSectionHeading,
-  ReferenceTemplatesBlock,
   VisualReferencePageShell,
 } from "../../../components/brand/visual-reference-shell";
 import { TYPOGRAPHY_SECTION } from "../../../content/brand/sections/typography";
@@ -115,8 +113,6 @@ export default function VisualTypographyPage() {
       </section>
 
       <ReferenceRulesBlock rules={TYPOGRAPHY_SECTION.rules} />
-      <ReferenceDoDontBlock examples={TYPOGRAPHY_SECTION.doDont} />
-      <ReferenceTemplatesBlock templates={TYPOGRAPHY_SECTION.templates} />
     </VisualReferencePageShell>
   );
 }

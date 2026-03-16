@@ -3,19 +3,32 @@ import type { Metadata } from "next";
 import { BRAND_CONTENT } from "../content/brand";
 
 type BrandContent = typeof BRAND_CONTENT;
+type BrandSection = BrandContent["sections"][keyof BrandContent["sections"]];
+type HeaderSection = Extract<
+  BrandSection,
+  {
+    header: {
+      id: string;
+      number: string;
+      title: string;
+      summary: string;
+    };
+  }
+>;
 
-export type BrandSection =
-  BrandContent["sections"][keyof BrandContent["sections"]];
+const hasHeader = (section: BrandSection): section is HeaderSection => "header" in section;
+const navigableSectionIds = new Set<string>(BRAND_CONTENT.navigation.items.map((item) => item.id));
 
 export const orderedNavItems = [...BRAND_CONTENT.navigation.items].sort(
   (left, right) => left.order - right.order,
 );
 
-export const orderedSections = Object.values(BRAND_CONTENT.sections).sort(
-  (left, right) => Number.parseInt(left.header.number, 10) - Number.parseInt(right.header.number, 10),
-);
+export const orderedSections = Object.values(BRAND_CONTENT.sections)
+  .filter(hasHeader)
+  .filter((section) => navigableSectionIds.has(section.header.id))
+  .sort((left, right) => Number.parseInt(left.header.number, 10) - Number.parseInt(right.header.number, 10));
 
-export const sectionById: ReadonlyMap<string, BrandSection> = new Map(
+export const sectionById: ReadonlyMap<string, HeaderSection> = new Map(
   orderedSections.map((section) => [section.header.id, section] as const),
 );
 
@@ -39,8 +52,8 @@ export const tokenCssVariables = BRAND_CONTENT.fundamentals.colorTokens.reduce<
 export const handbookMetadata = {
   title: "Vayasya Brand Handbook",
   description:
-    "Official Vayasya Brand Handbook covering identity standards, logo usage, color tokens, typography, voice guidelines, and governance for consistent communication.",
-  sectionCount: orderedSections.length,
+    "Official Vayasya Brand Handbook for employee-safe introductions, communication, representation, and brand control.",
+  sectionCount: BRAND_CONTENT.navigation.items.length,
   version: BRAND_CONTENT.sections.footerVersioning.footer.version,
   lastUpdated: BRAND_CONTENT.sections.footerVersioning.footer.effectiveDate,
 };
@@ -113,5 +126,3 @@ export const smoothScrollToSection = (sectionAnchor: string) => {
     behavior: prefersReducedMotion ? "auto" : "smooth",
   });
 };
-
-export const formatReadinessSla = (businessDays: number) => `${businessDays} business days`;

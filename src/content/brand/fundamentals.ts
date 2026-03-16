@@ -678,7 +678,7 @@ export const LOGO_RULES = {
       label: "Master logo on light background",
       filePath: "/brand/logos/master-logo-light.svg",
       background: "light",
-      minWidthPx: 120,
+      usageNote: "Use this master asset on light backgrounds where the mark remains clean and fully visible.",
       clearSpaceRule: "At least 1x height of the V in Vayasya around all sides.",
     },
     {
@@ -686,7 +686,7 @@ export const LOGO_RULES = {
       label: "Master logo on dark background",
       filePath: "/brand/logos/master-logo-dark.svg",
       background: "dark",
-      minWidthPx: 120,
+      usageNote: "Use this master asset on dark backgrounds where the mark needs the darker variant for clean contrast.",
       clearSpaceRule: "At least 1x height of the V in Vayasya around all sides.",
     },
   ] as const satisfies readonly LogoVariant[],
@@ -702,7 +702,7 @@ export const COLOR_USAGE_RULES = [
     context: "Surface composition",
     risk: "Overusing accents reduces readability and weakens brand hierarchy.",
     recommended:
-      "Use a 70/20/10 split: 70% neutrals, 20% one vertical or master-brand color, 10% semantic or chart highlights.",
+      "Let neutrals carry most of the surface, use one clear brand accent, and reserve semantic or chart highlights for meaning-bearing moments only.",
   },
   {
     context: "Vertical-specific documents",
@@ -791,7 +791,7 @@ const LANGUAGE_GUIDE = [
     ],
   },
   {
-    rule: "Limit sentence length to 22 words unless a legal clause requires more.",
+    rule: "Keep sentences short unless a legal or contractual clause requires more detail.",
     rationale: "Shorter sentences reduce misinterpretation in client communications.",
     examples: [
       "Use two short sentences for obligation and timeline.",
@@ -821,9 +821,9 @@ export const TYPO_RULES = {
   hierarchy: TYPE_HIERARCHY,
   language: LANGUAGE_GUIDE,
   lineLength: {
-    idealBodyCharacters: "55-72 characters per line",
-    maxBodyCharacters: "80 characters per line",
-    tableCellWrapThreshold: "32-40 characters per cell before wrapping",
+    body: "Keep body lines reasonably short for comfortable reading across desktop and mobile layouts.",
+    maximum: "Break dense copy before lines become visually wide or hard to scan.",
+    tableCells: "Wrap dense table content before values start colliding or hiding meaning.",
   },
   capitalization: {
     headings: "Title Case",

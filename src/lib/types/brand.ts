@@ -84,7 +84,6 @@ export type TaskGuide = {
   channel: string;
   approvedScript: string;
   topRules: readonly string[];
-  doDont: readonly DoDontExample[];
   escalateWhen: string;
   relatedChecklist: readonly string[];
   fullGuideAnchor: string;
@@ -93,10 +92,7 @@ export type TaskGuide = {
 export type ServiceCapability = {
   name: string;
   approvedDescription: string;
-  includes: readonly string[];
-  notIncluded: readonly string[];
-  onRequest: readonly string[];
-  proofPoints: readonly string[];
+  scopeBoundary: string;
 };
 
 export type RepresentationAsset = {
@@ -105,14 +101,6 @@ export type RepresentationAsset = {
   copy: string;
   whenToUse: string;
   governanceLevel: "self-serve" | "approval-required";
-};
-
-export type ApprovalTrigger = {
-  title: string;
-  requiredFor: readonly string[];
-  notRequiredFor: readonly string[];
-  approverRole: string;
-  responseSla: string;
 };
 
 // Core brand content types
@@ -134,7 +122,7 @@ export type LogoVariant = {
   label: string;
   filePath: string;
   background: "light" | "dark" | "mixed";
-  minWidthPx: number;
+  usageNote: string;
   clearSpaceRule: string;
 };
 
@@ -167,13 +155,6 @@ export type TypeHierarchy = {
   usage: string;
 };
 
-export type VoicePersona = {
-  trait: string;
-  description: string;
-  soundsLike: readonly string[];
-  avoid: readonly string[];
-};
-
 export type LanguageGuideItem = {
   rule: string;
   rationale: string;
@@ -195,9 +176,7 @@ export type QASection = {
 export type BrandFooter = {
   version: string;
   effectiveDate: string;
-  nextReviewDate: string;
   owner: string;
-  approvalTrail: readonly string[];
   contact: string;
 };
 
@@ -209,13 +188,6 @@ export type ClaimRule = {
   requiredEvidence: string;
   prohibitedPattern: string;
   reviewTrigger: string;
-};
-
-export type DoDontExample = {
-  topic: string;
-  do: string;
-  dont: string;
-  why: string;
 };
 
 export type TemplateSpec = {
@@ -281,20 +253,6 @@ export type TerminologyEntry = {
   approved: string;
   avoid: readonly string[];
   notes: string;
-};
-
-export type BannedPhrase = {
-  phrase: string;
-  reason: string;
-  alternative: string;
-};
-
-export type MeetingStandard = {
-  meetingType: string;
-  requiredInputs: readonly string[];
-  requiredOutputs: readonly string[];
-  timeboxMinutes: number;
-  ownerRole: string;
 };
 
 export type ImageryGuideline = {

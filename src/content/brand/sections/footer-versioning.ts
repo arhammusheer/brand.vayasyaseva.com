@@ -1,63 +1,12 @@
-import type {
-  BrandFooter,
-  DoDontExample,
-  SectionHeader,
-  TemplateSpec,
-} from "../../../lib/types/brand";
+import type { BrandFooter } from "../../../lib/types/brand";
 
 export const FOOTER_VERSIONING_SECTION = {
-  header: {
-    id: "footer-versioning",
-    number: "21",
-    title: "Footer / Versioning",
-    summary: "Keep every published artifact attributable, current, and reviewable.",
-  },
-  intro:
-    "Version metadata is mandatory for control and audit. Every formal artifact must contain version, effective date, owner, and review date.",
   footer: {
     version: "v4.0.0",
     effectiveDate: "16 Mar 2026",
-    nextReviewDate: "16 Sep 2026",
     owner: "Vayasya Brand Office",
-    approvalTrail: [
-      "Brand lead approval",
-      "Vertical head approval",
-      "Legal reviewer acknowledgment",
-    ],
     contact: "brand-office@vayasyaseva.com",
   },
-  rules: [
-    "Increase minor version for wording refinements without policy impact.",
-    "Increase major version for policy, legal, or claim framework changes.",
-    "Stamp footer metadata on all pages for exported PDF versions.",
-    "Maintain a changelog entry for every release.",
-  ],
-  doDont: [
-    {
-      topic: "Version hygiene",
-      do: "Issue a major version bump when the handbook changes how employees should use it day to day.",
-      dont: "Change content without version update.",
-      why: "Version history is required for traceability.",
-    },
-  ],
-  templates: [
-    {
-      name: "Footer metadata block",
-      purpose: "Standard footer data for all brand handbook exports.",
-      whenToUse: "PDF exports, document templates, and policy pages.",
-      template:
-        "Version: <vX.Y.Z> | Effective: <DD MMM YYYY> | Next review: <DD MMM YYYY> | Owner: <team> | Contact: <email>",
-      guardrails: [
-        "Use India-first date format.",
-        "Do not publish without owner and contact.",
-      ],
-    },
-  ],
 } as const satisfies {
-  header: SectionHeader;
-  intro: string;
   footer: BrandFooter;
-  rules: readonly string[];
-  doDont: readonly DoDontExample[];
-  templates: readonly TemplateSpec[];
 };

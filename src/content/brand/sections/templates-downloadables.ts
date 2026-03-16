@@ -1,9 +1,6 @@
 import type {
-  DoDontExample,
   RepresentationAsset,
   SectionHeader,
-  SectionSummaryStrip,
-  TemplateSpec,
 } from "../../../lib/types/brand";
 
 export const TEMPLATES_DOWNLOADABLES_SECTION = {
@@ -13,13 +10,6 @@ export const TEMPLATES_DOWNLOADABLES_SECTION = {
     title: "Representation Pack & Assets",
     summary: "Use self-serve approved assets and copy blocks for everyday representation work.",
   } satisfies SectionHeader,
-
-  summaryStrip: {
-    useThisWhen: "You need a signature, bio line, approved intro, script, or standard external asset quickly.",
-    doThis: "Use the approved pack exactly as supplied and only escalate for non-standard needs.",
-    neverDoThis: "Do not rewrite routine company copy or quietly edit standard templates.",
-    whoNeedsThis: "All employees, especially HR/admin, supervisors, sales/account, and field/site teams.",
-  } satisfies SectionSummaryStrip,
 
   intro:
     "This section replaces a controlled-access mindset for routine assets. Standard representation materials should be easy to use without waiting for approval each time.",
@@ -68,38 +58,4 @@ export const TEMPLATES_DOWNLOADABLES_SECTION = {
     "If you edit an approved template structurally, route it through governance before reuse.",
     "Do not create alternate bios, signatures, or intro paragraphs when an approved one already exists.",
   ],
-
-  doDont: [
-    {
-      topic: "Routine asset use",
-      do: "Use the approved signature and intro paragraph directly from the representation pack.",
-      dont: "Rewrite the company intro every time you send a quotation or update your profile.",
-      why: "Consistency is faster and safer than reinvention.",
-    },
-  ] satisfies readonly DoDontExample[],
-
-  templates: [
-    {
-      name: "Representation pack checklist",
-      purpose: "Make sure a routine external-facing setup uses the approved basics.",
-      whenToUse: "New employee setup, role change, or external-facing material creation.",
-      template:
-        "Need: <signature/bio/intro/script/template>\nApproved source used: <yes/no>\nRole / audience: <who will use it>\nAny edits made: <none or summary>\nGovernance required: <yes/no>",
-      guardrails: [
-        "If edits are made to a standard asset, re-check whether approval is required.",
-        "Use self-serve only when the asset is already approved and unchanged.",
-      ],
-    },
-    {
-      name: "Quotation note block",
-      purpose: "Give quotation owners an approved short note they can reuse safely.",
-      whenToUse: "Quotations, proposal attachments, and commercial document sharing.",
-      template:
-        "Please find the attached quotation for <scope>. This version covers <included items> and follows the approved service description. Owner for follow-up: <name>. Next step requested: <specific action/date>.",
-      guardrails: [
-        "Do not add promises or broaden the service description in the note.",
-        "Surface assumptions when they affect interpretation.",
-      ],
-    },
-  ] satisfies readonly TemplateSpec[],
 } as const;

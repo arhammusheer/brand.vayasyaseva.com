@@ -1,9 +1,7 @@
 import {
-  ReferenceDoDontBlock,
   ReferenceFieldDefaults,
   ReferenceRulesBlock,
   ReferenceSectionHeading,
-  ReferenceTemplatesBlock,
   VisualReferencePageShell,
 } from "../../../components/brand/visual-reference-shell";
 import { IMAGERY_SECTION } from "../../../content/brand/sections/imagery";
@@ -57,8 +55,6 @@ export default function VisualImageryPage() {
       </section>
 
       <ReferenceRulesBlock rules={IMAGERY_SECTION.rules} />
-      <ReferenceDoDontBlock examples={IMAGERY_SECTION.doDont} />
-      <ReferenceTemplatesBlock templates={IMAGERY_SECTION.templates} />
     </VisualReferencePageShell>
   );
 }
