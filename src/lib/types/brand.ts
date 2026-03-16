@@ -218,6 +218,93 @@ export type TypographyStack = {
   usage: string;
 };
 
+export type TypographyQuickAction = {
+  id: string;
+  title: string;
+  description: string;
+  href: string;
+  ctaLabel: string;
+  icon: "download" | "interface" | "data" | "review" | "hierarchy";
+  download?: boolean;
+  badge?: string;
+};
+
+export type TypographySpecimenCard = {
+  id: string;
+  title: string;
+  family: string;
+  fontClass: "font-display" | "font-sans" | "font-mono";
+  previewLabel?: string;
+  previewText: string;
+  previewDetail?: string;
+  whenToUse: string;
+  hardRule: string;
+  badge?: string;
+};
+
+export type TypographyNeed = {
+  need: string;
+  useThis: string;
+  note: string;
+};
+
+export type TypographyMisuseExample = {
+  id: string;
+  title: string;
+  previewKind: "mono-paragraph" | "display-body" | "all-caps" | "extra-font";
+  issue: string;
+  correction: string;
+};
+
+export type TypographyRoleAction = {
+  role: string;
+  summary: string;
+  href: string;
+  actions: readonly string[];
+};
+
+export type TypographySurfaceGuide = {
+  id: string;
+  title: string;
+  fontClass: "font-display" | "font-sans" | "font-mono";
+  sampleText: string;
+  sampleDetail?: string;
+  useThis: string;
+  note: string;
+  hardRule: string;
+  badge?: string;
+};
+
+export type TypographyHierarchyExample = {
+  id: string;
+  level: string;
+  fontClass: "font-display" | "font-sans" | "font-mono";
+  specimen: string;
+  fontWeight: number;
+  fontSize: string;
+  lineHeight: string;
+  usage: string;
+  note: string;
+};
+
+export type TypographyRelatedAsset = {
+  name: string;
+  description: string;
+  href: string;
+  ctaLabel: string;
+  download?: boolean;
+};
+
+export type TypographyReference = {
+  specialistQuickActions: readonly TypographyQuickAction[];
+  roleActions: readonly TypographyRoleAction[];
+  surfaceGuides: readonly TypographySurfaceGuide[];
+  hierarchyExamples: readonly TypographyHierarchyExample[];
+  reviewerChecklist: readonly string[];
+  technicalNotes: readonly string[];
+  relatedAssets?: readonly TypographyRelatedAsset[];
+};
+
 export type TypeHierarchy = {
   level: string;
   fontFamily: string;

@@ -19,6 +19,12 @@ import {
   LogoPreviewGrid,
   LogoQuickActionsGrid,
 } from "../components/brand/logo-usage-panels";
+import {
+  TypographyCommonNeedsGrid,
+  TypographyMisuseGrid,
+  TypographyQuickActionsGrid,
+  TypographySpecimenGrid,
+} from "../components/brand/typography-panels";
 import { Button } from "../components/ui/button";
 import { ScrollArea } from "../components/ui/scroll-area";
 import {
@@ -831,8 +837,22 @@ export default function Page() {
                 <p className="max-w-3xl text-lg leading-relaxed">
                   {sanitizeTokenMentions(sections.typography.intro)}
                 </p>
-                <FieldDefaults items={sections.typography.employeeDefaults} title="Employee-safe default" />
-                <RulesBlock rules={sections.typography.rules} title="Critical typography rules" />
+                <div className="mt-10 space-y-12">
+                  <TypographyQuickActionsGrid
+                    actions={sections.typography.quickActions}
+                    title="What you probably need"
+                    description="Start with the task. If you need more than the family role and the safe default, open the full typography reference."
+                  />
+                  <TypographySpecimenGrid
+                    cards={sections.typography.specimenCards}
+                    title="Pick the right type role"
+                  />
+                  <TypographyCommonNeedsGrid items={sections.typography.commonNeeds} />
+                  <TypographyMisuseGrid
+                    examples={sections.typography.misuseChecks}
+                    title="Never do this"
+                  />
+                </div>
                 <ReferenceLinkCard
                   href={sections.typography.referenceHref}
                   title={sections.typography.referenceTitle}

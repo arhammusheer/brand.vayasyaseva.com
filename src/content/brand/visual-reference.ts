@@ -22,7 +22,7 @@ export const VISUAL_REFERENCE_NAV_ITEMS = [
   {
     href: "/visual/typography",
     label: "Typography",
-    description: "Font packs, hierarchy, formatting controls, and implementation notes.",
+    description: "Role-first typography reference with live specimens, surface guidance, hierarchy examples, and technical checks.",
   },
   {
     href: "/visual/imagery",
@@ -151,27 +151,27 @@ export const VISUAL_REFERENCE_PAGES = [
     navLabel: "Typography",
     title: "Typography",
     summary:
-      "Full typography reference for font packs, stacks, hierarchy, language controls, and implementation decisions.",
+      "Role-first typography reference with live specimens, surface guidance, hierarchy examples, and release-ready technical checks.",
     pageIntro:
-      "Use this page when you need the production and implementation detail behind the handbook’s default rule to stay inside approved templates and font systems.",
+      "Use this page when you are designing, implementing, or reviewing typography decisions and need more than the quick chooser on the handbook root.",
     specialistAudience: "Design, product, and engineering teams.",
     handbookHref: "/#07-typography",
     guidanceBlocks: [
       {
-        title: "Font pack",
-        description: "Download the approved company font package and respect internal-use controls.",
+        title: "Role quick actions",
+        description: "Start from the designer, developer, or reviewer path instead of scanning every typography rule.",
       },
       {
-        title: "Stacks and roles",
-        description: "Use Anek for display, Hind for narrative/UI copy, and JetBrains Mono for data.",
+        title: "Approved stacks and roles",
+        description: "Use live specimens to pick Anek for display, Hind for readable body/UI copy, and JetBrains Mono for data.",
       },
       {
-        title: "Hierarchy controls",
-        description: "Apply the approved size, line-height, and usage hierarchy consistently.",
+        title: "Surface chooser",
+        description: "Map decks, product UI, tables, reports, and exports to the approved family roles.",
       },
       {
-        title: "Implementation notes",
-        description: "Carry the same type system into product and engineering work without ad hoc substitutions.",
+        title: "Review and technical notes",
+        description: "Catch role mismatches, silent substitutions, and noisy hierarchy shifts before release.",
       },
     ],
     assets: [
@@ -180,18 +180,18 @@ export const VISUAL_REFERENCE_PAGES = [
         description: "Approved font files for design, marketing, and implementation teams.",
       },
       {
-        name: "Type hierarchy",
-        description: "Approved hierarchy levels for titles, body copy, and data contexts.",
+        name: "Surface guidance",
+        description: "Approved mapping for decks, UI, reports, exports, and data-heavy surfaces.",
       },
       {
-        name: "Formatting controls",
-        description: "Working rules for casing, hierarchy use, and readable long-form layouts.",
+        name: "Hierarchy examples",
+        description: "Specimen-led scale with technical size and line-height detail for release work.",
       },
     ],
     implementationNotes: [
-      "Do not introduce additional fonts beyond Anek, Hind, and JetBrains Mono.",
-      "Keep data-heavy UI and tables in mono where alignment and character distinction matter.",
-      "Escalate rendering issues instead of silently switching to fallback families.",
+      "Keep product and collateral typography aligned to the same Anek, Hind, and JetBrains Mono role system.",
+      "Use JetBrains Mono only where precision, alignment, or character distinction materially help the reader.",
+      "Escalate font-loading or rendering problems instead of silently switching to fallback families.",
     ],
   },
   {

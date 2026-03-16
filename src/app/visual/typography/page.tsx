@@ -1,11 +1,20 @@
 import {
   ReferenceDownloadablesBlock,
-  ReferenceFieldDefaults,
   ReferenceRulesBlock,
   ReferenceSectionHeading,
   VisualReferencePageShell,
 } from "../../../components/brand/visual-reference-shell";
-import { TYPOGRAPHY_SECTION } from "../../../content/brand/sections/typography";
+import {
+  TypographyHierarchyExamplesGrid,
+  TypographyQuickActionsGrid,
+  TypographyRoleActionsGrid,
+  TypographySpecimenGrid,
+  TypographySurfaceGuidesGrid,
+} from "../../../components/brand/typography-panels";
+import {
+  TYPOGRAPHY_REFERENCE,
+  TYPOGRAPHY_SECTION,
+} from "../../../content/brand/sections/typography";
 import { getVisualReferencePage } from "../../../content/brand/visual-reference";
 import { buildBrandPageMetadata } from "../../../lib/brand-utils";
 
@@ -21,7 +30,7 @@ const visualPage = (() => {
 export const metadata = buildBrandPageMetadata({
   title: "Typography | Vayasya Visual Reference",
   description:
-    "Full Vayasya typography reference covering approved font packs, stacks, hierarchy, formatting controls, and implementation guidance.",
+    "Role-first Vayasya typography reference for designers, developers, and reviewers covering font packs, hierarchy, surface guidance, and technical checks.",
   path: "/visual/typography",
 });
 
@@ -29,44 +38,49 @@ export default function VisualTypographyPage() {
   return (
     <VisualReferencePageShell page={visualPage}>
       <section className="space-y-6">
+        <TypographyRoleActionsGrid
+          items={TYPOGRAPHY_REFERENCE.roleActions}
+          title="Role quick actions"
+        />
+        <TypographyQuickActionsGrid
+          actions={TYPOGRAPHY_REFERENCE.specialistQuickActions}
+          title="Specialist quick actions"
+          description="Jump to the right pack, hierarchy view, surface guidance, or review path before scanning the whole page."
+        />
+      </section>
+
+      <section className="space-y-6" id="font-pack-approved-stacks">
         <ReferenceSectionHeading
-          title="Font system"
+          title="Font pack and approved stacks"
           description={TYPOGRAPHY_SECTION.intro}
         />
-        <ReferenceFieldDefaults
-          items={TYPOGRAPHY_SECTION.employeeDefaults}
-          title="Employee-safe default"
-        />
         <ReferenceDownloadablesBlock assets={[TYPOGRAPHY_SECTION.fontPack]} title="Approved font pack" />
-      </section>
-
-      <section className="space-y-6">
-        <ReferenceSectionHeading
-          title="Font stacks"
-          description="Apply the approved family and usage role consistently across brand, product, and engineering work."
+        <TypographySpecimenGrid
+          cards={TYPOGRAPHY_SECTION.specimenCards}
+          title="Approved stacks and roles"
         />
-        <div className="grid gap-6 lg:grid-cols-3">
-          {TYPOGRAPHY_SECTION.stacks.map((stack) => (
-            <div key={stack.family} className="rounded-lg border border-[color:var(--vy-border)] p-6">
-              <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)]">
-                {stack.label}
-              </p>
-              <h3 className="mt-2 text-2xl font-semibold text-[color:var(--vy-text-strong)]">
-                {stack.family}
-              </h3>
-              <p className="mt-3 text-sm text-[color:var(--vy-muted-fg)]">{stack.usage}</p>
-              <p className="mt-3 text-xs text-[color:var(--vy-muted-fg)]">
-                Fallbacks: {stack.fallback.join(", ")}
-              </p>
-            </div>
-          ))}
-        </div>
+        <ReferenceRulesBlock rules={TYPOGRAPHY_SECTION.rules} title="Core family rules" />
       </section>
 
-      <section className="space-y-6">
+      <section className="space-y-6" id="surface-chooser">
         <ReferenceSectionHeading
-          title="Type hierarchy"
-          description="Use the approved hierarchy levels as the default scale for titles, body copy, and data-heavy contexts."
+          title="Surface chooser"
+          description="Choose the type treatment by actual surface so product, data, and collateral work stay aligned to the same system."
+        />
+        <TypographySurfaceGuidesGrid
+          items={TYPOGRAPHY_REFERENCE.surfaceGuides}
+          title="Approved surface guidance"
+        />
+      </section>
+
+      <section className="space-y-6" id="hierarchy-system">
+        <ReferenceSectionHeading
+          title="Hierarchy system"
+          description="Use the specimen-led scale first, then confirm the technical size and line-height values in the matrix below."
+        />
+        <TypographyHierarchyExamplesGrid
+          items={TYPOGRAPHY_REFERENCE.hierarchyExamples}
+          title="Specimen-led hierarchy"
         />
         <div className="overflow-x-auto rounded-lg border border-[color:var(--vy-border)]">
           <table className="w-full text-sm">
@@ -99,7 +113,7 @@ export default function VisualTypographyPage() {
       <section className="space-y-6">
         <ReferenceSectionHeading
           title="Formatting controls"
-          description="Keep language, casing, and line-length controls consistent across long-form content and interfaces."
+          description="Use these as execution checks for readability, casing, data formatting, and hierarchy discipline."
         />
         <div className="grid gap-4 md:grid-cols-2">
           {TYPOGRAPHY_SECTION.languageControls.map((item) => (
@@ -112,7 +126,20 @@ export default function VisualTypographyPage() {
         </div>
       </section>
 
-      <ReferenceRulesBlock rules={TYPOGRAPHY_SECTION.rules} />
+      <section className="space-y-6" id="review-technical-notes">
+        <ReferenceSectionHeading
+          title="Review and technical notes"
+          description="Use these checks before approving a branded surface or shipping a product implementation that relies on the type system."
+        />
+        <ReferenceRulesBlock
+          rules={TYPOGRAPHY_REFERENCE.reviewerChecklist}
+          title="Reviewer checklist"
+        />
+        <ReferenceRulesBlock
+          rules={TYPOGRAPHY_REFERENCE.technicalNotes}
+          title="Technical notes"
+        />
+      </section>
     </VisualReferencePageShell>
   );
 }
