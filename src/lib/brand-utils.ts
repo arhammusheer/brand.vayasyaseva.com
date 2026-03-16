@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import { BRAND_CONTENT } from "../content/brand";
 
 type BrandContent = typeof BRAND_CONTENT;
@@ -41,6 +43,46 @@ export const handbookMetadata = {
   sectionCount: orderedSections.length,
   version: BRAND_CONTENT.sections.footerVersioning.footer.version,
   lastUpdated: BRAND_CONTENT.sections.footerVersioning.footer.effectiveDate,
+};
+
+export const brandSiteUrl = "https://brand.vayasyaseva.com";
+
+export const sanitizeTokenMentions = (value: string) =>
+  value.replace(/`?--vy-[a-z0-9-]+`?/gi, (rawToken) => {
+    const token = rawToken.replace(/`/g, "").toLowerCase().replace(/^--vy-/, "");
+    return token.replace(/-/g, " ");
+  });
+
+export const buildBrandPageMetadata = ({
+  title,
+  description,
+  path,
+}: {
+  title: string;
+  description: string;
+  path: string;
+}): Metadata => {
+  const url = new URL(path, brandSiteUrl).toString();
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: path,
+    },
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: handbookMetadata.title,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
 };
 
 export const activeSectionLabel = (activeId: string | null) => {

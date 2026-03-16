@@ -1,22 +1,24 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import {
   AlertTriangle,
   ArrowRight,
   ArrowUp,
   Check,
-  Copy,
   FileText,
   Menu,
   X,
 } from "lucide-react";
-import { useState } from "react";
-import { toast } from "sonner";
 
 import { BRAND_CONTENT } from "../content/brand";
 import { useActiveSection } from "../hooks/use-active-section";
-import { anchorsFromNavigation, smoothScrollToSection } from "../lib/brand-utils";
+import {
+  anchorsFromNavigation,
+  sanitizeTokenMentions,
+  smoothScrollToSection,
+} from "../lib/brand-utils";
 import { ChapterNav, ChapterNavSidebar } from "../components/brand/chapter-nav";
 import { ChapterWrapper } from "../components/brand/chapter-wrapper";
 import { Button } from "../components/ui/button";
@@ -31,48 +33,6 @@ import {
 
 const sections = BRAND_CONTENT.sections;
 const fundamentals = BRAND_CONTENT.fundamentals;
-
-const TOKEN_LABELS: Record<string, string> = {
-  bg: "background",
-  fg: "foreground",
-  "bg-canvas": "canvas background",
-  "bg-subtle": "subtle background",
-  "bg-muted": "muted background",
-  "border-default": "default border",
-  "text-primary": "primary text",
-  "text-secondary": "secondary text",
-  "text-strong": "strong text",
-  muted: "muted surface",
-  "muted-fg": "muted text",
-  border: "border",
-  "brand-primary": "brand primary",
-  "brand-primary-hover": "brand primary hover",
-  "brand-on-primary": "on brand surface text",
-  "brand-text": "brand text",
-  "focus-ring": "focus ring",
-  "gold-ui": "brand gold",
-  seva: "Seva accent",
-  setu: "Setu accent",
-  kaushal: "Kaushal accent",
-  prabandh: "Prabandh accent",
-  success: "success",
-  warning: "warning",
-  info: "info",
-  danger: "danger",
-};
-
-const COLOR_ROLE_ORDER = [
-  "Neutral",
-  "Gold",
-  "Seva",
-  "Setu",
-  "Kaushal",
-  "Prabandh",
-  "Semantic",
-  "Data Visualization",
-  "Role Mapping",
-  "Compatibility",
-] as const;
 
 const CHAPTERS = {
   foundation: {
@@ -111,31 +71,6 @@ const CHAPTERS = {
     accentColor: "appendix",
   },
 } as const;
-
-const sanitizeTokenMentions = (value: string) =>
-  value.replace(/`?--vy-[a-z0-9-]+`?/gi, (rawToken) => {
-    const token = rawToken.replace(/`/g, "").toLowerCase().replace(/^--vy-/, "");
-    return TOKEN_LABELS[token] ?? token.replace(/-/g, " ");
-  });
-
-const tokenLabel = (token: string) => {
-  const label = sanitizeTokenMentions(token);
-  return label.charAt(0).toUpperCase() + label.slice(1);
-};
-
-const swatchIconColor = (hex: string) => {
-  const normalized = hex.replace("#", "");
-  if (!/^[\da-f]{6}$/i.test(normalized)) {
-    return "var(--vy-brand-on-primary)";
-  }
-
-  const red = Number.parseInt(normalized.slice(0, 2), 16);
-  const green = Number.parseInt(normalized.slice(2, 4), 16);
-  const blue = Number.parseInt(normalized.slice(4, 6), 16);
-  const luminance = (0.299 * red + 0.587 * green + 0.114 * blue) / 255;
-
-  return luminance > 0.62 ? "var(--vy-brand-on-primary)" : "var(--vy-bg-canvas)";
-};
 
 function SectionHeader({
   number,
@@ -342,38 +277,36 @@ function TemplatesBlock({
   );
 }
 
-function ColorSwatch({ token, hex, usage }: { token: string; hex: string; usage: string }) {
-  const [copied, setCopied] = useState(false);
-  const iconColor = swatchIconColor(hex);
-
-  const copyHex = async () => {
-    await navigator.clipboard.writeText(hex);
-    setCopied(true);
-    toast.success(`Copied ${hex}`);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
+function ReferenceLinkCard({
+  href,
+  title,
+  audience,
+}: {
+  href: string;
+  title: string;
+  audience?: string;
+}) {
   return (
-    <button onClick={copyHex} className="group text-left">
-      <div
-        className="mb-2 flex h-20 items-center justify-center rounded-lg border border-[color:var(--vy-border)] transition-transform group-hover:scale-105"
-        style={{ backgroundColor: hex }}
-      >
-        {copied ? (
-          <Check className="h-5 w-5 drop-shadow-md" style={{ color: iconColor }} />
-        ) : (
-          <Copy
-            className="h-5 w-5 opacity-0 drop-shadow-md transition-opacity group-hover:opacity-100"
-            style={{ color: iconColor }}
-          />
-        )}
+    <div className="mt-10 rounded-xl border border-[color:var(--vy-border)] bg-[color:var(--vy-muted)] p-6">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)]">
+            Specialist reference
+          </p>
+          <p className="mt-2 text-[color:var(--vy-fg)]">
+            {audience
+              ? `For ${sanitizeTokenMentions(audience)}. Use the handbook root for employee-safe defaults, then open the deeper visual reference only when you need production or implementation detail.`
+              : "Open the deeper visual reference only when you need production or implementation detail."}
+          </p>
+        </div>
+        <Button asChild variant="outline" className="justify-between">
+          <Link href={href}>
+            {title}
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </Button>
       </div>
-      <p className="text-xs text-[color:var(--vy-muted-fg)]">{tokenLabel(token)}</p>
-      <p className="font-mono text-sm font-medium">{hex}</p>
-      <p className="mt-1 line-clamp-2 text-xs text-[color:var(--vy-muted-fg)]">
-        {sanitizeTokenMentions(usage)}
-      </p>
-    </button>
+    </div>
   );
 }
 
@@ -400,12 +333,6 @@ export default function Page() {
     return normalized.replace(/^\d+-/, "").replace(/-/g, " ");
   };
 
-  const orderedColorRoles = [
-    ...COLOR_ROLE_ORDER,
-    ...Array.from(new Set(sections.colorPalette.swatches.map((color) => color.role))).filter(
-      (role) => !COLOR_ROLE_ORDER.includes(role as (typeof COLOR_ROLE_ORDER)[number]),
-    ),
-  ];
   const heroQuickActions = sections.overview.taskCards;
 
   return (
@@ -950,78 +877,12 @@ export default function Page() {
               <div className="mt-10">
                 <p className="max-w-3xl text-lg leading-relaxed">{sections.logoUsage.intro}</p>
                 <FieldDefaults items={sections.logoUsage.employeeDefaults} />
-
-                <div className="mt-10 grid gap-6 lg:grid-cols-3">
-                  {sections.logoUsage.downloadables.map((asset) => (
-                    <article
-                      key={asset.filePath}
-                      className="rounded-lg border border-[color:var(--vy-border)] bg-[color:var(--vy-muted)] p-6"
-                    >
-                      <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)]">
-                        {asset.fileType}
-                      </p>
-                      <h4 className="mt-2 text-lg font-medium text-[color:var(--vy-text-strong)]">
-                        {asset.name}
-                      </h4>
-                      <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">{asset.description}</p>
-                      <ul className="mt-4 space-y-1 text-sm text-[color:var(--vy-fg)]">
-                        {asset.includes.map((item) => (
-                          <li key={item}>{item}</li>
-                        ))}
-                      </ul>
-                      <Button asChild className="mt-5 w-full justify-between">
-                        <a href={asset.filePath} download>
-                          Download pack
-                          <ArrowRight className="h-4 w-4" />
-                        </a>
-                      </Button>
-                    </article>
-                  ))}
-                </div>
-
-                {sections.logoUsage.accessNote ? (
-                  <div className="mt-6 rounded-lg border border-[color:var(--vy-warning)] bg-[color:var(--vy-muted)] p-5">
-                    <div className="flex items-start gap-3">
-                      <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--vy-warning)]" />
-                      <p className="text-sm text-[color:var(--vy-muted-fg)]">{sections.logoUsage.accessNote}</p>
-                    </div>
-                  </div>
-                ) : null}
-
-                <div className="mt-10 grid gap-6 md:grid-cols-2">
-                  {sections.logoUsage.variants.map((variant) => (
-                    <div key={variant.id} className="rounded-lg border border-[color:var(--vy-border)] p-6">
-                      <div
-                        className={`flex h-32 items-center justify-center rounded ${
-                          variant.background === "dark"
-                            ? "bg-[color:var(--vy-gold-950)]"
-                            : "bg-[color:var(--vy-bg)]"
-                        }`}
-                      >
-                        <div className="relative h-20 w-20">
-                          <Image
-                            src={variant.filePath}
-                            alt={variant.label}
-                            fill
-                            sizes="80px"
-                            className="object-contain"
-                          />
-                        </div>
-                      </div>
-                      <p className="mt-4 font-medium text-[color:var(--vy-text-strong)]">{variant.label}</p>
-                      <p className="mt-1 text-sm text-[color:var(--vy-muted-fg)]">
-                        Minimum width: {variant.minWidthPx}px
-                      </p>
-                      <p className="mt-1 text-sm text-[color:var(--vy-muted-fg)]">
-                        Clear space: {variant.clearSpaceRule}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-                <RulesBlock rules={sections.logoUsage.rules} />
-                <DoDontBlock examples={sections.logoUsage.doDont} />
-                <TemplatesBlock templates={sections.logoUsage.templates} />
+                <RulesBlock rules={sections.logoUsage.rules.slice(0, 5)} title="Critical rules" />
+                <ReferenceLinkCard
+                  href={sections.logoUsage.referenceHref}
+                  title={sections.logoUsage.referenceTitle}
+                  audience={sections.logoUsage.referenceAudience}
+                />
               </div>
             </section>
 
@@ -1032,40 +893,12 @@ export default function Page() {
               <div className="mt-10">
                 <p className="max-w-3xl text-lg leading-relaxed">{sections.colorPalette.intro}</p>
                 <FieldDefaults items={sections.colorPalette.employeeDefaults} />
-
-                {orderedColorRoles.map((role) => {
-                  const colors = sections.colorPalette.swatches.filter((color) => color.role === role);
-                  if (!colors.length) return null;
-
-                  return (
-                    <div key={role} className="mt-10">
-                      <h4 className="mb-6 text-lg font-medium text-[color:var(--vy-text-strong)]">{role}</h4>
-                      <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-                        {colors.map((color) => (
-                          <ColorSwatch key={color.token} token={color.token} hex={color.hex} usage={color.usage} />
-                        ))}
-                      </div>
-                    </div>
-                  );
-                })}
-
-                <div className="mt-12 grid gap-4 md:grid-cols-3">
-                  {sections.colorPalette.scenarios.map((scenario) => (
-                    <div key={scenario.context} className="rounded-lg border border-[color:var(--vy-border)] p-5">
-                      <p className="font-medium text-[color:var(--vy-text-strong)]">{scenario.context}</p>
-                      <p className="mt-3 text-sm text-[color:var(--vy-muted-fg)]">
-                        Risk: {scenario.risk}
-                      </p>
-                      <p className="mt-3 text-sm text-[color:var(--vy-fg)]">
-                        {scenario.recommended}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-                <RulesBlock rules={sections.colorPalette.rules} />
-                <DoDontBlock examples={sections.colorPalette.doDont} />
-                <TemplatesBlock templates={sections.colorPalette.templates} />
+                <RulesBlock rules={sections.colorPalette.rules.slice(0, 5)} title="Critical rules" />
+                <ReferenceLinkCard
+                  href={sections.colorPalette.referenceHref}
+                  title={sections.colorPalette.referenceTitle}
+                  audience={sections.colorPalette.referenceAudience}
+                />
               </div>
             </section>
 
@@ -1076,89 +909,12 @@ export default function Page() {
               <div className="mt-10">
                 <p className="max-w-3xl text-lg leading-relaxed">{sections.typography.intro}</p>
                 <FieldDefaults items={sections.typography.employeeDefaults} />
-
-                <div className="mt-8 rounded-lg border border-[color:var(--vy-border)] bg-[color:var(--vy-muted)] p-6">
-                  <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                    <div>
-                      <h4 className="text-lg font-medium text-[color:var(--vy-text-strong)]">
-                        {sections.typography.fontPack.name}
-                      </h4>
-                      <p className="mt-1 text-sm text-[color:var(--vy-muted-fg)]">
-                        {sections.typography.fontPack.description}
-                      </p>
-                      <p className="mt-2 font-mono text-xs text-[color:var(--vy-muted-fg)]">
-                        File: {sections.typography.fontPack.filePath}
-                      </p>
-                    </div>
-                    <Button asChild>
-                      <a href={sections.typography.fontPack.filePath} download>
-                        Download font pack
-                        <ArrowRight className="h-4 w-4" />
-                      </a>
-                    </Button>
-                  </div>
-                  {sections.typography.fontPack.accessNote ? (
-                    <p className="mt-4 text-xs text-[color:var(--vy-muted-fg)]">
-                      {sections.typography.fontPack.accessNote}
-                    </p>
-                  ) : null}
-                </div>
-
-                <div className="mt-12 grid gap-6 lg:grid-cols-3">
-                  {sections.typography.stacks.map((stack) => (
-                    <div key={stack.family} className="rounded-lg border border-[color:var(--vy-border)] p-6">
-                      <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)]">
-                        {stack.label}
-                      </p>
-                      <h5 className="mt-2 text-2xl font-semibold text-[color:var(--vy-text-strong)]">
-                        {stack.family}
-                      </h5>
-                      <p className="mt-3 text-sm text-[color:var(--vy-muted-fg)]">{stack.usage}</p>
-                      <p className="mt-3 text-xs text-[color:var(--vy-muted-fg)]">
-                        Fallbacks: {stack.fallback.join(", ")}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-12 overflow-x-auto rounded-lg border border-[color:var(--vy-border)]">
-                  <table className="w-full text-sm">
-                    <thead className="bg-[color:var(--vy-muted)]">
-                      <tr>
-                        <th className="p-4 text-left font-medium">Level</th>
-                        <th className="p-4 text-left font-medium">Family</th>
-                        <th className="p-4 text-left font-medium">Size / line height</th>
-                        <th className="p-4 text-left font-medium">Usage</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {sections.typography.hierarchy.map((level) => (
-                        <tr key={level.level} className="border-t border-[color:var(--vy-border)]">
-                          <td className="p-4 font-medium">{level.level}</td>
-                          <td className="p-4">{level.fontFamily}</td>
-                          <td className="p-4">
-                            {level.fontSize} / {level.lineHeight}
-                          </td>
-                          <td className="p-4 text-[color:var(--vy-muted-fg)]">{level.usage}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-
-                <div className="mt-10 grid gap-4 md:grid-cols-2">
-                  {sections.typography.languageControls.map((item) => (
-                    <div key={item.rule} className="rounded-lg border border-[color:var(--vy-border)] p-5">
-                      <p className="font-medium text-[color:var(--vy-text-strong)]">{item.rule}</p>
-                      <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">{item.rationale}</p>
-                      <p className="mt-3 text-sm">{item.examples.join(" ")}</p>
-                    </div>
-                  ))}
-                </div>
-
-                <RulesBlock rules={sections.typography.rules} />
-                <DoDontBlock examples={sections.typography.doDont} />
-                <TemplatesBlock templates={sections.typography.templates} />
+                <RulesBlock rules={sections.typography.rules.slice(0, 5)} title="Critical rules" />
+                <ReferenceLinkCard
+                  href={sections.typography.referenceHref}
+                  title={sections.typography.referenceTitle}
+                  audience={sections.typography.referenceAudience}
+                />
               </div>
             </section>
 
@@ -1169,24 +925,12 @@ export default function Page() {
               <div className="mt-10">
                 <p className="max-w-3xl text-lg leading-relaxed">{sections.imagery.intro}</p>
                 <FieldDefaults items={sections.imagery.employeeDefaults} />
-
-                <div className="mt-10 grid gap-4 md:grid-cols-2">
-                  {sections.imagery.scenarios.map((scenario) => (
-                    <div key={scenario.context} className="rounded-lg border border-[color:var(--vy-border)] p-5">
-                      <p className="font-medium text-[color:var(--vy-text-strong)]">{scenario.context}</p>
-                      <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">
-                        Risk: {scenario.risk}
-                      </p>
-                      <p className="mt-3 text-sm text-[color:var(--vy-fg)]">
-                        {scenario.recommended}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-                <RulesBlock rules={sections.imagery.rules} />
-                <DoDontBlock examples={sections.imagery.doDont} />
-                <TemplatesBlock templates={sections.imagery.templates} />
+                <RulesBlock rules={sections.imagery.rules.slice(0, 5)} title="Critical rules" />
+                <ReferenceLinkCard
+                  href={sections.imagery.referenceHref}
+                  title={sections.imagery.referenceTitle}
+                  audience={sections.imagery.referenceAudience}
+                />
               </div>
             </section>
           </ChapterWrapper>

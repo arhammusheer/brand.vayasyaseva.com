@@ -5,6 +5,7 @@ import type {
   SectionHeader,
   SectionSummaryStrip,
   TemplateSpec,
+  VisualReferenceLinkMeta,
 } from "../../../lib/types/brand";
 
 export const LOGO_USAGE_SECTION = {
@@ -22,6 +23,9 @@ export const LOGO_USAGE_SECTION = {
   } satisfies SectionSummaryStrip,
   intro:
     "Logo consistency is mandatory. The source gold logo asset is authoritative and must remain untouched. Any deviation needs explicit approval.",
+  referenceHref: "/visual/logo-usage",
+  referenceTitle: "Open full logo usage reference",
+  referenceAudience: "Marketing, design, product, and engineering teams",
   employeeDefaults: [
     "If you only need a logo for email, a document, a slide, or a signature, use the supplied pack and stop there.",
     "If you need a new size or new lockup, ask for it. Do not edit the file yourself.",
@@ -120,6 +124,9 @@ export const LOGO_USAGE_SECTION = {
   header: SectionHeader;
   summaryStrip: SectionSummaryStrip;
   intro: string;
+  referenceHref: VisualReferenceLinkMeta["referenceHref"];
+  referenceTitle: VisualReferenceLinkMeta["referenceTitle"];
+  referenceAudience?: VisualReferenceLinkMeta["referenceAudience"];
   employeeDefaults: readonly string[];
   downloadables: readonly DownloadableBundle[];
   accessNote?: string;

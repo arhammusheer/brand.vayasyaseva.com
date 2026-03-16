@@ -4,6 +4,7 @@ import type {
   SectionHeader,
   SectionSummaryStrip,
   TemplateSpec,
+  VisualReferenceLinkMeta,
 } from "../../../lib/types/brand";
 
 export const IMAGERY_SECTION = {
@@ -21,6 +22,9 @@ export const IMAGERY_SECTION = {
   } satisfies SectionSummaryStrip,
   intro:
     "Imagery should support understanding of service environments, outcomes, and processes. Avoid abstract visuals that do not add operational meaning.",
+  referenceHref: "/visual/imagery",
+  referenceTitle: "Open full imagery reference",
+  referenceAudience: "Design, marketing, and content approval teams",
   employeeDefaults: [
     "If the image does not prove or explain something, leave it out.",
     "If the image contains client-sensitive information, mask it or do not use it.",
@@ -69,6 +73,9 @@ export const IMAGERY_SECTION = {
   header: SectionHeader;
   summaryStrip: SectionSummaryStrip;
   intro: string;
+  referenceHref: VisualReferenceLinkMeta["referenceHref"];
+  referenceTitle: VisualReferenceLinkMeta["referenceTitle"];
+  referenceAudience?: VisualReferenceLinkMeta["referenceAudience"];
   employeeDefaults: readonly string[];
   rules: readonly string[];
   scenarios: readonly Scenario[];

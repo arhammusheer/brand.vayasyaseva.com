@@ -7,6 +7,7 @@ import type {
   TemplateSpec,
   TypeHierarchy,
   TypographyStack,
+  VisualReferenceLinkMeta,
 } from "../../../lib/types/brand";
 
 export const TYPOGRAPHY_SECTION = {
@@ -24,6 +25,9 @@ export const TYPOGRAPHY_SECTION = {
   } satisfies SectionSummaryStrip,
   intro:
     "Typography is a readability control with three mandatory systems: Anek for display hierarchy, Hind for narrative and UI copy, and JetBrains Mono for data-heavy contexts where character distinction is critical.",
+  referenceHref: "/visual/typography",
+  referenceTitle: "Open full typography reference",
+  referenceAudience: "Design, product, and engineering teams",
   employeeDefaults: [
     "If you are working in a template, do not change the font system.",
     "If the file looks wrong, escalate the template or asset issue instead of repairing it ad hoc.",
@@ -45,7 +49,7 @@ export const TYPOGRAPHY_SECTION = {
       usage: "Headlines",
     },
     {
-      label: "Serif",
+      label: "Body",
       family: "Hind",
       fallback: ["Noto Sans", "Segoe UI", "sans-serif"],
       usage: "Body and labels",
@@ -142,6 +146,9 @@ export const TYPOGRAPHY_SECTION = {
   header: SectionHeader;
   summaryStrip: SectionSummaryStrip;
   intro: string;
+  referenceHref: VisualReferenceLinkMeta["referenceHref"];
+  referenceTitle: VisualReferenceLinkMeta["referenceTitle"];
+  referenceAudience?: VisualReferenceLinkMeta["referenceAudience"];
   employeeDefaults: readonly string[];
   fontPack: DownloadableAsset;
   stacks: readonly TypographyStack[];

@@ -5,6 +5,7 @@ import type {
   SectionHeader,
   SectionSummaryStrip,
   TemplateSpec,
+  VisualReferenceLinkMeta,
 } from "../../../lib/types/brand";
 import { COLOR_TOKENS } from "../fundamentals";
 
@@ -23,6 +24,9 @@ export const COLOR_PALETTE_SECTION = {
   } satisfies SectionSummaryStrip,
   intro:
     "Use the token system exactly. Neutrals carry operational readability, one vertical or master-brand color carries ownership context, and semantic/data-viz colors carry meaning.",
+  referenceHref: "/visual/color-palette",
+  referenceTitle: "Open full color reference",
+  referenceAudience: "Design, product, and engineering teams",
   employeeDefaults: [
     "If you are not designing from scratch, use approved templates and do not touch the palette.",
     "Use one clear brand owner per artifact. Do not mix vertical colors to make something feel richer.",
@@ -90,6 +94,9 @@ export const COLOR_PALETTE_SECTION = {
   header: SectionHeader;
   summaryStrip: SectionSummaryStrip;
   intro: string;
+  referenceHref: VisualReferenceLinkMeta["referenceHref"];
+  referenceTitle: VisualReferenceLinkMeta["referenceTitle"];
+  referenceAudience?: VisualReferenceLinkMeta["referenceAudience"];
   employeeDefaults: readonly string[];
   swatches: readonly ColorSwatch[];
   scenarios: readonly Scenario[];

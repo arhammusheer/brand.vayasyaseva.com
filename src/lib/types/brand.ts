@@ -64,6 +64,12 @@ export type QuickAnswerCard = {
   fullGuideAnchor: string;
 };
 
+export type VisualReferenceLinkMeta = {
+  referenceHref: string;
+  referenceTitle: string;
+  referenceAudience?: string;
+};
+
 export type RoleGuide = {
   role: string;
   mustKnow: readonly string[];
@@ -230,6 +236,36 @@ export type DownloadableAsset = {
 
 export type DownloadableBundle = DownloadableAsset & {
   includes: readonly string[];
+};
+
+export type VisualReferenceResource = {
+  name: string;
+  description: string;
+};
+
+export type VisualReferenceGuidanceBlock = {
+  title: string;
+  description: string;
+};
+
+export type VisualReferenceNavItem = {
+  href: string;
+  label: string;
+  description: string;
+};
+
+export type VisualReferencePage = {
+  slug: string;
+  href: string;
+  navLabel: string;
+  title: string;
+  summary: string;
+  pageIntro: string;
+  specialistAudience: string;
+  handbookHref: string;
+  guidanceBlocks: readonly VisualReferenceGuidanceBlock[];
+  assets: readonly VisualReferenceResource[];
+  implementationNotes?: readonly string[];
 };
 
 export type ApprovalRule = {
