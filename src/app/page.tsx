@@ -101,6 +101,21 @@ function jumpTarget(anchor: string) {
   return anchor.replace(/^#/, "");
 }
 
+function RuleBullet({
+  tone = "brand",
+}: {
+  tone?: "brand" | "success" | "warning" | "danger";
+}) {
+  const colorClass = {
+    brand: "bg-[color:var(--vy-gold-ui)]",
+    success: "bg-[color:var(--vy-success)]",
+    warning: "bg-[color:var(--vy-warning)]",
+    danger: "bg-[color:var(--vy-danger)]",
+  }[tone];
+
+  return <span aria-hidden="true" className={`mt-2 h-1.5 w-1.5 shrink-0 rounded-full ${colorClass}`} />;
+}
+
 function SectionHeader({
   number,
   title,
@@ -111,18 +126,23 @@ function SectionHeader({
   summary: string;
 }) {
   return (
-    <header className="border-b border-[color:var(--vy-border)] pb-8">
-      <div className="flex items-baseline gap-3">
-        <span className="font-display text-sm font-semibold text-[color:var(--vy-muted-fg)]">
+    <header className="border-t border-[color:var(--vy-border)] pt-10">
+      <div className="flex items-start gap-4 md:gap-5">
+        <span className="font-display text-5xl font-semibold leading-none text-[color:var(--vy-gold-300)] md:text-6xl">
           {number}
         </span>
-        <h3 className="font-display text-2xl font-semibold text-[color:var(--vy-text-strong)]">
-          {sanitizeTokenMentions(title)}
-        </h3>
+        <div className="max-w-3xl">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[color:var(--vy-brand-text)]">
+            Handbook Section
+          </p>
+          <h3 className="mt-3 font-display text-2xl font-semibold text-[color:var(--vy-text-strong)] md:text-3xl">
+            {sanitizeTokenMentions(title)}
+          </h3>
+          <p className="mt-3 max-w-3xl text-lg leading-8 text-[color:var(--vy-muted-fg)]">
+            {sanitizeTokenMentions(summary)}
+          </p>
+        </div>
       </div>
-      <p className="mt-3 max-w-3xl text-lg text-[color:var(--vy-muted-fg)]">
-        {sanitizeTokenMentions(summary)}
-      </p>
     </header>
   );
 }
@@ -139,7 +159,7 @@ function SummaryStrip({
   whoNeedsThis: string;
 }) {
   return (
-    <div className="mt-8 grid gap-4 md:grid-cols-2">
+    <div className="mt-8 overflow-hidden border-y border-[color:var(--vy-border)] md:grid md:grid-cols-2 xl:grid-cols-4 xl:divide-x xl:divide-[color:var(--vy-border)]">
       {[
         { label: "Use This When", value: useThisWhen },
         { label: "Do This", value: doThis },
@@ -148,12 +168,12 @@ function SummaryStrip({
       ].map((item) => (
         <div
           key={item.label}
-          className="rounded-lg border border-[color:var(--vy-border)] bg-[color:var(--vy-muted)] p-5"
+          className="border-b border-[color:var(--vy-border)] px-0 py-5 last:border-b-0 md:px-5 xl:border-b-0"
         >
-          <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[color:var(--vy-brand-text)]">
             {item.label}
           </p>
-          <p className="mt-2 text-sm text-[color:var(--vy-fg)]">
+          <p className="mt-3 max-w-[26ch] text-sm leading-6 text-[color:var(--vy-fg)]">
             {sanitizeTokenMentions(item.value)}
           </p>
         </div>
@@ -168,10 +188,10 @@ function RulesBlock({ rules, title = "Rules" }: { rules: readonly string[]; titl
   return (
     <div className="mt-12">
       <h4 className="mb-5 text-lg font-medium text-[color:var(--vy-text-strong)]">{title}</h4>
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-x-8 gap-y-4 md:grid-cols-2">
         {rules.map((rule) => (
-          <div key={rule} className="flex gap-3 rounded-lg bg-[color:var(--vy-muted)] p-4">
-            <Check className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--vy-success)]" />
+          <div key={rule} className="flex gap-3 border-l border-[color:var(--vy-border)] pl-4">
+            <RuleBullet />
             <span className="text-[color:var(--vy-fg)]">{sanitizeTokenMentions(rule)}</span>
           </div>
         ))}
@@ -190,14 +210,14 @@ function FieldDefaults({
   if (!items?.length) return null;
 
   return (
-    <div className="mt-8 rounded-lg border-l-4 border-l-[color:var(--vy-gold-ui)] bg-[color:var(--vy-muted)] p-5">
+    <div className="mt-8 border-l-2 border-l-[color:var(--vy-gold-ui)] bg-[color:rgba(253,241,207,0.55)] px-5 py-4">
       <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)]">
         {title}
       </p>
       <ul className="mt-4 space-y-2 text-sm text-[color:var(--vy-fg)]">
         {items.map((item) => (
           <li key={item} className="flex gap-2">
-            <Check className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--vy-success)]" />
+            <RuleBullet />
             <span>{sanitizeTokenMentions(item)}</span>
           </li>
         ))}
@@ -226,32 +246,38 @@ function TemplatesBlock({
       <h4 className="mb-5 text-lg font-medium text-[color:var(--vy-text-strong)]">{title}</h4>
       <div className="grid gap-6">
         {templates.map((template) => (
-          <div key={template.name} className="overflow-hidden rounded-lg border border-[color:var(--vy-border)]">
-            <div className="bg-[color:var(--vy-muted)] p-5">
+          <article
+            key={template.name}
+            className="grid gap-6 border-y border-[color:var(--vy-border)] py-6 lg:grid-cols-[260px_minmax(0,1fr)]"
+          >
+            <div>
               <div className="flex items-center gap-2">
-                <FileText className="h-4 w-4 text-[color:var(--vy-muted-fg)]" />
+                <FileText className="h-4 w-4 text-[color:var(--vy-brand-text)]" />
                 <h5 className="font-semibold text-[color:var(--vy-text-strong)]">
                   {sanitizeTokenMentions(template.name)}
                 </h5>
               </div>
-              <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">
+              <p className="mt-3 text-sm leading-6 text-[color:var(--vy-muted-fg)]">
                 {sanitizeTokenMentions(template.purpose)}
               </p>
-              <p className="mt-1 text-xs text-[color:var(--vy-muted-fg)]">
-                When to use: {sanitizeTokenMentions(template.whenToUse)}
+              <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[color:var(--vy-brand-text)]">
+                When to use
+              </p>
+              <p className="mt-1 text-sm text-[color:var(--vy-fg)]">
+                {sanitizeTokenMentions(template.whenToUse)}
               </p>
             </div>
-            <div className="space-y-4 p-5">
-              <pre className="whitespace-pre-wrap rounded bg-[color:var(--vy-muted)] p-4 font-mono text-sm leading-relaxed">
+            <div className="space-y-5">
+              <pre className="whitespace-pre-wrap border-l-2 border-l-[color:var(--vy-gold-ui)] bg-[color:rgba(252,252,253,0.92)] px-5 py-4 font-mono text-sm leading-7 text-[color:var(--vy-fg)]">
                 {sanitizeTokenMentions(template.template)}
               </pre>
               <div>
-                <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)]">
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--vy-muted-fg)]">
                   Guardrails
                 </p>
-                <ul className="space-y-1 text-sm">
+                <ul className="grid gap-3 md:grid-cols-2">
                   {template.guardrails.map((guardrail) => (
-                    <li key={guardrail} className="flex gap-2">
+                    <li key={guardrail} className="flex gap-2 text-sm">
                       <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--vy-warning)]" />
                       <span className="text-[color:var(--vy-muted-fg)]">
                         {sanitizeTokenMentions(guardrail)}
@@ -261,7 +287,7 @@ function TemplatesBlock({
                 </ul>
               </div>
             </div>
-          </div>
+          </article>
         ))}
       </div>
     </div>
@@ -278,13 +304,13 @@ function ReferenceLinkCard({
   audience?: string;
 }) {
   return (
-    <div className="mt-10 rounded-xl border border-[color:var(--vy-border)] bg-[color:var(--vy-muted)] p-6">
+    <div className="mt-12 border-y border-[color:var(--vy-border)] py-6">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[color:var(--vy-brand-text)]">
             Specialist reference
           </p>
-          <p className="mt-2 text-[color:var(--vy-fg)]">
+          <p className="mt-3 max-w-2xl text-[color:var(--vy-fg)]">
             {audience
               ? `For ${sanitizeTokenMentions(audience)}. Use the root handbook for the safe default, then open the deeper reference only when you need production or implementation detail.`
               : "Open the deeper reference only when you need production or implementation detail."}
@@ -315,16 +341,16 @@ function TaskGuideCard({
   escalateWhen: string;
 }) {
   return (
-    <div className="rounded-lg border border-[color:var(--vy-border)] p-6">
+    <div className="border-t border-[color:var(--vy-border)] pt-6">
       <div className="flex items-start justify-between gap-4">
         <h5 className="text-lg font-semibold text-[color:var(--vy-text-strong)]">
           {sanitizeTokenMentions(title)}
         </h5>
-        <span className="rounded-full bg-[color:var(--vy-muted)] px-2.5 py-1 text-xs font-medium text-[color:var(--vy-muted-fg)]">
+        <span className="rounded-full border border-[color:var(--vy-border)] px-2.5 py-1 text-xs font-medium text-[color:var(--vy-muted-fg)]">
           {sanitizeTokenMentions(channel)}
         </span>
       </div>
-      <div className="mt-5 rounded-lg bg-[color:var(--vy-muted)] p-4">
+      <div className="mt-5 border-l-2 border-l-[color:var(--vy-gold-ui)] bg-[color:rgba(252,252,253,0.9)] px-4 py-4">
         <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)]">
           Approved script
         </p>
@@ -335,7 +361,7 @@ function TaskGuideCard({
       <ul className="mt-5 space-y-2 text-sm text-[color:var(--vy-fg)]">
         {topRules.map((rule) => (
           <li key={rule} className="flex gap-2">
-            <Check className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--vy-success)]" />
+            <RuleBullet />
             <span>{sanitizeTokenMentions(rule)}</span>
           </li>
         ))}
@@ -368,6 +394,7 @@ export default function Page() {
 
   const heroQuickActions = sections.overview.taskCards;
   const footer = sections.footerVersioning.footer;
+  const currentSectionLabel = activeSectionId ? anchorLabel(activeSectionId) : "Overview";
 
   return (
     <div className="min-h-screen bg-[color:var(--vy-bg)] text-[color:var(--vy-fg)]">
@@ -385,7 +412,7 @@ export default function Page() {
         />
       </div>
 
-      <header className="border-b border-[color:var(--vy-border)] print:hidden">
+      <header className="border-b border-[color:var(--vy-border)] bg-[color:rgba(255,255,255,0.9)] backdrop-blur-sm print:hidden">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 lg:px-6">
           <div className="flex items-center gap-3 sm:gap-4">
             <a
@@ -404,6 +431,9 @@ export default function Page() {
             </a>
             <span className="hidden h-8 w-px bg-[color:var(--vy-border)] sm:block" aria-hidden="true" />
             <div className="hidden leading-tight sm:block">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[color:var(--vy-brand-text)]">
+                Vayasya
+              </p>
               <p className="mt-1 text-sm font-medium text-[color:var(--vy-muted-fg)]">Brand Handbook</p>
             </div>
           </div>
@@ -433,60 +463,180 @@ export default function Page() {
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 pb-24 pt-12 lg:grid-cols-[260px_1fr] lg:px-6">
+      <main id="main-content">
+        <section className="relative isolate overflow-hidden border-b border-[color:var(--vy-border)] print:border-b-0">
+          <div
+            className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,1)_0%,rgba(253,241,207,0.42)_52%,rgba(255,255,255,1)_100%)]"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute -left-24 top-20 h-64 w-64 rounded-full bg-[color:rgba(253,241,207,0.78)] blur-3xl"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute right-0 top-0 h-full w-full opacity-60"
+            aria-hidden="true"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(226,232,240,0.55) 1px, transparent 1px), linear-gradient(90deg, rgba(226,232,240,0.55) 1px, transparent 1px)",
+              backgroundPosition: "top left",
+              backgroundSize: "80px 80px",
+              maskImage: "linear-gradient(180deg, rgba(0,0,0,0.6), transparent 82%)",
+            }}
+          />
+          <div
+            className="pointer-events-none absolute right-[26rem] top-1/2 hidden h-[24rem] w-[24rem] -translate-y-1/2 lg:block xl:right-[29rem] xl:h-[28rem] xl:w-[28rem]"
+            aria-hidden="true"
+          >
+            <div className="absolute inset-[2rem] rounded-full bg-[radial-gradient(circle,rgba(250,225,158,0.34)_0%,rgba(253,241,207,0.2)_36%,rgba(255,255,255,0)_72%)]" />
+            <div className="absolute inset-x-[18%] bottom-[15%] top-[18%] rounded-[999px] border border-[color:rgba(218,162,54,0.1)]" />
+            <div className="absolute inset-y-[20%] left-1/2 w-px -translate-x-1/2 bg-[linear-gradient(180deg,transparent,rgba(218,162,54,0.16),transparent)]" />
+          </div>
+          <div className="relative mx-auto grid min-h-[calc(100svh-73px)] max-w-7xl gap-10 px-4 pb-10 pt-10 lg:min-h-[min(52rem,calc(100svh-73px))] lg:grid-cols-[minmax(0,1.02fr)_22rem] lg:items-center lg:px-6 lg:pb-16 lg:pt-12 xl:grid-cols-[minmax(0,1.05fr)_24rem] xl:pb-20 xl:pt-16">
+            <div className="max-w-3xl pb-2 lg:max-w-[39rem] lg:self-center">
+              <p className="animate-handbook-enter text-xs font-semibold uppercase tracking-[0.34em] text-[color:var(--vy-brand-text)]">
+                {sanitizeTokenMentions(fundamentals.brandName.parent)}
+              </p>
+              <h1 className="animate-handbook-enter-delayed mt-5 max-w-2xl font-display text-5xl font-semibold tracking-tight text-[color:var(--vy-text-strong)] md:text-6xl lg:text-7xl">
+                Brand Handbook
+              </h1>
+              <p className="animate-handbook-enter-delayed mt-6 max-w-2xl text-lg leading-8 text-[color:var(--vy-muted-fg)] md:text-xl">
+                A compliance-first field manual for how Vayasya should be introduced, written,
+                shown, and represented across everyday work.
+              </p>
+
+              <div className="animate-handbook-enter-delayed mt-8 flex flex-wrap gap-3">
+                <Button
+                  type="button"
+                  onClick={() => handleNavigate(jumpTarget(heroQuickActions[0].fullGuideAnchor))}
+                  className="min-w-[12rem] justify-between"
+                >
+                  Start with quick entry
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+                <Button asChild variant="outline" className="min-w-[12rem] justify-between">
+                  <Link href="/visual">
+                    Open visual reference
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+
+              <div className="mt-8 lg:hidden">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[color:var(--vy-brand-text)]">
+                  Quick entry
+                </p>
+                <div className="-mx-4 mt-3 overflow-x-auto px-4">
+                  <div className="flex min-w-max gap-3 pb-1">
+                    {heroQuickActions.map((action, index) => (
+                      <button
+                        key={action.title}
+                        type="button"
+                        onClick={() => handleNavigate(jumpTarget(action.fullGuideAnchor))}
+                        className="flex min-h-[5.5rem] w-56 flex-col justify-between rounded-[1.25rem] border border-[color:var(--vy-border)] bg-[color:rgba(255,255,255,0.86)] px-4 py-3 text-left"
+                      >
+                        <span className="text-[11px] font-semibold tracking-[0.2em] text-[color:var(--vy-brand-text)]">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                        <span className="text-sm font-medium leading-6 text-[color:var(--vy-text-strong)]">
+                          {sanitizeTokenMentions(action.title)}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="animate-handbook-enter mt-10 grid max-w-2xl gap-4 border-y border-[color:var(--vy-border)] py-5 sm:grid-cols-3 sm:divide-x sm:divide-[color:var(--vy-border)]">
+                <div className="sm:pr-4">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[color:var(--vy-brand-text)]">
+                    Version
+                  </p>
+                  <p className="mt-2 font-mono text-sm text-[color:var(--vy-text-strong)]">
+                    {footer.version}
+                  </p>
+                </div>
+                <div className="sm:px-4">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[color:var(--vy-brand-text)]">
+                    Effective
+                  </p>
+                  <p className="mt-2 text-sm text-[color:var(--vy-text-strong)]">
+                    {footer.effectiveDate}
+                  </p>
+                </div>
+                <div className="sm:pl-4">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[color:var(--vy-brand-text)]">
+                    Audience
+                  </p>
+                  <p className="mt-2 text-sm text-[color:var(--vy-text-strong)]">
+                    Field teams first, specialists on demand
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <aside className="animate-handbook-enter-delayed relative hidden border-t border-[color:var(--vy-border)] pt-5 lg:block lg:self-center lg:border-l lg:border-t-0 lg:pl-6 lg:pt-6 xl:pl-8">
+              <div className="pointer-events-none absolute -right-2 top-2 hidden h-56 w-56 lg:block" aria-hidden="true">
+                <div className="animate-handbook-drift absolute inset-0 rounded-full border border-[color:rgba(218,162,54,0.22)]" />
+                <div className="absolute left-8 top-8 h-40 w-40 rounded-full border border-[color:rgba(218,162,54,0.14)]" />
+                <div className="absolute left-14 top-14 h-28 w-28 rounded-full bg-[color:rgba(253,241,207,0.48)]" />
+              </div>
+              <div className="relative flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[color:var(--vy-brand-text)]">
+                    Most-used entry points
+                  </p>
+                  <p className="mt-2 max-w-[22ch] text-sm leading-6 text-[color:var(--vy-muted-fg)]">
+                    Jump by task, not by chapter.
+                  </p>
+                </div>
+                <div className="hidden rounded-full border border-[color:var(--vy-border)] px-3 py-1 font-mono text-xs text-[color:var(--vy-muted-fg)] lg:inline-flex">
+                  {footer.version}
+                </div>
+              </div>
+              <ol className="relative mt-6 space-y-1">
+                {heroQuickActions.map((action, index) => (
+                  <li key={action.title}>
+                    <button
+                      type="button"
+                      onClick={() => handleNavigate(jumpTarget(action.fullGuideAnchor))}
+                      className="group flex w-full items-start gap-4 border-t border-[color:var(--vy-border)] py-3.5 text-left transition-colors hover:text-[color:var(--vy-text-strong)]"
+                    >
+                      <span className="pt-0.5 text-[11px] font-semibold tracking-[0.2em] text-[color:var(--vy-brand-text)]">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-sm font-medium text-[color:var(--vy-text-strong)]">
+                          {sanitizeTokenMentions(action.title)}
+                        </span>
+                        <span className="mt-1 block text-[15px] leading-7 text-[color:var(--vy-muted-fg)]">
+                          {sanitizeTokenMentions(action.tenSecondRule)}
+                        </span>
+                      </span>
+                      <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-[color:var(--vy-muted-fg)] transition-transform group-hover:translate-x-0.5 group-hover:text-[color:var(--vy-text-strong)]" />
+                    </button>
+                  </li>
+                ))}
+              </ol>
+            </aside>
+          </div>
+        </section>
+
+        <div className="border-b border-[color:var(--vy-border)] bg-[color:rgba(255,255,255,0.92)] py-3 lg:hidden print:hidden">
+          <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 text-xs text-[color:var(--vy-muted-fg)]">
+            <span className="truncate font-medium text-[color:var(--vy-text-strong)]">
+              {sanitizeTokenMentions(currentSectionLabel)}
+            </span>
+            <span className="font-mono">{Math.round(progress * 100)}%</span>
+          </div>
+        </div>
+
+        <div className="mx-auto grid max-w-7xl gap-12 px-4 pb-24 pt-12 lg:grid-cols-[260px_1fr] lg:px-6">
         <aside className="hidden print:hidden lg:block">
           <ChapterNavSidebar activeSection={activeSectionId} onNavigate={handleNavigate} />
         </aside>
 
-        <main id="main-content" className="min-w-0">
-          <header className="mb-20 border-b border-[color:var(--vy-border)] pb-12">
-            <p className="text-sm font-medium uppercase tracking-widest text-[color:var(--vy-muted-fg)]">
-              {sanitizeTokenMentions(fundamentals.brandName.parent)}
-            </p>
-            <h1 className="mt-6 text-4xl font-bold tracking-tight text-[color:var(--vy-text-strong)] md:text-5xl lg:text-6xl">
-              Brand Handbook
-            </h1>
-            <p className="mt-6 max-w-3xl text-xl leading-relaxed text-[color:var(--vy-muted-fg)]">
-              A glance-first operating guide for how Vayasya should be introduced, written,
-              shown, and represented across field work, client communication, and brand assets.
-            </p>
-            <div className="mt-10">
-              <div className="mb-4 flex items-center justify-between gap-4">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--vy-muted-fg)]">
-                    Most-used entry points
-                  </p>
-                  <p className="mt-1 text-sm text-[color:var(--vy-muted-fg)]">
-                    Jump straight to the task you need most often.
-                  </p>
-                </div>
-                <span className="hidden rounded-full bg-[color:var(--vy-muted)] px-3 py-1 font-mono text-xs text-[color:var(--vy-muted-fg)] sm:inline-flex">
-                  {footer.version}
-                </span>
-              </div>
-              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-                {heroQuickActions.map((action) => (
-                  <button
-                    key={action.title}
-                    type="button"
-                    onClick={() => handleNavigate(jumpTarget(action.fullGuideAnchor))}
-                    className="group flex items-center justify-between gap-3 rounded-xl border border-[color:var(--vy-border)] bg-[color:var(--vy-muted)] px-4 py-4 text-left transition-colors hover:border-[color:var(--vy-gold-ui)] hover:bg-[color:var(--vy-bg)]"
-                  >
-                    <div>
-                      <p className="font-medium text-[color:var(--vy-text-strong)]">
-                        {sanitizeTokenMentions(action.title)}
-                      </p>
-                      <p className="mt-1 text-sm text-[color:var(--vy-muted-fg)]">
-                        {sanitizeTokenMentions(action.tenSecondRule)}
-                      </p>
-                    </div>
-                    <ArrowRight className="h-4 w-4 shrink-0 text-[color:var(--vy-muted-fg)] transition-transform group-hover:translate-x-0.5" />
-                  </button>
-                ))}
-              </div>
-            </div>
-          </header>
-
+        <div className="min-w-0">
           <ChapterWrapper {...CHAPTERS.foundation}>
             <section
               id={sectionAnchor(sections.overview.header.id, sections.overview.header.number)}
@@ -519,39 +669,40 @@ export default function Page() {
                   </h4>
                   <div className="grid gap-6 lg:grid-cols-2">
                     {sections.overview.roleGuides.map((role) => (
-                      <div key={role.role} className="rounded-lg border border-[color:var(--vy-border)] p-6">
+                      <div key={role.role} className="border-t border-[color:var(--vy-border)] pt-6">
                         <h5 className="text-lg font-semibold text-[color:var(--vy-text-strong)]">
                           {sanitizeTokenMentions(role.role)}
                         </h5>
                         <div className="mt-5 grid gap-4 text-sm md:grid-cols-2">
                           <div>
-                            <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-success)]">
+                            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--vy-brand-text)]">
                               Must know
                             </p>
                             <ul className="space-y-2">
                               {role.mustKnow.map((item) => (
                                 <li key={item} className="flex gap-2">
-                                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--vy-success)]" />
+                                  <RuleBullet />
                                   <span>{sanitizeTokenMentions(item)}</span>
                                 </li>
                               ))}
                             </ul>
                           </div>
                           <div>
-                            <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-info)]">
+                            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--vy-brand-text)]">
                               Top tasks
                             </p>
                             <ul className="space-y-2">
                               {role.topTasks.map((item) => (
-                                <li key={item} className="text-[color:var(--vy-fg)]">
+                                <li key={item} className="flex gap-2 text-[color:var(--vy-fg)]">
+                                  <RuleBullet />
                                   {sanitizeTokenMentions(item)}
                                 </li>
                               ))}
                             </ul>
                           </div>
                         </div>
-                        <div className="mt-5 rounded-lg bg-[color:var(--vy-muted)] p-4">
-                          <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-danger)]">
+                        <div className="mt-5 border-l-2 border-l-[color:var(--vy-warning)] bg-[color:rgba(255,249,232,0.68)] px-4 py-4">
+                          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--vy-warning)]">
                             Common mistakes
                           </p>
                           <ul className="mt-2 space-y-1 text-sm text-[color:var(--vy-muted-fg)]">
@@ -620,8 +771,8 @@ export default function Page() {
 
                 <div className="mt-10 grid gap-4 md:grid-cols-2">
                   {sections.identity.identitySignals.map((signal) => (
-                    <div key={signal} className="flex gap-3 rounded-lg bg-[color:var(--vy-muted)] p-4">
-                      <Check className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--vy-success)]" />
+                    <div key={signal} className="flex gap-3 border-l border-[color:var(--vy-border)] pl-4">
+                      <RuleBullet />
                       <span>{sanitizeTokenMentions(signal)}</span>
                     </div>
                   ))}
@@ -742,13 +893,13 @@ export default function Page() {
                       </p>
                       <div className="mt-5 grid gap-4 md:grid-cols-2">
                         <div>
-                          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-success)]">
+                          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--vy-brand-text)]">
                             Behaviors
                           </p>
                           <ul className="space-y-2 text-sm text-[color:var(--vy-fg)]">
                             {pillar.behaviors.map((item) => (
                               <li key={item} className="flex gap-2">
-                                <Check className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--vy-success)]" />
+                                <RuleBullet />
                                 <span>{sanitizeTokenMentions(item)}</span>
                               </li>
                             ))}
@@ -912,7 +1063,7 @@ export default function Page() {
                         <h5 className="mt-2 text-lg font-semibold text-[color:var(--vy-text-strong)]">
                           {sanitizeTokenMentions(item.term)}
                         </h5>
-                        <p className="mt-4 text-sm font-medium text-[color:var(--vy-success)]">
+                        <p className="mt-4 text-sm font-medium text-[color:var(--vy-brand-text)]">
                           Use: {sanitizeTokenMentions(item.approved)}
                         </p>
                         <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">
@@ -1102,7 +1253,7 @@ export default function Page() {
                       <p className="mt-3 text-[color:var(--vy-text-strong)]">
                         {sanitizeTokenMentions(item.situation)}
                       </p>
-                      <p className="mt-4 text-sm font-medium text-[color:var(--vy-success)]">
+                      <p className="mt-4 text-sm font-medium text-[color:var(--vy-brand-text)]">
                         Use: {sanitizeTokenMentions(item.use)}
                       </p>
                       <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">
@@ -1136,7 +1287,7 @@ export default function Page() {
                     <ul className="mt-5 space-y-3 text-sm text-[color:var(--vy-fg)]">
                       {sections.meetings.siteVisitRules.map((rule) => (
                         <li key={rule} className="flex gap-2">
-                          <Check className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--vy-success)]" />
+                          <RuleBullet />
                           <span>{sanitizeTokenMentions(rule)}</span>
                         </li>
                       ))}
@@ -1149,7 +1300,7 @@ export default function Page() {
                     <ul className="mt-5 space-y-3 text-sm text-[color:var(--vy-fg)]">
                       {sections.meetings.callRules.map((rule) => (
                         <li key={rule} className="flex gap-2">
-                          <Check className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--vy-success)]" />
+                          <RuleBullet />
                           <span>{sanitizeTokenMentions(rule)}</span>
                         </li>
                       ))}
@@ -1184,7 +1335,7 @@ export default function Page() {
                       <ul className="mt-5 space-y-3 text-sm text-[color:var(--vy-fg)]">
                         {group.items.map((item) => (
                           <li key={item} className="flex gap-2">
-                            <Check className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--vy-success)]" />
+                            <RuleBullet />
                             <span>{sanitizeTokenMentions(item)}</span>
                           </li>
                         ))}
@@ -1369,8 +1520,9 @@ export default function Page() {
               </div>
             </div>
           </div>
-        </main>
+        </div>
       </div>
+      </main>
 
       <Button
         variant="default"

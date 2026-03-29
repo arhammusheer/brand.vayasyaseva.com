@@ -9,9 +9,32 @@ export const CHANGELOG_SECTION = {
   } satisfies SectionHeader,
 
   intro:
-    "Every change to the brand handbook is recorded here. Major versions indicate policy or framework changes. Minor versions indicate wording refinements.",
+    "Every change to the brand handbook is recorded here. Major versions indicate policy or framework changes. Minor versions indicate wording, layout, or presentation refinements that do not change policy.",
 
   entries: [
+    {
+      version: "v4.1.0",
+      date: "30 Mar 2026",
+      summary:
+        "Minor visual refinement release: improved handbook composition, specialist page restraint, and large-screen readability without changing policy content.",
+      changes: [
+        {
+          type: "changed" as const,
+          description:
+            "Refined the root handbook hero, quick-entry presentation, and chapter framing to read more clearly on large desktop screens.",
+        },
+        {
+          type: "changed" as const,
+          description:
+            "Reduced decorative clutter in the visual system so gold-led accents support the content instead of competing with it.",
+        },
+        {
+          type: "changed" as const,
+          description:
+            "Aligned the specialist visual reference pages to a quieter layout model with clearer typography, spacing, and navigation hierarchy.",
+        },
+      ],
+    },
     {
       version: "v4.0.0",
       date: "16 Mar 2026",

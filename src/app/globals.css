@@ -55,6 +55,27 @@ samp {
   }
 }
 
+@keyframes handbook-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes handbook-drift {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
 @layer utilities {
   .animate-accordion-down {
     animation: accordion-down 0.2s ease-out;
@@ -62,6 +83,19 @@ samp {
 
   .animate-accordion-up {
     animation: accordion-up 0.2s ease-out;
+  }
+
+  .animate-handbook-enter {
+    animation: handbook-enter 0.72s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .animate-handbook-enter-delayed {
+    animation: handbook-enter 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: 0.08s;
+  }
+
+  .animate-handbook-drift {
+    animation: handbook-drift 9s ease-in-out infinite;
   }
 }
 

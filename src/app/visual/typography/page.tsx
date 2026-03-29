@@ -2,6 +2,7 @@ import {
   ReferenceDownloadRow,
   ReferenceRulesBlock,
   ReferenceSectionHeading,
+  VisualReferencePageShell,
 } from "../../../components/brand/visual-reference-shell";
 import {
   TypographyHierarchyExamplesGrid,
@@ -12,7 +13,17 @@ import {
   TYPOGRAPHY_REFERENCE,
   TYPOGRAPHY_SECTION,
 } from "../../../content/brand/sections/typography";
+import { getVisualReferencePage } from "../../../content/brand/visual-reference";
 import { buildBrandPageMetadata } from "../../../lib/brand-utils";
+
+const visualPage = (() => {
+  const page = getVisualReferencePage("typography");
+  if (!page) {
+    throw new Error("Missing visual reference page configuration for typography.");
+  }
+
+  return page;
+})();
 
 export const metadata = buildBrandPageMetadata({
   title: "Typography | Vayasya Visual Reference",
@@ -23,19 +34,7 @@ export const metadata = buildBrandPageMetadata({
 
 export default function VisualTypographyPage() {
   return (
-    <section className="space-y-12">
-      <header className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--vy-muted-fg)]">
-          Visual Reference
-        </p>
-        <h1 className="text-4xl font-semibold tracking-tight text-[color:var(--vy-text-strong)] md:text-5xl">
-          Typography
-        </h1>
-        <p className="max-w-3xl text-base leading-relaxed text-[color:var(--vy-muted-fg)] md:text-lg">
-          Download the approved font pack, match each family to the right surface, and review hierarchy before release.
-        </p>
-      </header>
-
+    <VisualReferencePageShell page={visualPage}>
       <ReferenceDownloadRow assets={[TYPOGRAPHY_SECTION.fontPack]} title="Download font pack" />
 
       <section className="space-y-6" id="family-roles">
@@ -61,9 +60,9 @@ export default function VisualTypographyPage() {
           description="Use the specimen-led scale first, then confirm the technical size and line-height values in the matrix."
         />
         <TypographyHierarchyExamplesGrid items={TYPOGRAPHY_REFERENCE.hierarchyExamples} title="Specimen-led hierarchy" />
-        <div className="overflow-x-auto rounded-lg border border-[color:var(--vy-border)]">
+        <div className="overflow-x-auto rounded-[1.5rem] border border-[color:var(--vy-border)] bg-[color:rgba(255,255,255,0.78)]">
           <table className="w-full text-sm">
-            <thead className="bg-[color:var(--vy-muted)]">
+            <thead className="bg-[color:rgba(253,241,207,0.42)]">
               <tr>
                 <th className="p-4 text-left font-medium">Level</th>
                 <th className="p-4 text-left font-medium">Family</th>
@@ -98,7 +97,7 @@ export default function VisualTypographyPage() {
           {TYPOGRAPHY_SECTION.languageControls.map((item) => (
             <div
               key={item.rule}
-              className="rounded-lg border border-[color:var(--vy-border)] bg-[color:var(--vy-muted)] p-5"
+              className="border-l border-[color:var(--vy-border)] pl-5"
             >
               <p className="font-medium text-[color:var(--vy-text-strong)]">{item.rule}</p>
               <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">{item.rationale}</p>
@@ -116,6 +115,6 @@ export default function VisualTypographyPage() {
         />
         <ReferenceRulesBlock rules={TYPOGRAPHY_REFERENCE.reviewerChecklist} title="Release checks" />
       </section>
-    </section>
+    </VisualReferencePageShell>
   );
 }

@@ -4,7 +4,6 @@ import {
   AlertTriangle,
   ArrowLeft,
   ArrowRight,
-  Check,
 } from "lucide-react";
 
 import { orderedVisualReferencePages } from "../../content/brand/visual-reference";
@@ -38,12 +37,15 @@ export function ReferenceSectionHeading({
   description?: string;
 }) {
   return (
-    <div className="space-y-3">
-      <h2 className="text-2xl font-semibold tracking-tight text-[color:var(--vy-text-strong)]">
+    <div className="space-y-3 border-t border-[color:var(--vy-border)] pt-8">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[color:var(--vy-brand-text)]">
+        Topic
+      </p>
+      <h2 className="text-2xl font-semibold tracking-tight text-[color:var(--vy-text-strong)] md:text-3xl">
         {sanitizeTokenMentions(title)}
       </h2>
       {description ? (
-        <p className="max-w-3xl text-base leading-relaxed text-[color:var(--vy-muted-fg)]">
+        <p className="max-w-3xl text-base leading-7 text-[color:var(--vy-muted-fg)]">
           {sanitizeTokenMentions(description)}
         </p>
       ) : null}
@@ -63,8 +65,11 @@ export function ReferenceRulesBlock({
       <h3 className="text-lg font-medium text-[color:var(--vy-text-strong)]">{title}</h3>
       <div className="grid gap-4 md:grid-cols-2">
         {rules.map((rule) => (
-          <div key={rule} className="flex gap-3 rounded-lg bg-[color:var(--vy-muted)] p-4">
-            <Check className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--vy-success)]" />
+          <div key={rule} className="flex gap-3 border-l border-[color:var(--vy-border)] pl-4">
+            <span
+              className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--vy-gold-ui)]"
+              aria-hidden="true"
+            />
             <span className="text-[color:var(--vy-fg)]">{sanitizeTokenMentions(rule)}</span>
           </div>
         ))}
@@ -83,7 +88,7 @@ export function ReferenceFieldDefaults({
   return (
     <div
       className={cn(
-        "rounded-lg border-l-4 border-l-[color:var(--vy-gold-ui)] bg-[color:var(--vy-muted)] p-5",
+        "border-l-2 border-l-[color:var(--vy-gold-ui)] bg-[color:var(--vy-gold-50)]/70 px-5 py-4",
         className,
       )}
     >
@@ -93,7 +98,10 @@ export function ReferenceFieldDefaults({
       <ul className="mt-4 space-y-2 text-sm text-[color:var(--vy-fg)]">
         {items.map((item) => (
           <li key={item} className="flex gap-2">
-            <Check className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--vy-success)]" />
+            <span
+              className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--vy-gold-ui)]"
+              aria-hidden="true"
+            />
             <span>{sanitizeTokenMentions(item)}</span>
           </li>
         ))}
@@ -112,7 +120,7 @@ export function ReferenceNote({
   return (
     <div
       className={cn(
-        "rounded-lg border border-[color:var(--vy-warning)] bg-[color:var(--vy-muted)] p-5",
+        "rounded-[1.25rem] border border-[color:var(--vy-warning)] bg-[color:rgba(255,249,232,0.85)] p-5",
         className,
       )}
     >
@@ -140,7 +148,7 @@ export function ReferenceDownloadablesBlock({
         {assets.map((asset) => (
           <article
             key={asset.filePath}
-            className="rounded-lg border border-[color:var(--vy-border)] bg-[color:var(--vy-muted)] p-6"
+            className="rounded-[1.5rem] border border-[color:var(--vy-border)] bg-[color:rgba(255,255,255,0.78)] p-6"
           >
             <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)]">
               {sanitizeTokenMentions(asset.fileType)}
@@ -205,7 +213,7 @@ export function ReferenceDownloadRow({
             key={asset.filePath}
             asChild
             variant="outline"
-            className="h-auto min-w-[11.5rem] items-start gap-1 whitespace-normal px-4 py-3 text-left"
+            className="h-auto min-w-[11.5rem] items-start gap-1 rounded-full whitespace-normal border-[color:var(--vy-border)] px-4 py-3 text-left"
           >
             <a href={asset.filePath} download>
               <span className="font-medium text-[color:var(--vy-text-strong)]">
@@ -270,7 +278,11 @@ export function VisualReferencePageShell({
 
   return (
     <section className="space-y-12">
-      <header className="border-b border-[color:var(--vy-border)] pb-10">
+      <header className="relative isolate overflow-hidden border-b border-[color:var(--vy-border)] pb-12">
+        <div
+          className="absolute -right-12 top-8 h-48 w-48 rounded-full bg-[color:var(--vy-gold-100)] blur-3xl"
+          aria-hidden="true"
+        />
         <div className="flex flex-wrap items-center gap-3">
           <Button asChild variant="ghost" className="-ml-3 px-3">
             <Link href="/visual">
@@ -283,24 +295,24 @@ export function VisualReferencePageShell({
           </Button>
         </div>
 
-        <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--vy-muted-fg)]">
+        <p className="mt-8 text-xs font-semibold uppercase tracking-[0.26em] text-[color:var(--vy-brand-text)]">
           Specialist Reference
         </p>
-        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-[color:var(--vy-text-strong)] md:text-5xl">
+        <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-[color:var(--vy-text-strong)] md:text-5xl">
           {page.title}
         </h1>
-        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-[color:var(--vy-muted-fg)]">
+        <p className="mt-4 max-w-3xl text-lg leading-8 text-[color:var(--vy-muted-fg)]">
           {page.summary}
         </p>
 
         <div className="mt-8 grid gap-4 xl:grid-cols-[minmax(0,1fr)_320px]">
-          <div className="rounded-xl border border-[color:var(--vy-border)] bg-[color:var(--vy-bg)] p-6">
+          <div className="rounded-[1.75rem] border border-[color:var(--vy-border)] bg-[color:rgba(255,255,255,0.82)] p-6">
             <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)]">
               When to use this page
             </p>
             <p className="mt-3 text-[color:var(--vy-fg)]">{page.pageIntro}</p>
           </div>
-          <div className="rounded-xl border border-[color:var(--vy-border)] bg-[color:var(--vy-muted)] p-6">
+          <div className="rounded-[1.75rem] border border-[color:var(--vy-border)] bg-[color:rgba(253,241,207,0.55)] p-6">
             <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)]">
               Specialist audience
             </p>
@@ -312,7 +324,7 @@ export function VisualReferencePageShell({
           {page.guidanceBlocks.map((block) => (
             <div
               key={block.title}
-              className="rounded-lg border border-[color:var(--vy-border)] bg-[color:var(--vy-bg)] p-5"
+              className="border-l border-[color:var(--vy-border)] pl-5"
             >
               <p className="font-medium text-[color:var(--vy-text-strong)]">{block.title}</p>
               <p className="mt-2 text-sm leading-relaxed text-[color:var(--vy-muted-fg)]">
@@ -326,11 +338,11 @@ export function VisualReferencePageShell({
           <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)]">
             Assets and references
           </p>
-          <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-4 grid gap-4 border-y border-[color:var(--vy-border)] py-4 md:grid-cols-2 xl:grid-cols-3">
             {page.assets.map((asset) => (
               <div
                 key={asset.name}
-                className="rounded-lg border border-[color:var(--vy-border)] bg-[color:var(--vy-muted)] p-5"
+                className="border-l border-[color:var(--vy-border)] pl-4"
               >
                 <p className="font-medium text-[color:var(--vy-text-strong)]">{asset.name}</p>
                 <p className="mt-2 text-sm leading-relaxed text-[color:var(--vy-muted-fg)]">
@@ -352,7 +364,7 @@ export function VisualReferencePageShell({
 
       <div className="space-y-12">{children}</div>
 
-      <section className="rounded-xl border border-[color:var(--vy-border)] bg-[color:var(--vy-muted)] p-6">
+      <section className="rounded-[1.75rem] border border-[color:var(--vy-border)] bg-[color:rgba(255,255,255,0.82)] p-6">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
             <h2 className="text-xl font-semibold text-[color:var(--vy-text-strong)]">
@@ -371,7 +383,7 @@ export function VisualReferencePageShell({
             <Link
               key={sibling.slug}
               href={sibling.href}
-              className="group rounded-lg border border-[color:var(--vy-border)] bg-[color:var(--vy-bg)] p-5 transition-colors hover:border-[color:var(--vy-gold-ui)]"
+              className="group rounded-[1.25rem] border border-[color:var(--vy-border)] bg-[color:rgba(252,252,253,0.82)] p-5 transition-colors hover:border-[color:var(--vy-gold-ui)]"
             >
               <p className="font-medium text-[color:var(--vy-text-strong)]">{sibling.title}</p>
               <p className="mt-2 text-sm leading-relaxed text-[color:var(--vy-muted-fg)]">

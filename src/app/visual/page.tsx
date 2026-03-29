@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { Button } from "../../components/ui/button";
 import {
@@ -18,25 +18,29 @@ export const metadata = buildBrandPageMetadata({
 export default function VisualReferenceHubPage() {
   return (
     <section className="space-y-10">
-      <header className="border-b border-[color:var(--vy-border)] pb-10">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--vy-muted-fg)]">
+      <header className="relative isolate overflow-hidden border-b border-[color:var(--vy-border)] pb-12">
+        <div
+          className="absolute -right-16 top-8 h-48 w-48 rounded-full bg-[color:var(--vy-gold-100)] blur-3xl"
+          aria-hidden="true"
+        />
+        <p className="text-xs font-semibold uppercase tracking-[0.26em] text-[color:var(--vy-brand-text)]">
           Specialist Reference
         </p>
-        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-[color:var(--vy-text-strong)] md:text-5xl">
+        <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-[color:var(--vy-text-strong)] md:text-5xl">
           {VISUAL_REFERENCE_HUB.title}
         </h1>
-        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-[color:var(--vy-muted-fg)]">
+        <p className="mt-4 max-w-3xl text-lg leading-8 text-[color:var(--vy-muted-fg)]">
           {VISUAL_REFERENCE_HUB.summary}
         </p>
 
         <div className="mt-8 grid gap-4 xl:grid-cols-[minmax(0,1fr)_320px]">
-          <div className="rounded-xl border border-[color:var(--vy-border)] bg-[color:var(--vy-bg)] p-6">
+          <div className="rounded-[1.75rem] border border-[color:var(--vy-border)] bg-[color:rgba(255,255,255,0.82)] p-6">
             <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)]">
               When to use this area
             </p>
             <p className="mt-3 text-[color:var(--vy-fg)]">{VISUAL_REFERENCE_HUB.intro}</p>
           </div>
-          <div className="rounded-xl border border-[color:var(--vy-border)] bg-[color:var(--vy-muted)] p-6">
+          <div className="rounded-[1.75rem] border border-[color:var(--vy-border)] bg-[color:rgba(253,241,207,0.55)] p-6">
             <p className="text-xs font-semibold uppercase tracking-wide text-[color:var(--vy-muted-fg)]">
               Specialist audience
             </p>
@@ -48,8 +52,11 @@ export default function VisualReferenceHubPage() {
 
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {VISUAL_REFERENCE_HUB.rules.map((rule) => (
-            <div key={rule} className="flex gap-3 rounded-lg bg-[color:var(--vy-muted)] p-4">
-              <Check className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--vy-success)]" />
+            <div key={rule} className="flex gap-3 border-l border-[color:var(--vy-border)] pl-4">
+              <span
+                aria-hidden="true"
+                className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--vy-gold-ui)]"
+              />
               <span>{rule}</span>
             </div>
           ))}
@@ -66,7 +73,7 @@ export default function VisualReferenceHubPage() {
         {orderedVisualReferencePages.map((page) => (
           <article
             key={page.slug}
-            className="rounded-xl border border-[color:var(--vy-border)] bg-[color:var(--vy-bg)] p-6"
+            className="rounded-[1.75rem] border border-[color:var(--vy-border)] bg-[color:rgba(255,255,255,0.82)] p-6"
           >
             <div className="flex items-start justify-between gap-4">
               <div>
@@ -81,11 +88,11 @@ export default function VisualReferenceHubPage() {
 
             <p className="mt-4 text-[color:var(--vy-fg)]">{page.summary}</p>
 
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
+            <div className="mt-6 grid gap-4 border-y border-[color:var(--vy-border)] py-4 md:grid-cols-2">
               {page.guidanceBlocks.map((block) => (
                 <div
                   key={block.title}
-                  className="rounded-lg border border-[color:var(--vy-border)] bg-[color:var(--vy-muted)] p-4"
+                  className="border-l border-[color:var(--vy-border)] pl-4"
                 >
                   <p className="font-medium text-[color:var(--vy-text-strong)]">{block.title}</p>
                   <p className="mt-2 text-sm text-[color:var(--vy-muted-fg)]">
@@ -103,7 +110,7 @@ export default function VisualReferenceHubPage() {
                 {page.assets.map((asset) => (
                   <div
                     key={asset.name}
-                    className="rounded-lg border border-[color:var(--vy-border)] p-4"
+                    className="border-l border-[color:var(--vy-border)] pl-4"
                   >
                     <p className="font-medium text-[color:var(--vy-text-strong)]">{asset.name}</p>
                     <p className="mt-1 text-sm text-[color:var(--vy-muted-fg)]">

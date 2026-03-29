@@ -14,12 +14,12 @@ export function VisualReferenceNav({ className }: VisualReferenceNavProps) {
   const pathname = usePathname();
 
   return (
-    <nav aria-label="Visual reference navigation" className={cn("space-y-6", className)}>
+    <nav aria-label="Visual reference navigation" className={cn("space-y-8", className)}>
       <div>
-        <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-[color:var(--vy-muted-fg)]">
+        <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.26em] text-[color:var(--vy-brand-text)]">
           Visual Reference
         </p>
-        <ul className="space-y-1">
+        <ul className="space-y-2">
           {VISUAL_REFERENCE_NAV_ITEMS.map((item) => {
             const isActive = pathname === item.href;
 
@@ -28,20 +28,20 @@ export function VisualReferenceNav({ className }: VisualReferenceNavProps) {
                 <Link
                   href={item.href}
                   className={cn(
-                    "block rounded-lg px-3 py-3 transition-colors",
+                    "group block border-l px-3 py-2 transition-colors",
                     isActive
-                      ? "bg-[color:var(--vy-gold-ui)] text-[color:var(--vy-brand-on-primary)]"
-                      : "text-[color:var(--vy-fg)] hover:bg-[color:var(--vy-muted)]",
+                      ? "border-[color:var(--vy-gold-ui)] text-[color:var(--vy-text-strong)]"
+                      : "border-[color:var(--vy-border)] text-[color:var(--vy-fg)] hover:border-[color:var(--vy-gold-300)]",
                   )}
                   aria-current={isActive ? "page" : undefined}
                 >
                   <p className="text-sm font-medium">{item.label}</p>
                   <p
                     className={cn(
-                      "mt-1 text-xs leading-relaxed",
+                      "mt-1 max-w-[24ch] text-xs leading-relaxed",
                       isActive
-                        ? "text-[color:var(--vy-brand-on-primary)]/80"
-                        : "text-[color:var(--vy-muted-fg)]",
+                        ? "text-[color:var(--vy-muted-fg)]"
+                        : "text-[color:var(--vy-muted-fg)] group-hover:text-[color:var(--vy-fg)]",
                     )}
                   >
                     {item.description}

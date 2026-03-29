@@ -8,12 +8,23 @@ import {
   ReferenceDownloadRow,
   ReferenceRulesBlock,
   ReferenceSectionHeading,
+  VisualReferencePageShell,
 } from "../../../components/brand/visual-reference-shell";
 import {
   LOGO_USAGE_REFERENCE,
   LOGO_USAGE_SECTION,
 } from "../../../content/brand/sections/logo-usage";
+import { getVisualReferencePage } from "../../../content/brand/visual-reference";
 import { buildBrandPageMetadata } from "../../../lib/brand-utils";
+
+const visualPage = (() => {
+  const page = getVisualReferencePage("logo-usage");
+  if (!page) {
+    throw new Error("Missing visual reference page configuration for logo usage.");
+  }
+
+  return page;
+})();
 
 export const metadata = buildBrandPageMetadata({
   title: "Logo Usage | Vayasya Visual Reference",
@@ -34,23 +45,8 @@ export default function VisualLogoUsagePage() {
   );
 
   return (
-    <section className="space-y-12">
-      <header className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--vy-muted-fg)]">
-          Visual Reference
-        </p>
-        <h1 className="text-4xl font-semibold tracking-tight text-[color:var(--vy-text-strong)] md:text-5xl">
-          Logo Usage
-        </h1>
-        <p className="max-w-3xl text-base leading-relaxed text-[color:var(--vy-muted-fg)] md:text-lg">
-          Download the right pack, choose the approved mark by surface, and review placement before release.
-        </p>
-      </header>
-
-      <ReferenceDownloadRow
-        assets={LOGO_USAGE_SECTION.downloadables}
-        title="Downloads"
-      />
+    <VisualReferencePageShell page={visualPage}>
+      <ReferenceDownloadRow assets={LOGO_USAGE_SECTION.downloadables} title="Downloads" />
 
       <section className="space-y-6" id="master-logos">
         <ReferenceSectionHeading
@@ -100,6 +96,6 @@ export default function VisualLogoUsagePage() {
         <LogoRoleSections sections={LOGO_USAGE_REFERENCE.roleSections} />
         <ReferenceRulesBlock rules={LOGO_USAGE_REFERENCE.technicalNotes} title="Technical notes" />
       </section>
-    </section>
+    </VisualReferencePageShell>
   );
 }

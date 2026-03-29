@@ -14,7 +14,7 @@ type ChapterNavProps = {
 
 export function ChapterNav({ activeSection, onNavigate }: ChapterNavProps) {
   return (
-    <nav aria-label="Chapter navigation" className="space-y-6">
+    <nav aria-label="Chapter navigation" className="space-y-8">
       {navGroups.map((group) => {
         const groupItemIds = group.items as readonly string[];
         const groupItems = navItems.filter((item) =>
@@ -23,10 +23,10 @@ export function ChapterNav({ activeSection, onNavigate }: ChapterNavProps) {
 
         return (
           <div key={group.id}>
-            <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-[color:var(--vy-muted-fg)]">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.26em] text-[color:var(--vy-brand-text)]">
               {group.title}
             </p>
-            <ul className="space-y-1">
+            <ul className="space-y-2">
               {groupItems.map((item) => {
                 const anchorId = item.href.replace("#", "");
                 const isActive = activeSection === anchorId;
@@ -36,18 +36,27 @@ export function ChapterNav({ activeSection, onNavigate }: ChapterNavProps) {
                     <button
                       onClick={() => onNavigate(anchorId)}
                       className={cn(
-                        "flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm transition-colors",
+                        "group flex w-full items-start gap-3 border-l px-3 py-1 text-left transition-colors",
                         isActive
-                          ? "bg-[color:var(--vy-gold-ui)] text-[color:var(--vy-brand-on-primary)]"
-                          : "text-[color:var(--vy-fg)] hover:bg-[color:var(--vy-muted)]"
+                          ? "border-[color:var(--vy-gold-ui)] text-[color:var(--vy-text-strong)]"
+                          : "border-[color:var(--vy-border)] text-[color:var(--vy-muted-fg)] hover:border-[color:var(--vy-gold-300)] hover:text-[color:var(--vy-text-strong)]"
                       )}
                       aria-current={isActive ? "page" : undefined}
                     >
-                      <span className="shrink-0 text-xs opacity-60">
+                      <span
+                        className={cn(
+                          "shrink-0 pt-0.5 text-[11px] font-semibold tracking-[0.16em]",
+                          isActive
+                            ? "text-[color:var(--vy-brand-text)]"
+                            : "text-[color:var(--vy-muted-fg)]/70 group-hover:text-[color:var(--vy-brand-text)]",
+                        )}
+                      >
                         {item.label.split(" ")[0]}
                       </span>
-                      <span className="truncate">
-                        {item.label.split(" ").slice(1).join(" ")}
+                      <span className="min-w-0">
+                        <span className="block truncate text-sm font-medium">
+                          {item.label.split(" ").slice(1).join(" ")}
+                        </span>
                       </span>
                     </button>
                   </li>
@@ -60,10 +69,10 @@ export function ChapterNav({ activeSection, onNavigate }: ChapterNavProps) {
 
       {/* Appendix */}
       <div>
-        <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-[color:var(--vy-muted-fg)]">
+        <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.26em] text-[color:var(--vy-brand-text)]">
           Appendix
         </p>
-        <ul className="space-y-1">
+        <ul className="space-y-2">
           {BRAND_CONTENT.appendixItems.map((item) => {
             const anchorId = item.href.replace("#", "");
             const isActive = activeSection === anchorId;
@@ -73,14 +82,14 @@ export function ChapterNav({ activeSection, onNavigate }: ChapterNavProps) {
                 <button
                   onClick={() => onNavigate(anchorId)}
                   className={cn(
-                    "flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm transition-colors",
+                    "flex w-full items-start gap-3 border-l px-3 py-1 text-left transition-colors",
                     isActive
-                      ? "bg-[color:var(--vy-muted)] text-[color:var(--vy-fg)]"
-                      : "text-[color:var(--vy-muted-fg)] hover:bg-[color:var(--vy-muted)] hover:text-[color:var(--vy-fg)]"
+                      ? "border-[color:var(--vy-gold-ui)] text-[color:var(--vy-text-strong)]"
+                      : "border-[color:var(--vy-border)] text-[color:var(--vy-muted-fg)] hover:border-[color:var(--vy-gold-300)] hover:text-[color:var(--vy-text-strong)]"
                   )}
                   aria-current={isActive ? "page" : undefined}
                 >
-                  <span className="truncate">{item.label}</span>
+                  <span className="truncate text-sm">{item.label}</span>
                 </button>
               </li>
             );
@@ -96,10 +105,15 @@ export function ChapterNavSidebar({
   onNavigate,
 }: ChapterNavProps) {
   return (
-    <div className="sticky top-6 rounded-lg border border-[color:var(--vy-border)] bg-[color:var(--vy-bg)] p-4">
-      <h2 className="mb-4 text-sm font-semibold text-[color:var(--vy-text-strong)]">
-        Contents
-      </h2>
+    <div className="sticky top-6 rounded-[1.75rem] border border-[color:var(--vy-border)] bg-[color:rgba(255,255,255,0.9)] p-5 backdrop-blur-sm">
+      <div className="mb-5 border-b border-[color:var(--vy-border)] pb-4">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-[color:var(--vy-brand-text)]">
+          Handbook Rail
+        </p>
+        <h2 className="mt-2 text-sm font-semibold text-[color:var(--vy-text-strong)]">
+          Contents
+        </h2>
+      </div>
       <ScrollArea className="h-[calc(100vh-160px)]">
         <ChapterNav activeSection={activeSection} onNavigate={onNavigate} />
       </ScrollArea>
